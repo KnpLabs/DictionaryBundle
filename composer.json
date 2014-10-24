@@ -1,0 +1,23 @@
+{
+    "name": "knplabs/dictionary-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "schevalier",
+            "email": "chevalier.syl20@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/framework-bundle": "2.4"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-0": { "Knp/DictionaryBundle": "src/" }
+    }
+}

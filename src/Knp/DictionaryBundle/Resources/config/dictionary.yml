@@ -1,0 +1,18 @@
+parameters:
+    knp_dictionary.dictionary.dictionary_registry.class: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
+    knp_dictionary.dictionary.dictionary.class: Knp\DictionaryBundle\Dictionary\Dictionary
+    knp_dictionary.form.type.dictionary_type.class: Knp\DictionaryBundle\Form\Type\DictionaryType
+
+services:
+    knp_dictionary.dictionary.dictionary_registry:
+        class: %knp_dictionary.dictionary.dictionary_registry.class%
+    knp_dictionary.registry:
+        alias: knp_dictionary.dictionary.dictionary_registry
+
+    knp_dictionary.form.type.dictionary_type:
+        class: %knp_dictionary.form.type.dictionary_type.class%
+        arguments:
+            - @knp_dictionary.registry
+        tags:
+            - { name: form.type, alias: dictionary }
+
