@@ -36,8 +36,10 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate
     {
         if (false === $this->offsetExists($offset)) {
             throw new DictionaryNotFoundException(sprintf(
-                'The dictionary "%s" has not been found in the registry',
-                $offset
+                'The dictionary "%s" has not been found in the registry. '.
+                'Known dictionaries are: "%s".',
+                $offset,
+                implode('", "', array_keys($this->dictionaries))
             ));
         }
 
