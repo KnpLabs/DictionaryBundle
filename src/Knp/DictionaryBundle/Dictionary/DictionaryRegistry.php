@@ -69,6 +69,6 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
 
     public function getIterator()
     {
-        return new \ArrayAccess($this->dictionaries);
+        return new \ArrayIterator($this->dictionaries);
     }
 }
