@@ -19,18 +19,16 @@ class DictionaryType extends AbstractType
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $choiceList = function (Options $options) {
-            $choices = $this->registry[$options['dictionary']]->getValues();
+        $choices = function (Options $options) {
+            $name    = $options['dictionary'];
+            $choices = $this->registry[$name]->getValues();
 
-            return new ChoiceList(
-                array_keys($choices),
-                array_values($choices)
-            );
+            return $choices;
         };
 
         $resolver->setDefaults(array(
-            'dictionary'  => null,
-            'choice_list' => $choiceList
+            'dictionary' => null,
+            'choices'    => $choices
         ));
     }
 
