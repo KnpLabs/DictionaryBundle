@@ -2,6 +2,8 @@ parameters:
     knp_dictionary.dictionary.dictionary_registry.class: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
     knp_dictionary.dictionary.dictionary.class: Knp\DictionaryBundle\Dictionary\Dictionary
     knp_dictionary.form.type.dictionary_type.class: Knp\DictionaryBundle\Form\Type\DictionaryType
+    knp_dictionary.data_collector.dictionary_data_collector.class: Knp\DictionaryBundle\DataCollector\DictionaryDataCollector
+    knp_dictionary.data_collector.dictionary_data_collector.template: KnpDictionaryBundle::layout.html.twig
 
 services:
     knp_dictionary.dictionary.dictionary_registry:
@@ -15,4 +17,11 @@ services:
             - @knp_dictionary.registry
         tags:
             - { name: form.type, alias: dictionary }
+
+    knp_dictionary.data_collector.dictionary_data_collector:
+        class: %knp_dictionary.data_collector.dictionary_data_collector.class%
+        arguments:
+            - @knp_dictionary.registry
+        tags:
+            - { name: data_collector, template: %knp_dictionary.data_collector.dictionary_data_collector.template%, id: 'dictionary' }
 

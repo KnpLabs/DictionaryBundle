@@ -4,7 +4,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 
-class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate
+class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     private $dictionaries = [];
 
@@ -60,6 +60,11 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate
             'You can\'t destroy a dictionary registry value. It\'s used as application '.
             'constants.'
         );
+    }
+
+    public function count()
+    {
+        return count($this->dictionaries);
     }
 
     public function getIterator()
