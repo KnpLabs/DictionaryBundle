@@ -6,7 +6,7 @@ use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 
 class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
 {
-    private $dictionaries = [];
+    private $dictionaries = array();
 
     public function set($key, Dictionary $dictionary)
     {
