@@ -4,7 +4,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 class Dictionary
 {
-    private $values = [];
+    private $values = array();
 
     private $name;
 
