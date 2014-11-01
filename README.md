@@ -47,9 +47,9 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         // ...
-        ->add('civility', 'dictionary', [
+        ->add('civility', 'dictionary', array(
             'dictionary' => 'my_dictionary'
-        ]);
+        ));
     ;
 }
 ```
