@@ -5,6 +5,8 @@ namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
@@ -29,12 +31,33 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
     private function createDefinition($class, $name, array $dictionary)
     {
+        $values     = $this->createDictionary($dictionary);
         $definition = new Definition();
 
         return $definition
             ->setClass($class)
             ->addArgument($name)
-            ->addArgument($dictionary)
+            ->addArgument($values)
         ;
+    }
+
+    private function createDictionary(array $dictionary)
+    {
+        $type    = $dictionary['type'];
+        $content = $dictionary['content'];
+
+        switch ($type) {
+            case Dictionary::NATURALLY_INDEXED:
+                return array_combine($content, $content);
+            case Dictionary::INDEXED:
+                return array_values($content);
+            case Dictionary::VALUE_INDEXED:
+                return $content;
+        }
+
+        throw new RuntimeException(sprintf(
+            'Unknown dictionary type "%s"',
+            $type
+        ));
     }
 }
