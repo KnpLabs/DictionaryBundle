@@ -36,6 +36,8 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
         return $definition
             ->setClass($class)
+            ->setFactoryService('knp_dictionary.dictionary.dictionary_factory')
+            ->setFactoryMethod('create')
             ->addArgument($name)
             ->addArgument($values)
         ;

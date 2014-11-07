@@ -1,6 +1,9 @@
 parameters:
     knp_dictionary.dictionary.dictionary_registry.class: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
     knp_dictionary.dictionary.dictionary.class: Knp\DictionaryBundle\Dictionary\Dictionary
+
+    knp_dictionary.dictionary.value_transformer.constant_transformer.class: Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer
+
     knp_dictionary.form.type.dictionary_type.class: Knp\DictionaryBundle\Form\Type\DictionaryType
     knp_dictionary.data_collector.dictionary_data_collector.class: Knp\DictionaryBundle\DataCollector\DictionaryDataCollector
     knp_dictionary.data_collector.dictionary_data_collector.template: KnpDictionaryBundle::layout.html.twig
@@ -10,6 +13,14 @@ services:
         class: %knp_dictionary.dictionary.dictionary_registry.class%
     knp_dictionary.registry:
         alias: knp_dictionary.dictionary.dictionary_registry
+
+    knp_dictionary.dictionary.dictionary_factory:
+        class: Knp\DictionaryBundle\Dictionary\DictionaryFactory
+
+    knp_dictionary.dictionary.value_transformer.constant_transformer:
+        class: %knp_dictionary.dictionary.value_transformer.constant_transformer.class%
+        tags:
+            - { name: knp_dictionary.value_transformer }
 
     knp_dictionary.form.type.dictionary_type:
         class: %knp_dictionary.form.type.dictionary_type.class%
