@@ -48,12 +48,12 @@ public function buildForm(FormBuilderInterface $builder, array $options)
     $builder
         // ...
         ->add('civility', 'dictionary', array(
-            'dictionary' => 'my_dictionary'
+            'name' => 'my_dictionary'
         ));
     ;
 }
 ```
-The dictionary form type extends [symfony's choice type](http://symfony.com/fr/doc/current/reference/forms/types/choice.html) and its options.
+The dictionary form type extends the [symfony's choice type](http://symfony.com/fr/doc/current/reference/forms/types/choice.html) and its options.
 
 ## Types
 You can also specify the indexation mode of each dictionary
@@ -61,13 +61,13 @@ You can also specify the indexation mode of each dictionary
 knp_dictionary:
     dictionaries:
         my_dictionary:
-            type: 'value_indexed'   # your dictionary type
+            type: 'key_value'   # your dictionary type
             content:
                 "foo": "foo_value"
                 "bar": "bar_value"
                 "baz": "baz_value"
 ```
 ### Available types
-- `naturally_indexed` **(default)**: Values are also used for keys
-- `indexed`: Basic indexation
-- `value_indexed`: Use your own keys
+- `value` (default) : Natural indexation
+- `value_as_key`: Keys are defined from their value
+- `key_value`: Define your own keys
