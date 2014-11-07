@@ -14,13 +14,14 @@ class ConstantTransformer implements TransformerInterface
             return false;
         }
 
-        try {
-            $class = new \ReflectionClass($matches['class']);
-        } catch (\ReflectionException $e) {
+        if (false === class_exists($matches['class'])) {
             return false;
         }
 
-        return false !== $class->getConstant($matches['constant']);
+        $class = new \ReflectionClass($matches['class']);
+        $constants = $class->getConstants();
+
+        return array_key_exists($matches['constant'], $constants);
     }
 
     public function transform($value)
