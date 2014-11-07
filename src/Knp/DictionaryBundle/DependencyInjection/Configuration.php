@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
                 ->useAttributeAsKey('name')
                     ->prototype('array')
                         ->children()
-                            ->scalarNode('type')->defaultValue('naturally_indexed')->end()
+                            ->scalarNode('type')->defaultValue('value')->end()
                             ->arrayNode('content')
                                 ->isRequired()
                                 ->prototype('scalar')->end()

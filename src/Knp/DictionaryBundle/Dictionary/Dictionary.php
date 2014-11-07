@@ -4,11 +4,11 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 class Dictionary
 {
-    const NATURALLY_INDEXED = 'naturally_indexed';
+    const VALUE        = 'value';
 
-    const INDEXED           = 'indexed';
+    const VALUE_AS_KEY = 'value_as_key';
 
-    const VALUE_INDEXED     = 'value_indexed';
+    const KEY_VALUE    = 'key_value';
 
     private $values = array();
 

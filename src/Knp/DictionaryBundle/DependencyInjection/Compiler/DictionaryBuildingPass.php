@@ -47,11 +47,11 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $content = $dictionary['content'];
 
         switch ($type) {
-            case Dictionary::NATURALLY_INDEXED:
+            case Dictionary::VALUE_AS_KEY:
                 return array_combine($content, $content);
-            case Dictionary::INDEXED:
+            case Dictionary::VALUE:
                 return array_values($content);
-            case Dictionary::VALUE_INDEXED:
+            case Dictionary::KEY_VALUE:
                 return $content;
         }
 
