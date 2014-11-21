@@ -1,10 +1,16 @@
 {
-    "name": "knplabs/dictionary-bundle",
-    "license": "MIT",
-    "authors": [
+    "name":     "knplabs/dictionary-bundle",
+    "keywords": ["dictionary"],
+    "type":     "symfony-bundle",
+    "license":  "MIT",
+    "authors":  [
         {
-            "name": "schevalier",
-            "email": "chevalier.syl20@gmail.com"
+            "name": "Knplabs",
+            "homepage": "http://knplabs.com"
+        },
+        {
+            "name": "Shivoham",
+            "homepage": "https://github.com/Shivoham"
         }
     ],
     "minimum-stability": "stable",
