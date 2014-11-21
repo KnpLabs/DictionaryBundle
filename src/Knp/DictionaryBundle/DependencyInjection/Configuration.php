@@ -21,13 +21,15 @@ class Configuration implements ConfigurationInterface
                             ->then(function($values) {
                                 if (!array_key_exists('type', $values)) {
                                     if (!array_key_exists('content', $values)) {
-                                        return [
+                                        return array(
                                             'type' => 'value',
                                             'content' => $values
-                                        ];
+                                        );
                                     }
 
-                                    return array_merge($values, ['type' => 'value']);
+                                    return array_merge($values, array(
+                                        'type' => 'value'
+                                    ));
                                 }
 
                                 return $values;
