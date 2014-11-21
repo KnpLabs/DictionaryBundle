@@ -31,7 +31,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
     private function createDefinition($class, $name, array $dictionary)
     {
-        $values     = $this->createDictionary($dictionary);
+        $content    = $this->createDictionary($dictionary);
         $definition = new Definition();
 
         return $definition
@@ -39,7 +39,8 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ->setFactoryService('knp_dictionary.dictionary.dictionary_factory')
             ->setFactoryMethod('create')
             ->addArgument($name)
-            ->addArgument($values)
+            ->addArgument($content)
+            ->addArgument($dictionary['type'])
         ;
     }
 
