@@ -73,7 +73,7 @@ knp_dictionary:
 - `key_value`: Define your own keys
 
 ## Transformers
-Actually, this bundle is able to resolve your **class constants**:
+For now, this bundle is only able to resolve your **class constants**:
 
 ```yaml
 my_dictionary:
@@ -82,7 +82,7 @@ my_dictionary:
     - Bar
 ```
 You want to add other kinds of transformations for your dictionary values ?
-Feel free to create your own transformers !
+Feel free to create your own transformer !
 
 ### Add your own transformers
 
