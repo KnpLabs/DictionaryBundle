@@ -9,10 +9,15 @@ final class DictionaryFactory
 {
     private $transformers = array();
 
-    public function create($name, $values)
+    public function create($name, $content, $type)
     {
-        foreach ($values as $key => $value) {
-            $values[$key] = $this->buildValue($value);
+        $values = array();
+        foreach ($content as $key => $value) {
+            $builtValue = $this->buildValue($value);
+            if (Dictionary::VALUE_AS_KEY == $type) {
+                $key = $builtValue;
+            }
+            $values[$key] = $builtValue;
         }
 
         return new Dictionary($name, $values);

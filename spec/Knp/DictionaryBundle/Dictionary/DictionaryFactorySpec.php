@@ -26,7 +26,7 @@ class DictionaryFactorySpec extends ObjectBehavior
     function it_creates_dictionaries()
     {
         $this
-            ->create('foo', array('bar' => 'baz'))
+            ->create('foo', array('bar' => 'baz'), Argument::any())
             ->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary')
         ;
     }
@@ -36,7 +36,7 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->supports('bar')->shouldBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->create('foo', array('foo' => 'bar'));
+        $this->create('foo', array('foo' => 'bar'), Argument::any());
 
     }
 
@@ -45,6 +45,6 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->transform('baz')->shouldBeCalled();
 
-        $this->create('foo', array('bar' => 'baz'));
+        $this->create('foo', array('bar' => 'baz'), Argument::any());
     }
 }
