@@ -29,10 +29,9 @@ Define dictionaries in your config.yml file:
 knp_dictionary:
     dictionaries:
         my_dictionary:      # your dictionary name
-            content:        # your dictionary content
-                - Foo
-                - Bar
-                - Baz
+            - Foo           # your dictionary content
+            - Bar
+            - Baz
 ```
 You will be able to retreive it trough the dictionary registry service:
 ```php
@@ -55,14 +54,14 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 ```
 The dictionary form type extends the [symfony's choice type](http://symfony.com/fr/doc/current/reference/forms/types/choice.html) and its options.
 
-## Types
-You can also specify the indexation mode of each dictionary
+## Advanced usage
+You can specify the indexation mode of each dictionary
 ```yaml
 knp_dictionary:
     dictionaries:
-        my_dictionary:
-            type: 'key_value'   # your dictionary type
-            content:
+        my_dictionary:                  # your dictionary name
+            type: 'key_value'           # your dictionary type
+            content:                    # your dictionary content
                 "foo": "foo_value"
                 "bar": "bar_value"
                 "baz": "baz_value"

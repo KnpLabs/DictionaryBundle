@@ -16,6 +16,25 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('dictionaries')
                 ->useAttributeAsKey('name')
                     ->prototype('array')
+                        ->beforeNormalization()
+                            ->always()
+                            ->then(function($values) {
+                                if (!array_key_exists('type', $values)) {
+                                    if (!array_key_exists('content', $values)) {
+                                        return array(
+                                            'type' => 'value',
+                                            'content' => $values
+                                        );
+                                    }
+
+                                    return array_merge($values, array(
+                                        'type' => 'value'
+                                    ));
+                                }
+
+                                return $values;
+                            })
+                        ->end()
                         ->children()
                             ->scalarNode('type')->defaultValue('value')->end()
                             ->arrayNode('content')
