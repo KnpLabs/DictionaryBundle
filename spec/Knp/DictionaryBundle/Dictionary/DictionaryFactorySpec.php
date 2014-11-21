@@ -5,6 +5,7 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
+use Knp\DictionaryBundle\Dictionary\Dictionary;
 
 class DictionaryFactorySpec extends ObjectBehavior
 {
@@ -33,7 +34,9 @@ class DictionaryFactorySpec extends ObjectBehavior
 
     function it_doesnt_call_transformers_transform_method_if_not_supported($transformer)
     {
+        $transformer->supports('foo')->shouldBeCalled();
         $transformer->supports('bar')->shouldBeCalled();
+        $transformer->transform('foo')->shouldNotBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
         $this->create('foo', array('foo' => 'bar'), Argument::any());
@@ -42,9 +45,18 @@ class DictionaryFactorySpec extends ObjectBehavior
 
     function it_calls_transformers_transform_method_if_supported($transformer)
     {
+        $transformer->supports('bar')->shouldBeCalled();
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->transform('baz')->shouldBeCalled();
+        $transformer->transform('bar')->shouldNotBeCalled();
 
         $this->create('foo', array('bar' => 'baz'), Argument::any());
+    }
+
+    function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
+    {
+        $transformer->supports('baz')->shouldBeCalled();
+        $transformer->supports('bar')->shouldNotBeCalled();
+        $this->create('foo', array('bar' => 'baz'), Dictionary::VALUE_AS_KEY);
     }
 }

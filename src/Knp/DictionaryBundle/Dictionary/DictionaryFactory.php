@@ -14,9 +14,10 @@ final class DictionaryFactory
         $values = array();
         foreach ($content as $key => $value) {
             $builtValue = $this->buildValue($value);
-            if (Dictionary::VALUE_AS_KEY == $type) {
-                $key = $builtValue;
-            }
+            $key = Dictionary::VALUE_AS_KEY == $type
+                ? $builtValue
+                : $this->buildValue($key)
+            ;
             $values[$key] = $builtValue;
         }
 
