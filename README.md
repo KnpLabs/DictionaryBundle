@@ -3,6 +3,8 @@ DictionaryBundle
 [![Build Status](https://travis-ci.org/Shivoham/DictionaryBundle.svg?branch=master)](https://travis-ci.org/Shivoham/DictionaryBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/Shivoham/DictionaryBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/Shivoham/DictionaryBundle/?branch=master)
 
+Are you often tired to repeat static choices like gender or civility in your apps ?
+
 ## Requirements
 - Symfony >= 2.4
 
