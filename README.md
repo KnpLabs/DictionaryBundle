@@ -57,6 +57,23 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 ```
 The dictionary form type extends the [symfony's choice type](http://symfony.com/fr/doc/current/reference/forms/types/choice.html) and its options.
 
+### Validation constraint
+
+You can also use the constraint for validation
+
+```php
+use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
+
+class User
+{
+    /**
+     * @ORM\Column
+     * @Dictionary(name="my_dictionary")
+     */
+    private $civility;
+}
+```
+
 ## Advanced usage
 You can specify the indexation mode of each dictionary
 ```yaml

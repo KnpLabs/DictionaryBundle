@@ -1,21 +1,25 @@
 parameters:
-    knp_dictionary.dictionary.dictionary_registry.class: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
-    knp_dictionary.dictionary.dictionary.class: Knp\DictionaryBundle\Dictionary\Dictionary
-
-    knp_dictionary.dictionary.value_transformer.constant_transformer.class: Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer
-
-    knp_dictionary.form.type.dictionary_type.class: Knp\DictionaryBundle\Form\Type\DictionaryType
-    knp_dictionary.data_collector.dictionary_data_collector.class: Knp\DictionaryBundle\DataCollector\DictionaryDataCollector
-    knp_dictionary.data_collector.dictionary_data_collector.template: KnpDictionaryBundle::layout.html.twig
+    knp_dictionary.data_collector.dictionary_data_collector.class:           Knp\DictionaryBundle\DataCollector\DictionaryDataCollector
+    knp_dictionary.data_collector.dictionary_data_collector.template:        KnpDictionaryBundle::layout.html.twig
+    knp_dictionary.dictionary.dictionary.class:                              Knp\DictionaryBundle\Dictionary\Dictionary
+    knp_dictionary.dictionary.dictionary_registry.class:                     Knp\DictionaryBundle\Dictionary\DictionaryRegistry
+    knp_dictionary.dictionary.value_transformer.constant_transformer.class:  Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer
+    knp_dictionary.form.type.dictionary_type.class:                          Knp\DictionaryBundle\Form\Type\DictionaryType
+    knp_dictionary.validator.constraints.dictionary_validator.class:         Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator
 
 services:
-    knp_dictionary.dictionary.dictionary_registry:
-        class: %knp_dictionary.dictionary.dictionary_registry.class%
-    knp_dictionary.registry:
-        alias: knp_dictionary.dictionary.dictionary_registry
+    knp_dictionary.data_collector.dictionary_data_collector:
+        class: %knp_dictionary.data_collector.dictionary_data_collector.class%
+        arguments:
+            - @knp_dictionary.registry
+        tags:
+            - { name: data_collector, template: %knp_dictionary.data_collector.dictionary_data_collector.template%, id: 'dictionary' }
 
     knp_dictionary.dictionary.dictionary_factory:
         class: Knp\DictionaryBundle\Dictionary\DictionaryFactory
+
+    knp_dictionary.dictionary.dictionary_registry:
+        class: %knp_dictionary.dictionary.dictionary_registry.class%
 
     knp_dictionary.dictionary.value_transformer.constant_transformer:
         class: %knp_dictionary.dictionary.value_transformer.constant_transformer.class%
@@ -29,10 +33,13 @@ services:
         tags:
             - { name: form.type, alias: dictionary }
 
-    knp_dictionary.data_collector.dictionary_data_collector:
-        class: %knp_dictionary.data_collector.dictionary_data_collector.class%
+    knp_dictionary.registry:
+        alias: knp_dictionary.dictionary.dictionary_registry
+
+    knp_dictionary.validator.constraints.dictionary_validator:
+        class: %knp_dictionary.validator.constraints.dictionary_validator.class%
         arguments:
             - @knp_dictionary.registry
         tags:
-            - { name: data_collector, template: %knp_dictionary.data_collector.dictionary_data_collector.template%, id: 'dictionary' }
+            - { name: validator.constraint_validator, alias: knp_dictionary.dictionary_validator }
 
