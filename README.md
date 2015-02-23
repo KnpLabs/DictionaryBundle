@@ -13,7 +13,7 @@ Add the DictionaryBundle to your `composer.json`:
 ```yaml
 {
     "require": {
-        "knplabs/dictionary-bundle": "1.0.0"
+        "knplabs/dictionary-bundle": "1.1.0"
     }
 }
 ```
