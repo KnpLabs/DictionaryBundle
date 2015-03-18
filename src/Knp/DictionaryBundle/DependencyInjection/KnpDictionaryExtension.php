@@ -2,14 +2,16 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection;
 
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class KnpDictionaryExtension extends Extension
 {
+    /**
+     * {@inheritdoc}
+     */
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(

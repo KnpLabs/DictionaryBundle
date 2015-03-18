@@ -1,9 +1,10 @@
 {
-    "name":     "knplabs/dictionary-bundle",
-    "keywords": ["dictionary"],
-    "type":     "symfony-bundle",
-    "license":  "MIT",
-    "authors":  [
+    "name":         "knplabs/dictionary-bundle",
+    "description":  "Are you often tired to repeat static choices like gender or civility in your apps ?",
+    "keywords":     ["dictionary"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors":      [
         {
             "name": "Knplabs",
             "homepage": "http://knplabs.com"
@@ -15,6 +16,7 @@
     ],
     "minimum-stability": "stable",
     "require": {
+        "php": ">=5.3",
         "symfony/symfony": "~2.4"
     },
     "require-dev": {

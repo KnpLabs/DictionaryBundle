@@ -2,14 +2,17 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Knp\DictionaryBundle\Dictionary\Dictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Knp\DictionaryBundle\Dictionary\Dictionary;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         $config = $container->getParameter('knp_dictionary.configuration');
@@ -29,6 +32,13 @@ class DictionaryBuildingPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param string $class
+     * @param string $class
+     * @param array  $dictionary
+     *
+     * @return Definition
+     */
     private function createDefinition($class, $name, array $dictionary)
     {
         $content    = $this->createDictionary($dictionary);
@@ -44,6 +54,13 @@ class DictionaryBuildingPass implements CompilerPassInterface
         ;
     }
 
+    /**
+     * @param array $dictionary
+     *
+     * @return array
+     *
+     * @throws \RuntimeException
+     */
     private function createDictionary(array $dictionary)
     {
         $type    = $dictionary['type'];

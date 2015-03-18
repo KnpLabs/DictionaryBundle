@@ -3,13 +3,32 @@
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
-use Knp\DictionaryBundle\Dictionary\Dictionary;
 
 final class DictionaryFactory
 {
+    /**
+     * @var TransformerInterface[]
+     */
     private $transformers = array();
 
-    public function create($name, $content, $type)
+    /**
+     * @param TransformerInterface $transformer
+     *
+     * @return DictionaryFactory
+     */
+    public function addTransformer(TransformerInterface $transformer)
+    {
+        $this->transformers[] = $transformer;
+    }
+
+    /**
+     * @param string  $name
+     * @param mixed[] $content
+     * @param type    $string
+     *
+     * @return Dictionary
+     */
+    public function create($name, array $content, $type)
     {
         $values = array();
         foreach ($content as $key => $value) {
@@ -24,6 +43,11 @@ final class DictionaryFactory
         return new Dictionary($name, $values);
     }
 
+    /**
+     * @param mixed $value
+     *
+     * @return mixed
+     */
     private function buildValue($value)
     {
         foreach ($this->transformers as $transformer) {
@@ -33,10 +57,5 @@ final class DictionaryFactory
         }
 
         return $value;
-    }
-
-    public function addTransformer(TransformerInterface $transformer)
-    {
-        $this->transformers[] = $transformer;
     }
 }
