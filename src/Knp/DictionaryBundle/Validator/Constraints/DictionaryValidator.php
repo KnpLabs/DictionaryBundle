@@ -3,8 +3,6 @@
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
-use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
-use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -12,7 +10,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 class DictionaryValidator extends ConstraintValidator
 {
     /**
-     * @var DictionaryRegistry $registry
+     * @var DictionaryRegistry
      */
     private $registry;
 

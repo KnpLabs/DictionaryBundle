@@ -4,8 +4,14 @@ namespace Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
 class ConstantTransformer implements TransformerInterface
 {
+    /**
+     * @var string
+     */
     private $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
 
+    /**
+     * {@inheritdoc}
+     */
     public function supports($value)
     {
         $matches = array();
@@ -24,6 +30,9 @@ class ConstantTransformer implements TransformerInterface
         return array_key_exists($matches['constant'], $constants);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function transform($value)
     {
         $matches = array();

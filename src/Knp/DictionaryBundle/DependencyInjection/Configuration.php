@@ -2,11 +2,14 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
+use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function getConfigTreeBuilder()
     {
         $builder = new TreeBuilder();
@@ -18,18 +21,13 @@ class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->beforeNormalization()
                             ->always()
-                            ->then(function($values) {
+                            ->then(function ($values) {
                                 if (!array_key_exists('type', $values)) {
                                     if (!array_key_exists('content', $values)) {
-                                        return array(
-                                            'type' => 'value',
-                                            'content' => $values
-                                        );
+                                        return array('type' => 'value', 'content' => $values);
                                     }
 
-                                    return array_merge($values, array(
-                                        'type' => 'value'
-                                    ));
+                                    return array_merge($values, array('type' => 'value'));
                                 }
 
                                 return $values;
