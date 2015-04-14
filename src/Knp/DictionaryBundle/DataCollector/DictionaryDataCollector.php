@@ -5,9 +5,9 @@ namespace Knp\DictionaryBundle\DataCollector;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-class DictionaryDataCollector implements DataCollectorInterface
+class DictionaryDataCollector extends DataCollector
 {
     /**
      * @var DictionaryRegistry
@@ -27,7 +27,15 @@ class DictionaryDataCollector implements DataCollectorInterface
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->dictionaries = $this->registry;
+        $this->data = $this->registry->all();
+    }
+
+    /**
+     * @return Dictionary[]
+     */
+    public function getDictionaries()
+    {
+        return $this->data;
     }
 
     /**

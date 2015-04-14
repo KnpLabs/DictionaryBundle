@@ -19,12 +19,14 @@ final class DictionaryFactory
     public function addTransformer(TransformerInterface $transformer)
     {
         $this->transformers[] = $transformer;
+
+        return $this;
     }
 
     /**
      * @param string  $name
      * @param mixed[] $content
-     * @param type    $string
+     * @param string  $type
      *
      * @return Dictionary
      */
@@ -32,11 +34,8 @@ final class DictionaryFactory
     {
         $values = array();
         foreach ($content as $key => $value) {
-            $builtValue = $this->buildValue($value);
-            $key = Dictionary::VALUE_AS_KEY == $type
-                ? $builtValue
-                : $this->buildValue($key)
-            ;
+            $builtValue   = $this->buildValue($value);
+            $key          = Dictionary::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
             $values[$key] = $builtValue;
         }
 

@@ -9,7 +9,7 @@ use Knp\DictionaryBundle\Dictionary\Dictionary;
 
 class DictionaryFactorySpec extends ObjectBehavior
 {
-    function let(TransformerInterface $transformer)
+    public function let(TransformerInterface $transformer)
     {
         $transformer->supports('baz')->willReturn(true);
         $transformer->transform('baz')->willReturn('foo');
@@ -19,12 +19,12 @@ class DictionaryFactorySpec extends ObjectBehavior
         $this->addTransformer($transformer);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\DictionaryFactory');
     }
 
-    function it_creates_dictionaries()
+    public function it_creates_dictionaries()
     {
         $this
             ->create('foo', array('bar' => 'baz'), Argument::any())
@@ -32,7 +32,7 @@ class DictionaryFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_doesnt_call_transformers_transform_method_if_not_supported($transformer)
+    public function it_doesnt_call_transformers_transform_method_if_not_supported($transformer)
     {
         $transformer->supports('foo')->shouldBeCalled();
         $transformer->supports('bar')->shouldBeCalled();
@@ -40,10 +40,9 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('bar')->shouldNotBeCalled();
 
         $this->create('foo', array('foo' => 'bar'), Argument::any());
-
     }
 
-    function it_calls_transformers_transform_method_if_supported($transformer)
+    public function it_calls_transformers_transform_method_if_supported($transformer)
     {
         $transformer->supports('bar')->shouldBeCalled();
         $transformer->supports('baz')->shouldBeCalled();
@@ -53,7 +52,7 @@ class DictionaryFactorySpec extends ObjectBehavior
         $this->create('foo', array('bar' => 'baz'), Argument::any());
     }
 
-    function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
+    public function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
     {
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->supports('bar')->shouldNotBeCalled();
