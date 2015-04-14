@@ -20,7 +20,8 @@
         "symfony/symfony": "~2.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.0",
+        "bossa/phpspec2-expect": "~1.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -30,7 +31,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.1.x-dev"
+            "dev-master": "1.2.x-dev"
         }
     }
 }
