@@ -2,7 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-class Dictionary implements \ArrayAccess, \IteratorAggregate
+class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
 {
     const VALUE = 'value';
 
@@ -84,5 +84,27 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate
     public function getIterator()
     {
         return new \ArrayIterator($this->values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            'name'   => $this->name,
+            'values' => $this->values,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+
+        $this->name   = $data['name'];
+        $this->values = $data['values'];
     }
 }

@@ -7,7 +7,7 @@
     {% set text %}
         <div class="sf-toolbar-info-piece">
             <b>Dictionaries</b>
-            <span>{{ collector.dictionaries.count }}</span>
+            <span>{{ collector.dictionaries|length }}</span>
         </div>
     {% endset %}
     {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
@@ -20,7 +20,7 @@
 </span>
 <strong>Dictionaries</strong>
 <span class="count">
-    <span>{{ collector.dictionaries.count }}</span>
+    <span>{{ collector.dictionaries|length }}</span>
 </span>
 {% endblock %}
 
@@ -34,7 +34,7 @@
                 <th>Key</th>
                 <th>Value</th>
             </tr>
-            {% for key, value in dictionary.values %}
+            {% for key, value in dictionary %}
             <tr>
                 <td>{{ key }}</td>
                 <td>{{ value }}</td>

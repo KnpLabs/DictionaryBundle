@@ -14,14 +14,14 @@ class KnpDictionaryExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
+        $configuration = new Configuration();
+        $config        = $this->processConfiguration($configuration, $config);
+        $container->setParameter('knp_dictionary.configuration', $config);
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
         $loader->load('dictionary.yml');
-
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $config);
-        $container->setParameter('knp_dictionary.configuration', $config);
     }
 }

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class DictionaryValidatorSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry, ExecutionContextInterface $context, Dictionary $dictionary)
+    public function let(DictionaryRegistry $registry, ExecutionContextInterface $context, Dictionary $dictionary)
     {
         $this->beConstructedWith($registry);
         $this->initialize($context);
@@ -23,12 +23,12 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $dictionary->getValues()->willReturn(array('the_key' => 'the_value'));
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator');
     }
 
-    function it_valids_existing_keys($context)
+    public function it_valids_existing_keys($context)
     {
         $constraint = new Constraint(array( 'name' => 'dico' ));
 
@@ -37,7 +37,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $this->validate('the_key', $constraint);
     }
 
-    function it_doesnt_valid_unexisting_keys($context)
+    public function it_doesnt_valid_unexisting_keys($context)
     {
         $constraint = new Constraint(array( 'name' => 'dico' ));
 
@@ -46,9 +46,9 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $this->validate('the_unexisting_key', $constraint);
     }
 
-    function it_throw_exception_form_unknown_constraints()
+    public function it_throw_exception_form_unknown_constraints()
     {
-        $constraint = new NotNull;
+        $constraint = new NotNull();
         $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))->duringValidate('the_key', $constraint);
     }
 }

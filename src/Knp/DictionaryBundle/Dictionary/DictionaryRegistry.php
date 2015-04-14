@@ -32,6 +32,14 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
+     * @return Dictionary[]
+     */
+    public function all()
+    {
+        return $this->dictionaries;
+    }
+
+    /**
      * @param mixed $offset
      *
      * @return Dictionary
@@ -42,9 +50,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param mixed $offset
-     *
-     * @return boolean
+     * {@inheritdoc}
      */
     public function offsetExists($offset)
     {
@@ -52,11 +58,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param mixed $offset
-     *
-     * @return Dictionary
-     *
-     * @throws DictionaryNotFoundException
+     * {@inheritdoc}
      */
     public function offsetGet($offset)
     {
@@ -73,10 +75,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param mixed $offset
-     * @param mixed $value
-     *
-     * @throws \RuntimeException
+     * {@inheritdoc}
      */
     public function offsetSet($offset, $value)
     {
@@ -87,9 +86,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param mixed $offset
-     *
-     * @throws \RuntimeException
+     * {@inheritdoc}
      */
     public function offsetUnset($offset)
     {
@@ -100,7 +97,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @return integer
+     * {@inheritdoc}
      */
     public function count()
     {
@@ -108,7 +105,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @return \ArrayIterator
+     * {@inheritdoc}
      */
     public function getIterator()
     {

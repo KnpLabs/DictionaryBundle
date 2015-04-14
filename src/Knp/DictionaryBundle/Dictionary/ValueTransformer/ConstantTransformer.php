@@ -24,7 +24,7 @@ class ConstantTransformer implements TransformerInterface
             return false;
         }
 
-        $class = new \ReflectionClass($matches['class']);
+        $class     = new \ReflectionClass($matches['class']);
         $constants = $class->getConstants();
 
         return array_key_exists($matches['constant'], $constants);

@@ -15,10 +15,10 @@ class DictionaryBuildingPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $config = $container->getParameter('knp_dictionary.configuration');
-        $class  = $container->getParameter('knp_dictionary.dictionary.dictionary.class');
+        $config       = $container->getParameter('knp_dictionary.configuration');
+        $class        = $container->getParameter('knp_dictionary.dictionary.dictionary.class');
         $dictionaries = $config['dictionaries'];
-        $registry = $container
+        $registry     = $container
             ->getDefinition('knp_dictionary.dictionary.dictionary_registry')
         ;
 
