@@ -9,7 +9,7 @@ branches:
         - master
 
 before_script:
-    - composer update --prefer-source --dev
+    - composer update --prefer-source
 
 script:
     - bin/phpspec run -fpretty
