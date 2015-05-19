@@ -12,7 +12,6 @@ class DictionaryExtension extends \Twig_Extension
     private $registry;
 
     /**
-     *
      * @param DictionaryRegistry $registry
      */
     public function __construct(DictionaryRegistry $registry)
@@ -37,6 +36,7 @@ class DictionaryExtension extends \Twig_Extension
 
     /**
      * @param $dictionaryName
+     *
      * @return \Knp\DictionaryBundle\Dictionary\Dictionary
      */
     public function getDictionary($dictionaryName)
