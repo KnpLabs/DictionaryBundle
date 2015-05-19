@@ -114,3 +114,13 @@ services:
     	tags:
         	- { name: knp_dictionary.value_transformer }
 ```
+
+### Use your dictionary in twig
+
+You can also use your dictionary in your Twig templates via calling ```dictionary``` function
+
+```twig
+{% for example in dictionary('examples') %}
+    {{ example }}
+{% endfor %}
+```
