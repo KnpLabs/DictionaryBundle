@@ -25,7 +25,7 @@ class DictionaryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'dictionary' => new \Twig_Filter_Method($this, 'getDictionary'),
+            'dictionary' => new \Twig_SimpleFilter($this, 'getDictionary'),
         );
     }
 
