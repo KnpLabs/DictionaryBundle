@@ -117,10 +117,24 @@ services:
 
 ### Use your dictionary in twig
 
-You can also use your dictionary in your Twig templates via calling ```dictionary``` function
+You can also use your dictionary in your Twig templates via calling ```dictionary``` function (or filter)
 
 ```twig
 {% for example in dictionary('examples') %}
     {{ example }}
 {% endfor %}
+
+{% for example in 'examples'|dictionary %}
+    {{ example }}
+{% endfor %}
+```
+
+But you can also access directly to a value by using the same function (or filter)
+
+```twig
+    {{ 'my_key'|dictionary('dictionary_name') }}
+```
+OR
+```twig
+    {{ dictionary('my_key', 'dictionary_name') }}
 ```

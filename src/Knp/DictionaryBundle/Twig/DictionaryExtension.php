@@ -7,16 +7,16 @@ use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 class DictionaryExtension extends \Twig_Extension
 {
     /**
-     * @var DictionaryRegistry
+     * @var Dictionarydictionaries
      */
-    private $registry;
+    private $dictionaries;
 
     /**
-     * @param DictionaryRegistry $registry
+     * @param DictionaryRegistry $dictionaries
      */
-    public function __construct(DictionaryRegistry $registry)
+    public function __construct(DictionaryRegistry $dictionaries)
     {
-        $this->registry = $registry;
+        $this->dictionaries = $dictionaries;
     }
 
     /**
@@ -25,22 +25,42 @@ class DictionaryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'dictionary' => new \Twig_Function_Method($this, 'getDictionary'),
+            'dictionary' => new \Twig_Function_Method($this, 'getData'),
         );
     }
 
-    public function getName()
+    /**
+     * {@inheritdoc}
+     */
+    public function getFilters()
     {
-        return 'knp_dictionary.dictionary_extension';
+        return array(
+            'dictionary' => new \Twig_Filter_Method($this, 'getData'),
+        );
     }
 
     /**
-     * @param $dictionaryName
+     * @param mixed $key
+     * @param mixed|null $name
      *
-     * @return \Knp\DictionaryBundle\Dictionary\Dictionary
+     * @return mixed|Knp\DictionaryBundle\Dictionary\Dictionary if $name !== null, the value $key is searched into the dictionary $name, else the dictionary $key is returned
      */
-    public function getDictionary($dictionaryName)
+    public function getData($key, $name = null)
     {
-        return $this->registry->get($dictionaryName);
+        if (null === $name) {
+            return $this->dictionaries->get($key);
+        }
+
+        $dictionary = $this->dictionaries->get($name);
+
+        return $dictionary[$key];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'knp_dictionary.dictionary_extension';
     }
 }
