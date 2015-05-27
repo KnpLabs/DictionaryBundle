@@ -115,7 +115,7 @@ services:
         	- { name: knp_dictionary.value_transformer }
 ```
 
-### Use your dictionary in twig
+## Use your dictionary in twig
 
 You can also use your dictionary in your Twig templates via calling ```dictionary``` function (or filter)
 
@@ -123,18 +123,10 @@ You can also use your dictionary in your Twig templates via calling ```dictionar
 {% for example in dictionary('examples') %}
     {{ example }}
 {% endfor %}
-
-{% for example in 'examples'|dictionary %}
-    {{ example }}
-{% endfor %}
 ```
 
 But you can also access directly to a value by using the same function (or filter)
 
 ```twig
-    {{ 'my_key'|dictionary('dictionary_name') }}
-```
-OR
-```twig
-    {{ dictionary('my_key', 'dictionary_name') }}
+{{ 'my_key'|dictionary('dictionary_name') }}
 ```
