@@ -7,7 +7,7 @@ use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 class DictionaryExtension extends \Twig_Extension
 {
     /**
-     * @var Dictionarydictionaries
+     * @var DictionaryRegistry
      */
     private $dictionaries;
 
@@ -25,7 +25,7 @@ class DictionaryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'dictionary' => new \Twig_Function_Method($this, 'getData'),
+            'dictionary' => new \Twig_Function_Method($this, 'getDictionary'),
         );
     }
 
@@ -35,22 +35,28 @@ class DictionaryExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'dictionary' => new \Twig_Filter_Method($this, 'getData'),
+            'dictionary' => new \Twig_Filter_Method($this, 'getValue'),
         );
     }
 
     /**
-     * @param mixed $key
-     * @param mixed|null $name
+     * @param string $name
      *
-     * @return mixed|Knp\DictionaryBundle\Dictionary\Dictionary if $name !== null, the value $key is searched into the dictionary $name, else the dictionary $key is returned
+     * @return \Knp\DictionaryBundle\Dictionary\Dictionary
      */
-    public function getData($key, $name = null)
+    public function getDictionary($name)
     {
-        if (null === $name) {
-            return $this->dictionaries->get($key);
-        }
+        return $this->dictionaries->get($name);
+    }
 
+    /**
+     * @param mixed  $key
+     * @param string $name
+     *
+     * @return mixed
+     */
+    public function getValue($key, $name)
+    {
         $dictionary = $this->dictionaries->get($name);
 
         return $dictionary[$key];

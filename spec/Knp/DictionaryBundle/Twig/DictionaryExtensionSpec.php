@@ -26,13 +26,13 @@ class DictionaryExtensionSpec extends ObjectBehavior
 
     public function it_returns_a_dictionary_by_its_name($dico1, $dico2)
     {
-        $this->getData('test')->shouldReturn($dico1);
-        $this->getData('other')->shouldReturn($dico2);
+        $this->getDictionary('test')->shouldReturn($dico1);
+        $this->getDictionary('other')->shouldReturn($dico2);
     }
 
     public function it_returns_a_value_from_a_dictionary()
     {
-        $this->getData('foo', 'test')->shouldReturn('bar');
-        $this->getData('foo', 'other')->shouldReturn(false);
+        $this->getValue('foo', 'test')->shouldReturn('bar');
+        $this->getValue('foo', 'other')->shouldReturn(false);
     }
 }
