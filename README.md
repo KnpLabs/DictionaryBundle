@@ -114,3 +114,19 @@ services:
     	tags:
         	- { name: knp_dictionary.value_transformer }
 ```
+
+## Use your dictionary in twig
+
+You can also use your dictionary in your Twig templates via calling ```dictionary``` function (or filter)
+
+```twig
+{% for example in dictionary('examples') %}
+    {{ example }}
+{% endfor %}
+```
+
+But you can also access directly to a value by using the same function (or filter)
+
+```twig
+{{ 'my_key'|dictionary('dictionary_name') }}
+```
