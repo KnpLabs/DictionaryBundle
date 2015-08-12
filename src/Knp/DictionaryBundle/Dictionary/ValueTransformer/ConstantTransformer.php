@@ -20,7 +20,7 @@ class ConstantTransformer implements TransformerInterface
             return false;
         }
 
-        if (false === class_exists($matches['class'])) {
+        if (false === class_exists($matches['class']) && false === interface_exists($matches['class'])) {
             return false;
         }
 
