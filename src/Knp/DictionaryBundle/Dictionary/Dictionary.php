@@ -47,6 +47,14 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
     }
 
     /**
+     * @return mixed[]
+     */
+    public function getKeys()
+    {
+        return array_keys($this->values);
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function offsetExists($offset)

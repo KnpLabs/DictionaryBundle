@@ -7,6 +7,7 @@ parameters:
     knp_dictionary.form.type.dictionary_type.class:                          Knp\DictionaryBundle\Form\Type\DictionaryType
     knp_dictionary.validator.constraints.dictionary_validator.class:         Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator
     knp_dictionary.twig.dictionary_extension.class:                          Knp\DictionaryBundle\Twig\DictionaryExtension
+    knp_dictionary.data_fixtures.dictionary_provider.class:                  Knp\DictionaryBundle\DataFixtures\DictionaryProvider
 services:
     knp_dictionary.data_collector.dictionary_data_collector:
         class: %knp_dictionary.data_collector.dictionary_data_collector.class%
@@ -49,3 +50,10 @@ services:
             - @knp_dictionary.registry
         tags:
             - { name: twig.extension }
+
+    knp_dictionary.data_fixtures.dictionary_provider:
+        class: %knp_dictionary.data_fixtures.dictionary_provider.class%
+        arguments:
+            - @knp_dictionary.registry
+        tags:
+            - { name: knp_rad_fixtures_load.provider }
