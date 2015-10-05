@@ -16,6 +16,11 @@ class Dictionary extends Constraint
     public $name;
 
     /**
+     * @var bool
+     */
+    public $required = true;
+
+    /**
      * @var string
      */
     public $message = 'The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.';

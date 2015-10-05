@@ -31,6 +31,10 @@ class DictionaryValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
         }
 
+        if (!$constraint->required && empty($value)) {
+            return;
+        }
+
         $dictionary = $this->registry->get($constraint->name);
         $values     = $dictionary->getValues();
 
