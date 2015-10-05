@@ -57,9 +57,9 @@ class DictionaryBuildingPass implements CompilerPassInterface
     /**
      * @param array $dictionary
      *
-     * @return array
-     *
      * @throws \RuntimeException
+     *
+     * @return array
      */
     private function createDictionary(array $dictionary)
     {

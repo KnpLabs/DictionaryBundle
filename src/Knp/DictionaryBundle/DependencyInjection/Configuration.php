@@ -22,8 +22,8 @@ class Configuration implements ConfigurationInterface
                         ->beforeNormalization()
                             ->always()
                             ->then(function ($values) {
-                                if (!array_key_exists('type', $values)) {
-                                    if (!array_key_exists('content', $values)) {
+                                if (false === array_key_exists('type', $values)) {
+                                    if (false === array_key_exists('content', $values)) {
                                         return array('type' => 'value', 'content' => $values);
                                     }
 
