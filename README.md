@@ -59,7 +59,8 @@ The dictionary form type extends the [symfony's choice type](http://symfony.com/
 
 ### Validation constraint
 
-You can also use the constraint for validation
+You can also use the constraint for validation. By default, the value should be set.
+However, you can provide the `required` parameter to not validate it if the value is empty.
 
 ```php
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
@@ -68,7 +69,7 @@ class User
 {
     /**
      * @ORM\Column
-     * @Dictionary(name="my_dictionary")
+     * @Dictionary(name="my_dictionary", required=false)
      */
     private $civility;
 }
