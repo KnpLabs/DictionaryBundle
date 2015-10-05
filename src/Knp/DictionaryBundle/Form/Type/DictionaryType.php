@@ -34,7 +34,7 @@ class DictionaryType extends AbstractType
             return $choices;
         };
 
-        $resolver->setDefaults(array('name'    => null, 'choices' => $choices));
+        $resolver->setDefaults(array('name' => null, 'choices' => $choices));
     }
 
     /**

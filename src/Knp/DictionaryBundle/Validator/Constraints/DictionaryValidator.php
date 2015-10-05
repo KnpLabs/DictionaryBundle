@@ -27,11 +27,11 @@ class DictionaryValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof Dictionary) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
+        if (false === $constraint instanceof Dictionary) {
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Dictionary');
         }
 
-        if (!$constraint->required && empty($value)) {
+        if (false === $constraint->required && empty($value)) {
             return;
         }
 
