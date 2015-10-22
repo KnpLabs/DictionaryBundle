@@ -27,7 +27,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "~2.0",
-        "bossa/phpspec2-expect": "~1.0"
+        "bossa/phpspec2-expect": "~1.0",
+        "fzaninotto/faker": "^1.5"
     },
     "config": {
         "bin-dir": "bin"
@@ -39,5 +40,8 @@
         "branch-alias": {
             "dev-master": "1.3.x-dev"
         }
+    },
+    "suggest": {
+        "knplabs/rad-fixtures-load": "Allows to autoregister the dictionary provider as an alice provider"
     }
 }

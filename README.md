@@ -131,3 +131,23 @@ But you can also access directly to a value by using the same function (or filte
 ```twig
 {{ 'my_key'|dictionary('dictionary_name') }}
 ```
+
+## Faker provider
+
+The KnpDictionaryBundle comes with a [faker provider](https://github.com/fzaninotto/Faker) that can be used to provide a random entry from a dictionary.
+
+### Alice
+
+To register the provider in [nelmio/alice](https://github.com/nelmio/alice), you can follow the [official documentation](https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md#add-a-custom-faker-provider-class) 
+
+or ...
+
+if you use the awesome [knplabs/rad-fixtures-load](https://github.com/knplabs/rad-fixtures-load) library, the dictionary provider will be automaticaly loaded for you :)
+
+```yaml
+App\Entity\User:
+    john_doe:
+        firstname: John
+        latnale: Doe
+        city: <dictionary('cities')>
+```
