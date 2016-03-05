@@ -5,7 +5,8 @@ namespace Knp\DictionaryBundle\Form\Type;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DictionaryType extends AbstractType
 {
@@ -25,7 +26,7 @@ class DictionaryType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $choices = function (Options $options) {
             $name    = $options['name'];
@@ -42,14 +43,6 @@ class DictionaryType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'dictionary';
+        return ChoiceType::class;
     }
 }
