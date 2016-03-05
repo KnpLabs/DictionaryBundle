@@ -16,29 +16,32 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.3",
-        "symfony/http-kernel": "~2.5",
-        "symfony/dependency-injection": "~2.5",
-        "symfony/http-foundation": "~2.5",
-        "symfony/config": "~2.5",
-        "symfony/form": "~2.5",
-        "symfony/validator": "~2.5",
-        "twig/twig": "^1.12"
+        "php": ">=5.5.9",
+        "symfony/http-kernel": "~2.8 || ~3.0",
+        "symfony/dependency-injection": "~2.8 || ~3.0",
+        "symfony/http-foundation": "~2.8 || ~3.0",
+        "symfony/config": "~2.8 || ~3.0",
+        "symfony/form": "~2.8 || ~3.0",
+        "symfony/validator": "~2.8 || ~3.0",
+        "twig/twig": "~1.11",
+        "fzaninotto/faker": "^1.5"
     },
     "require-dev": {
-        "phpspec/phpspec": "~2.5",
         "bossa/phpspec2-expect": "~1.0",
+        "phpspec/phpspec": "~2.4",
         "fzaninotto/faker": "^1.5"
     },
     "config": {
         "bin-dir": "bin"
     },
     "autoload": {
-        "psr-0": { "Knp\\DictionaryBundle": "src/" }
+        "psr-4": {
+            "Knp\\DictionaryBundle\\": "src/Knp/DictionaryBundle"
+        }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.5.x-dev"
+            "dev-master": "2.0.x-dev"
         }
     },
     "suggest": {
