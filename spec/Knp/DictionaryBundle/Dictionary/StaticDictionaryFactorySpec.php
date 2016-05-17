@@ -2,12 +2,12 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class DictionaryFactorySpec extends ObjectBehavior
+class StaticDictionaryFactorySpec extends ObjectBehavior
 {
     function let(TransformerInterface $transformer)
     {
@@ -21,14 +21,14 @@ class DictionaryFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\DictionaryFactory');
+        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\StaticDictionaryFactory');
     }
 
     function it_creates_dictionaries()
     {
         $this
             ->create('foo', array('bar' => 'baz'), Argument::any())
-            ->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary')
+            ->shouldHaveType('Knp\DictionaryBundle\Dictionary\StaticDictionary')
         ;
     }
 
