@@ -28,7 +28,7 @@
     },
     "require-dev": {
         "bossa/phpspec2-expect": "~1.0",
-        "pedrotroller/php-cs-custom-fixer": "^1.3",
+        "pedrotroller/php-cs-custom-fixer": "~1.3.3",
         "phpspec/phpspec": "~2.5"
     },
     "config": {
