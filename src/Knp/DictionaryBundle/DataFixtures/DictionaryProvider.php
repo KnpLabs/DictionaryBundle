@@ -32,4 +32,3 @@ class DictionaryProvider extends BaseProvider
         return self::randomElement($dictionary->getKeys());
     }
 }
-

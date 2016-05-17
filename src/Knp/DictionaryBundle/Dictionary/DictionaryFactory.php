@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 
 final class DictionaryFactory
@@ -35,7 +36,7 @@ final class DictionaryFactory
         $values = array();
         foreach ($content as $key => $value) {
             $builtValue   = $this->buildValue($value);
-            $key          = Dictionary::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
+            $key          = DictionaryInterface::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
             $values[$key] = $builtValue;
         }
 
