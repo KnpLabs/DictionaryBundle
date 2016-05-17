@@ -2,7 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary as Constraint;
 use PhpSpec\ObjectBehavior;

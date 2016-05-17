@@ -2,7 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Twig;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use PhpSpec\ObjectBehavior;
 
