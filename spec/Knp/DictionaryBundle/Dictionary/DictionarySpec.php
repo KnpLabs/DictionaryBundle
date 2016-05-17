@@ -20,7 +20,12 @@ class DictionarySpec extends ObjectBehavior
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary');
     }
 
-    public function its_getvalues_should_return_dictionary_values()
+    function it_is_a_dictionary()
+    {
+        $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
+    }
+
+    function its_getvalues_should_return_dictionary_values()
     {
         $this->getValues()->shouldReturn(array(
             'foo' => 0,
@@ -29,7 +34,7 @@ class DictionarySpec extends ObjectBehavior
         ));
     }
 
-    public function its_getname_should_return_dictionary_name()
+    function its_getname_should_return_dictionary_name()
     {
         $this->getName()->shouldReturn('foo');
     }
