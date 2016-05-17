@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 
 class DictionarySpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->beConstructedWith('foo', array(
             'foo' => 0,
@@ -15,7 +15,7 @@ class DictionarySpec extends ObjectBehavior
         ));
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary');
     }
@@ -34,7 +34,7 @@ class DictionarySpec extends ObjectBehavior
         $this->getName()->shouldReturn('foo');
     }
 
-    public function it_access_to_value_like_an_array()
+    function it_access_to_value_like_an_array()
     {
         expect($this['foo']->getWrappedObject())->toBe(0);
         expect($this['bar']->getWrappedObject())->toBe(1);

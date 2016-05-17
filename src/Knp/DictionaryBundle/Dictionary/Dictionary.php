@@ -2,14 +2,10 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
+use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
+
+class Dictionary implements DictionaryInterface
 {
-    const VALUE = 'value';
-
-    const VALUE_AS_KEY = 'value_as_key';
-
-    const KEY_VALUE = 'key_value';
-
     /**
      * @var string
      */
@@ -31,7 +27,7 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -39,7 +35,7 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getValues()
     {
@@ -47,7 +43,7 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
     }
 
     /**
-     * @return mixed[]
+     * {@inheritdoc}
      */
     public function getKeys()
     {
