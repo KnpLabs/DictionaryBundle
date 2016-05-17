@@ -2,10 +2,10 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 
-final class DictionaryFactory
+final class StaticDictionaryFactory
 {
     /**
      * @var TransformerInterface[]
@@ -15,7 +15,7 @@ final class DictionaryFactory
     /**
      * @param TransformerInterface $transformer
      *
-     * @return DictionaryFactory
+     * @return StaticDictionaryFactory
      */
     public function addTransformer(TransformerInterface $transformer)
     {
@@ -29,18 +29,18 @@ final class DictionaryFactory
      * @param mixed[] $content
      * @param string  $type
      *
-     * @return Dictionary
+     * @return StaticDictionary
      */
     public function create($name, array $content, $type)
     {
         $values = array();
         foreach ($content as $key => $value) {
             $builtValue   = $this->buildValue($value);
-            $key          = DictionaryInterface::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
+            $key          = Dictionary::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
             $values[$key] = $builtValue;
         }
 
-        return new Dictionary($name, $values);
+        return new StaticDictionary($name, $values);
     }
 
     /**

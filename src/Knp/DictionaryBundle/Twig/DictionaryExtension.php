@@ -42,7 +42,7 @@ class DictionaryExtension extends \Twig_Extension
     /**
      * @param string $name
      *
-     * @return \Knp\DictionaryBundle\Dictionary\Dictionary
+     * @return \Knp\DictionaryBundle\Dictionary
      */
     public function getDictionary($name)
     {

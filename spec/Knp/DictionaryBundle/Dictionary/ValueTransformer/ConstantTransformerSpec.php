@@ -23,16 +23,16 @@ class ConstantTransformerSpec extends ObjectBehavior
 
     function it_doesnt_support_non_existing_constants()
     {
-        $this->supports('Knp\DictionaryBundle\Dictionary\Dictionary::PONEY')->shouldReturn(false);
+        $this->supports('Knp\DictionaryBundle\Dictionary::PONEY')->shouldReturn(false);
     }
 
     function it_supports_existing_classes_and_constants()
     {
-        $this->supports('Knp\DictionaryBundle\Dictionary\Dictionary::VALUE')->shouldReturn(true);
+        $this->supports('Knp\DictionaryBundle\Dictionary::VALUE')->shouldReturn(true);
     }
 
     function it_transforms_constant_patterns()
     {
-        $this->transform('Knp\DictionaryBundle\Dictionary\Dictionary::VALUE')->shouldReturn('value');
+        $this->transform('Knp\DictionaryBundle\Dictionary::VALUE')->shouldReturn('value');
     }
 }

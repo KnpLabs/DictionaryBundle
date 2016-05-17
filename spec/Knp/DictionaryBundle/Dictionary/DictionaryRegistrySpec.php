@@ -2,7 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
 class DictionaryRegistrySpec extends ObjectBehavior
@@ -20,17 +20,17 @@ class DictionaryRegistrySpec extends ObjectBehavior
 
     function it_is_an_array_access()
     {
-        $this->shouldHaveType('\ArrayAccess');
+        $this->shouldHaveType('ArrayAccess');
     }
 
     function it_is_iterable()
     {
-        $this->shouldHaveType('\IteratorAggregate');
+        $this->shouldHaveType('IteratorAggregate');
     }
 
     function it_is_countable()
     {
-        $this->shouldHaveType('\Countable');
+        $this->shouldHaveType('Countable');
     }
 
     function it_sets_registry_entry($dictionary)
@@ -53,12 +53,12 @@ class DictionaryRegistrySpec extends ObjectBehavior
         $this->shouldThrow('Knp\DictionaryBundle\Exception\DictionaryNotFoundException')->duringGet('bar');
     }
 
-    public function its_offsetSet_method_cannot_be_called()
+    function its_offsetSet_method_cannot_be_called()
     {
         $this->shouldThrow('\RuntimeException')->duringOffsetSet('foo', 'bar');
     }
 
-    public function its_offsetUnset_method_cannot_be_called()
+    function its_offsetUnset_method_cannot_be_called()
     {
         $this->shouldThrow('\RuntimeException')->duringOffsetUnset('foo');
     }
