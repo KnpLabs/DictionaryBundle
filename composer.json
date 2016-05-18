@@ -12,6 +12,10 @@
         {
             "name": "Shivoham",
             "homepage": "https://github.com/Shivoham"
+        },
+        {
+            "name": "PedroTroller",
+            "homepage": "https://github.com/PedroTroller"
         }
     ],
     "minimum-stability": "stable",
