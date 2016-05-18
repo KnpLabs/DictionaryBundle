@@ -49,7 +49,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ->setClass($class)
             ->setFactory(array(
                 new Reference('knp_dictionary.dictionary.dictionary_factory'),
-                'create'
+                'create',
             ))
             ->addArgument($name)
             ->addArgument($content)
