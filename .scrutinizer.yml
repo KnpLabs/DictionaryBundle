@@ -1,0 +1,10 @@
+inherit: true
+
+build:
+    tests:
+        override:
+            -
+                command: './bin/phpspec run'
+                coverage:
+                    file: 'coverage.xml'
+                    format: 'clover'
