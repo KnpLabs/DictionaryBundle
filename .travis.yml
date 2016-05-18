@@ -33,5 +33,4 @@ before_script:
     - composer update --prefer-source $COMPOSER_FLAGS
 
 script:
-    - bin/phpspec run -fpretty
-    - bin/php-cs-fixer --diff --dry-run -v fix
+    - make test
