@@ -6,14 +6,14 @@ DictionaryBundle
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
 ## Requirements
-- Symfony >= 2.4
+- Symfony >= 2.8
 
 ## Installation
 Add the DictionaryBundle to your `composer.json`:
 ```yaml
 {
     "require": {
-        "knplabs/dictionary-bundle": "~1.5"
+        "knplabs/dictionary-bundle": "~2.0"
     }
 }
 ```
@@ -45,13 +45,25 @@ $container->get('knp_dictionary.registry')->get('my_dictionary');
 Now, use them in your forms:
 
 ```php
+use Knp\DictionaryBundle\Form\Type\DictionaryType;
+
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
-        // ...
+        // PHP ~5.5.9 syntax
+        ->add('civility', DictionaryType::class, array(
+            'name' => 'my_dictionary'
+        ))
+
+        // PHP ~5.3.9+ syntax
+        ->add('civility', 'Knp\DictionaryBundle\Form\Type\DictionaryType', array(
+            'name' => 'my_dictionary'
+        ))
+
+        // PHP ~5.3.9+ (deprecated since Symfony 3.0)
         ->add('civility', 'dictionary', array(
             'name' => 'my_dictionary'
-        ));
+        ))
     ;
 }
 ```

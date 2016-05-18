@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\Reference;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
@@ -46,8 +47,10 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
         return $definition
             ->setClass($class)
-            ->setFactoryService('knp_dictionary.dictionary.dictionary_factory')
-            ->setFactoryMethod('create')
+            ->setFactory(array(
+                new Reference('knp_dictionary.dictionary.dictionary_factory'),
+                'create'
+            ))
             ->addArgument($name)
             ->addArgument($content)
             ->addArgument($dictionary['type'])
