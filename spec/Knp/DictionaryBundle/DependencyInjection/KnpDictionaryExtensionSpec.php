@@ -6,7 +6,7 @@ use PhpSpec\ObjectBehavior;
 
 class KnpDictionaryExtensionSpec extends ObjectBehavior
 {
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\KnpDictionaryExtension');
     }
