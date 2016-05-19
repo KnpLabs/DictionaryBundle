@@ -2,8 +2,20 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-class StaticDictionary extends LazyDictionary
+use Knp\DictionaryBundle\Dictionary;
+
+class StaticDictionary implements Dictionary
 {
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var mixed[]|\ArrayAccess
+     */
+    protected $values = null;
+
     /**
      * @param string  $name
      * @param mixed[] $values
@@ -17,8 +29,88 @@ class StaticDictionary extends LazyDictionary
     /**
      * {@inheritdoc}
      */
-    protected function hydrate()
+    public function getName()
     {
-        return;
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValues()
+    {
+        return $this->values;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getKeys()
+    {
+        return array_keys($this->values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetExists($offset)
+    {
+        return array_key_exists($offset, $this->values);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @return mixed
+     */
+    public function offsetGet($offset)
+    {
+        return $this->values[$offset];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetSet($offset, $value)
+    {
+        $this->values[$offset] = $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function offsetUnset($offset)
+    {
+        unset($this->values[$offset]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getIterator()
+    {
+        return new \ArrayIterator($this->values);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            'name'   => $this->name,
+            'values' => $this->values,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+
+        $this->name   = $data['name'];
+        $this->values = $data['values'];
     }
 }

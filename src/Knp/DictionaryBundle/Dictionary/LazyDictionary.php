@@ -2,24 +2,12 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary;
-
-class LazyDictionary implements Dictionary
+class LazyDictionary extends StaticDictionary
 {
     /**
      * @var callable
      */
     private $callable;
-
-    /**
-     * @var string
-     */
-    protected $name;
-
-    /**
-     * @var mixed[]|\ArrayAccess
-     */
-    protected $values = null;
 
     /**
      * @param string   $name
@@ -39,19 +27,11 @@ class LazyDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getValues()
     {
         $this->hydrate();
 
-        return $this->values;
+        return parent::getValues();
     }
 
     /**
@@ -61,7 +41,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return array_keys($this->values);
+        return parent::getKeys();
     }
 
     /**
@@ -71,7 +51,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return array_key_exists($offset, $this->values);
+        return parent::offsetExists($offset);
     }
 
     /**
@@ -83,7 +63,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return $this->values[$offset];
+        return parent::offsetGet($offset);
     }
 
     /**
@@ -93,7 +73,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        $this->values[$offset] = $value;
+        return parent::offsetSet($offset, $value);
     }
 
     /**
@@ -103,7 +83,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        unset($this->values[$offset]);
+        return parent::offsetUnset($offset);
     }
 
     /**
@@ -113,7 +93,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return new \ArrayIterator($this->values);
+        return parent::getIterator();
     }
 
     /**
@@ -123,21 +103,7 @@ class LazyDictionary implements Dictionary
     {
         $this->hydrate();
 
-        return serialize(array(
-            'name'   => $this->name,
-            'values' => $this->values,
-        ));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        $data = unserialize($serialized);
-
-        $this->name   = $data['name'];
-        $this->values = $data['values'];
+        return parent::serialize();
     }
 
     /**

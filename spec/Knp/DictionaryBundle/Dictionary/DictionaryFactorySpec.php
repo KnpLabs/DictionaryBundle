@@ -7,7 +7,7 @@ use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class StaticDictionaryFactorySpec extends ObjectBehavior
+class DictionaryFactorySpec extends ObjectBehavior
 {
     function let(TransformerInterface $transformer)
     {
@@ -21,14 +21,22 @@ class StaticDictionaryFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\StaticDictionaryFactory');
+        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\DictionaryFactory');
     }
 
-    function it_creates_dictionaries()
+    function it_creates_dictionaries_from_array()
     {
         $this
-            ->create('foo', array('bar' => 'baz'), Argument::any())
+            ->createFromArray('foo', array('bar' => 'baz'), Argument::any())
             ->shouldHaveType('Knp\DictionaryBundle\Dictionary\StaticDictionary')
+        ;
+    }
+
+    function it_creates_dictionaries_from_callable()
+    {
+        $this
+            ->createFromCallable('foo', function () { return array(); })
+            ->shouldHaveType('Knp\DictionaryBundle\Dictionary\LazyDictionary')
         ;
     }
 
@@ -39,7 +47,7 @@ class StaticDictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('foo')->shouldNotBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->create('foo', array('foo' => 'bar'), Argument::any());
+        $this->createFromArray('foo', array('foo' => 'bar'), Argument::any());
     }
 
     function it_calls_transformers_transform_method_if_supported($transformer)
@@ -49,13 +57,13 @@ class StaticDictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('baz')->shouldBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->create('foo', array('bar' => 'baz'), Argument::any());
+        $this->createFromArray('foo', array('bar' => 'baz'), Argument::any());
     }
 
     function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
     {
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->supports('bar')->shouldNotBeCalled();
-        $this->create('foo', array('bar' => 'baz'), Dictionary::VALUE_AS_KEY);
+        $this->createFromArray('foo', array('bar' => 'baz'), Dictionary::VALUE_AS_KEY);
     }
 }
