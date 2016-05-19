@@ -5,7 +5,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 
-final class StaticDictionaryFactory
+final class DictionaryFactory
 {
     /**
      * @var TransformerInterface[]
@@ -15,7 +15,7 @@ final class StaticDictionaryFactory
     /**
      * @param TransformerInterface $transformer
      *
-     * @return StaticDictionaryFactory
+     * @return DictionaryFactory
      */
     public function addTransformer(TransformerInterface $transformer)
     {
@@ -31,7 +31,7 @@ final class StaticDictionaryFactory
      *
      * @return StaticDictionary
      */
-    public function create($name, array $content, $type)
+    public function createFromArray($name, array $content, $type)
     {
         $values = array();
         foreach ($content as $key => $value) {
@@ -41,6 +41,17 @@ final class StaticDictionaryFactory
         }
 
         return new StaticDictionary($name, $values);
+    }
+
+    /**
+     * @param string   $name
+     * @param callable $callable
+     *
+     * @return LazyDictionary
+     */
+    public function createFromCallable($name, $callable)
+    {
+        return new LazyDictionary($name, $callable);
     }
 
     /**
