@@ -29,7 +29,7 @@ final class DictionaryFactory
      * @param mixed[] $content
      * @param string  $type
      *
-     * @return StaticDictionary
+     * @return LazyDictionary
      */
     public function createFromArray($name, array $content, $type)
     {
@@ -40,7 +40,9 @@ final class DictionaryFactory
             $values[$key] = $builtValue;
         }
 
-        return new StaticDictionary($name, $values);
+        return new LazyDictionary($name, function () use ($values) {
+            return $values;
+        });
     }
 
     /**

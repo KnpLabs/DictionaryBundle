@@ -9,8 +9,10 @@ class DictionaryRegistrySpec extends ObjectBehavior
 {
     function let(Dictionary $dictionary, Dictionary $dictionary2)
     {
-        $this->set('foo', $dictionary);
-        $this->set('dictionary', $dictionary);
+        $dictionary->getName()->willReturn('foo');
+
+        $this->add($dictionary);
+        $this->set('dictionary', $dictionary2);
     }
 
     function it_is_initializable()
@@ -31,6 +33,14 @@ class DictionaryRegistrySpec extends ObjectBehavior
     function it_is_countable()
     {
         $this->shouldHaveType('Countable');
+    }
+
+    function it_provides_a_list_of_dictionaries($dictionary, $dictionary2)
+    {
+        $this->all()->shouldReturn(array(
+            'foo'        => $dictionary,
+            'dictionary' => $dictionary2,
+        ));
     }
 
     function it_sets_registry_entry($dictionary)
@@ -66,5 +76,13 @@ class DictionaryRegistrySpec extends ObjectBehavior
     function it_counts_entries()
     {
         $this->count()->shouldReturn(2);
+    }
+
+    function it_provides_an_array_iterator($dictionary, $dictionary2)
+    {
+        $this->getIterator()->getArrayCopy()->shouldReturn(array(
+            'foo'        => $dictionary,
+            'dictionary' => $dictionary2,
+        ));
     }
 }
