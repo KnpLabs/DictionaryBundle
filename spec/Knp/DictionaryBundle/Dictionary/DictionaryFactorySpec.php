@@ -26,18 +26,32 @@ class DictionaryFactorySpec extends ObjectBehavior
 
     function it_creates_dictionaries_from_array()
     {
-        $this
+        $dictionary = $this
             ->createFromArray('foo', array('bar' => 'baz'), Argument::any())
-            ->shouldHaveType('Knp\DictionaryBundle\Dictionary\StaticDictionary')
         ;
+
+        $dictionary
+            ->shouldHaveType('Knp\DictionaryBundle\Dictionary')
+        ;
+
+        $dictionary->getName()->shouldReturn('foo');
+        $dictionary->getKeys()->shouldReturn(array('bar'));
+        $dictionary->getValues()->shouldReturn(array('bar' => 'foo'));
     }
 
     function it_creates_dictionaries_from_callable()
     {
-        $this
-            ->createFromCallable('foo', function () { return array(); })
-            ->shouldHaveType('Knp\DictionaryBundle\Dictionary\LazyDictionary')
+        $dictionary = $this
+            ->createFromCallable('foo', function () { return array('bar' => 'baz'); })
         ;
+
+        $dictionary
+            ->shouldHaveType('Knp\DictionaryBundle\Dictionary')
+        ;
+
+        $dictionary->getName()->shouldReturn('foo');
+        $dictionary->getKeys()->shouldReturn(array('bar'));
+        $dictionary->getValues()->shouldReturn(array('bar' => 'baz'));
     }
 
     function it_doesnt_call_transformers_transform_method_if_not_supported($transformer)

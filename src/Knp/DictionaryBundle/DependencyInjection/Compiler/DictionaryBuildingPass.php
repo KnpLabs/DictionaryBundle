@@ -19,16 +19,11 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $config       = $container->getParameter('knp_dictionary.configuration');
         $class        = $container->getParameter('knp_dictionary.dictionary.dictionary.class');
         $dictionaries = $config['dictionaries'];
-        $registry     = $container
-            ->getDefinition('knp_dictionary.dictionary.dictionary_registry')
-        ;
 
         foreach ($dictionaries as $name => $dictionary) {
-            $definition = $this->createDefinition($class, $name, $dictionary);
-            $registry->addMethodCall('set', array($name, $definition));
             $container->setDefinition(
                 sprintf('knp_dictionary.dictionary.%s', $name),
-                $definition
+                $this->createDefinition($class, $name, $dictionary)
             );
         }
     }
@@ -54,6 +49,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ->addArgument($name)
             ->addArgument($content)
             ->addArgument($dictionary['type'])
+            ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
         ;
     }
 

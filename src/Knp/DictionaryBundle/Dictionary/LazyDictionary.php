@@ -2,8 +2,20 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-class LazyDictionary extends StaticDictionary
+use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
+
+class LazyDictionary implements DictionaryInterface
 {
+    /**
+     * @var string
+     */
+    private $name;
+
+    /**
+     * @var mixed[]|\ArrayAccess
+     */
+    private $values = null;
+
     /**
      * @var callable
      */
@@ -27,11 +39,19 @@ class LazyDictionary extends StaticDictionary
     /**
      * {@inheritdoc}
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValues()
     {
         $this->hydrate();
 
-        return parent::getValues();
+        return $this->values;
     }
 
     /**
@@ -41,7 +61,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::getKeys();
+        return array_keys($this->values);
     }
 
     /**
@@ -51,7 +71,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::offsetExists($offset);
+        return array_key_exists($offset, $this->values);
     }
 
     /**
@@ -63,7 +83,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::offsetGet($offset);
+        return $this->values[$offset];
     }
 
     /**
@@ -73,7 +93,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::offsetSet($offset, $value);
+        $this->values[$offset] = $value;
     }
 
     /**
@@ -83,7 +103,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::offsetUnset($offset);
+        unset($this->values[$offset]);
     }
 
     /**
@@ -93,7 +113,7 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::getIterator();
+        return new \ArrayIterator($this->values);
     }
 
     /**
@@ -103,7 +123,21 @@ class LazyDictionary extends StaticDictionary
     {
         $this->hydrate();
 
-        return parent::serialize();
+        return serialize(array(
+            'name'   => $this->name,
+            'values' => $this->values,
+        ));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+
+        $this->name   = $data['name'];
+        $this->values = $data['values'];
     }
 
     /**
