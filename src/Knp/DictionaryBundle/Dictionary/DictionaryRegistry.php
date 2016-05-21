@@ -13,6 +13,16 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     private $dictionaries = array();
 
     /**
+     * @param Dictionary $dictionary
+     *
+     * @return DictionaryRegistry
+     */
+    public function add(Dictionary $dictionary)
+    {
+        $this->set($dictionary->getName(), $dictionary);
+    }
+
+    /**
      * @param string     $key
      * @param Dictionary $dictionary
      *
@@ -65,7 +75,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     {
         if (false === $this->offsetExists($offset)) {
             throw new DictionaryNotFoundException(sprintf(
-                'The dictionary "%s" has not been found in the registry. '.
+                'The dictionary "%s" has not been found in the registry. ' .
                 'Known dictionaries are: "%s".',
                 $offset,
                 implode('", "', array_keys($this->dictionaries))
@@ -81,7 +91,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function offsetSet($offset, $value)
     {
         throw new \RuntimeException(
-            'You can\'t use Knp\DictionaryBundle\Dictionary\Dictionary::offsetSet. Please use '.
+            'You can\'t use Knp\DictionaryBundle\Dictionary\Dictionary::offsetSet. Please use ' .
             'Knp\DictionaryBundle\Dictionary\Dictionary::set instead.'
         );
     }
@@ -92,7 +102,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function offsetUnset($offset)
     {
         throw new \RuntimeException(
-            'You can\'t destroy a dictionary registry value. It\'s used as application '.
+            'You can\'t destroy a dictionary registry value. It\'s used as application ' .
             'constants.'
         );
     }
