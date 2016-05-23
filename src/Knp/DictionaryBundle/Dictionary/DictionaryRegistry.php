@@ -20,6 +20,8 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function add(Dictionary $dictionary)
     {
         $this->set($dictionary->getName(), $dictionary);
+
+        return $this;
     }
 
     /**
