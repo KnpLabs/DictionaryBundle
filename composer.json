@@ -27,7 +27,7 @@
         "symfony/config": "~2.8 || ~3.0",
         "symfony/form": "~2.8 || ~3.0",
         "symfony/validator": "~2.8 || ~3.0",
-        "twig/twig": "~1.11"
+        "twig/twig": "~1.12|~2.0"
     },
     "require-dev": {
         "bossa/phpspec2-expect": "~1.0",
@@ -51,7 +51,6 @@
         }
     },
     "suggest": {
-        "fzaninotto/faker": "To use the dictionary provider",
         "knplabs/rad-fixtures-load": "Allows to autoregister the dictionary provider as an alice provider"
     }
 }
