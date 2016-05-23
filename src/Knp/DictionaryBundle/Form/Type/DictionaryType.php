@@ -27,10 +27,13 @@ class DictionaryType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            $name = $options['name'];
+        $registry = $this->registry;
 
-            return $this->registry[$name]->getValues();
+        $choices = function (Options $options) use ($registry) {
+            $name    = $options['name'];
+            $choices = $registry[$name]->getValues();
+
+            return $choices;
         };
 
         $resolver
