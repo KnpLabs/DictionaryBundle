@@ -27,7 +27,7 @@
         "symfony/config": "~2.8 || ~3.0",
         "symfony/form": "~2.8 || ~3.0",
         "symfony/validator": "~2.8 || ~3.0",
-        "twig/twig": "~1.11",
+        "twig/twig": "~1.12|~2.0",
         "fzaninotto/faker": "^1.5"
     },
     "require-dev": {
