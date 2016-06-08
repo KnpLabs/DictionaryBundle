@@ -10,4 +10,9 @@ class ConfigurationSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Configuration');
     }
+
+    function it_generates_a_tree()
+    {
+        $this->getConfigTreeBuilder()->shouldHaveType('Symfony\Component\Config\Definition\Builder\TreeBuilder');
+    }
 }
