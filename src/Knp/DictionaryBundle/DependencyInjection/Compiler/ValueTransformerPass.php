@@ -8,12 +8,14 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ValueTransformerPass implements CompilerPassInterface
 {
+    const TAG_TRANSFORMER = 'knp_dictionary.value_transformer';
+
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        $transformers = $container->findTaggedServiceIds('knp_dictionary.value_transformer');
+        $transformers = $container->findTaggedServiceIds(self::TAG_TRANSFORMER);
         $factory      = $container->getDefinition('knp_dictionary.dictionary.dictionary_factory');
 
         foreach ($transformers as $id => $attributes) {

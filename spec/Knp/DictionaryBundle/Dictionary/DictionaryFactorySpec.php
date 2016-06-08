@@ -42,7 +42,9 @@ class DictionaryFactorySpec extends ObjectBehavior
     function it_creates_dictionaries_from_callable()
     {
         $dictionary = $this
-            ->createFromCallable('foo', function () { return array('bar' => 'baz'); })
+            ->createFromCallable('foo', function () {
+                return array('bar' => 'baz');
+            })
         ;
 
         $dictionary
