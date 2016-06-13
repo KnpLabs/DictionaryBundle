@@ -35,11 +35,13 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ->toBe('Knp\DictionaryBundle\Dictionary')
                 ;
 
-                expect($definition->getFactory()[0]->__toString())
+                $factory = $definition->getFactory();
+
+                expect($factory[0]->__toString())
                     ->toBe('knp_dictionary.dictionary.dictionary_factory')
                 ;
 
-                expect($definition->getFactory()[1])
+                expect($factory[1])
                     ->toBe('createFromArray')
                 ;
 
@@ -77,11 +79,13 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ->toBe('Knp\DictionaryBundle\Dictionary')
                 ;
 
-                expect($definition->getFactory()[0]->__toString())
+                $factory = $definition->getFactory();
+
+                expect($factory[0]->__toString())
                     ->toBe('knp_dictionary.dictionary.dictionary_factory')
                 ;
 
-                expect($definition->getFactory()[1])
+                expect($factory[1])
                     ->toBe('createFromArray')
                 ;
 
@@ -119,11 +123,13 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ->toBe('Knp\DictionaryBundle\Dictionary')
                 ;
 
-                expect($definition->getFactory()[0]->__toString())
+                $factory = $definition->getFactory();
+
+                expect($factory[0]->__toString())
                     ->toBe('knp_dictionary.dictionary.dictionary_factory')
                 ;
 
-                expect($definition->getFactory()[1])
+                expect($factory[1])
                     ->toBe('createFromArray')
                 ;
 
