@@ -19,7 +19,6 @@ class DictionarySpec extends ObjectBehavior
     function it_ad_default_values()
     {
         $this->name->shouldReturn('yolo');
-        $this->required->shouldReturn(true);
         $this->validatedBy()->shouldReturn('knp_dictionary.dictionary_validator');
     }
 }
