@@ -51,22 +51,4 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $constraint = new NotNull();
         $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))->duringValidate('the_key', $constraint);
     }
-
-    public function it_adds_violation_for_an_empty_key_when_required($context)
-    {
-        $constraint = new Constraint(array('name' => 'dico'));
-
-        $context->addViolation(Argument::type('string'), Argument::type('array'))->shouldBeCalled();
-
-        $this->validate('the_inexistent_key', $constraint);
-    }
-
-    public function it_doesnt_validate_for_empty_key_when_not_required($context)
-    {
-        $constraint = new Constraint(array('name' => 'dico', 'required' => false));
-
-        $context->addViolation(Argument::type('string'), Argument::type('array'))->shouldNotBeCalled();
-
-        $this->validate('', $constraint);
-    }
 }
