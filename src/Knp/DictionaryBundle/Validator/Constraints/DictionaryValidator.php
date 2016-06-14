@@ -31,7 +31,7 @@ class DictionaryValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Dictionary');
         }
 
-        if (false === $constraint->required && empty($value)) {
+        if (null === $value || '' === $value) {
             return;
         }
 
