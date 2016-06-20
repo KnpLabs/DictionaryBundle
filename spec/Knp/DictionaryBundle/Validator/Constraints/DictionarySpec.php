@@ -16,7 +16,7 @@ class DictionarySpec extends ObjectBehavior
         $this->shouldHaveType('Knp\DictionaryBundle\Validator\Constraints\Dictionary');
     }
 
-    function it_ad_default_values()
+    function it_adds_default_values()
     {
         $this->name->shouldReturn('yolo');
         $this->validatedBy()->shouldReturn('knp_dictionary.dictionary_validator');
