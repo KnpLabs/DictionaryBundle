@@ -2,7 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerInterface;
 
 final class DictionaryFactory
@@ -29,31 +29,29 @@ final class DictionaryFactory
      * @param mixed[] $content
      * @param string  $type
      *
-     * @return LazyDictionary
+     * @return SimpleDictionary
      */
     public function createFromArray($name, array $content, $type)
     {
         $values = array();
         foreach ($content as $key => $value) {
             $builtValue   = $this->buildValue($value);
-            $key          = Dictionary::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
+            $key          = DictionaryInterface::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
             $values[$key] = $builtValue;
         }
 
-        return new LazyDictionary($name, function () use ($values) {
-            return $values;
-        });
+        return new SimpleDictionary($name, $values);
     }
 
     /**
      * @param string   $name
      * @param callable $callable
      *
-     * @return LazyDictionary
+     * @return CallableDictionary
      */
     public function createFromCallable($name, $callable)
     {
-        return new LazyDictionary($name, $callable);
+        return new CallableDictionary($name, $callable);
     }
 
     /**

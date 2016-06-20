@@ -25,6 +25,6 @@ class DictionaryProviderSpec extends ObjectBehavior
 
         $value = $this->dictionary('omg');
 
-        expect(in_array($value->getWrappedObject(), array('foo', 'bar', 'baz')))->toBe(true);
+        expect(array('foo', 'bar', 'baz'))->toContain($value->getWrappedObject());
     }
 }
