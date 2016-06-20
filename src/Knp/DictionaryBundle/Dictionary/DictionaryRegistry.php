@@ -2,7 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 
 class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
@@ -13,11 +13,11 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     private $dictionaries = array();
 
     /**
-     * @param Dictionary $dictionary
+     * @param DictionaryInterface $dictionary
      *
      * @return DictionaryRegistry
      */
-    public function add(Dictionary $dictionary)
+    public function add(DictionaryInterface $dictionary)
     {
         $this->set($dictionary->getName(), $dictionary);
 
@@ -25,12 +25,12 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param string     $key
-     * @param Dictionary $dictionary
+     * @param string              $key
+     * @param DictionaryInterface $dictionary
      *
      * @return DictionaryRegistry
      */
-    public function set($key, Dictionary $dictionary)
+    public function set($key, DictionaryInterface $dictionary)
     {
         if (isset($this->dictionaries[$key])) {
             throw new \RuntimeException(sprintf(
@@ -45,7 +45,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @return Dictionary[]
+     * @return DictionaryInterface[]
      */
     public function all()
     {
@@ -55,7 +55,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @param mixed $offset
      *
-     * @return Dictionary
+     * @return DictionaryInterface
      */
     public function get($offset)
     {
