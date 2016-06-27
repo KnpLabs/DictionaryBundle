@@ -2,7 +2,7 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -16,44 +16,37 @@ class DictionaryBuildingPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $config       = $container->getParameter('knp_dictionary.configuration');
-        $class        = $container->getParameter('knp_dictionary.dictionary.dictionary.class');
-        $dictionaries = $config['dictionaries'];
-        $registry     = $container
-            ->getDefinition('knp_dictionary.dictionary.dictionary_registry')
-        ;
+        $config = $container->getParameter('knp_dictionary.configuration');
 
-        foreach ($dictionaries as $name => $dictionary) {
-            $definition = $this->createDefinition($class, $name, $dictionary);
-            $registry->addMethodCall('set', array($name, $definition));
+        foreach ($config['dictionaries'] as $name => $dictionary) {
             $container->setDefinition(
                 sprintf('knp_dictionary.dictionary.%s', $name),
-                $definition
+                $this->createDefinition($name, $dictionary)
             );
         }
     }
 
     /**
-     * @param string $class
-     * @param string $class
+     * @param string $name
      * @param array  $dictionary
      *
      * @return Definition
      */
-    private function createDefinition($class, $name, array $dictionary)
+    private function createDefinition($name, array $dictionary)
     {
         $content    = $this->createDictionary($dictionary);
         $definition = new Definition();
 
         return $definition
-            ->setClass($class)
+            ->setClass('Knp\DictionaryBundle\Dictionary')
             ->setFactory(array(
                 new Reference('knp_dictionary.dictionary.dictionary_factory'),
-                'create'
+                'createFromArray',
             ))
             ->addArgument($name)
             ->addArgument($content)
             ->addArgument($dictionary['type'])
+            ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
         ;
     }
 

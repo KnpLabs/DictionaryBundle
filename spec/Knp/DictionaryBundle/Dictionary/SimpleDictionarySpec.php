@@ -4,7 +4,7 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use PhpSpec\ObjectBehavior;
 
-class DictionarySpec extends ObjectBehavior
+class SimpleDictionarySpec extends ObjectBehavior
 {
     function let()
     {
@@ -17,7 +17,12 @@ class DictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary');
+        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\SimpleDictionary');
+    }
+
+    function it_is_a_dictionary()
+    {
+        $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
     }
 
     function its_getvalues_should_return_dictionary_values()

@@ -2,13 +2,13 @@
 
 namespace spec\Knp\DictionaryBundle\Twig;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use PhpSpec\ObjectBehavior;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
-    public function let(DictionaryRegistry $registry, Dictionary $dico1, Dictionary $dico2)
+    function let(DictionaryRegistry $registry, Dictionary $dico1, Dictionary $dico2)
     {
         $this->beConstructedWith($registry);
 
@@ -19,18 +19,32 @@ class DictionaryExtensionSpec extends ObjectBehavior
         $dico2->offsetGet('foo')->willReturn(false);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Twig\DictionaryExtension');
     }
 
-    public function it_returns_a_dictionary_by_its_name($dico1, $dico2)
+    function it_has_a_filter_and_a_function()
+    {
+        $filters   = $this->getFilters();
+        $functions = $this->getFunctions();
+
+        expect(current($filters->getWrappedObject())->getName())->toBe('dictionary');
+        expect(current($functions->getWrappedObject())->getName())->toBe('dictionary');
+    }
+
+    function it_has_a_name()
+    {
+        $this->getName()->shouldReturn('knp_dictionary.dictionary_extension');
+    }
+
+    function it_returns_a_dictionary_by_its_name($dico1, $dico2)
     {
         $this->getDictionary('test')->shouldReturn($dico1);
         $this->getDictionary('other')->shouldReturn($dico2);
     }
 
-    public function it_returns_a_value_from_a_dictionary()
+    function it_returns_a_value_from_a_dictionary()
     {
         $this->getValue('foo', 'test')->shouldReturn('bar');
         $this->getValue('foo', 'other')->shouldReturn(false);

@@ -12,6 +12,10 @@
         {
             "name": "Shivoham",
             "homepage": "https://github.com/Shivoham"
+        },
+        {
+            "name": "PedroTroller",
+            "homepage": "https://github.com/PedroTroller"
         }
     ],
     "minimum-stability": "stable",
@@ -23,12 +27,16 @@
         "symfony/config": "~2.8 || ~3.0",
         "symfony/form": "~2.8 || ~3.0",
         "symfony/validator": "~2.8 || ~3.0",
-        "twig/twig": "~1.11",
+        "twig/twig": "~1.12|~2.0",
         "fzaninotto/faker": "^1.5"
     },
     "require-dev": {
         "bossa/phpspec2-expect": "~1.0",
-        "phpspec/phpspec": "~2.5"
+        "fabpot/php-cs-fixer": "~1.12@dev",
+        "henrikbjorn/phpspec-code-coverage": "^2.1",
+        "pedrotroller/php-cs-custom-fixer": "~1.3.3",
+        "phpspec/phpspec": "~2.5",
+        "phpspec/prophecy": "~1.6"
     },
     "config": {
         "bin-dir": "bin"

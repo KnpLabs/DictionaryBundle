@@ -2,18 +2,74 @@
 
 namespace spec\Knp\DictionaryBundle\Form\Type;
 
-use PhpSpec\ObjectBehavior;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DictionaryTypeSpec extends ObjectBehavior
 {
-    public function let(DictionaryRegistry $registry)
+    function let(DictionaryRegistry $registry)
     {
         $this->beConstructedWith($registry);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Form\Type\DictionaryType');
+    }
+
+    function it_is_a_choice_form_type()
+    {
+        $this
+            ->getParent()
+            ->shouldReturn('Symfony\Component\Form\Extension\Core\Type\ChoiceType')
+        ;
+    }
+
+    function it_has_default_options(
+        $registry,
+        OptionsResolver $resolver,
+        Options $options,
+        Dictionary $dictionary1,
+        Dictionary $dictionary2
+    ) {
+        $registry
+            ->all()
+            ->willReturn(array('d1' => $dictionary1, 'd2' => $dictionary2))
+        ;
+
+        $registry
+            ->offsetGet('d1')
+            ->willReturn($dictionary1)
+        ;
+
+        $dictionary1->getValues()->willReturn(array('foo' => 'bar'));
+
+        $resolver
+            ->setDefault('choices', Argument::that(function ($callable) use ($options) {
+                $options->offsetGet('name')->willReturn('d1');
+
+                return $callable($options->getWrappedObject()) === array('foo' => 'bar');
+            }))
+            ->willReturn($resolver)
+            ->shouldBeCalled()
+        ;
+
+        $resolver
+            ->setRequired(array('name'))
+            ->willReturn($resolver)
+            ->shouldBeCalled()
+        ;
+
+        $resolver
+            ->setAllowedValues('name', array('d1', 'd2'))
+            ->willReturn($resolver)
+            ->shouldBeCalled()
+        ;
+
+        $this->configureOptions($resolver);
     }
 }
