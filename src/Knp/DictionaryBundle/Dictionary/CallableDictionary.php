@@ -2,6 +2,8 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use ArrayAccess;
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 
 class CallableDictionary implements DictionaryInterface
@@ -12,23 +14,30 @@ class CallableDictionary implements DictionaryInterface
     private $name;
 
     /**
-     * @var mixed[]|\ArrayAccess
-     */
-    private $values = null;
-
-    /**
      * @var callable
      */
-    private $callable;
+    private $valuesOrKeys;
 
     /**
-     * @param string   $name
-     * @param callable $callable
+     * @var callable|null
      */
-    public function __construct($name, callable $callable)
+    private $values;
+
+    /**
+     * @var DictionaryInterface|null
+     */
+    private $wrapped;
+
+    /**
+     * @param string        $name
+     * @param callable      $valuesOrKeys
+     * @param callable|null $values
+     */
+    public function __construct($name, $valuesOrKeys, $values = null)
     {
-        $this->name     = $name;
-        $this->callable = $callable;
+        $this->name         = $name;
+        $this->valuesOrKeys = $valuesOrKeys;
+        $this->values       = $values;
     }
 
     /**
@@ -46,7 +55,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return $this->values;
+        return $this
+            ->wrapped
+            ->getValues()
+        ;
     }
 
     /**
@@ -56,7 +68,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return array_keys($this->values);
+        return $this
+            ->wrapped
+            ->getKeys()
+        ;
     }
 
     /**
@@ -66,7 +81,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return array_key_exists($offset, $this->values);
+        return $this
+            ->wrapped
+            ->offsetExists($offset)
+        ;
     }
 
     /**
@@ -78,7 +96,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return $this->values[$offset];
+        return $this
+            ->wrapped
+            ->offsetGet($offset)
+        ;
     }
 
     /**
@@ -88,7 +109,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        $this->values[$offset] = $value;
+        $this
+            ->wrapped
+            ->offsetSet($offset, $value)
+        ;
     }
 
     /**
@@ -98,7 +122,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        unset($this->values[$offset]);
+        $this
+            ->wrapped
+            ->offsetUnset($offset)
+        ;
     }
 
     /**
@@ -108,7 +135,7 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return new \ArrayIterator($this->values);
+        return $this->wrapped->getIterator();
     }
 
     /**
@@ -118,10 +145,7 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return serialize([
-            'name'   => $this->name,
-            'values' => $this->values,
-        ]);
+        return serialize($this->wrapped);
     }
 
     /**
@@ -129,29 +153,51 @@ class CallableDictionary implements DictionaryInterface
      */
     public function unserialize($serialized)
     {
-        $data = unserialize($serialized);
-
-        $this->name   = $data['name'];
-        $this->values = $data['values'];
+        $this->wrapped = unserialize($serialized);
     }
 
     /**
-     * Hydrate values from callable.
+     * Hydrate wrapped dictionary from callables.
      */
-    protected function hydrate()
+    private function hydrate()
     {
-        if (null !== $this->values) {
+        if (null !== $this->wrapped) {
             return;
         }
 
-        $values = call_user_func($this->callable);
-
-        if (false === is_array($values) && false === $values instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException(
-                'Dictionary callable must return an array or an instance of ArrayAccess'
+        if (null === $this->values) {
+            $this->wrapped = new SimpleDictionary(
+                $this->name,
+                $this->assertArrayAndReturn(call_user_func($this->valuesOrKeys))
             );
+
+            return;
         }
 
-        $this->values = $values;
+        $this->wrapped = new SimpleDictionary(
+            $this->name,
+            $this->assertArrayAndReturn(call_user_func($this->valuesOrKeys)),
+            $this->assertArrayAndReturn(call_user_func($this->values))
+        );
+    }
+
+    /**
+     * @param mixed $array
+     *
+     * @return array
+     *
+     * @throw InvalidArgumentException
+     */
+    private function assertArrayAndReturn($array)
+    {
+        if (is_array($array)) {
+            return $array;
+        }
+
+        if ($array instanceof ArrayAccess) {
+            return $array;
+        }
+
+        throw new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess');
     }
 }
