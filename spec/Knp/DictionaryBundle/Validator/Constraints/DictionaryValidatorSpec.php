@@ -20,7 +20,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
         $registry->get('dico')->willReturn($dictionary);
 
-        $dictionary->getValues()->willReturn(array('the_key' => 'the_value'));
+        $dictionary->getKeys()->willReturn(array('the_key'));
     }
 
     function it_is_initializable()
