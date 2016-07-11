@@ -36,12 +36,12 @@ class DictionaryValidator extends ConstraintValidator
         }
 
         $dictionary = $this->registry->get($constraint->name);
-        $values     = $dictionary->getValues();
+        $values     = $dictionary->getKeys();
 
-        if (false === array_key_exists($value, $values)) {
+        if (false === in_array($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
-                array('{{ key }}' => $value, '{{ keys }}' => implode(', ', array_keys($values)))
+                array('{{ key }}' => $value, '{{ keys }}' => implode(', ', $values))
             );
         }
     }

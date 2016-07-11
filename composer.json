@@ -32,9 +32,8 @@
     },
     "require-dev": {
         "bossa/phpspec2-expect": "~1.0",
-        "fabpot/php-cs-fixer": "~1.12@dev",
         "henrikbjorn/phpspec-code-coverage": "^2.1",
-        "pedrotroller/php-cs-custom-fixer": "~1.3.3",
+        "pedrotroller/php-cs-custom-fixer": "~1.4.0",
         "phpspec/phpspec": "~2.5",
         "phpspec/prophecy": "~1.6"
     },
