@@ -19,7 +19,7 @@ class ValueTransformerPass implements CompilerPassInterface
         $factory      = $container->getDefinition('knp_dictionary.dictionary.dictionary_factory');
 
         foreach ($transformers as $id => $attributes) {
-            $factory->addMethodCall('addTransformer', array(new Reference($id)));
+            $factory->addMethodCall('addTransformer', [new Reference($id)]);
         }
     }
 }

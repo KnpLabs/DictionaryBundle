@@ -10,7 +10,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * @var Dictionary[]
      */
-    private $dictionaries = array();
+    private $dictionaries = [];
 
     /**
      * @param DictionaryInterface $dictionary

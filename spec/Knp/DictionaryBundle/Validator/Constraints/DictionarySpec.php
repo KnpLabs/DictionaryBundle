@@ -8,7 +8,7 @@ class DictionarySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(array('name' => 'yolo'));
+        $this->beConstructedWith(['name' => 'yolo']);
     }
 
     function it_is_initializable()

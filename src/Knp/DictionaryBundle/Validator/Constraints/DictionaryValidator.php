@@ -41,7 +41,7 @@ class DictionaryValidator extends ConstraintValidator
         if (false === in_array($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
-                array('{{ key }}' => $value, '{{ keys }}' => implode(', ', $values))
+                ['{{ key }}' => $value, '{{ keys }}' => implode(', ', $values)]
             );
         }
     }

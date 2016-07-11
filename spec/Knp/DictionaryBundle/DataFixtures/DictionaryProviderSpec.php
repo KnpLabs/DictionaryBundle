@@ -21,10 +21,10 @@ class DictionaryProviderSpec extends ObjectBehavior
     function it_returns_a_key_from_a_dictionary($dictionaries, Dictionary $dictionary)
     {
         $dictionaries->get('omg')->willReturn($dictionary);
-        $dictionary->getKeys()->willReturn(array('foo', 'bar', 'baz'));
+        $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
         $value = $this->dictionary('omg');
 
-        expect(array('foo', 'bar', 'baz'))->toContain($value->getWrappedObject());
+        expect(['foo', 'bar', 'baz'])->toContain($value->getWrappedObject());
     }
 }
