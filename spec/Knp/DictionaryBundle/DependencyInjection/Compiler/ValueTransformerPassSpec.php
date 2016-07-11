@@ -17,7 +17,7 @@ class ValueTransformerPassSpec extends ObjectBehavior
 
     function it_registers_transformers(ContainerBuilder $container, Definition $factory)
     {
-        $tags = array('foo' => array(), 'bar' => array(), 'baz' => array());
+        $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
         $container->getDefinition('knp_dictionary.dictionary.dictionary_factory')->willReturn($factory);
         $container->findTaggedServiceIds(ValueTransformerPass::TAG_TRANSFORMER)->willReturn($tags);

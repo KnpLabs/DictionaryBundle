@@ -21,10 +21,10 @@ class DictionaryDataCollectorSpec extends ObjectBehavior
 
     function it_collects_data_from_dictionaries(Request $request, Response $response, $registry)
     {
-        $registry->all()->willReturn(array('foo', 'bar', 'baz'));
+        $registry->all()->willReturn(['foo', 'bar', 'baz']);
         $this->collect($request, $response);
 
-        $this->getDictionaries()->shouldReturn(array('foo', 'bar', 'baz'));
+        $this->getDictionaries()->shouldReturn(['foo', 'bar', 'baz']);
     }
 
     function it_has_a_name()

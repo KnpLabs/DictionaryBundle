@@ -97,10 +97,10 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             'name'   => $this->name,
             'values' => $this->values,
-        ));
+        ]);
     }
 
     /**

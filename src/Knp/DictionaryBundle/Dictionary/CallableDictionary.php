@@ -25,14 +25,9 @@ class CallableDictionary implements DictionaryInterface
      * @param string   $name
      * @param callable $callable
      */
-    public function __construct($name, $callable)
+    public function __construct($name, callable $callable)
     {
-        $this->name = $name;
-
-        if (false === is_callable($callable)) {
-            throw new \InvalidArgumentException('Second argument must be a callable.');
-        }
-
+        $this->name     = $name;
         $this->callable = $callable;
     }
 
@@ -123,10 +118,10 @@ class CallableDictionary implements DictionaryInterface
     {
         $this->hydrate();
 
-        return serialize(array(
+        return serialize([
             'name'   => $this->name,
             'values' => $this->values,
-        ));
+        ]);
     }
 
     /**

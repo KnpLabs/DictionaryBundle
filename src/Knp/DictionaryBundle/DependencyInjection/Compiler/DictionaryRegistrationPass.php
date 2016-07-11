@@ -24,7 +24,7 @@ class DictionaryRegistrationPass implements CompilerPassInterface
 
         foreach ($services as $id => $tags) {
             $dictionary = new Reference($id);
-            $registry->addMethodCall('add', array($dictionary));
+            $registry->addMethodCall('add', [$dictionary]);
         }
     }
 }
