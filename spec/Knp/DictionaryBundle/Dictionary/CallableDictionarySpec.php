@@ -32,16 +32,6 @@ class CallableDictionarySpec extends ObjectBehavior
         $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
     }
 
-    function it_cant_be_constructed_with_something_else_than_a_callable()
-    {
-        $this->beConstructedWith('foo', array());
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Second argument must be a callable.'))
-            ->duringInstantiation()
-        ;
-    }
-
     function it_supports_some_array_access_functions()
     {
         $dictionary = $this->getWrappedObject();
@@ -68,35 +58,35 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_provides_a_set_of_values()
     {
-        $this->getValues()->shouldReturn(array(
+        $this->getValues()->shouldReturn([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
-        ));
+        ]);
     }
 
     function it_provides_a_set_of_keys()
     {
-        $this->getKeys()->shouldReturn(array(
+        $this->getKeys()->shouldReturn([
             'foo',
             'bar',
             'baz',
-        ));
+        ]);
     }
 
     function it_is_hydrated_just_once()
     {
-        $this->getValues()->shouldReturn(array(
+        $this->getValues()->shouldReturn([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
-        ));
+        ]);
 
-        $this->getValues()->shouldReturn(array(
+        $this->getValues()->shouldReturn([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
-        ));
+        ]);
     }
 
     function its_getname_should_return_dictionary_name()
@@ -127,11 +117,11 @@ class CallableDictionarySpec extends ObjectBehavior
         $iterator = $this->getIterator();
         $iterator->shouldHaveType('Iterator');
 
-        expect(iterator_to_array($iterator->getWrappedObject()))->toBe(array(
+        expect(iterator_to_array($iterator->getWrappedObject()))->toBe([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
-        ));
+        ]);
     }
 
     public function execution()
@@ -139,11 +129,11 @@ class CallableDictionarySpec extends ObjectBehavior
         if (false === $this->executed) {
             $this->executed = true;
 
-            return  array(
+            return  [
                 'foo' => 0,
                 'bar' => 1,
                 'baz' => 2,
-            );
+            ];
         }
 
         throw new \Exception('Executed twice');

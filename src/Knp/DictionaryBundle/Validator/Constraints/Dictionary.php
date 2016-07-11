@@ -33,6 +33,6 @@ class Dictionary extends Constraint
      */
     public function getRequiredOptions()
     {
-        return array('name');
+        return ['name'];
     }
 }
