@@ -41,7 +41,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
     {
         $constraint = new Constraint(array( 'name' => 'dico' ));
 
-        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', array("{{ key }}" => "the_unexisting_key", "{{ keys }}" => "the_key"))->shouldBeCalled();
+        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', array('{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'))->shouldBeCalled();
 
         $this->validate('the_unexisting_key', $constraint);
     }
