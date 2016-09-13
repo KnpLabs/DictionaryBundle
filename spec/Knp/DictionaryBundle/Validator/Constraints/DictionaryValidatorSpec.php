@@ -20,7 +20,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
         $registry->get('dico')->willReturn($dictionary);
 
-        $dictionary->getValues()->willReturn(array('the_key' => 'the_value'));
+        $dictionary->getValues()->willReturn(['the_key' => 'the_value']);
     }
 
     public function it_is_initializable()
@@ -30,7 +30,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
     public function it_valids_existing_keys($context)
     {
-        $constraint = new Constraint(array( 'name' => 'dico' ));
+        $constraint = new Constraint(['name' => 'dico']);
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
@@ -39,9 +39,13 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
     public function it_adds_violation_for_an_unexisting_keys($context)
     {
-        $constraint = new Constraint(array( 'name' => 'dico' ));
+        $constraint = new Constraint(['name' => 'dico']);
 
-        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', array('{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'))->shouldBeCalled();
+        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', [
+            '{{ key }}'  => 'the_unexisting_key',
+            '{{ keys }}' => 'the_key',
+        ])->shouldBeCalled()
+        ;
 
         $this->validate('the_unexisting_key', $constraint);
     }
@@ -49,12 +53,14 @@ class DictionaryValidatorSpec extends ObjectBehavior
     public function it_throw_exception_form_unknown_constraints()
     {
         $constraint = new NotNull();
-        $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))->duringValidate('the_key', $constraint);
+        $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))
+            ->duringValidate('the_key', $constraint)
+        ;
     }
 
     public function it_adds_violation_for_an_empty_key_when_required($context)
     {
-        $constraint = new Constraint(array('name' => 'dico'));
+        $constraint = new Constraint(['name' => 'dico']);
 
         $context->addViolation(Argument::type('string'), Argument::type('array'))->shouldBeCalled();
 
@@ -63,7 +69,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
     public function it_doesnt_validate_for_empty_key_when_not_required($context)
     {
-        $constraint = new Constraint(array('name' => 'dico', 'required' => false));
+        $constraint = new Constraint(['name' => 'dico', 'required' => false]);
 
         $context->addViolation(Argument::type('string'), Argument::type('array'))->shouldNotBeCalled();
 

@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\DataCollector;
 
+use Knp\DictionaryBundle\Dictionary\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

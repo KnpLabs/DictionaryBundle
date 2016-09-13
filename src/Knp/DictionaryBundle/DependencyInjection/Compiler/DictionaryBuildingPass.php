@@ -7,6 +7,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\Kernel;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
@@ -18,13 +20,11 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $config       = $container->getParameter('knp_dictionary.configuration');
         $class        = $container->getParameter('knp_dictionary.dictionary.dictionary.class');
         $dictionaries = $config['dictionaries'];
-        $registry     = $container
-            ->getDefinition('knp_dictionary.dictionary.dictionary_registry')
-        ;
+        $registry     = $container->getDefinition('knp_dictionary.dictionary.dictionary_registry');
 
         foreach ($dictionaries as $name => $dictionary) {
             $definition = $this->createDefinition($class, $name, $dictionary);
-            $registry->addMethodCall('set', array($name, $definition));
+            $registry->addMethodCall('set', [$name, $definition]);
             $container->setDefinition(
                 sprintf('knp_dictionary.dictionary.%s', $name),
                 $definition
@@ -44,14 +44,23 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $content    = $this->createDictionary($dictionary);
         $definition = new Definition();
 
-        return $definition
+        $definition
             ->setClass($class)
-            ->setFactoryService('knp_dictionary.dictionary.dictionary_factory')
-            ->setFactoryMethod('create')
             ->addArgument($name)
             ->addArgument($content)
             ->addArgument($dictionary['type'])
         ;
+
+        if (Kernel::MAJOR_VERSION === 3) {
+            $definition->setFactory([new Reference('knp_dictionary.dictionary.dictionary_factory'), 'create']);
+        } else {
+            $definition
+                ->setFactoryService('knp_dictionary.dictionary.dictionary_factory')
+                ->setFactoryMethod('create')
+            ;
+        }
+
+        return $definition;
     }
 
     /**

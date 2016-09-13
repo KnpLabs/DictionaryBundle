@@ -24,10 +24,10 @@ class Configuration implements ConfigurationInterface
                             ->then(function ($values) {
                                 if (false === array_key_exists('type', $values)) {
                                     if (false === array_key_exists('content', $values)) {
-                                        return array('type' => 'value', 'content' => $values);
+                                        return ['type' => 'value', 'content' => $values];
                                     }
 
-                                    return array_merge($values, array('type' => 'value'));
+                                    return array_merge($values, ['type' => 'value']);
                                 }
 
                                 return $values;

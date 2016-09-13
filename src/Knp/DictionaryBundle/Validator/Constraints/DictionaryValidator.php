@@ -28,7 +28,7 @@ class DictionaryValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (false === $constraint instanceof Dictionary) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Dictionary');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
         }
 
         if (false === $constraint->required && empty($value)) {
@@ -41,7 +41,7 @@ class DictionaryValidator extends ConstraintValidator
         if (false === array_key_exists($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
-                array('{{ key }}' => $value, '{{ keys }}' => implode(', ', array_keys($values)))
+                ['{{ key }}' => $value, '{{ keys }}' => implode(', ', array_keys($values))]
             );
         }
     }

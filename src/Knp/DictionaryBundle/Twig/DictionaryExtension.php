@@ -24,9 +24,9 @@ class DictionaryExtension extends \Twig_Extension
      */
     public function getFunctions()
     {
-        return array(
+        return [
             'dictionary' => new \Twig_Function_Method($this, 'getDictionary'),
-        );
+        ];
     }
 
     /**
@@ -34,9 +34,9 @@ class DictionaryExtension extends \Twig_Extension
      */
     public function getFilters()
     {
-        return array(
+        return [
             'dictionary' => new \Twig_Filter_Method($this, 'getValue'),
-        );
+        ];
     }
 
     /**
