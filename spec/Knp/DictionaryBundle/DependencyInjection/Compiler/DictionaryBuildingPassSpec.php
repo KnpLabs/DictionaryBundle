@@ -16,7 +16,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass');
     }
 
-    function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_value_as_key_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = array(
             'dictionaries' => array(
@@ -32,7 +32,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
                 expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
+                    ->toBe('Knp\DictionaryBundle\Dictionary\LazyDictionary')
                 ;
 
                 $factory = $definition->getFactory();
@@ -60,7 +60,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_value_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = array(
             'dictionaries' => array(
@@ -76,7 +76,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
                 expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
+                    ->toBe('Knp\DictionaryBundle\Dictionary\LazyDictionary')
                 ;
 
                 $factory = $definition->getFactory();
@@ -104,7 +104,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_key_value_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = array(
             'dictionaries' => array(
@@ -120,7 +120,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
                 expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
+                    ->toBe('Knp\DictionaryBundle\Dictionary\LazyDictionary')
                 ;
 
                 $factory = $definition->getFactory();
@@ -136,6 +136,57 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 expect($definition->getArguments())
                     ->toBe(array('dico1', array(2 => 'foo', 10 => 'bar', 100 => 'baz'), Dictionary::KEY_VALUE))
                 ;
+
+                expect($definition->getTags())
+                    ->toBe(array(DictionaryRegistrationPass::TAG_DICTIONARY => array(array())))
+                ;
+
+                return true;
+            })
+        )->shouldBeCalled();
+
+        $this->process($container);
+    }
+
+    function it_builds_a_callback_dictionary_from_the_config(ContainerBuilder $container)
+    {
+        $config = array(
+            'dictionaries' => array(
+                'dico1' => array(
+                    'type'    => Dictionary::CALLABLE,
+                    'service' => 'app.service.name',
+                    'method' => 'getUnicorns',
+                ),
+            ),
+        );
+
+        $container->getParameter('knp_dictionary.configuration')->willReturn($config);
+        $container->setDefinition(
+            'knp_dictionary.dictionary.dico1',
+            Argument::that(function ($definition) {
+                expect($definition->getClass())
+                    ->toBe('Knp\DictionaryBundle\Dictionary\LazyDictionary')
+                ;
+
+                $factory = $definition->getFactory();
+
+                expect($factory[0]->__toString())
+                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                ;
+
+                expect($factory[1])
+                    ->toBe('createFromCallable')
+                ;
+
+                $arguments = $definition->getArguments();
+                $name = $arguments[0];
+                $reference = $arguments[1][0];
+                $method = $arguments[1][1];
+
+                expect($name)->toBe('dico1');
+                expect($reference)->toHaveType('Symfony\Component\DependencyInjection\Reference');
+                expect($reference->__toString())->toBe('app.service.name');
+                expect($method)->toBe('getUnicorns');
 
                 expect($definition->getTags())
                     ->toBe(array(DictionaryRegistrationPass::TAG_DICTIONARY => array(array())))

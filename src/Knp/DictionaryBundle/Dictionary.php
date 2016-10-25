@@ -7,6 +7,7 @@ interface Dictionary extends \ArrayAccess, \IteratorAggregate, \Serializable
     const VALUE        = 'value';
     const VALUE_AS_KEY = 'value_as_key';
     const KEY_VALUE    = 'key_value';
+    const CALLABLE     = 'callable';
 
     /**
      * @return string
