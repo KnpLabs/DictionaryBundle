@@ -28,7 +28,7 @@ class DictionaryValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         if (false === $constraint instanceof Dictionary) {
-            throw new UnexpectedTypeException($constraint, __NAMESPACE__ . '\Dictionary');
+            throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
         }
 
         if (null === $value || '' === $value) {
@@ -36,7 +36,7 @@ class DictionaryValidator extends ConstraintValidator
         }
 
         $dictionary = $this->registry->get($constraint->name);
-        $values     = $dictionary->getKeys();
+        $values = $dictionary->getKeys();
 
         if (false === in_array($value, $values)) {
             $this->context->addViolation(

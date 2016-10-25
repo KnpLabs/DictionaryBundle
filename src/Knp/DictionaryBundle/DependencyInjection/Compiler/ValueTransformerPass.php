@@ -16,7 +16,7 @@ class ValueTransformerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $transformers = $container->findTaggedServiceIds(self::TAG_TRANSFORMER);
-        $factory      = $container->getDefinition('knp_dictionary.dictionary.dictionary_factory');
+        $factory = $container->getDefinition('knp_dictionary.dictionary.dictionary_factory');
 
         foreach ($transformers as $id => $attributes) {
             $factory->addMethodCall('addTransformer', array(new Reference($id)));

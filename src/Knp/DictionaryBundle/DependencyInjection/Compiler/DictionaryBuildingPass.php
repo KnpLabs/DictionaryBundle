@@ -75,7 +75,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $service = $dictionary['service'];
         $method = $dictionary['method'];
 
-        $callable = [new Reference($service), $method];
+        $callable = array(new Reference($service), $method);
 
         return $definition
             ->setClass('Knp\DictionaryBundle\Dictionary\LazyDictionary')
