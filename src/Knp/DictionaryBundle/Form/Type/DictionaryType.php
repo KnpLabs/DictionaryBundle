@@ -30,7 +30,7 @@ class DictionaryType extends AbstractType
         $registry = $this->registry;
 
         $choices = function (Options $options) use ($registry) {
-            $name = $options['name'];
+            $name    = $options['name'];
             $choices = $registry[$name]->getValues();
 
             return $choices;

@@ -34,7 +34,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
      */
     private function createDefinition($name, array $dictionary)
     {
-        if (Dictionary::CALLABLE === $dictionary['type']) {
+        if (Dictionary::CALLABLE_TYPE === $dictionary['type']) {
             return $this->createDefinitionForCallableDictionary($name, $dictionary);
         }
 
@@ -73,7 +73,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
         }
 
         $service = $dictionary['service'];
-        $method = $dictionary['method'];
+        $method  = $dictionary['method'];
 
         $callable = array(new Reference($service), $method);
 
@@ -81,7 +81,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ->setClass('Knp\DictionaryBundle\Dictionary\LazyDictionary')
             ->setFactory(array(
                 new Reference('knp_dictionary.dictionary.dictionary_factory'),
-                'createFromCallable'
+                'createFromCallable',
             ))
             ->addArgument($name)
             ->addArgument($callable)

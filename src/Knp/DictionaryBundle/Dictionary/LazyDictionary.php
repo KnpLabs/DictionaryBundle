@@ -124,7 +124,7 @@ class LazyDictionary implements DictionaryInterface
         $this->hydrate();
 
         return serialize(array(
-            'name' => $this->name,
+            'name'   => $this->name,
             'values' => $this->values,
         ));
     }
@@ -136,7 +136,7 @@ class LazyDictionary implements DictionaryInterface
     {
         $data = unserialize($serialized);
 
-        $this->name = $data['name'];
+        $this->name   = $data['name'];
         $this->values = $data['values'];
     }
 

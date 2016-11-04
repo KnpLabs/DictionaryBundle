@@ -153,9 +153,9 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $config = array(
             'dictionaries' => array(
                 'dico1' => array(
-                    'type' => Dictionary::CALLABLE,
+                    'type'    => Dictionary::CALLABLE_TYPE,
                     'service' => 'app.service.name',
-                    'method' => 'getUnicorns',
+                    'method'  => 'getUnicorns',
                 ),
             ),
         );
