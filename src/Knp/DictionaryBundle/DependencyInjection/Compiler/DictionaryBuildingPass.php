@@ -54,6 +54,12 @@ class DictionaryBuildingPass implements CompilerPassInterface
         ;
     }
 
+    /**
+     * @param string $name
+     * @param array  $dictionary
+     *
+     * @return Definition
+     */
     private function createDefinitionForCallableDictionary($name, array $dictionary)
     {
         $definition = new Definition();
