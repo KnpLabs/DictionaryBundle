@@ -1,12 +1,14 @@
 language: php
 
 php:
-    - 5.3
-    - 5.4
     - 5.5
     - 5.6
     - 7.0
 
+env:
+    global:
+        - COMPOSER_FLAGS=""
+        - SYMFONY_VERSION=""
 
 cache:
     directories:
@@ -14,10 +16,12 @@ cache:
 
 matrix:
     include:
-        - php: 5.3
-          env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
         - php: 5.4
-          env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
+          env: 'SYMFONY_VERSION="2.8.*"'
+        - php: 5.4
+          env:
+            - COMPOSER_FLAGS="--prefer-lowest --prefer-stable"
+            - SYMFONY_VERSION="2.8.*"
         - php: 5.5
           env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
         - php: 5.6
@@ -29,9 +33,11 @@ branches:
     only:
         - master
 
-before_script:
-    - composer update --prefer-source $COMPOSER_FLAGS
+before_install:
+    - if [[ "$SYMFONY_VERSION" != "" ]]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
+
+install:
+    - composer update --prefer-dist --no-interaction $COMPOSER_FLAGS
 
 script:
     - bin/phpspec run -fpretty
-

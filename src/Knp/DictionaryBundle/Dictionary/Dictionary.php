@@ -18,7 +18,7 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
     /**
      * @var mixed[]
      */
-    private $values = array();
+    private $values = [];
 
     /**
      * @param string  $name
@@ -99,10 +99,10 @@ class Dictionary implements \ArrayAccess, \IteratorAggregate, \Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             'name'   => $this->name,
             'values' => $this->values,
-        ));
+        ]);
     }
 
     /**

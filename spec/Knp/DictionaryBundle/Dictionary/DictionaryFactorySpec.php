@@ -27,7 +27,7 @@ class DictionaryFactorySpec extends ObjectBehavior
     public function it_creates_dictionaries()
     {
         $this
-            ->create('foo', array('bar' => 'baz'), Argument::any())
+            ->create('foo', ['bar' => 'baz'], Argument::any())
             ->shouldHaveType('Knp\DictionaryBundle\Dictionary\Dictionary')
         ;
     }
@@ -39,7 +39,7 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('foo')->shouldNotBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->create('foo', array('foo' => 'bar'), Argument::any());
+        $this->create('foo', ['foo' => 'bar'], Argument::any());
     }
 
     public function it_calls_transformers_transform_method_if_supported($transformer)
@@ -49,13 +49,13 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('baz')->shouldBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->create('foo', array('bar' => 'baz'), Argument::any());
+        $this->create('foo', ['bar' => 'baz'], Argument::any());
     }
 
     public function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
     {
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->supports('bar')->shouldNotBeCalled();
-        $this->create('foo', array('bar' => 'baz'), Dictionary::VALUE_AS_KEY);
+        $this->create('foo', ['bar' => 'baz'], Dictionary::VALUE_AS_KEY);
     }
 }

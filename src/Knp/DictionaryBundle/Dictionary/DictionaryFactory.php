@@ -9,7 +9,7 @@ final class DictionaryFactory
     /**
      * @var TransformerInterface[]
      */
-    private $transformers = array();
+    private $transformers = [];
 
     /**
      * @param TransformerInterface $transformer
@@ -32,7 +32,7 @@ final class DictionaryFactory
      */
     public function create($name, array $content, $type)
     {
-        $values = array();
+        $values = [];
         foreach ($content as $key => $value) {
             $builtValue   = $this->buildValue($value);
             $key          = Dictionary::VALUE_AS_KEY === $type ? $builtValue : $this->buildValue($key);
