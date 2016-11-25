@@ -35,7 +35,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
     {
         $definition = new Definition();
 
-        return $definition
+        $definition
             ->setClass('Knp\DictionaryBundle\Dictionary')
             ->setFactory(array(
                 new Reference('knp_dictionary.dictionary.factory.factory_aggregate'),
@@ -45,5 +45,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ->addArgument($config)
             ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
         ;
+
+        return $definition;
     }
 }
