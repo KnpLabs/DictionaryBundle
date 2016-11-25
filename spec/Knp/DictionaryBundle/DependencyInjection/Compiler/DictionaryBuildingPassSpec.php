@@ -7,7 +7,6 @@ use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 class DictionaryBuildingPassSpec extends ObjectBehavior
 {
@@ -38,15 +37,18 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(array('dico1', array('foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'), Dictionary::VALUE_AS_KEY))
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::VALUE_AS_KEY,
+                        'content' => array('foo', 'bar', 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
@@ -82,15 +84,18 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(array('dico1', array('foo', 'bar', 'baz'), Dictionary::VALUE))
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::VALUE,
+                        'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
@@ -126,15 +131,18 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(array('dico1', array(2 => 'foo', 10 => 'bar', 100 => 'baz'), Dictionary::KEY_VALUE))
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::KEY_VALUE,
+                        'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
@@ -146,21 +154,5 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->process($container);
-    }
-
-    function it_doesnt_supports_other_types(ContainerBuilder $container)
-    {
-        $config = array(
-            'dictionaries' => array(
-                'dico1' => array(
-                    'type'    => 'yolo',
-                    'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
-                ),
-            ),
-        );
-
-        $container->getParameter('knp_dictionary.configuration')->willReturn($config);
-
-        $this->shouldThrow(new RuntimeException('Unknown dictionary type "yolo"'))->duringProcess($container);
     }
 }

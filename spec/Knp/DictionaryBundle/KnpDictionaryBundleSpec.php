@@ -16,7 +16,7 @@ class KnpDictionaryBundleSpec extends ObjectBehavior
     function it_registers_compiler_passes(ContainerBuilder $container)
     {
         $container
-            ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\ValueTransformerPass'))
+            ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass'))
             ->shouldBeCalled()
         ;
 

@@ -6,7 +6,28 @@
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.dictionary_factory" class="Knp\DictionaryBundle\Dictionary\DictionaryFactory"/>
+    <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
+
+    <service id="knp_dictionary.dictionary.factory.value" class="Knp\DictionaryBundle\Dictionary\Factory\Value">
+        <call method="addTransformer">
+            <argument type="service" id="knp_dictionary.dictionary.value_transformer.constant_transformer"/>
+        </call>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
+    <service id="knp_dictionary.dictionary.factory.key_value" class="Knp\DictionaryBundle\Dictionary\Factory\KeyValue">
+        <call method="addTransformer">
+            <argument type="service" id="knp_dictionary.dictionary.value_transformer.constant_transformer"/>
+        </call>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
+    <service id="knp_dictionary.dictionary.factory.value_as_key" class="Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey">
+        <call method="addTransformer">
+            <argument type="service" id="knp_dictionary.dictionary.value_transformer.constant_transformer"/>
+        </call>
+        <tag name="knp_dictionary.factory"/>
+    </service>
 
     <service id="knp_dictionary.dictionary.dictionary_registry" class="Knp\DictionaryBundle\Dictionary\DictionaryRegistry"/>
 
