@@ -2,7 +2,9 @@
 
 namespace Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
-class ConstantTransformer implements TransformerInterface
+use Knp\DictionaryBundle\Dictionary\ValueTransformer;
+
+class ConstantTransformer implements ValueTransformer
 {
     /**
      * @var string
