@@ -7,7 +7,6 @@ use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Exception\RuntimeException;
 
 class DictionaryBuildingPassSpec extends ObjectBehavior
 {
@@ -18,14 +17,14 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
     function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
     {
-        $config = [
-            'dictionaries' => [
-                'dico1' => [
+        $config = array(
+            'dictionaries' => array(
+                'dico1' => array(
                     'type'    => Dictionary::VALUE_AS_KEY,
-                    'content' => ['foo', 'bar', 'baz'],
-                ],
-            ],
-        ];
+                    'content' => array('foo', 'bar', 'baz'),
+                ),
+            ),
+        );
 
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
@@ -38,19 +37,22 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(['dico1', ['foo' => 'foo', 'bar' => 'bar', 'baz' => 'baz'], Dictionary::VALUE_AS_KEY])
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::VALUE_AS_KEY,
+                        'content' => array('foo', 'bar', 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
+                    ->toBe(array(DictionaryRegistrationPass::TAG_DICTIONARY => array(array())))
                 ;
 
                 return true;
@@ -62,14 +64,14 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
     function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
     {
-        $config = [
-            'dictionaries' => [
-                'dico1' => [
+        $config = array(
+            'dictionaries' => array(
+                'dico1' => array(
                     'type'    => Dictionary::VALUE,
-                    'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
-                ],
-            ],
-        ];
+                    'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                ),
+            ),
+        );
 
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
@@ -82,19 +84,22 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(['dico1', ['foo', 'bar', 'baz'], Dictionary::VALUE])
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::VALUE,
+                        'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
+                    ->toBe(array(DictionaryRegistrationPass::TAG_DICTIONARY => array(array())))
                 ;
 
                 return true;
@@ -106,14 +111,14 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
     function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
     {
-        $config = [
-            'dictionaries' => [
-                'dico1' => [
+        $config = array(
+            'dictionaries' => array(
+                'dico1' => array(
                     'type'    => Dictionary::KEY_VALUE,
-                    'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
-                ],
-            ],
-        ];
+                    'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                ),
+            ),
+        );
 
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
@@ -126,19 +131,22 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                 $factory = $definition->getFactory();
 
                 expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.dictionary_factory')
+                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
                 ;
 
                 expect($factory[1])
-                    ->toBe('createFromArray')
+                    ->toBe('create')
                 ;
 
                 expect($definition->getArguments())
-                    ->toBe(['dico1', [2 => 'foo', 10 => 'bar', 100 => 'baz'], Dictionary::KEY_VALUE])
+                    ->toBe(array('dico1', array(
+                        'type'    => Dictionary::KEY_VALUE,
+                        'content' => array(2 => 'foo', 10 => 'bar', 100 => 'baz'),
+                    )))
                 ;
 
                 expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
+                    ->toBe(array(DictionaryRegistrationPass::TAG_DICTIONARY => array(array())))
                 ;
 
                 return true;
@@ -146,21 +154,5 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         )->shouldBeCalled();
 
         $this->process($container);
-    }
-
-    function it_doesnt_supports_other_types(ContainerBuilder $container)
-    {
-        $config = [
-            'dictionaries' => [
-                'dico1' => [
-                    'type'    => 'yolo',
-                    'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
-                ],
-            ],
-        ];
-
-        $container->getParameter('knp_dictionary.configuration')->willReturn($config);
-
-        $this->shouldThrow(new RuntimeException('Unknown dictionary type "yolo"'))->duringProcess($container);
     }
 }
