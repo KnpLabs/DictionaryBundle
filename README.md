@@ -102,6 +102,20 @@ knp_dictionary:
 - `value` (default) : Natural indexation
 - `value_as_key`: Keys are defined from their value
 - `key_value`: Define your own keys
+- `callback`: Build a dictionary from a callable
+
+### Callback dictionary
+You can create a callback dictionary:
+```yaml
+knp_dictionary:
+    dictionaries:
+        my_callback_dictionary:         # your dictionary name
+            type: 'callback'            # your dictionary type
+            service: 'app.service.id'   # a valid service from your application
+            method: 'getSomething'      # the method name to execute
+```
+Callback dictionaries are loaded with a lazy strategy. It means that the callback
+will not be called if you do not use the dictionary.
 
 ## Transformers
 For now, this bundle is only able to resolve your **class constants**:
@@ -161,4 +175,20 @@ App\Entity\User:
         firstname: John
         latnale: Doe
         city: <dictionary('cities')>
+```
+
+## Create your own dictionary implementation
+
+### Dictionary
+Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary/Dictionary.php).
+
+### Dictionary Factory
+You must create a dictionary factory that will be responsible to instanciate your dictionary.
+
+```yaml
+services:
+    app.dictionary.factory.my_custom_factory:
+        class: App\Dictionary\Factory\MyCustomFactory
+        tags:
+            { name: 'knp_dictionary.factory' }
 ```
