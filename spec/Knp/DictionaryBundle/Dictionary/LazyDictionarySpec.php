@@ -4,7 +4,7 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use PhpSpec\ObjectBehavior;
 
-class CallableDictionarySpec extends ObjectBehavior
+class LazyDictionarySpec extends ObjectBehavior
 {
     /**
      * @var bool
@@ -24,7 +24,7 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\CallableDictionary');
+        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\LazyDictionary');
     }
 
     function it_is_a_dictionary()

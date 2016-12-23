@@ -13,7 +13,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     private $dictionaries = array();
 
     /**
-     * @param DictionaryInterface $dictionary
+     * @param Dictionary $dictionary
      *
      * @return DictionaryRegistry
      */
@@ -25,8 +25,8 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     }
 
     /**
-     * @param string              $key
-     * @param DictionaryInterface $dictionary
+     * @param string     $key
+     * @param Dictionary $dictionary
      *
      * @return DictionaryRegistry
      */
