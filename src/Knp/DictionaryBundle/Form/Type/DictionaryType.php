@@ -33,7 +33,7 @@ class DictionaryType extends AbstractType
             $name    = $options['name'];
             $choices = $registry[$name]->getValues();
 
-            return $choices;
+            return array_flip($choices);
         };
 
         $resolver
