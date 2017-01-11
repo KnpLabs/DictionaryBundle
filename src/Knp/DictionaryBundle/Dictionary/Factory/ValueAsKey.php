@@ -11,7 +11,15 @@ class ValueAsKey implements Factory
     /**
      * @var ValueTransformer
      */
-    protected $transformers = array();
+    protected $transformer;
+
+    /**
+     * @param ValueTransformer $transformer
+     */
+    public function __construct(ValueTransformer $transformer)
+    {
+        $this->transformer = $transformer;
+    }
 
     /**
      * {@inheritdoc}
@@ -29,7 +37,7 @@ class ValueAsKey implements Factory
         $values  = array();
 
         foreach ($content as $value) {
-            $builtValue          = $this->buildValue($value);
+            $builtValue          = $this->transformer->transform($value);
             $values[$builtValue] = $builtValue;
         }
 
@@ -42,33 +50,5 @@ class ValueAsKey implements Factory
     public function supports(array $config)
     {
         return (isset($config['type'])) ? $config['type'] === 'value_as_key' : false;
-    }
-
-    /**
-     * @param ValueTransformer $transformers
-     *
-     * @return ValueAsKey
-     */
-    public function addTransformer(ValueTransformer $transformer)
-    {
-        $this->transformers = $transformer;
-
-        return $this;
-    }
-
-    /**
-     * @param mixed $value
-     *
-     * @return mixed
-     */
-    private function buildValue($value)
-    {
-        foreach ($this->transformers as $transformer) {
-            if ($transformer->supports($value)) {
-                return $transformer->transform($value);
-            }
-        }
-
-        return $value;
     }
 }
