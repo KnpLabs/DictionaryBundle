@@ -2,10 +2,16 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 use PhpSpec\ObjectBehavior;
 
 class KeyValueSpec extends ObjectBehavior
 {
+    function let(ValueTransformer $transformer)
+    {
+        $this->beConstructedWith($transformer);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\KeyValue');
@@ -29,7 +35,7 @@ class KeyValueSpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_a_dictionary()
+    function it_creates_a_dictionary($transformer)
     {
         $config = array(
             'content' => array(
@@ -38,6 +44,10 @@ class KeyValueSpec extends ObjectBehavior
                 'foo3' => 'bar3',
             ),
         );
+
+        $transformer->transform('bar1')->willReturn('bar1');
+        $transformer->transform('bar2')->willReturn('bar2');
+        $transformer->transform('bar3')->willReturn('bar3');
 
         $dictionary = $this->create('yolo', $config);
 
