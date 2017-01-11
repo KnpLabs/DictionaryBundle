@@ -12,6 +12,18 @@ class FactoryAggregate implements Factory
     private $factories = array();
 
     /**
+     * @param Factory $factory
+     *
+     * @return FactoryAggregate
+     */
+    public function addFactory(Factory $factory)
+    {
+        $this->factories[] = $factory;
+
+        return $this;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function create($name, array $config)
@@ -33,18 +45,12 @@ class FactoryAggregate implements Factory
      */
     public function supports(array $config)
     {
-        return true;
-    }
+        foreach ($this->factories as $factory) {
+            if ($factory->supports($config)) {
+                return true;
+            }
+        }
 
-    /**
-     * @param Factory $factory
-     *
-     * @return FactoryAggregate
-     */
-    public function addFactory(Factory $factory)
-    {
-        $this->factories[] = $factory;
-
-        return $this;
+        return false;
     }
 }
