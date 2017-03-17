@@ -38,7 +38,7 @@ class DictionaryTypeSpec extends ObjectBehavior
     ) {
         $registry
             ->all()
-            ->willReturn(array('d1' => $dictionary1, 'd2' => $dictionary2))
+            ->willReturn(['d1' => $dictionary1, 'd2' => $dictionary2])
         ;
 
         $registry
@@ -46,26 +46,26 @@ class DictionaryTypeSpec extends ObjectBehavior
             ->willReturn($dictionary1)
         ;
 
-        $dictionary1->getValues()->willReturn(array('foo' => 'bar'));
+        $dictionary1->getValues()->willReturn(['foo' => 'bar']);
 
         $resolver
             ->setDefault('choices', Argument::that(function ($callable) use ($options) {
                 $options->offsetGet('name')->willReturn('d1');
 
-                return $callable($options->getWrappedObject()) === array('foo' => 'bar');
+                return $callable($options->getWrappedObject()) === ['foo' => 'bar'];
             }))
             ->willReturn($resolver)
             ->shouldBeCalled()
         ;
 
         $resolver
-            ->setRequired(array('name'))
+            ->setRequired(['name'])
             ->willReturn($resolver)
             ->shouldBeCalled()
         ;
 
         $resolver
-            ->setAllowedValues('name', array('d1', 'd2'))
+            ->setAllowedValues('name', ['d1', 'd2'])
             ->willReturn($resolver)
             ->shouldBeCalled()
         ;

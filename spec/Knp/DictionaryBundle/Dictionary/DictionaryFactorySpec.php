@@ -27,7 +27,7 @@ class DictionaryFactorySpec extends ObjectBehavior
     function it_creates_dictionaries_from_array()
     {
         $dictionary = $this
-            ->createFromArray('foo', array('bar' => 'baz'), Argument::any())
+            ->createFromArray('foo', ['bar' => 'baz'], Argument::any())
         ;
 
         $dictionary
@@ -35,15 +35,15 @@ class DictionaryFactorySpec extends ObjectBehavior
         ;
 
         $dictionary->getName()->shouldReturn('foo');
-        $dictionary->getKeys()->shouldReturn(array('bar'));
-        $dictionary->getValues()->shouldReturn(array('bar' => 'foo'));
+        $dictionary->getKeys()->shouldReturn(['bar']);
+        $dictionary->getValues()->shouldReturn(['bar' => 'foo']);
     }
 
     function it_creates_dictionaries_from_callable()
     {
         $dictionary = $this
             ->createFromCallable('foo', function () {
-                return array('bar' => 'baz');
+                return ['bar' => 'baz'];
             })
         ;
 
@@ -52,8 +52,8 @@ class DictionaryFactorySpec extends ObjectBehavior
         ;
 
         $dictionary->getName()->shouldReturn('foo');
-        $dictionary->getKeys()->shouldReturn(array('bar'));
-        $dictionary->getValues()->shouldReturn(array('bar' => 'baz'));
+        $dictionary->getKeys()->shouldReturn(['bar']);
+        $dictionary->getValues()->shouldReturn(['bar' => 'baz']);
     }
 
     function it_doesnt_call_transformers_transform_method_if_not_supported($transformer)
@@ -63,7 +63,7 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('foo')->shouldNotBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->createFromArray('foo', array('foo' => 'bar'), Argument::any());
+        $this->createFromArray('foo', ['foo' => 'bar'], Argument::any());
     }
 
     function it_calls_transformers_transform_method_if_supported($transformer)
@@ -73,13 +73,13 @@ class DictionaryFactorySpec extends ObjectBehavior
         $transformer->transform('baz')->shouldBeCalled();
         $transformer->transform('bar')->shouldNotBeCalled();
 
-        $this->createFromArray('foo', array('bar' => 'baz'), Argument::any());
+        $this->createFromArray('foo', ['bar' => 'baz'], Argument::any());
     }
 
     function it_doesnt_call_transformers_transform_method_for_specific_dictionaries($transformer)
     {
         $transformer->supports('baz')->shouldBeCalled();
         $transformer->supports('bar')->shouldNotBeCalled();
-        $this->createFromArray('foo', array('bar' => 'baz'), Dictionary::VALUE_AS_KEY);
+        $this->createFromArray('foo', ['bar' => 'baz'], Dictionary::VALUE_AS_KEY);
     }
 }

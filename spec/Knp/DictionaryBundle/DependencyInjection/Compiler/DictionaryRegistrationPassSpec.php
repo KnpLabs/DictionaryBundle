@@ -17,7 +17,7 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
 
     function it_registers_dictionaries(ContainerBuilder $container, Definition $registry)
     {
-        $tags = array('foo' => array(), 'bar' => array(), 'baz' => array());
+        $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
         $container->getDefinition('knp_dictionary.dictionary.dictionary_registry')->willReturn($registry);
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);

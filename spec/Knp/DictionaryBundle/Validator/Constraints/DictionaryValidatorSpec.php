@@ -20,7 +20,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
         $registry->get('dico')->willReturn($dictionary);
 
-        $dictionary->getKeys()->willReturn(array('the_key'));
+        $dictionary->getKeys()->willReturn(['the_key']);
     }
 
     function it_is_initializable()
@@ -30,7 +30,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
     function it_valids_existing_keys($context)
     {
-        $constraint = new Constraint(array('name' => 'dico'));
+        $constraint = new Constraint(['name' => 'dico']);
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
@@ -39,9 +39,9 @@ class DictionaryValidatorSpec extends ObjectBehavior
 
     function it_adds_violation_for_an_unexisting_keys($context)
     {
-        $constraint = new Constraint(array('name' => 'dico'));
+        $constraint = new Constraint(['name' => 'dico']);
 
-        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', array('{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'))->shouldBeCalled();
+        $context->addViolation('The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.', ['{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'])->shouldBeCalled();
 
         $this->validate('the_unexisting_key', $constraint);
     }

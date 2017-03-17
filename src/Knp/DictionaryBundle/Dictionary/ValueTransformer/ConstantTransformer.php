@@ -14,7 +14,7 @@ class ConstantTransformer implements TransformerInterface
      */
     public function supports($value)
     {
-        $matches = array();
+        $matches = [];
 
         if (0 === preg_match($this->pattern, $value, $matches)) {
             return false;
@@ -35,7 +35,7 @@ class ConstantTransformer implements TransformerInterface
      */
     public function transform($value)
     {
-        $matches = array();
+        $matches = [];
         preg_match($this->pattern, $value, $matches);
         $class = new \ReflectionClass($matches['class']);
 

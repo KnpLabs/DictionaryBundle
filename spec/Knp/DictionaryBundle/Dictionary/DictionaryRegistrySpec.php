@@ -37,10 +37,10 @@ class DictionaryRegistrySpec extends ObjectBehavior
 
     function it_provides_a_list_of_dictionaries($dictionary, $dictionary2)
     {
-        $this->all()->shouldReturn(array(
+        $this->all()->shouldReturn([
             'foo'        => $dictionary,
             'dictionary' => $dictionary2,
-        ));
+        ]);
     }
 
     function it_sets_registry_entry($dictionary)
@@ -80,9 +80,9 @@ class DictionaryRegistrySpec extends ObjectBehavior
 
     function it_provides_an_array_iterator($dictionary, $dictionary2)
     {
-        $this->getIterator()->getArrayCopy()->shouldReturn(array(
+        $this->getIterator()->getArrayCopy()->shouldReturn([
             'foo'        => $dictionary,
             'dictionary' => $dictionary2,
-        ));
+        ]);
     }
 }
