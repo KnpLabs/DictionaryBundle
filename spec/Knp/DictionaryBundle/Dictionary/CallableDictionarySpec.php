@@ -33,6 +33,15 @@ class CallableDictionarySpec extends ObjectBehavior
         $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
     }
 
+    function it_supports_callable_arguments()
+    {
+        $this->beConstructedWith('baz', function () {
+            return call_user_func_array([$this, 'execution'], func_get_args());
+        }, [['foo' => 2, 'bar' => 1, 'baz' => 0]]);
+
+        $this->getValues()->shouldReturn(['foo' => 2, 'bar' => 1, 'baz' => 0]);
+    }
+
     function it_supports_some_array_access_functions()
     {
         $dictionary = $this->getWrappedObject();
@@ -119,8 +128,9 @@ class CallableDictionarySpec extends ObjectBehavior
     {
         if (false === $this->executed) {
             $this->executed = true;
+            $args = func_get_args();
 
-            return  [
+            return !empty($args) ? current($args) : [
                 'foo' => 0,
                 'bar' => 1,
                 'baz' => 2,
