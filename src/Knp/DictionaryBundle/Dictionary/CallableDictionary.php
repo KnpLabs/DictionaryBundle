@@ -21,14 +21,19 @@ class CallableDictionary implements DictionaryInterface
      */
     private $callable;
 
+    /** @var array */
+    private $callableArgs;
+
     /**
      * @param string   $name
      * @param callable $callable
+     * @param array    $callableArgs
      */
-    public function __construct($name, callable $callable)
+    public function __construct($name, callable $callable, array $callableArgs = [])
     {
-        $this->name     = $name;
-        $this->callable = $callable;
+        $this->name         = $name;
+        $this->callable     = $callable;
+        $this->callableArgs = $callableArgs;
     }
 
     /**
@@ -144,7 +149,7 @@ class CallableDictionary implements DictionaryInterface
             return;
         }
 
-        $values = call_user_func($this->callable);
+        $values = call_user_func_array($this->callable, $this->callableArgs);
 
         if (false === is_array($values) && false === $values instanceof \ArrayAccess) {
             throw new \InvalidArgumentException(
