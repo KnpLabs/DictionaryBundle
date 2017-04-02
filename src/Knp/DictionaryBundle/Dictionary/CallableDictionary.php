@@ -21,14 +21,18 @@ class CallableDictionary implements DictionaryInterface
      */
     private $callable;
 
+    /** @var bool */
+    private $initialized;
+
     /**
      * @param string   $name
      * @param callable $callable
      */
     public function __construct($name, callable $callable)
     {
-        $this->name     = $name;
-        $this->callable = $callable;
+        $this->name        = $name;
+        $this->callable    = $callable;
+        $this->initialized = false;
     }
 
     /**
@@ -116,11 +120,9 @@ class CallableDictionary implements DictionaryInterface
      */
     public function serialize()
     {
-        $this->hydrate();
-
         return serialize([
             'name'   => $this->name,
-            'values' => $this->values,
+            'values' => $this->values ?: array(),
         ]);
     }
 
@@ -131,8 +133,9 @@ class CallableDictionary implements DictionaryInterface
     {
         $data = unserialize($serialized);
 
-        $this->name   = $data['name'];
-        $this->values = $data['values'];
+        $this->name        = $data['name'];
+        $this->values      = $data['values'];
+        $this->initialized = true;
     }
 
     /**
@@ -140,7 +143,7 @@ class CallableDictionary implements DictionaryInterface
      */
     protected function hydrate()
     {
-        if (null !== $this->values) {
+        if ($this->initialized) {
             return;
         }
 
@@ -152,6 +155,7 @@ class CallableDictionary implements DictionaryInterface
             );
         }
 
-        $this->values = $values;
+        $this->values      = $values;
+        $this->initialized = true;
     }
 }
