@@ -8,6 +8,13 @@ Are you often tired to repeat static choices like gender or civility in your app
 ## Requirements
 - Symfony >= 2.5
 
+## Maintainers
+
+You can ping us if need some reviews/comments/help:
+
+ - [@AntoineLelaisant](https://github.com/AntoineLelaisant)
+ - [@Shivoham](https://github.com/Shivoham)
+
 ## Installation
 Add the DictionaryBundle to your `composer.json`:
 ```yaml
