@@ -52,7 +52,7 @@ class DictionaryTypeSpec extends ObjectBehavior
             ->setDefault('choices', Argument::that(function ($callable) use ($options) {
                 $options->offsetGet('name')->willReturn('d1');
 
-                return $callable($options->getWrappedObject()) === ['foo' => 'bar'];
+                return $callable($options->getWrappedObject()) === array_flip(['foo' => 'bar']);
             }))
             ->willReturn($resolver)
             ->shouldBeCalled()

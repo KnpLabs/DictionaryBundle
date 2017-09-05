@@ -9,7 +9,7 @@ class FactoryAggregate implements Factory
     /**
      * @var Factory[]
      */
-    private $factories = array();
+    private $factories = [];
 
     /**
      * @param Factory $factory
