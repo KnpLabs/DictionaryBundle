@@ -24,11 +24,11 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
     ) {
         $container
             ->findTaggedServiceIds(DictionaryFactoryBuildingPass::TAG_FACTORY)
-            ->willReturn(array(
+            ->willReturn([
                 'factory1' => $factory1,
                 'factory2' => $factory2,
                 'factory3' => $factory3,
-            ))
+            ])
         ;
 
         $container

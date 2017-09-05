@@ -5,7 +5,7 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\Container;
 
-class CallbackFactorySpec extends ObjectBehavior
+class CallableFactorySpec extends ObjectBehavior
 {
     function let(Container $container)
     {
@@ -14,7 +14,7 @@ class CallbackFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\CallbackFactory');
+        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\CallableFactory');
     }
 
     function it_is_a_factory()
@@ -24,33 +24,33 @@ class CallbackFactorySpec extends ObjectBehavior
 
     function it_supports_specific_config()
     {
-        $this->supports(array('type' => 'callback'))->shouldReturn(true);
+        $this->supports(['type' => 'callable'])->shouldReturn(true);
     }
 
     function it_creates_a_dictionary(
         $container,
         MockedService $service
     ) {
-        $config = array(
+        $config = [
             'service' => 'service.id',
             'method'  => 'getYolo',
-        );
+        ];
 
         $container->get('service.id')->willReturn($service);
-        $service->getYolo()->willReturn(array(
+        $service->getYolo()->willReturn([
             'foo1' => 'bar1',
             'foo2' => 'bar2',
             'foo3' => 'bar3',
-        ));
+        ]);
 
         $dictionary = $this->create('yolo', $config);
 
         $dictionary->getName()->shouldBe('yolo');
-        $dictionary->getValues()->shouldBe(array(
+        $dictionary->getValues()->shouldBe([
             'foo1' => 'bar1',
             'foo2' => 'bar2',
             'foo3' => 'bar3',
-        ));
+        ]);
     }
 }
 

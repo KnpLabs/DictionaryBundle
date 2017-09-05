@@ -37,10 +37,10 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
         $definition
             ->setClass('Knp\DictionaryBundle\Dictionary')
-            ->setFactory(array(
+            ->setFactory([
                 new Reference('knp_dictionary.dictionary.factory.factory_aggregate'),
                 'create',
-            ))
+            ])
             ->addArgument($name)
             ->addArgument($config)
             ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)

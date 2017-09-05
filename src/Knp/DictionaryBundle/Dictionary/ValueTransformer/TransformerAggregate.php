@@ -9,7 +9,7 @@ class TransformerAggregate implements ValueTransformer
     /**
      * @var ValueTransformer[]
      */
-    private $transformers = array();
+    private $transformers = [];
 
     /**
      * @param ValueTransformer $transformer

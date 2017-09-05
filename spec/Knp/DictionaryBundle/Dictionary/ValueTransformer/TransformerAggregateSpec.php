@@ -22,20 +22,20 @@ class TransformerAggregateSpec extends ObjectBehavior
         ValueTransformer $transformer2,
         ValueTransformer $transformer3
     ) {
-        $transformer1->supports(array())->willReturn(false);
-        $transformer2->supports(array())->willReturn(false);
-        $transformer3->supports(array())->willReturn(true);
+        $transformer1->supports([])->willReturn(false);
+        $transformer2->supports([])->willReturn(false);
+        $transformer3->supports([])->willReturn(true);
 
         $this
             ->addTransformer($transformer1)
             ->addTransformer($transformer2)
         ;
 
-        $this->supports(array())->shouldReturn(false);
+        $this->supports([])->shouldReturn(false);
 
         $this->addTransformer($transformer3);
 
-        $this->supports(array())->shouldReturn(true);
+        $this->supports([])->shouldReturn(true);
     }
 
     function it_transform_value(
@@ -43,12 +43,12 @@ class TransformerAggregateSpec extends ObjectBehavior
         ValueTransformer $transformer2,
         ValueTransformer $transformer3
     ) {
-        $transformer1->supports(array())->willReturn(false);
-        $transformer2->supports(array())->willReturn(true);
-        $transformer3->supports(array())->willReturn(true);
+        $transformer1->supports([])->willReturn(false);
+        $transformer2->supports([])->willReturn(true);
+        $transformer3->supports([])->willReturn(true);
 
-        $transformer2->transform(array())->willReturn('foo');
-        $transformer3->transform(array())->willReturn('bar');
+        $transformer2->transform([])->willReturn('foo');
+        $transformer3->transform([])->willReturn('bar');
 
         $this
             ->addTransformer($transformer1)
@@ -56,6 +56,6 @@ class TransformerAggregateSpec extends ObjectBehavior
             ->addTransformer($transformer3)
         ;
 
-        $this->transform(array())->shouldReturn('foo');
+        $this->transform([])->shouldReturn('foo');
     }
 }
