@@ -4,7 +4,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 
-class CallbackDictionary implements DictionaryInterface
+class CallableDictionary implements DictionaryInterface
 {
     /**
      * @var string

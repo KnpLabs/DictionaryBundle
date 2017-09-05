@@ -2,11 +2,11 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
-use Knp\DictionaryBundle\Dictionary\CallbackDictionary;
+use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
 
-class CallbackFactory implements Factory
+class CallableFactory implements Factory
 {
     /**
      * @var Container
@@ -14,7 +14,7 @@ class CallbackFactory implements Factory
     private $container;
 
     /**
-     * @param $container Container
+     * @param Container $container
      */
     public function __construct(Container $container)
     {
@@ -35,20 +35,20 @@ class CallbackFactory implements Factory
 
         $service = $this->container->get($config['service']);
 
-        $callback = array($service);
+        $callable = array($service);
 
         if (isset($config['method'])) {
-            $callback[] = $config['method'];
+            $callable[] = $config['method'];
         }
 
-        if ( ! is_callable($callback)) {
+        if ( ! is_callable($callable)) {
             throw new \InvalidArgumentException(sprintf(
-                'You must provide a valid callback for the dictionary named "%s"',
+                'You must provide a valid callable for the dictionary named "%s"',
                 $name
             ));
         }
 
-        return new CallbackDictionary($name, $callback);
+        return new CallableDictionary($name, $callable);
     }
 
     /**
@@ -56,6 +56,6 @@ class CallbackFactory implements Factory
      */
     public function supports(array $config)
     {
-        return (isset($config['type'])) ? $config['type'] === 'callback' : false;
+        return (isset($config['type'])) ? $config['type'] === 'callable' : false;
     }
 }

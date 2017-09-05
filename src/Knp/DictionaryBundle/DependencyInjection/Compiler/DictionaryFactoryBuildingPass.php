@@ -10,6 +10,9 @@ class DictionaryFactoryBuildingPass implements CompilerPassInterface
 {
     const TAG_FACTORY = 'knp_dictionary.factory';
 
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
         $factories = $container->findTaggedServiceIds(self::TAG_FACTORY);

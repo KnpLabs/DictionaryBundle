@@ -102,19 +102,19 @@ knp_dictionary:
 - `value` (default) : Natural indexation
 - `value_as_key`: Keys are defined from their value
 - `key_value`: Define your own keys
-- `callback`: Build a dictionary from a callable
+- `callable`: Build a dictionary from a callable
 
-### Callback dictionary
-You can create a callback dictionary:
+### Callable dictionary
+You can create a callable dictionary:
 ```yaml
 knp_dictionary:
     dictionaries:
-        my_callback_dictionary:         # your dictionary name
-            type: 'callback'            # your dictionary type
+        my_callable_dictionary:         # your dictionary name
+            type: 'callable'            # your dictionary type
             service: 'app.service.id'   # a valid service from your application
             method: 'getSomething'      # the method name to execute
 ```
-Callback dictionaries are loaded with a lazy strategy. It means that the callback
+Callable dictionaries are loaded with a lazy strategy. It means that the callable
 will not be called if you do not use the dictionary.
 
 ## Transformers

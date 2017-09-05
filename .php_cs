@@ -14,7 +14,6 @@ return Symfony\CS\Config\Config::create()
         'concat_with_spaces',
         'line_break_between_statements',
         'logical_not_operators_with_spaces',
-        'long_array_syntax',
         'newline_after_open_tag',
         'no_empty_comment',
         'no_empty_comment',
@@ -23,6 +22,7 @@ return Symfony\CS\Config\Config::create()
         'ordered_use',
         'phpdoc_order',
         'phpspec',
+        'long_array_syntax',
     ))
     ->addCustomFixer(new PedroTroller\CS\Fixer\Contrib\LineBreakBetweenStatementsFixer())
     ->addCustomFixer(new PedroTroller\CS\Fixer\Contrib\PhpspecFixer())

@@ -23,7 +23,7 @@
         <tag name="knp_dictionary.factory"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.factory.callback_factory" class="Knp\DictionaryBundle\Dictionary\Factory\CallbackFactory">
+    <service id="knp_dictionary.dictionary.factory.callable_factory" class="Knp\DictionaryBundle\Dictionary\Factory\CallableFactory">
         <argument type="service" id="service_container"/>
         <tag name="knp_dictionary.factory"/>
     </service>
