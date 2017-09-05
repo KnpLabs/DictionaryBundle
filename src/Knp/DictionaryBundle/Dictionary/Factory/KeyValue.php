@@ -34,7 +34,7 @@ class KeyValue implements Factory
         }
 
         $content = $config['content'];
-        $values  = array();
+        $values  = [];
 
         foreach ($content as $key => $value) {
             $builtValue   = $this->transformer->transform($value);

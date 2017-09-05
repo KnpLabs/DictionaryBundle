@@ -34,7 +34,7 @@ class Value implements Factory
         }
 
         $content = $config['content'];
-        $values  = array();
+        $values  = [];
 
         foreach ($content as $value) {
             $values[] = $this->transformer->transform($value);

@@ -25,15 +25,15 @@ class FactoryAggregateSpec extends ObjectBehavior
     ) {
         $this->addFactory($factory1)->addFactory($factory2);
 
-        $factory1->supports(array())->willReturn(false);
-        $factory2->supports(array())->willReturn(false);
-        $factory3->supports(array())->willReturn(true);
+        $factory1->supports([])->willReturn(false);
+        $factory2->supports([])->willReturn(false);
+        $factory3->supports([])->willReturn(true);
 
-        $this->supports(array())->shouldReturn(false);
+        $this->supports([])->shouldReturn(false);
 
         $this->addFactory($factory3);
 
-        $this->supports(array())->shouldReturn(true);
+        $this->supports([])->shouldReturn(true);
     }
 
     function it_uses_its_factory_to_build_a_dictionary(
@@ -44,13 +44,13 @@ class FactoryAggregateSpec extends ObjectBehavior
     ) {
         $this->addFactory($factory1)->addFactory($factory2)->addFactory($factory3);
 
-        $factory1->supports(array())->willReturn(false);
-        $factory2->supports(array())->willReturn(false);
-        $factory3->supports(array())->willReturn(true);
+        $factory1->supports([])->willReturn(false);
+        $factory2->supports([])->willReturn(false);
+        $factory3->supports([])->willReturn(true);
 
-        $factory3->create('yolo', array())->willReturn($dictionary);
+        $factory3->create('yolo', [])->willReturn($dictionary);
 
-        $this->create('yolo', array())->shouldReturn($dictionary);
+        $this->create('yolo', [])->shouldReturn($dictionary);
     }
 
     function it_throws_exception_if_no_factory_supports_the_config(
@@ -60,10 +60,10 @@ class FactoryAggregateSpec extends ObjectBehavior
     ) {
         $this->addFactory($factory1)->addFactory($factory2)->addFactory($factory3);
 
-        $factory1->supports(array())->willReturn(false);
-        $factory2->supports(array())->willReturn(false);
-        $factory3->supports(array())->willReturn(false);
+        $factory1->supports([])->willReturn(false);
+        $factory2->supports([])->willReturn(false);
+        $factory3->supports([])->willReturn(false);
 
-        $this->shouldThrow('\InvalidArgumentException')->during('create', array('yolo', array()));
+        $this->shouldThrow('\InvalidArgumentException')->during('create', ['yolo', []]);
     }
 }

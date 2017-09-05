@@ -24,22 +24,22 @@ class ValueAsKeySpec extends ObjectBehavior
 
     function it_supports_specific_config()
     {
-        $this->supports(array('type' => 'value_as_key'))->shouldReturn(true);
+        $this->supports(['type' => 'value_as_key'])->shouldReturn(true);
     }
 
     function it_throws_exception_if_no_content_is_provided()
     {
         $this
             ->shouldThrow('\InvalidArgumentException')
-            ->during('create', array('yolo', array()))
+            ->during('create', ['yolo', []])
         ;
     }
 
     function it_creates_a_dictionary($transformer)
     {
-        $config = array(
-            'content' => array('bar1', 'bar2', 'bar3'),
-        );
+        $config = [
+            'content' => ['bar1', 'bar2', 'bar3'],
+        ];
 
         $transformer->transform('bar1')->willReturn('bar1');
         $transformer->transform('bar2')->willReturn('bar2');
@@ -48,10 +48,10 @@ class ValueAsKeySpec extends ObjectBehavior
         $dictionary = $this->create('yolo', $config);
 
         $dictionary->getName()->shouldBe('yolo');
-        $dictionary->getValues()->shouldBe(array(
+        $dictionary->getValues()->shouldBe([
             'bar1' => 'bar1',
             'bar2' => 'bar2',
             'bar3' => 'bar3',
-        ));
+        ]);
     }
 }
