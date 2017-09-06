@@ -1,8 +1,8 @@
 <?php
 
-namespace Knp\DictionaryBundle\Dictionary\ValueTransformer;
+namespace Knp\DictionaryBundle\Dictionary;
 
-interface TransformerInterface
+interface ValueTransformer
 {
     /**
      * @param mixed $value

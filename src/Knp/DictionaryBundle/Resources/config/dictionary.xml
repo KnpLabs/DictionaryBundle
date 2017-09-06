@@ -6,12 +6,36 @@
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.dictionary_factory" class="Knp\DictionaryBundle\Dictionary\DictionaryFactory"/>
+    <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
+
+    <service id="knp_dictionary.dictionary.factory.value" class="Knp\DictionaryBundle\Dictionary\Factory\Value">
+        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
+    <service id="knp_dictionary.dictionary.factory.key_value" class="Knp\DictionaryBundle\Dictionary\Factory\KeyValue">
+        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
+    <service id="knp_dictionary.dictionary.factory.value_as_key" class="Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey">
+        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
+    <service id="knp_dictionary.dictionary.factory.callable_factory" class="Knp\DictionaryBundle\Dictionary\Factory\CallableFactory">
+        <argument type="service" id="service_container"/>
+        <tag name="knp_dictionary.factory"/>
+    </service>
 
     <service id="knp_dictionary.dictionary.dictionary_registry" class="Knp\DictionaryBundle\Dictionary\DictionaryRegistry"/>
 
-    <service id="knp_dictionary.dictionary.value_transformer.constant_transformer" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer">
-      <tag name="knp_dictionary.value_transformer"/>
+    <service id="knp_dictionary.dictionary.value_transformer.constant_transformer" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer"/>
+
+    <service id="knp_dictionary.dictionary.value_transformer.transformer_aggregate" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate">
+        <call method="addTransformer">
+            <argument type="service" id="knp_dictionary.dictionary.value_transformer.constant_transformer"/>
+        </call>
     </service>
 
     <service id="knp_dictionary.form.type.dictionary_type" class="Knp\DictionaryBundle\Form\Type\DictionaryType">
