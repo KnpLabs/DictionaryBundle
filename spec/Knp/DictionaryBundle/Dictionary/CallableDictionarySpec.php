@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
 class CallableDictionarySpec extends ObjectBehavior
@@ -44,16 +45,6 @@ class CallableDictionarySpec extends ObjectBehavior
 
         unset($dictionary['foo']);
         expect(isset($dictionary['foo']))->toBe(false);
-    }
-
-    function it_can_be_serialized_and_unserialized()
-    {
-        $dictionary = $this->getWrappedObject();
-
-        $dictionary = unserialize(serialize($dictionary));
-
-        expect($dictionary['foo'])->toBe(0);
-        expect(isset($dictionary['foo']))->toBe(true);
     }
 
     function it_provides_a_set_of_values()

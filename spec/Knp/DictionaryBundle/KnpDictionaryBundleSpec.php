@@ -30,6 +30,11 @@ class KnpDictionaryBundleSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
+        $container
+            ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryTracePass'))
+            ->shouldBeCalled()
+        ;
+
         $this->build($container);
     }
 }
