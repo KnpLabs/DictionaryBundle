@@ -13,6 +13,7 @@ Are you often tired to repeat static choices like gender or civility in your app
 You can ping us if need some reviews/comments/help:
 
  - [@AntoineLelaisant](https://github.com/AntoineLelaisant)
+ - [@PedroTroller](https://github.com/PedroTroller)
  - [@Shivoham](https://github.com/Shivoham)
 
 ## Installation
