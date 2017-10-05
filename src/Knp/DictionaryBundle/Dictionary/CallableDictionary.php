@@ -2,9 +2,9 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
+use Knp\DictionaryBundle\Dictionary;
 
-class CallableDictionary implements DictionaryInterface
+class CallableDictionary implements Dictionary
 {
     /**
      * @var string
@@ -109,30 +109,6 @@ class CallableDictionary implements DictionaryInterface
         $this->hydrate();
 
         return new \ArrayIterator($this->values);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize()
-    {
-        $this->hydrate();
-
-        return serialize([
-            'name'   => $this->name,
-            'values' => $this->values,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        $data = unserialize($serialized);
-
-        $this->name   = $data['name'];
-        $this->values = $data['values'];
     }
 
     /**

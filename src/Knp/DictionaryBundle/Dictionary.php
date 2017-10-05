@@ -2,7 +2,10 @@
 
 namespace Knp\DictionaryBundle;
 
-interface Dictionary extends \ArrayAccess, \IteratorAggregate, \Serializable
+use ArrayAccess;
+use IteratorAggregate;
+
+interface Dictionary extends ArrayAccess, IteratorAggregate
 {
     const VALUE        = 'value';
     const VALUE_AS_KEY = 'value_as_key';
