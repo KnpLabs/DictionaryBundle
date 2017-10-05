@@ -1,33 +1,42 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block menu %}
-<span class="label">
-<span class="icon">
-    <img width="26" height="28" alt="Dictionary" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAByFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwtwJvAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAAI28AACNvATX8B/sAAAAHdElNRQffAxAPNTnObSSWAAAANklEQVQoz2NgoCmYPB0FxCBJTccAqJKJ+CQZRiVpJjmdXEk86QBDrhGfJLLAtOl4jcLjIKoDACWgunBRwjJ0AAAAAElFTkSuQmCC">
-</span>
-<strong>Dictionaries</strong>
-<span class="count">
-    <span>{{ collector.dictionaries|length }}</span>
+<span class="label {{ collector.dictionaries is empty ? 'disabled' }}">
+    <span class="icon">
+        <img width="26" height="28" alt="Dictionary" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAByFBMVEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwtwJvAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAAI28AACNvATX8B/sAAAAHdElNRQffAxAPNTnObSSWAAAANklEQVQoz2NgoCmYPB0FxCBJTccAqJKJ+CQZRiVpJjmdXEk86QBDrhGfJLLAtOl4jcLjIKoDACWgunBRwjJ0AAAAAElFTkSuQmCC" />
+    </span>
+    <strong>Dictionaries</strong>
+    {% if collector.dictionaries is not empty %}
+        <span class="count">
+            <span>{{ collector.dictionaries|length }} used</span>
+        </span>
+    {% endif %}
 </span>
 {% endblock %}
 
 {% block panel %}
-<h2>Dictionaries</h2>
-{% for dictionary in collector.dictionaries %}
-    <h3>{{ dictionary.name }}</h3>
+{% for name, dictionary in collector.dictionaries %}
+    <h2><b>{{ name }}</b></h2>
     <table>
         <tbody>
             <tr>
                 <th>Key</th>
                 <th>Value</th>
             </tr>
-            {% for key, value in dictionary %}
+            {% for item in dictionary %}
             <tr>
-                <td>{{ key }}</td>
-                <td>{{ value }}</td>
+                <td>{{ item.key }}</td>
+                <td>{{ item.value }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% if false == loop.last %}
+        <hr />
+    {% endif %}
+{% else %}
+    <div class="empty">
+        <p>No dictionary used</p>
+    </div>
 {% endfor %}
 {% endblock %}
