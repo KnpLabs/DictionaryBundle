@@ -38,6 +38,7 @@ class KeyValue implements Factory
 
         foreach ($content as $key => $value) {
             $builtValue   = $this->transformer->transform($value);
+            $key          = $this->transformer->transform($key);
             $values[$key] = $builtValue;
         }
 
