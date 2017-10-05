@@ -46,14 +46,22 @@ class CallableDictionarySpec extends ObjectBehavior
         expect(isset($dictionary['foo']))->toBe(false);
     }
 
-    function it_can_be_serialized_and_unserialized()
+    function it_contains_original_values_after_unserialization_if_the_original_dictionary_is_hydrated_first()
     {
-        $dictionary = $this->getWrappedObject();
+        // should hydrate the original dictionary
+        $this->getValues()->shouldReturn(array('foo' => 0, 'bar' => 1, 'baz' => 2));
 
-        $dictionary = unserialize(serialize($dictionary));
+        $dictionary = unserialize(serialize($this->getWrappedObject()));
 
         expect($dictionary['foo'])->toBe(0);
         expect(isset($dictionary['foo']))->toBe(true);
+    }
+
+    function it_contains_nothing_after_unserialization_if_the_original_dictionary_is_not_hydrated_first()
+    {
+        $dictionary = unserialize(serialize($this->getWrappedObject()));
+
+        expect(isset($dictionary['foo']))->toBe(false);
     }
 
     function it_provides_a_set_of_values()
