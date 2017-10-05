@@ -2,29 +2,43 @@
 
 namespace spec\Knp\DictionaryBundle\DataCollector;
 
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class DictionaryDataCollectorSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry)
-    {
-        $this->beConstructedWith($registry);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DataCollector\DictionaryDataCollector');
     }
 
-    function it_collects_data_from_dictionaries(Request $request, Response $response, $registry)
+    function it_collects_data_from_dictionaries()
     {
-        $registry->all()->willReturn(['foo', 'bar', 'baz']);
-        $this->collect($request, $response);
+        $this->addDictionary('foo', ['key1', 'key2'], ['value1', 'value2']);
+        $this->addDictionary('foo', ['key1', 'key2'], ['value1', 'value2']);
+        $this->addDictionary('bar', ['keyA', 'keyB'], ['valueA', 'valueB']);
 
-        $this->getDictionaries()->shouldReturn(['foo', 'bar', 'baz']);
+        $this->getDictionaries()->shouldReturn([
+            'foo' => [
+                [
+                    'key'   => 'key1',
+                    'value' => 'value1',
+                ],
+                [
+                    'key'   => 'key2',
+                    'value' => 'value2',
+                ],
+            ],
+            'bar' => [
+                [
+                    'key'   => 'keyA',
+                    'value' => 'valueA',
+                ],
+                [
+                    'key'   => 'keyB',
+                    'value' => 'valueB',
+                ],
+            ],
+        ]);
     }
 
     function it_has_a_name()

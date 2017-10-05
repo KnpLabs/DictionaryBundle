@@ -3,7 +3,6 @@
   <services>
     <service id="knp_dictionary.data_collector.dictionary_data_collector" class="Knp\DictionaryBundle\DataCollector\DictionaryDataCollector">
       <tag name="data_collector" template="KnpDictionaryBundle::layout.html.twig" id="dictionary"/>
-      <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
     <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
