@@ -113,7 +113,7 @@ Feel free to create your own transformer !
 
 ### Add your own transformers
 
-Create your class that implements [TransformerInterface](src/Knp/DictionaryBundle/Dictionary/ValueTransformer/TransformerInterface.php).
+Create your class that implements [TransformerInterface](src/Dictionary/ValueTransformer/TransformerInterface.php).
 Load your transformer and tag it as `knp_dictionary.value_transformer`.
 ```yaml
 services:
