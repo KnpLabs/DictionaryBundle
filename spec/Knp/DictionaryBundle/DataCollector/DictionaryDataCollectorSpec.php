@@ -2,8 +2,8 @@
 
 namespace spec\Knp\DictionaryBundle\DataCollector;
 
-use PhpSpec\ObjectBehavior;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use PhpSpec\ObjectBehavior;
 
 class DictionaryDataCollectorSpec extends ObjectBehavior
 {
@@ -11,7 +11,7 @@ class DictionaryDataCollectorSpec extends ObjectBehavior
     {
         $this->beConstructedWith($registry);
     }
-
+    
     public function it_is_initializable()
     {
         $this->shouldHaveType('Knp\DictionaryBundle\DataCollector\DictionaryDataCollector');
