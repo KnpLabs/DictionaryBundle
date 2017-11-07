@@ -33,6 +33,13 @@ class DictionaryDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
+    public function reset()
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'dictionary';
