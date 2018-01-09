@@ -25,8 +25,7 @@ class DictionaryTypeSpec extends ObjectBehavior
     {
         $this
             ->getParent()
-            ->shouldReturn('Symfony\Component\Form\Extension\Core\Type\ChoiceType')
-        ;
+            ->shouldReturn('Symfony\Component\Form\Extension\Core\Type\ChoiceType');
     }
 
     function it_has_default_options(
@@ -38,13 +37,11 @@ class DictionaryTypeSpec extends ObjectBehavior
     ) {
         $registry
             ->all()
-            ->willReturn(['d1' => $dictionary1, 'd2' => $dictionary2])
-        ;
+            ->willReturn(['d1' => $dictionary1, 'd2' => $dictionary2]);
 
         $registry
             ->offsetGet('d1')
-            ->willReturn($dictionary1)
-        ;
+            ->willReturn($dictionary1);
 
         $dictionary1->getValues()->willReturn(['foo' => 'bar']);
 
@@ -55,20 +52,17 @@ class DictionaryTypeSpec extends ObjectBehavior
                 return $callable($options->getWrappedObject()) === array_flip(['foo' => 'bar']);
             }))
             ->willReturn($resolver)
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $resolver
             ->setRequired(['name'])
             ->willReturn($resolver)
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $resolver
             ->setAllowedValues('name', ['d1', 'd2'])
             ->willReturn($resolver)
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

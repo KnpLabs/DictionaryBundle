@@ -25,7 +25,14 @@ class SimpleDictionarySpec extends ObjectBehavior
         $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
     }
 
-    function its_getvalues_should_return_dictionary_values()
+    function it_access_to_value_like_an_array()
+    {
+        expect($this['foo']->getWrappedObject())->toBe(0);
+        expect($this['bar']->getWrappedObject())->toBe(1);
+        expect($this['baz']->getWrappedObject())->toBe(2);
+    }
+
+    public function its_getvalues_should_return_dictionary_values()
     {
         $this->getValues()->shouldReturn([
             'foo' => 0,
@@ -34,15 +41,8 @@ class SimpleDictionarySpec extends ObjectBehavior
         ]);
     }
 
-    function its_getname_should_return_dictionary_name()
+    public function its_getname_should_return_dictionary_name()
     {
         $this->getName()->shouldReturn('foo');
-    }
-
-    function it_access_to_value_like_an_array()
-    {
-        expect($this['foo']->getWrappedObject())->toBe(0);
-        expect($this['bar']->getWrappedObject())->toBe(1);
-        expect($this['baz']->getWrappedObject())->toBe(2);
     }
 }

@@ -13,8 +13,11 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class DictionaryValidatorSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry, ExecutionContextInterface $context, Dictionary $dictionary)
-    {
+    function let(
+        DictionaryRegistry $registry,
+        ExecutionContextInterface $context,
+        Dictionary $dictionary
+    ) {
         $this->beConstructedWith($registry);
         $this->initialize($context);
 

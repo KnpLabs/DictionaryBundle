@@ -43,8 +43,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
             ])
             ->addArgument($name)
             ->addArgument($config)
-            ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
-        ;
+            ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY);
 
         return $definition;
     }

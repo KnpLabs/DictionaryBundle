@@ -31,8 +31,7 @@ class ValueAsKeySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow('\InvalidArgumentException')
-            ->during('create', ['yolo', []])
-        ;
+            ->during('create', ['yolo', []]);
     }
 
     function it_creates_a_dictionary($transformer)
