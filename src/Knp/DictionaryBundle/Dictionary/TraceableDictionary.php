@@ -17,8 +17,10 @@ class TraceableDictionary implements Dictionary
      */
     private $collector;
 
-    public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
-    {
+    public function __construct(
+        Dictionary $dictionary,
+        DictionaryDataCollector $collector
+    ) {
         $this->dictionary = $dictionary;
         $this->collector  = $collector;
     }

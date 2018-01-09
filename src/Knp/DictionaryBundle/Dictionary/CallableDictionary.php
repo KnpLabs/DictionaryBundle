@@ -12,16 +12,18 @@ class CallableDictionary implements Dictionary
     private $name;
 
     /**
-     * @var mixed[]|\ArrayAccess
+     * @var \ArrayAccess|mixed[]
      */
-    private $values = null;
+    private $values;
 
     /**
      * @var callable
      */
     private $callable;
 
-    /** @var array */
+    /**
+     * @var array
+     */
     private $callableArgs;
 
     /**
@@ -29,8 +31,11 @@ class CallableDictionary implements Dictionary
      * @param callable $callable
      * @param array    $callableArgs
      */
-    public function __construct($name, callable $callable, array $callableArgs = [])
-    {
+    public function __construct(
+        $name,
+        callable $callable,
+        array $callableArgs = []
+    ) {
         $this->name         = $name;
         $this->callable     = $callable;
         $this->callableArgs = $callableArgs;

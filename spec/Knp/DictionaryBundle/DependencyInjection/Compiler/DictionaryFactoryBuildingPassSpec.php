@@ -28,13 +28,11 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
                 'factory1' => $factory1,
                 'factory2' => $factory2,
                 'factory3' => $factory3,
-            ])
-        ;
+            ]);
 
         $container
             ->findDefinition('knp_dictionary.dictionary.factory.factory_aggregate')
-            ->willReturn($aggregate)
-        ;
+            ->willReturn($aggregate);
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
             expect($reference)->toHaveType('Reference');

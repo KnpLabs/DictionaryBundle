@@ -12,13 +12,13 @@ class SimpleDictionary implements DictionaryInterface
     private $name;
 
     /**
-     * @var mixed[]|\ArrayAccess
+     * @var \ArrayAccess|mixed[]
      */
     private $values;
 
     /**
      * @param string               $name
-     * @param mixed[]|\ArrayAccess $values
+     * @param \ArrayAccess|mixed[] $values
      */
     public function __construct($name, $values)
     {

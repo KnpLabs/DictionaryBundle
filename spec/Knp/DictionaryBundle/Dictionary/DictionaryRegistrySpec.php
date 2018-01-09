@@ -63,16 +63,6 @@ class DictionaryRegistrySpec extends ObjectBehavior
         $this->shouldThrow('Knp\DictionaryBundle\Exception\DictionaryNotFoundException')->duringGet('bar');
     }
 
-    function its_offsetSet_method_cannot_be_called()
-    {
-        $this->shouldThrow('\RuntimeException')->duringOffsetSet('foo', 'bar');
-    }
-
-    function its_offsetUnset_method_cannot_be_called()
-    {
-        $this->shouldThrow('\RuntimeException')->duringOffsetUnset('foo');
-    }
-
     function it_counts_entries()
     {
         $this->count()->shouldReturn(2);
@@ -84,5 +74,15 @@ class DictionaryRegistrySpec extends ObjectBehavior
             'foo'        => $dictionary,
             'dictionary' => $dictionary2,
         ]);
+    }
+
+    public function its_offsetSet_method_cannot_be_called()
+    {
+        $this->shouldThrow('\RuntimeException')->duringOffsetSet('foo', 'bar');
+    }
+
+    public function its_offsetUnset_method_cannot_be_called()
+    {
+        $this->shouldThrow('\RuntimeException')->duringOffsetUnset('foo');
     }
 }

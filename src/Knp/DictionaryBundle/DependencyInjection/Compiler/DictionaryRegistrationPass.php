@@ -17,8 +17,7 @@ class DictionaryRegistrationPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $registry = $container
-            ->getDefinition('knp_dictionary.dictionary.dictionary_registry')
-        ;
+            ->getDefinition('knp_dictionary.dictionary.dictionary_registry');
 
         $services = $container->findTaggedServiceIds(self::TAG_DICTIONARY);
 
