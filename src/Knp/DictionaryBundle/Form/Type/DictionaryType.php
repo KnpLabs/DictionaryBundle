@@ -39,8 +39,7 @@ class DictionaryType extends AbstractType
         $resolver
             ->setDefault('choices', $choices)
             ->setRequired(['name'])
-            ->setAllowedValues('name', array_keys($this->registry->all()))
-        ;
+            ->setAllowedValues('name', array_keys($this->registry->all()));
     }
 
     /**

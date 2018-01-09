@@ -26,7 +26,7 @@ class CallableFactory implements Factory
      */
     public function create($name, array $config)
     {
-        if ( ! isset($config['service'])) {
+        if (!isset($config['service'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The "service" config key must be set for the dictionary named "%s"',
                 $name
@@ -41,7 +41,7 @@ class CallableFactory implements Factory
             $callable[] = $config['method'];
         }
 
-        if ( ! is_callable($callable)) {
+        if (!is_callable($callable)) {
             throw new \InvalidArgumentException(sprintf(
                 'You must provide a valid callable for the dictionary named "%s"',
                 $name
@@ -56,6 +56,6 @@ class CallableFactory implements Factory
      */
     public function supports(array $config)
     {
-        return (isset($config['type'])) ? $config['type'] === 'callable' : false;
+        return (isset($config['type'])) ? 'callable' === $config['type'] : false;
     }
 }

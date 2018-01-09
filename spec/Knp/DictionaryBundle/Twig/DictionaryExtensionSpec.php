@@ -8,8 +8,11 @@ use PhpSpec\ObjectBehavior;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry, Dictionary $dico1, Dictionary $dico2)
-    {
+    function let(
+        DictionaryRegistry $registry,
+        Dictionary $dico1,
+        Dictionary $dico2
+    ) {
         $this->beConstructedWith($registry);
 
         $registry->get('test')->willReturn($dico1);

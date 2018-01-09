@@ -6,6 +6,7 @@ interface Factory
 {
     /**
      * @param array $config
+     * @param mixed $name
      *
      * @return Dictionary
      */
