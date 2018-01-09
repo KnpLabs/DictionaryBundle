@@ -12,30 +12,25 @@
         {
             "name": "Shivoham",
             "homepage": "https://github.com/Shivoham"
-        },
-        {
-            "name": "PedroTroller",
-            "homepage": "https://github.com/PedroTroller"
         }
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4",
-        "symfony/http-kernel": "~2.8 || ~3.0",
-        "symfony/dependency-injection": "~2.8 || ~3.0",
-        "symfony/http-foundation": "~2.8 || ~3.0",
-        "symfony/config": "~2.8 || ~3.0",
-        "symfony/form": "~2.8 || ~3.0",
-        "symfony/validator": "~2.8 || ~3.0",
-        "twig/twig": "~1.12|~2.0",
-        "fzaninotto/faker": "^1.5"
+        "php": ">=5.6",
+        "symfony/http-kernel": "~3.0 || ~4.0",
+        "symfony/dependency-injection": "~3.0 || ~4.0",
+        "symfony/http-foundation": "~3.0 || ~4.0",
+        "symfony/config": "~3.0 || ~4.0",
+        "symfony/form": "~3.0 || ~4.0",
+        "symfony/validator": "~3.0 || ~4.0",
+        "twig/twig": "~1.12 || ~2.0",
+        "fzaninotto/faker": "~1.0"
     },
     "require-dev": {
-        "bossa/phpspec2-expect": "~1.0",
-        "henrikbjorn/phpspec-code-coverage": "^2.1",
-        "pedrotroller/php-cs-custom-fixer": "~1.4.0",
-        "phpspec/phpspec": "~2.5",
-        "phpspec/prophecy": "~1.6"
+        "bossa/phpspec2-expect": "~2.0",
+        "pedrotroller/php-cs-custom-fixer": "~2.3.0",
+        "phpspec/phpspec": "~3.4",
+        "henrikbjorn/phpspec-code-coverage": "^3.0"
     },
     "config": {
         "bin-dir": "bin"
