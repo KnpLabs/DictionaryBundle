@@ -128,9 +128,9 @@ class CallableDictionarySpec extends ObjectBehavior
     {
         if (false === $this->executed) {
             $this->executed = true;
-            $args = func_get_args();
+            $args           = func_get_args();
 
-            return !empty($args) ? current($args) : [
+            return ! empty($args) ? current($args) : [
                 'foo' => 0,
                 'bar' => 1,
                 'baz' => 2,
