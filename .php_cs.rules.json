@@ -1,0 +1,49 @@
+{
+    "@Symfony": true,
+    "@Symfony:risky": true,
+    "PedroTroller/line_break_between_method_arguments": {
+        "max-args": 4,
+        "max-length": 80
+    },
+    "PedroTroller/line_break_between_statements": true,
+    "PedroTroller/ordered_spec_elements": true,
+    "PedroTroller/phpspec": true,
+    "PedroTroller/single_line_comment": {
+        "action": "expanded"
+    },
+    "align_multiline_comment": true,
+    "array_syntax": {
+        "syntax": "short"
+    },
+    "binary_operator_spaces": {
+        "operators": {
+            "=": "align_single_space_minimal",
+            "=>": "align_single_space_minimal"
+        }
+    },
+    "blank_line_before_statement": true,
+    "combine_consecutive_issets": true,
+    "combine_consecutive_unsets": true,
+    "compact_nullable_typehint": true,
+    "general_phpdoc_annotation_remove": true,
+    "heredoc_to_nowdoc": true,
+    "linebreak_after_opening_tag": true,
+    "list_syntax": {
+        "syntax": "long"
+    },
+    "mb_str_functions": true,
+    "no_multiline_whitespace_before_semicolons": true,
+    "no_null_property_initialization": true,
+    "no_superfluous_elseif": true,
+    "no_useless_else": true,
+    "no_useless_return": true,
+    "ordered_class_elements": true,
+    "ordered_imports": true,
+    "phpdoc_add_missing_param_annotation": {
+        "only_untyped": true
+    },
+    "phpdoc_order": true,
+    "phpdoc_types_order": true,
+    "semicolon_after_instruction": true,
+    "single_line_comment_style": true
+}

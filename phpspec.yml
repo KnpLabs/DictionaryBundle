@@ -1,9 +1,7 @@
 formatter.name: pretty
 
 extensions:
-    - PhpSpec\Extension\CodeCoverageExtension
-
-code_coverage:
+  PhpSpecCodeCoverage\CodeCoverageExtension:
     format:
         - clover
         - html
