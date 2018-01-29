@@ -1,10 +1,10 @@
 formatter.name: pretty
 
 extensions:
-  PhpSpecCodeCoverage\CodeCoverageExtension:
-    format:
-        - clover
-        - html
-    output:
-        clover: coverage.xml
-        html: coverage
+    LeanPHP\PhpSpec\CodeCoverage\CodeCoverageExtension:
+        format:
+            - clover
+            - html
+        output:
+            clover: coverage.xml
+            html: coverage

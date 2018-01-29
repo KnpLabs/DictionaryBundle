@@ -3,6 +3,7 @@
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use PhpSpec\ObjectBehavior;
+use Webmozart\Assert\Assert;
 
 class SimpleDictionarySpec extends ObjectBehavior
 {
@@ -27,12 +28,12 @@ class SimpleDictionarySpec extends ObjectBehavior
 
     function it_access_to_value_like_an_array()
     {
-        expect($this['foo']->getWrappedObject())->toBe(0);
-        expect($this['bar']->getWrappedObject())->toBe(1);
-        expect($this['baz']->getWrappedObject())->toBe(2);
+        Assert::eq($this['foo']->getWrappedObject(), 0);
+        Assert::eq($this['bar']->getWrappedObject(), 1);
+        Assert::eq($this['baz']->getWrappedObject(), 2);
     }
 
-    public function its_getvalues_should_return_dictionary_values()
+    function its_getvalues_should_return_dictionary_values()
     {
         $this->getValues()->shouldReturn([
             'foo' => 0,
@@ -41,7 +42,7 @@ class SimpleDictionarySpec extends ObjectBehavior
         ]);
     }
 
-    public function its_getname_should_return_dictionary_name()
+    function its_getname_should_return_dictionary_name()
     {
         $this->getName()->shouldReturn('foo');
     }

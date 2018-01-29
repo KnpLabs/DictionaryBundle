@@ -25,8 +25,15 @@ class DictionaryProviderSpec extends ObjectBehavior
         $dictionaries->get('omg')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
-        $value = $this->dictionary('omg');
+        $this->dictionary('omg')->shouldBeContainedIn(['foo', 'bar', 'baz']);
+    }
 
-        expect(['foo', 'bar', 'baz'])->toContain($value->getWrappedObject());
+    public function getMatchers(): array
+    {
+        return [
+            'beContainedIn' => function ($value, array $array) {
+                return in_array($value, $array);
+            },
+        ];
     }
 }

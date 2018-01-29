@@ -5,6 +5,7 @@ namespace spec\Knp\DictionaryBundle\Twig;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use PhpSpec\ObjectBehavior;
+use Webmozart\Assert\Assert;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
@@ -32,8 +33,8 @@ class DictionaryExtensionSpec extends ObjectBehavior
         $filters   = $this->getFilters();
         $functions = $this->getFunctions();
 
-        expect(current($filters->getWrappedObject())->getName())->toBe('dictionary');
-        expect(current($functions->getWrappedObject())->getName())->toBe('dictionary');
+        Assert::eq(current($filters->getWrappedObject())->getName(), 'dictionary');
+        Assert::eq(current($functions->getWrappedObject())->getName(), 'dictionary');
     }
 
     function it_has_a_name()
