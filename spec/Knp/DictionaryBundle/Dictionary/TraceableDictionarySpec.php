@@ -5,6 +5,7 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use PhpSpec\ObjectBehavior;
+use Webmozart\Assert\Assert;
 
 class TraceableDictionarySpec extends ObjectBehavior
 {
@@ -72,13 +73,13 @@ class TraceableDictionarySpec extends ObjectBehavior
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        expect(isset($this['baz']))->toBe(true);
+        Assert::eq(isset($this['baz']), true);
     }
 
     function it_trace_iteration($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        expect(iterator_to_array($this->getIterator()->getWrappedObject()))->toBe(['foo' => 'bar', 'baz' => null]);
+        Assert::eq(iterator_to_array($this->getIterator()->getWrappedObject()), ['foo' => 'bar', 'baz' => null]);
     }
 }
