@@ -16,24 +16,25 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.6",
-        "symfony/http-kernel": "~3.0 || ~4.0",
-        "symfony/dependency-injection": "~3.0 || ~4.0",
-        "symfony/http-foundation": "~3.0 || ~4.0",
+        "php": ">=7.0",
+        "fzaninotto/faker": "~1.0",
         "symfony/config": "~3.0 || ~4.0",
+        "symfony/dependency-injection": "~3.0 || ~4.0",
         "symfony/form": "~3.0 || ~4.0",
+        "symfony/http-foundation": "~3.0 || ~4.0",
+        "symfony/http-kernel": "~3.0 || ~4.0",
         "symfony/validator": "~3.0 || ~4.0",
-        "twig/twig": "~1.12 || ~2.0",
-        "fzaninotto/faker": "~1.0"
+        "twig/twig": "~1.12 || ~2.0"
     },
     "require-dev": {
-        "bossa/phpspec2-expect": "~2.0",
-        "phpspec/phpspec": "~3.4",
-        "henrikbjorn/phpspec-code-coverage": "^3.0",
-        "pedrotroller/php-cs-custom-fixer": "~2.5.0"
+        "leanphp/phpspec-code-coverage": "^4.0",
+        "pedrotroller/php-cs-custom-fixer": "^2.6",
+        "phpspec/phpspec": "~4.0",
+        "sebastian/comparator": "~1.2.4",
+        "webmozart/assert": "^1.2"
     },
     "config": {
-        "bin-dir": "bin"
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
