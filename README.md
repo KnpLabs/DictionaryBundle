@@ -131,8 +131,8 @@ For now, this bundle is only able to resolve your **class constants**:
 
 ```yaml
 my_dictionary:
-	- MyClass::MY_CONSTANT
-	- Foo
+    - MyClass::MY_CONSTANT
+    - Foo
     - Bar
 ```
 You want to add other kinds of transformations for your dictionary values ?
@@ -144,10 +144,10 @@ Create your class that implements [TransformerInterface](src/Knp/DictionaryBundl
 Load your transformer and tag it as `knp_dictionary.value_transformer`.
 ```yaml
 services:
-	my_bundle.my_namespace.my_transformer:
-    	class: %my_transformer_class%
-    	tags:
-        	- { name: knp_dictionary.value_transformer }
+    my_bundle.my_namespace.my_transformer:
+        class: %my_transformer_class%
+            tags:
+                - { name: knp_dictionary.value_transformer }
 ```
 
 ## Use your dictionary in twig
