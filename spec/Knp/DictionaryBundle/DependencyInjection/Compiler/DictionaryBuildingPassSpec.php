@@ -7,6 +7,7 @@ use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Webmozart\Assert\Assert;
 
 class DictionaryBuildingPassSpec extends ObjectBehavior
 {
@@ -15,8 +16,9 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass');
     }
 
-    function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
-    {
+    function it_builds_a_value_as_key_dictionary_form_the_config(
+        ContainerBuilder $container
+    ) {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -30,30 +32,23 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
-                ;
+                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
 
                 $factory = $definition->getFactory();
 
-                expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
-                ;
+                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
 
-                expect($factory[1])
-                    ->toBe('create')
-                ;
+                Assert::eq($factory[1], 'create');
 
-                expect($definition->getArguments())
-                    ->toBe(['dico1', [
+                Assert::eq($definition->getArguments(), [
+                    'dico1',
+                    [
                         'type'    => Dictionary::VALUE_AS_KEY,
                         'content' => ['foo', 'bar', 'baz'],
-                    ]])
-                ;
+                    ],
+                ]);
 
-                expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
-                ;
+                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -62,8 +57,9 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
-    {
+    function it_builds_a_value_dictionary_form_the_config(
+        ContainerBuilder $container
+    ) {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -77,30 +73,23 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
-                ;
+                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
 
                 $factory = $definition->getFactory();
 
-                expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
-                ;
+                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
 
-                expect($factory[1])
-                    ->toBe('create')
-                ;
+                Assert::eq($factory[1], 'create');
 
-                expect($definition->getArguments())
-                    ->toBe(['dico1', [
+                Assert::eq($definition->getArguments(), [
+                    'dico1',
+                    [
                         'type'    => Dictionary::VALUE,
                         'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
-                    ]])
-                ;
+                    ],
+                ]);
 
-                expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
-                ;
+                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -109,8 +98,9 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
-    {
+    function it_builds_a_key_value_dictionary_form_the_config(
+        ContainerBuilder $container
+    ) {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -124,30 +114,23 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                expect($definition->getClass())
-                    ->toBe('Knp\DictionaryBundle\Dictionary')
-                ;
+                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
 
                 $factory = $definition->getFactory();
 
-                expect($factory[0]->__toString())
-                    ->toBe('knp_dictionary.dictionary.factory.factory_aggregate')
-                ;
+                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
 
-                expect($factory[1])
-                    ->toBe('create')
-                ;
+                Assert::eq($factory[1], 'create');
 
-                expect($definition->getArguments())
-                    ->toBe(['dico1', [
+                Assert::eq($definition->getArguments(), [
+                    'dico1',
+                    [
                         'type'    => Dictionary::KEY_VALUE,
                         'content' => [2 => 'foo', 10 => 'bar', 100 => 'baz'],
-                    ]])
-                ;
+                    ],
+                ]);
 
-                expect($definition->getTags())
-                    ->toBe([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]])
-                ;
+                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })

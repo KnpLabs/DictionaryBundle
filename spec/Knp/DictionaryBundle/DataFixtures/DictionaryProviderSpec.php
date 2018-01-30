@@ -18,13 +18,22 @@ class DictionaryProviderSpec extends ObjectBehavior
         $this->shouldHaveType('Knp\DictionaryBundle\DataFixtures\DictionaryProvider');
     }
 
-    function it_returns_a_key_from_a_dictionary($dictionaries, Dictionary $dictionary)
-    {
+    function it_returns_a_key_from_a_dictionary(
+        $dictionaries,
+        Dictionary $dictionary
+    ) {
         $dictionaries->get('omg')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
-        $value = $this->dictionary('omg');
+        $this->dictionary('omg')->shouldBeContainedIn(['foo', 'bar', 'baz']);
+    }
 
-        expect(['foo', 'bar', 'baz'])->toContain($value->getWrappedObject());
+    public function getMatchers(): array
+    {
+        return [
+            'beContainedIn' => function ($value, array $array) {
+                return in_array($value, $array);
+            },
+        ];
     }
 }

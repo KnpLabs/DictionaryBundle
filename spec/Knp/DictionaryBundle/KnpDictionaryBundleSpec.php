@@ -17,23 +17,19 @@ class KnpDictionaryBundleSpec extends ObjectBehavior
     {
         $container
             ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass'))
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $container
             ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass'))
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $container
             ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass'))
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $container
             ->addCompilerPass(Argument::type('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryTracePass'))
-            ->shouldBeCalled()
-        ;
+            ->shouldBeCalled();
 
         $this->build($container);
     }

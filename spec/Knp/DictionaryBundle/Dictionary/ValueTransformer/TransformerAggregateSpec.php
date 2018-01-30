@@ -28,8 +28,7 @@ class TransformerAggregateSpec extends ObjectBehavior
 
         $this
             ->addTransformer($transformer1)
-            ->addTransformer($transformer2)
-        ;
+            ->addTransformer($transformer2);
 
         $this->supports([])->shouldReturn(false);
 
@@ -53,8 +52,7 @@ class TransformerAggregateSpec extends ObjectBehavior
         $this
             ->addTransformer($transformer1)
             ->addTransformer($transformer2)
-            ->addTransformer($transformer3)
-        ;
+            ->addTransformer($transformer3);
 
         $this->transform([])->shouldReturn('foo');
     }

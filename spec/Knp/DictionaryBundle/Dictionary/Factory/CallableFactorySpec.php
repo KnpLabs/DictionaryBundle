@@ -27,10 +27,8 @@ class CallableFactorySpec extends ObjectBehavior
         $this->supports(['type' => 'callable'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary(
-        $container,
-        MockedService $service
-    ) {
+    function it_creates_a_dictionary($container, MockedService $service)
+    {
         $config = [
             'service' => 'service.id',
             'method'  => 'getYolo',

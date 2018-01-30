@@ -26,7 +26,7 @@ class KeyValue implements Factory
      */
     public function create($name, array $config)
     {
-        if ( ! isset($config['content'])) {
+        if (!isset($config['content'])) {
             throw new \InvalidArgumentException(sprintf(
                 'The key content for dictionary %s must be set',
                 $name
@@ -50,6 +50,6 @@ class KeyValue implements Factory
      */
     public function supports(array $config)
     {
-        return (isset($config['type'])) ? $config['type'] === 'key_value' : false;
+        return (isset($config['type'])) ? 'key_value' === $config['type'] : false;
     }
 }

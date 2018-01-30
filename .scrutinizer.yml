@@ -4,7 +4,7 @@ build:
     tests:
         override:
             -
-                command: './bin/phpspec run'
+                command: 'vendor/bin/phpspec run -n -fpretty'
                 coverage:
                     file: 'coverage.xml'
                     format: 'clover'
