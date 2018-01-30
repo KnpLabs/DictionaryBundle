@@ -1,4 +1,5 @@
 {
+    "@PHP70Migration": true,
     "@Symfony": true,
     "@Symfony:risky": true,
     "PedroTroller/line_break_between_method_arguments": {
