@@ -52,7 +52,7 @@
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.data_fixtures.dictionary_provider" class="Knp\DictionaryBundle\DataFixtures\DictionaryProvider">
+    <service id="knp_dictionary.faker.provider.dictionary" class="Knp\DictionaryBundle\Faker\Provider\Dictionary">
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
