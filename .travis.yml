@@ -17,11 +17,6 @@ matrix:
         - php: 7.2
           env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
 
-# branches:
-#     only:
-#         - master
-
-
 before_script:
     - composer update --prefer-source $COMPOSER_FLAGS
 
