@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
@@ -27,7 +28,7 @@ class CallableFactory implements Factory
     public function create($name, array $config)
     {
         if (!isset($config['service'])) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The "service" config key must be set for the dictionary named "%s"',
                 $name
             ));
@@ -42,7 +43,7 @@ class CallableFactory implements Factory
         }
 
         if (!is_callable($callable)) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'You must provide a valid callable for the dictionary named "%s"',
                 $name
             ));

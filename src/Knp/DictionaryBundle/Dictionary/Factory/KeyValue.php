@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
@@ -27,7 +28,7 @@ class KeyValue implements Factory
     public function create($name, array $config)
     {
         if (!isset($config['content'])) {
-            throw new \InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(sprintf(
                 'The key content for dictionary %s must be set',
                 $name
             ));

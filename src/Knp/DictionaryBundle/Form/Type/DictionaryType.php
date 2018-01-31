@@ -4,6 +4,7 @@ namespace Knp\DictionaryBundle\Form\Type;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,6 +48,6 @@ class DictionaryType extends AbstractType
      */
     public function getParent()
     {
-        return 'Symfony\Component\Form\Extension\Core\Type\ChoiceType';
+        return ChoiceType::class;
     }
 }

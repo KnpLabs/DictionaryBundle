@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use ArrayIterator;
 use Knp\DictionaryBundle\Dictionary as DictionaryInterface;
 
 class SimpleDictionary implements DictionaryInterface
@@ -89,6 +90,6 @@ class SimpleDictionary implements DictionaryInterface
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->values);
+        return new ArrayIterator($this->values);
     }
 }

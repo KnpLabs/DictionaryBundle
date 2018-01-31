@@ -2,6 +2,8 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use ArrayAccess;
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 
 class CallableDictionary implements Dictionary
@@ -12,7 +14,7 @@ class CallableDictionary implements Dictionary
     private $name;
 
     /**
-     * @var \ArrayAccess|mixed[]
+     * @var ArrayAccess|mixed[]
      */
     private $values;
 
@@ -124,7 +126,7 @@ class CallableDictionary implements Dictionary
     /**
      * Hydrate values from callable.
      */
-    protected function hydrate()
+    private function hydrate()
     {
         if (null !== $this->values) {
             return;
@@ -132,8 +134,8 @@ class CallableDictionary implements Dictionary
 
         $values = call_user_func_array($this->callable, $this->callableArgs);
 
-        if (false === is_array($values) && false === $values instanceof \ArrayAccess) {
-            throw new \InvalidArgumentException(
+        if (false === is_array($values) && false === $values instanceof ArrayAccess) {
+            throw new InvalidArgumentException(
                 'Dictionary callable must return an array or an instance of ArrayAccess'
             );
         }
