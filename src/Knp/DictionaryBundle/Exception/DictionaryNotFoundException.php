@@ -2,6 +2,8 @@
 
 namespace Knp\DictionaryBundle\Exception;
 
-class DictionaryNotFoundException extends \Exception
+use Exception;
+
+class DictionaryNotFoundException extends Exception
 {
 }

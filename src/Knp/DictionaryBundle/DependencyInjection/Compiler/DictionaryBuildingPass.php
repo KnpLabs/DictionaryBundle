@@ -27,7 +27,6 @@ class DictionaryBuildingPass implements CompilerPassInterface
 
     /**
      * @param string $name
-     * @param array  $config
      *
      * @return Definition
      */

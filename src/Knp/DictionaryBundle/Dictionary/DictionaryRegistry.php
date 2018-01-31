@@ -2,10 +2,15 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use ArrayAccess;
+use ArrayIterator;
+use Countable;
+use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
+use RuntimeException;
 
-class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
+class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
 {
     /**
      * @var Dictionary[]
@@ -33,7 +38,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
     public function set($key, Dictionary $dictionary)
     {
         if (isset($this->dictionaries[$key])) {
-            throw new \RuntimeException(sprintf(
+            throw new RuntimeException(sprintf(
                 'The key "%s" already exists in the dictionary registry',
                 $key
             ));
@@ -92,7 +97,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
      */
     public function offsetSet($offset, $value)
     {
-        throw new \RuntimeException(
+        throw new RuntimeException(
             'You can\'t use Knp\DictionaryBundle\Dictionary\Dictionary::offsetSet. Please use '.
             'Knp\DictionaryBundle\Dictionary\Dictionary::set instead.'
         );
@@ -103,7 +108,7 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
      */
     public function offsetUnset($offset)
     {
-        throw new \RuntimeException(
+        throw new RuntimeException(
             'You can\'t destroy a dictionary registry value. It\'s used as application '.
             'constants.'
         );
@@ -122,6 +127,6 @@ class DictionaryRegistry implements \ArrayAccess, \IteratorAggregate, \Countable
      */
     public function getIterator()
     {
-        return new \ArrayIterator($this->dictionaries);
+        return new ArrayIterator($this->dictionaries);
     }
 }
