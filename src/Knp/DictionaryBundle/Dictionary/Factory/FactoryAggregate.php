@@ -13,16 +13,9 @@ class FactoryAggregate implements Factory
      */
     private $factories = [];
 
-    /**
-     * @param Factory $factory
-     *
-     * @return FactoryAggregate
-     */
     public function addFactory(Factory $factory)
     {
         $this->factories[] = $factory;
-
-        return $this;
     }
 
     /**

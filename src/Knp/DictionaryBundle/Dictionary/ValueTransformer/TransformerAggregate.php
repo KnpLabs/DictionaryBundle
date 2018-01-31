@@ -11,11 +11,9 @@ class TransformerAggregate implements ValueTransformer
      */
     private $transformers = [];
 
-    public function addTransformer(ValueTransformer $transformer): self
+    public function addTransformer(ValueTransformer $transformer)
     {
         $this->transformers[] = $transformer;
-
-        return $this;
     }
 
     /**

@@ -37,15 +37,14 @@ class CallableFactory implements Factory
             ));
         }
 
-        $service = $this->container->get($config['service']);
-
+        $service  = $this->container->get($config['service']);
         $callable = [$service];
 
         if (isset($config['method'])) {
             $callable[] = $config['method'];
         }
 
-        if (!is_callable($callable)) {
+        if (false === is_callable($callable)) {
             throw new InvalidArgumentException(sprintf(
                 'You must provide a valid callable for the dictionary named "%s"',
                 $name
