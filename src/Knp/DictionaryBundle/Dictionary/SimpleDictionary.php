@@ -13,15 +13,11 @@ class SimpleDictionary implements DictionaryInterface
     private $name;
 
     /**
-     * @var \ArrayAccess|mixed[]
+     * @var array
      */
     private $values;
 
-    /**
-     * @param string               $name
-     * @param \ArrayAccess|mixed[] $values
-     */
-    public function __construct($name, $values)
+    public function __construct(string $name, array $values)
     {
         $this->name   = $name;
         $this->values = $values;
@@ -30,7 +26,7 @@ class SimpleDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -38,7 +34,7 @@ class SimpleDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues(): array
     {
         return $this->values;
     }
@@ -46,7 +42,7 @@ class SimpleDictionary implements DictionaryInterface
     /**
      * {@inheritdoc}
      */
-    public function getKeys()
+    public function getKeys(): array
     {
         return array_keys($this->values);
     }

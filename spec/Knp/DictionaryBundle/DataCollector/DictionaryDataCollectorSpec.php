@@ -2,13 +2,14 @@
 
 namespace spec\Knp\DictionaryBundle\DataCollector;
 
+use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use PhpSpec\ObjectBehavior;
 
 class DictionaryDataCollectorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\DataCollector\DictionaryDataCollector');
+        $this->shouldHaveType(DictionaryDataCollector::class);
     }
 
     function it_collects_data_from_dictionaries()

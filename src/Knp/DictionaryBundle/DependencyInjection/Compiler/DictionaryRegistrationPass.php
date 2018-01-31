@@ -16,14 +16,11 @@ class DictionaryRegistrationPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $registry = $container
-            ->getDefinition('knp_dictionary.dictionary.dictionary_registry');
+        $dictionaries = $container->getDefinition('knp_dictionary.dictionary.dictionary_registry');
+        $services     = $container->findTaggedServiceIds(self::TAG_DICTIONARY);
 
-        $services = $container->findTaggedServiceIds(self::TAG_DICTIONARY);
-
-        foreach ($services as $id => $tags) {
-            $dictionary = new Reference($id);
-            $registry->addMethodCall('add', [$dictionary]);
+        foreach (array_keys($services) as $id) {
+            $dictionaries->addMethodCall('add', [new Reference($id)]);
         }
     }
 }

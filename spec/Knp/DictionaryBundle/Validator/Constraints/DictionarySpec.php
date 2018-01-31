@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 
+use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 use PhpSpec\ObjectBehavior;
 
 class DictionarySpec extends ObjectBehavior
@@ -13,7 +14,7 @@ class DictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Validator\Constraints\Dictionary');
+        $this->shouldHaveType(Dictionary::class);
     }
 
     function it_adds_default_values()

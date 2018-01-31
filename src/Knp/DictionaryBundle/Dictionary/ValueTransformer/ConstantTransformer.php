@@ -15,7 +15,7 @@ class ConstantTransformer implements ValueTransformer
     /**
      * {@inheritdoc}
      */
-    public function supports($value)
+    public function supports($value): bool
     {
         $matches = [];
 

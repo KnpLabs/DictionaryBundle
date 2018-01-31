@@ -13,10 +13,8 @@ class Dictionary extends Base
      */
     private $dictionaries;
 
-    public function __construct(
-        DictionaryRegistry $dictionaries,
-        Generator $generator = null
-    ) {
+    public function __construct(DictionaryRegistry $dictionaries, Generator $generator = null)
+    {
         $this->dictionaries = $dictionaries;
 
         if (null === $generator) {
@@ -27,6 +25,9 @@ class Dictionary extends Base
         parent::__construct($generator);
     }
 
+    /**
+     * @return mixed
+     */
     public function dictionary(string $name)
     {
         return self::randomElement($this->dictionaries->get($name)->getKeys());
