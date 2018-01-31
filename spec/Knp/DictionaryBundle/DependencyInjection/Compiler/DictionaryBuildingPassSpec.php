@@ -17,7 +17,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->shouldHaveType(DictionaryBuildingPass::class);
     }
 
-    function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_value_as_key_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
@@ -57,7 +57,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_value_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
@@ -97,7 +97,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
+    function it_builds_a_key_value_dictionary_from_the_config(ContainerBuilder $container)
     {
         $config = [
             'dictionaries' => [
