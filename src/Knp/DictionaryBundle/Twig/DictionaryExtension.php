@@ -3,6 +3,8 @@
 namespace Knp\DictionaryBundle\Twig;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Twig_SimpleFilter;
+use Twig_SimpleFunction;
 
 class DictionaryExtension extends \Twig_Extension
 {
@@ -25,7 +27,7 @@ class DictionaryExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('dictionary', [$this, 'getDictionary']),
+            new Twig_SimpleFunction('dictionary', [$this, 'getDictionary']),
         ];
     }
 
@@ -35,7 +37,7 @@ class DictionaryExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('dictionary', [$this, 'getValue']),
+            new Twig_SimpleFilter('dictionary', [$this, 'getValue']),
         ];
     }
 
