@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
@@ -13,12 +14,11 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass');
+        $this->shouldHaveType(DictionaryBuildingPass::class);
     }
 
-    function it_builds_a_value_as_key_dictionary_form_the_config(
-        ContainerBuilder $container
-    ) {
+    function it_builds_a_value_as_key_dictionary_form_the_config(ContainerBuilder $container)
+    {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -32,7 +32,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
+                Assert::eq($definition->getClass(), Dictionary::class);
 
                 $factory = $definition->getFactory();
 
@@ -57,9 +57,8 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_value_dictionary_form_the_config(
-        ContainerBuilder $container
-    ) {
+    function it_builds_a_value_dictionary_form_the_config(ContainerBuilder $container)
+    {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -98,9 +97,8 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_builds_a_key_value_dictionary_form_the_config(
-        ContainerBuilder $container
-    ) {
+    function it_builds_a_key_value_dictionary_form_the_config(ContainerBuilder $container)
+    {
         $config = [
             'dictionaries' => [
                 'dico1' => [
@@ -114,7 +112,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
+                Assert::eq($definition->getClass(), Dictionary::class);
 
                 $factory = $definition->getFactory();
 

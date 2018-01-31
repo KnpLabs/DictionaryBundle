@@ -4,42 +4,44 @@ namespace spec\Knp\DictionaryBundle\Form\Type;
 
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Form\Type\DictionaryType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DictionaryTypeSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry)
+    function let(DictionaryRegistry $dictionaries)
     {
-        $this->beConstructedWith($registry);
+        $this->beConstructedWith($dictionaries);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Form\Type\DictionaryType');
+        $this->shouldHaveType(DictionaryType::class);
     }
 
     function it_is_a_choice_form_type()
     {
         $this
             ->getParent()
-            ->shouldReturn('Symfony\Component\Form\Extension\Core\Type\ChoiceType');
+            ->shouldReturn(ChoiceType::class);
     }
 
     function it_has_default_options(
-        $registry,
+        $dictionaries,
         OptionsResolver $resolver,
         Options $options,
         Dictionary $dictionary1,
         Dictionary $dictionary2
     ) {
-        $registry
+        $dictionaries
             ->all()
             ->willReturn(['d1' => $dictionary1, 'd2' => $dictionary2]);
 
-        $registry
+        $dictionaries
             ->offsetGet('d1')
             ->willReturn($dictionary1);
 

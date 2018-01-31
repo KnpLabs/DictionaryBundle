@@ -12,7 +12,7 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass');
+        $this->shouldHaveType(DictionaryFactoryBuildingPass::class);
     }
 
     function it_adds_tagged_services_into_factory_aggregate(
@@ -35,17 +35,17 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
             ->willReturn($aggregate);
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
-            expect($reference)->toHaveType('Reference');
+            expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory1');
         }));
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
-            expect($reference)->toHaveType('Reference');
+            expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory2');
         }));
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
-            expect($reference)->toHaveType('Reference');
+            expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory3');
         }));
 

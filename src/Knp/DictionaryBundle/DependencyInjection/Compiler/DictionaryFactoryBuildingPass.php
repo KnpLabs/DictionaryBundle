@@ -19,7 +19,7 @@ class DictionaryFactoryBuildingPass implements CompilerPassInterface
 
         $factoryAggregate = $container->findDefinition('knp_dictionary.dictionary.factory.factory_aggregate');
 
-        foreach ($factories as $id => $factory) {
+        foreach (array_keys($factories) as $id) {
             $factoryAggregate->addMethodCall('addFactory', [new Reference($id)]);
         }
     }

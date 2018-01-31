@@ -28,16 +28,8 @@ class CallableDictionary implements Dictionary
      */
     private $callableArgs;
 
-    /**
-     * @param string   $name
-     * @param callable $callable
-     * @param array    $callableArgs
-     */
-    public function __construct(
-        $name,
-        callable $callable,
-        array $callableArgs = []
-    ) {
+    public function __construct(string $name, callable $callable, array $callableArgs = [])
+    {
         $this->name         = $name;
         $this->callable     = $callable;
         $this->callableArgs = $callableArgs;
@@ -46,7 +38,7 @@ class CallableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -54,7 +46,7 @@ class CallableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues(): array
     {
         $this->hydrate();
 
@@ -64,7 +56,7 @@ class CallableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getKeys()
+    public function getKeys(): array
     {
         $this->hydrate();
 

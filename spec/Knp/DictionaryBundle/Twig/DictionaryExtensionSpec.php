@@ -4,16 +4,14 @@ namespace spec\Knp\DictionaryBundle\Twig;
 
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Twig\DictionaryExtension;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
-    function let(
-        DictionaryRegistry $registry,
-        Dictionary $dico1,
-        Dictionary $dico2
-    ) {
+    function let(DictionaryRegistry $registry, Dictionary $dico1, Dictionary $dico2)
+    {
         $this->beConstructedWith($registry);
 
         $registry->get('test')->willReturn($dico1);
@@ -25,7 +23,7 @@ class DictionaryExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Twig\DictionaryExtension');
+        $this->shouldHaveType(DictionaryExtension::class);
     }
 
     function it_has_a_filter_and_a_function()

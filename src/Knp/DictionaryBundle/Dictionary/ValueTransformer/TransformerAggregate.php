@@ -11,12 +11,7 @@ class TransformerAggregate implements ValueTransformer
      */
     private $transformers = [];
 
-    /**
-     * @param ValueTransformer $transformer
-     *
-     * @return TransformerAggregate
-     */
-    public function addTransformer(ValueTransformer $transformer)
+    public function addTransformer(ValueTransformer $transformer): self
     {
         $this->transformers[] = $transformer;
 
@@ -40,7 +35,7 @@ class TransformerAggregate implements ValueTransformer
     /**
      * {@inheritdoc}
      */
-    public function supports($value)
+    public function supports($value): bool
     {
         foreach ($this->transformers as $transformer) {
             if ($transformer->supports($value)) {

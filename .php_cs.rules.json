@@ -4,7 +4,7 @@
     "@Symfony:risky": true,
     "PedroTroller/line_break_between_method_arguments": {
         "max-args": 4,
-        "max-length": 80
+        "max-length": 100
     },
     "PedroTroller/line_break_between_statements": true,
     "PedroTroller/ordered_spec_elements": true,

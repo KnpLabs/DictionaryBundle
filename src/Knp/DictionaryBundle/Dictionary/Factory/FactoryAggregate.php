@@ -3,6 +3,7 @@
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 
 class FactoryAggregate implements Factory
@@ -26,8 +27,10 @@ class FactoryAggregate implements Factory
 
     /**
      * {@inheritdoc}
+     *
+     * @throw InvalidArgumentException Not able to create a dictionary with the given name
      */
-    public function create($name, array $config)
+    public function create(string $name, array $config): Dictionary
     {
         foreach ($this->factories as $factory) {
             if ($factory->supports($config)) {
@@ -44,7 +47,7 @@ class FactoryAggregate implements Factory
     /**
      * {@inheritdoc}
      */
-    public function supports(array $config)
+    public function supports(array $config): bool
     {
         foreach ($this->factories as $factory) {
             if ($factory->supports($config)) {

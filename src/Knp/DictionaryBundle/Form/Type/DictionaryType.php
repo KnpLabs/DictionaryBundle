@@ -13,14 +13,11 @@ class DictionaryType extends AbstractType
     /**
      * @var DictionaryRegistry
      */
-    private $registry;
+    private $dictionaries;
 
-    /**
-     * @param DictionaryRegistry $registry
-     */
-    public function __construct(DictionaryRegistry $registry)
+    public function __construct(DictionaryRegistry $dictionaries)
     {
-        $this->registry = $registry;
+        $this->dictionaries = $dictionaries;
     }
 
     /**
@@ -28,11 +25,11 @@ class DictionaryType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $registry = $this->registry;
+        $dictionaries = $this->dictionaries;
 
-        $choices = function (Options $options) use ($registry) {
+        $choices = function (Options $options) use ($dictionaries) {
             $name    = $options['name'];
-            $choices = $registry[$name]->getValues();
+            $choices = $dictionaries[$name]->getValues();
 
             return array_flip($choices);
         };
@@ -40,7 +37,7 @@ class DictionaryType extends AbstractType
         $resolver
             ->setDefault('choices', $choices)
             ->setRequired(['name'])
-            ->setAllowedValues('name', array_keys($this->registry->all()));
+            ->setAllowedValues('name', array_keys($this->dictionaries->all()));
     }
 
     /**

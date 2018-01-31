@@ -2,20 +2,11 @@
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Dictionary;
+
 interface Factory
 {
-    /**
-     * @param array $config
-     * @param mixed $name
-     *
-     * @return Dictionary
-     */
-    public function create($name, array $config);
+    public function create(string $name, array $config): Dictionary;
 
-    /**
-     * @param array
-     *
-     * @return bool
-     */
-    public function supports(array $config);
+    public function supports(array $config): bool;
 }

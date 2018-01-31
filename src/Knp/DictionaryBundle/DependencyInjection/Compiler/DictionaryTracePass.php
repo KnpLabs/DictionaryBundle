@@ -2,6 +2,7 @@
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Knp\DictionaryBundle\Dictionary\TraceableDictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -21,12 +22,12 @@ class DictionaryTracePass implements CompilerPassInterface
         $collector = new Reference('knp_dictionary.data_collector.dictionary_data_collector');
         $services  = $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY);
 
-        foreach ($services as $id => $tags) {
+        foreach (array_keys($services) as $id) {
             $serviceId = sprintf('%s.%s.traceable', $id, md5($id));
 
             $dictionary = new Reference(sprintf('%s.inner', $serviceId));
 
-            $traceable = new Definition('Knp\DictionaryBundle\Dictionary\TraceableDictionary', [$dictionary, $collector]);
+            $traceable = new Definition(TraceableDictionary::class, [$dictionary, $collector]);
             $traceable->setDecoratedService($id);
 
             $container->setDefinition($serviceId, $traceable);
