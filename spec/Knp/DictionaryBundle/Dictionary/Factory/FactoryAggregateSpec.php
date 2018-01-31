@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
@@ -10,12 +11,12 @@ class FactoryAggregateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate');
+        $this->shouldHaveType(Factory\FactoryAggregate::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_supports_if_one_factory_supports(
@@ -64,6 +65,6 @@ class FactoryAggregateSpec extends ObjectBehavior
         $factory2->supports([])->willReturn(false);
         $factory3->supports([])->willReturn(false);
 
-        $this->shouldThrow('\InvalidArgumentException')->during('create', ['yolo', []]);
+        $this->shouldThrow(InvalidArgumentException::class)->during('create', ['yolo', []]);
     }
 }

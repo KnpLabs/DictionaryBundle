@@ -6,10 +6,8 @@ interface ValueTransformer
 {
     /**
      * @param mixed $value
-     *
-     * @return bool
      */
-    public function supports($value);
+    public function supports($value): bool;
 
     /**
      * @param mixed $value

@@ -17,10 +17,8 @@ class TraceableDictionary implements Dictionary
      */
     private $collector;
 
-    public function __construct(
-        Dictionary $dictionary,
-        DictionaryDataCollector $collector
-    ) {
+    public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
+    {
         $this->dictionary = $dictionary;
         $this->collector  = $collector;
     }
@@ -28,7 +26,7 @@ class TraceableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->dictionary->getName();
     }
@@ -36,7 +34,7 @@ class TraceableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getValues()
+    public function getValues(): array
     {
         $this->trace();
 
@@ -46,7 +44,7 @@ class TraceableDictionary implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getKeys()
+    public function getKeys(): array
     {
         $this->trace();
 

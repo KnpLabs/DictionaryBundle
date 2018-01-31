@@ -25,17 +25,12 @@ class DictionaryBuildingPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param string $name
-     *
-     * @return Definition
-     */
-    private function createDefinition($name, array $config)
+    private function createDefinition(string $name, array $config): Definition
     {
         $definition = new Definition();
 
         $definition
-            ->setClass('Knp\DictionaryBundle\Dictionary')
+            ->setClass(Dictionary::class)
             ->setFactory([
                 new Reference('knp_dictionary.dictionary.factory.factory_aggregate'),
                 'create',

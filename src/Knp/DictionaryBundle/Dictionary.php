@@ -11,18 +11,15 @@ interface Dictionary extends ArrayAccess, IteratorAggregate
     const VALUE_AS_KEY = 'value_as_key';
     const KEY_VALUE    = 'key_value';
 
-    /**
-     * @return string
-     */
-    public function getName();
+    public function getName(): string;
 
     /**
      * @return mixed[]
      */
-    public function getValues();
+    public function getValues(): array;
 
     /**
      * @return mixed[]
      */
-    public function getKeys();
+    public function getKeys(): array;
 }

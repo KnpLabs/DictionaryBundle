@@ -5,6 +5,7 @@ namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary as Constraint;
+use Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -14,21 +15,21 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 class DictionaryValidatorSpec extends ObjectBehavior
 {
     function let(
-        DictionaryRegistry $registry,
+        DictionaryRegistry $dictionaries,
         ExecutionContextInterface $context,
         Dictionary $dictionary
     ) {
-        $this->beConstructedWith($registry);
+        $this->beConstructedWith($dictionaries);
         $this->initialize($context);
 
-        $registry->get('dico')->willReturn($dictionary);
+        $dictionaries->get('dico')->willReturn($dictionary);
 
         $dictionary->getKeys()->willReturn(['the_key']);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator');
+        $this->shouldHaveType(DictionaryValidator::class);
     }
 
     function it_valids_existing_keys($context)
@@ -52,6 +53,6 @@ class DictionaryValidatorSpec extends ObjectBehavior
     function it_throw_exception_form_unknown_constraints()
     {
         $constraint = new NotNull();
-        $this->shouldThrow(new UnexpectedTypeException($constraint, 'Knp\DictionaryBundle\Validator\Constraints\Dictionary'))->duringValidate('the_key', $constraint);
+        $this->shouldThrow(new UnexpectedTypeException($constraint, Constraint::class))->duringValidate('the_key', $constraint);
     }
 }

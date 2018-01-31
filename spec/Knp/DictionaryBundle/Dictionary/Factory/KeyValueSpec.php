@@ -2,6 +2,8 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use InvalidArgumentException;
+use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
 use PhpSpec\ObjectBehavior;
 
@@ -14,12 +16,12 @@ class KeyValueSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\KeyValue');
+        $this->shouldHaveType(Factory\KeyValue::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_supports_specific_config()
@@ -30,7 +32,7 @@ class KeyValueSpec extends ObjectBehavior
     function it_throws_exception_if_no_content_is_provided()
     {
         $this
-            ->shouldThrow('\InvalidArgumentException')
+            ->shouldThrow(InvalidArgumentException::class)
             ->during('create', ['yolo', []]);
     }
 

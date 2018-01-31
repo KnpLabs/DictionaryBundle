@@ -3,6 +3,7 @@
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
@@ -24,8 +25,10 @@ class CallableFactory implements Factory
 
     /**
      * {@inheritdoc}
+     *
+     * @throw InvalidArgumentException if there is some problem with the config.
      */
-    public function create($name, array $config)
+    public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['service'])) {
             throw new InvalidArgumentException(sprintf(
@@ -55,7 +58,7 @@ class CallableFactory implements Factory
     /**
      * {@inheritdoc}
      */
-    public function supports(array $config)
+    public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'callable' === $config['type'] : false;
     }

@@ -12,13 +12,11 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass');
+        $this->shouldHaveType(DictionaryRegistrationPass::class);
     }
 
-    function it_registers_dictionaries(
-        ContainerBuilder $container,
-        Definition $registry
-    ) {
+    function it_registers_dictionaries(ContainerBuilder $container, Definition $registry)
+    {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
         $container->getDefinition('knp_dictionary.dictionary.dictionary_registry')->willReturn($registry);

@@ -20,20 +20,16 @@ class DictionarySpec extends ObjectBehavior
         $this->shouldHaveType(Dictionary::class);
     }
 
-    function it_can_generates_random_values(
-        $dictionaries,
-        SimpleDictionary $dictionary
-    ) {
+    function it_can_generates_random_values($dictionaries, SimpleDictionary $dictionary)
+    {
         $dictionaries->get('the_dico')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
         $this->dictionary('the_dico')->shouldBeOneOf(['foo', 'bar', 'baz']);
     }
 
-    function it_can_generates_unique_random_values(
-        $dictionaries,
-        SimpleDictionary $dictionary
-    ) {
+    function it_can_generates_unique_random_values($dictionaries, SimpleDictionary $dictionary)
+    {
         $dictionaries->get('the_dico')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 

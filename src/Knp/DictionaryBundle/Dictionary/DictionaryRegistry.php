@@ -17,25 +17,12 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     private $dictionaries = [];
 
-    /**
-     * @param Dictionary $dictionary
-     *
-     * @return DictionaryRegistry
-     */
     public function add(Dictionary $dictionary)
     {
         $this->set($dictionary->getName(), $dictionary);
-
-        return $this;
     }
 
-    /**
-     * @param string     $key
-     * @param Dictionary $dictionary
-     *
-     * @return DictionaryRegistry
-     */
-    public function set($key, Dictionary $dictionary)
+    public function set(string $key, Dictionary $dictionary)
     {
         if (isset($this->dictionaries[$key])) {
             throw new RuntimeException(sprintf(
@@ -45,24 +32,20 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
         }
 
         $this->dictionaries[$key] = $dictionary;
-
-        return $this;
     }
 
     /**
      * @return Dictionary[]
      */
-    public function all()
+    public function all(): array
     {
         return $this->dictionaries;
     }
 
     /**
-     * @param mixed $offset
-     *
-     * @return Dictionary
+     * @throw DictionaryNotFoundException
      */
-    public function get($offset)
+    public function get(string $offset): Dictionary
     {
         return $this->offsetGet($offset);
     }
@@ -77,6 +60,10 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
 
     /**
      * {@inheritdoc}
+     *
+     * @return Dictionary
+     *
+     * @throw DictionaryNotFoundException
      */
     public function offsetGet($offset)
     {
@@ -94,6 +81,8 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
 
     /**
      * {@inheritdoc}
+     *
+     * @throw RuntimeException
      */
     public function offsetSet($offset, $value)
     {
@@ -105,6 +94,8 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
 
     /**
      * {@inheritdoc}
+     *
+     * @throw RuntimeException
      */
     public function offsetUnset($offset)
     {

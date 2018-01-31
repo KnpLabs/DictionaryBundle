@@ -2,6 +2,7 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\Container;
 
@@ -14,12 +15,12 @@ class CallableFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory\CallableFactory');
+        $this->shouldHaveType(Factory\CallableFactory::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\Factory');
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_supports_specific_config()

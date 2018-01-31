@@ -2,7 +2,10 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Exception;
+use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 
@@ -26,12 +29,12 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\CallableDictionary');
+        $this->shouldHaveType(CallableDictionary::class);
     }
 
     function it_is_a_dictionary()
     {
-        $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
+        $this->shouldImplement(Dictionary::class);
     }
 
     function it_supports_callable_arguments()
@@ -104,7 +107,7 @@ class CallableDictionarySpec extends ObjectBehavior
         });
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess'))
+            ->shouldThrow(new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess'))
             ->duringGetValues();
     }
 
@@ -138,6 +141,6 @@ class CallableDictionarySpec extends ObjectBehavior
             ];
         }
 
-        throw new \Exception('Executed twice');
+        throw new Exception('Executed twice');
     }
 }

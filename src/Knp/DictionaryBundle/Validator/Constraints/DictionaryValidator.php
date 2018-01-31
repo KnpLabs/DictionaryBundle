@@ -12,14 +12,11 @@ class DictionaryValidator extends ConstraintValidator
     /**
      * @var DictionaryRegistry
      */
-    private $registry;
+    private $dictionaries;
 
-    /**
-     * @param DictionaryRegistry $registry
-     */
-    public function __construct(DictionaryRegistry $registry)
+    public function __construct(DictionaryRegistry $dictionaries)
     {
-        $this->registry = $registry;
+        $this->dictionaries = $dictionaries;
     }
 
     /**
@@ -35,7 +32,7 @@ class DictionaryValidator extends ConstraintValidator
             return;
         }
 
-        $dictionary = $this->registry->get($constraint->name);
+        $dictionary = $this->dictionaries->get($constraint->name);
         $values     = $dictionary->getKeys();
 
         if (false === in_array($value, $values)) {
