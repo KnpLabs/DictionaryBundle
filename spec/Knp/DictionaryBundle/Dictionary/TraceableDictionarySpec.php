@@ -3,7 +3,9 @@
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
+use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
+use Knp\DictionaryBundle\Dictionary\TraceableDictionary;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 
@@ -21,12 +23,12 @@ class TraceableDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\TraceableDictionary');
+        $this->shouldHaveType(TraceableDictionary::class);
     }
 
     function it_is_a_dictionary()
     {
-        $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
+        $this->shouldImplement(Dictionary::class);
     }
 
     function it_has_a_name()

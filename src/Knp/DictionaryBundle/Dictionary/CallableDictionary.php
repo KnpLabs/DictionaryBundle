@@ -14,7 +14,7 @@ class CallableDictionary implements Dictionary
     private $name;
 
     /**
-     * @var ArrayAccess|mixed[]
+     * @var null|array
      */
     private $values;
 
@@ -126,7 +126,7 @@ class CallableDictionary implements Dictionary
 
         $values = call_user_func_array($this->callable, $this->callableArgs);
 
-        if (false === is_array($values) && false === $values instanceof ArrayAccess) {
+        if (false === is_array($values)) {
             throw new InvalidArgumentException(
                 'Dictionary callable must return an array or an instance of ArrayAccess'
             );

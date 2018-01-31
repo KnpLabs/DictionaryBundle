@@ -2,13 +2,15 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
+use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer;
 use PhpSpec\ObjectBehavior;
 
 class ConstantTransformerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer');
+        $this->shouldHaveType(ConstantTransformer::class);
     }
 
     function it_doesnt_support_non_constant_pattern_values()
@@ -23,16 +25,16 @@ class ConstantTransformerSpec extends ObjectBehavior
 
     function it_doesnt_support_non_existing_constants()
     {
-        $this->supports('Knp\DictionaryBundle\Dictionary::PONEY')->shouldReturn(false);
+        $this->supports(Dictionary::class.'::PONEY')->shouldReturn(false);
     }
 
     function it_supports_existing_classes_and_constants()
     {
-        $this->supports('Knp\DictionaryBundle\Dictionary::VALUE')->shouldReturn(true);
+        $this->supports(Dictionary::class.'::VALUE')->shouldReturn(true);
     }
 
     function it_transforms_constant_patterns()
     {
-        $this->transform('Knp\DictionaryBundle\Dictionary::VALUE')->shouldReturn('value');
+        $this->transform(Dictionary::class.'::VALUE')->shouldReturn('value');
     }
 }

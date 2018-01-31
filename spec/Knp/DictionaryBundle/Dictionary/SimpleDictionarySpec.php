@@ -2,6 +2,8 @@
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use PhpSpec\ObjectBehavior;
 use Webmozart\Assert\Assert;
 
@@ -18,12 +20,12 @@ class SimpleDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Knp\DictionaryBundle\Dictionary\SimpleDictionary');
+        $this->shouldHaveType(SimpleDictionary::class);
     }
 
     function it_is_a_dictionary()
     {
-        $this->shouldImplement('Knp\DictionaryBundle\Dictionary');
+        $this->shouldImplement(Dictionary::class);
     }
 
     function it_access_to_value_like_an_array()
