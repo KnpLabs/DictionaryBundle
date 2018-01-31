@@ -24,7 +24,8 @@ class FactoryAggregateSpec extends ObjectBehavior
         Factory $factory2,
         Factory $factory3
     ) {
-        $this->addFactory($factory1)->addFactory($factory2);
+        $this->addFactory($factory1);
+        $this->addFactory($factory2);
 
         $factory1->supports([])->willReturn(false);
         $factory2->supports([])->willReturn(false);
@@ -43,7 +44,9 @@ class FactoryAggregateSpec extends ObjectBehavior
         Factory $factory3,
         Dictionary $dictionary
     ) {
-        $this->addFactory($factory1)->addFactory($factory2)->addFactory($factory3);
+        $this->addFactory($factory1);
+        $this->addFactory($factory2);
+        $this->addFactory($factory3);
 
         $factory1->supports([])->willReturn(false);
         $factory2->supports([])->willReturn(false);
@@ -59,7 +62,9 @@ class FactoryAggregateSpec extends ObjectBehavior
         Factory $factory2,
         Factory $factory3
     ) {
-        $this->addFactory($factory1)->addFactory($factory2)->addFactory($factory3);
+        $this->addFactory($factory1);
+        $this->addFactory($factory2);
+        $this->addFactory($factory3);
 
         $factory1->supports([])->willReturn(false);
         $factory2->supports([])->willReturn(false);

@@ -30,6 +30,7 @@
         "leanphp/phpspec-code-coverage": "^4.0",
         "pedrotroller/php-cs-custom-fixer": "^2.6",
         "phpspec/phpspec": "~4.0",
+        "phpspec/prophecy": ">=1.7.2",
         "sebastian/comparator": "~1.2.4",
         "webmozart/assert": "^1.2"
     },
