@@ -2,7 +2,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
   <services>
     <service id="knp_dictionary.data_collector.dictionary_data_collector" class="Knp\DictionaryBundle\DataCollector\DictionaryDataCollector">
-      <tag name="data_collector" template="KnpDictionaryBundle::layout.html.twig" id="dictionary"/>
+        <tag name="data_collector" template="@KnpDictionary/layout.html.twig" id="dictionary"/>
     </service>
 
     <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
