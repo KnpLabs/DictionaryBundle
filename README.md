@@ -6,7 +6,7 @@ DictionaryBundle
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
 ## Requirements
-- Symfony >= 2.8
+- Symfony >= 3.0
 
 ## Installation
 Add the DictionaryBundle to your `composer.json`:
