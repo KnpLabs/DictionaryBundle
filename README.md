@@ -189,15 +189,19 @@ App\Entity\User:
 ## Create your own dictionary implementation
 
 ### Dictionary
-Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary/Dictionary.php).
+
+Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary.php).
 
 ### Dictionary Factory
+
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
 
 ```yaml
+
 services:
     app.dictionary.factory.my_custom_factory:
         class: App\Dictionary\Factory\MyCustomFactory
         tags:
             { name: 'knp_dictionary.factory' }
+
 ```
