@@ -1,17 +1,17 @@
 <?php
 
-namespace spec\Knp\DictionaryBundle\Dictionary;
+namespace spec\Knp\DictionaryBundle;
 
 use ArrayAccess;
 use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\DictionaryCollection;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use PhpSpec\ObjectBehavior;
 use RuntimeException;
 
-class DictionaryRegistrySpec extends ObjectBehavior
+class DictionaryCollectionSpec extends ObjectBehavior
 {
     function let(Dictionary $dictionary, Dictionary $dictionary2)
     {
@@ -23,7 +23,7 @@ class DictionaryRegistrySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(DictionaryRegistry::class);
+        $this->shouldHaveType(DictionaryCollection::class);
     }
 
     function it_is_an_array_access()
