@@ -1,0 +1,24 @@
+<?php
+
+use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\KnpDictionaryBundle;
+use Pedrotroller\Symfony\IntegrationChecker\ConfigurableKernel;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Webmozart\Assert\Assert;
+
+$test = function (KernelInterface $kernel) {
+    if (false === $kernel->getContainer()->get('knp_dictionary.registry') instanceof DictionaryRegistry) {
+        throw new Exception('Service "knp_dictionary.registry" unavailable.');
+    }
+};
+
+return function (ConfigurableKernel $kernel) use ($test) {
+    $container = new ContainerBuilder();
+
+    $kernel
+        ->setContainerBuilder($container)
+        ->addBundle(new KnpDictionaryBundle())
+        ->afterBoot($test)
+    ;
+};

@@ -27,7 +27,7 @@
         <tag name="knp_dictionary.factory"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.dictionary_registry" class="Knp\DictionaryBundle\Dictionary\DictionaryRegistry"/>
+    <service id="knp_dictionary.dictionary.dictionary_registry" class="Knp\DictionaryBundle\Dictionary\DictionaryRegistry" public="true"/>
 
     <service id="knp_dictionary.dictionary.value_transformer.constant_transformer" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer"/>
 
@@ -56,6 +56,6 @@
       <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.registry" alias="knp_dictionary.dictionary.dictionary_registry"/>
+    <service id="knp_dictionary.registry" alias="knp_dictionary.dictionary.dictionary_registry" public="true"/>
   </services>
 </container>
