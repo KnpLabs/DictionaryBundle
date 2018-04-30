@@ -1,66 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
   <services>
-    <service id="knp_dictionary.data_collector.dictionary_data_collector" class="Knp\DictionaryBundle\DataCollector\DictionaryDataCollector">
-      <tag name="data_collector" template="KnpDictionaryBundle::layout.html.twig" id="dictionary"/>
-    </service>
+    <service id="Knp\DictionaryBundle\DictionaryCollection" public="true"/>
 
-    <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
-
-    <service id="knp_dictionary.dictionary.factory.value" class="Knp\DictionaryBundle\Dictionary\Factory\Value">
-        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
+    <service id="Knp\DictionaryBundle\Dictionary\Factory\CallableFactory" public="false">
+        <argument type="service" id="Symfony\Component\DependencyInjection\ContainerInterface"/>
         <tag name="knp_dictionary.factory"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.factory.key_value" class="Knp\DictionaryBundle\Dictionary\Factory\KeyValue">
-        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
-        <tag name="knp_dictionary.factory"/>
-    </service>
-
-    <service id="knp_dictionary.dictionary.factory.value_as_key" class="Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey">
-        <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
-        <tag name="knp_dictionary.factory"/>
-    </service>
-
-    <service id="knp_dictionary.dictionary.factory.callable_factory" class="Knp\DictionaryBundle\Dictionary\Factory\CallableFactory">
-        <argument type="service" id="service_container"/>
-        <tag name="knp_dictionary.factory"/>
-    </service>
-
-    <service id="Knp\DictionaryBundle\DictionaryCollection"/>
-
-    <service id="Knp\DictionaryBundle\Dictionary\DictionaryRegistry">
+    <service id="Knp\DictionaryBundle\Faker\Provider\Dictionary" public="false">
       <argument type="service" id="Knp\DictionaryBundle\DictionaryCollection"/>
     </service>
 
-    <service id="knp_dictionary.dictionary.value_transformer.constant_transformer" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer"/>
-
-    <service id="knp_dictionary.dictionary.value_transformer.transformer_aggregate" class="Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate">
-        <call method="addTransformer">
-            <argument type="service" id="knp_dictionary.dictionary.value_transformer.constant_transformer"/>
-        </call>
-    </service>
-
-    <service id="knp_dictionary.form.type.dictionary_type" class="Knp\DictionaryBundle\Form\Type\DictionaryType">
-      <tag name="form.type" alias="dictionary"/>
-      <argument type="service" id="knp_dictionary.registry"/>
-    </service>
-
-    <service id="knp_dictionary.validator.constraints.dictionary_validator" class="Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator">
-      <tag name="validator.constraint_validator" alias="knp_dictionary.dictionary_validator"/>
-      <argument type="service" id="knp_dictionary.registry"/>
-    </service>
-
-    <service id="knp_dictionary.twig.dictionary_extension" class="Knp\DictionaryBundle\Twig\DictionaryExtension">
+    <service id="Knp\DictionaryBundle\Twig\DictionaryExtension" public="false">
+      <argument type="service" id="Knp\DictionaryBundle\DictionaryCollection"/>
       <tag name="twig.extension"/>
-      <argument type="service" id="knp_dictionary.registry"/>
     </service>
 
-    <service id="knp_dictionary.faker.provider.dictionary" class="Knp\DictionaryBundle\Faker\Provider\Dictionary">
-      <argument type="service" id="knp_dictionary.registry"/>
+    <service id="Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator" public="false">
+      <argument type="service" id="Knp\DictionaryBundle\DictionaryCollection"/>
+      <tag name="validator.constraint_validator" alias="knp_dictionary.dictionary_validator"/>
     </service>
-
-    <service id="knp_dictionary.registry" alias="Knp\DictionaryBundle\Dictionary\DictionaryRegistry" deprecated="true"/>
-    <service id="knp_dictionary.registry" alias="Knp\DictionaryBundle\Dictionary\DictionaryRegistry" deprecated="true"/>
   </services>
 </container>
