@@ -32,7 +32,6 @@ You can ping us if need some reviews/comments/help:
 
  - [@AntoineLelaisant](https://github.com/AntoineLelaisant)
  - [@PedroTroller](https://github.com/PedroTroller)
- - [@Shivoham](https://github.com/Shivoham)
 
 ## Basic usage
 Define dictionaries in your config.yml file:
