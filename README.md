@@ -43,7 +43,6 @@ knp_dictionary:
             - Foo           # your dictionary content
             - Bar
             - Baz
-            
 ```
 You will be able to retreive it trough the dictionary registry service:
 ```php
@@ -113,7 +112,7 @@ knp_dictionary:
 - `key_value`: Define your own keys
 - `callable`: Build a dictionary from a callable
 
-### Callable dictionary
+### Callable dictionary
 You can create a callable dictionary:
 ```yaml
 knp_dictionary:
@@ -196,7 +195,7 @@ The KnpDictionaryBundle comes with a [faker provider](https://github.com/fzanino
 
 ### Alice
 
-To register the provider in [nelmio/alice](https://github.com/nelmio/alice), you can follow the [official documentation](https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md#add-a-custom-faker-provider-class) 
+To register the provider in [nelmio/alice](https://github.com/nelmio/alice), you can follow the [official documentation](https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md#add-a-custom-faker-provider-class)
 
 or ...
 
@@ -210,13 +209,13 @@ App\Entity\User:
         city: <dictionary('cities')>
 ```
 
-## Create your own dictionary implementation
+## Create your own dictionary implementation
 
 ### Dictionary
 
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary.php).
 
-### Dictionary Factory
+### Dictionary Factory
 
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
 
