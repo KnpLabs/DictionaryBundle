@@ -7,6 +7,12 @@
 
     <service id="knp_dictionary.dictionary.factory.factory_aggregate" class="Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate"/>
 
+    <service id="knp_dictionary.dictionary.factory.extended_factory" class="Knp\DictionaryBundle\Dictionary\Factory\Extended">
+        <argument type="service" id="knp_dictionary.dictionary.factory.factory_aggregate"/>
+        <argument type="service" id="knp_dictionary.dictionary.dictionary_registry"/>
+        <tag name="knp_dictionary.factory"/>
+    </service>
+
     <service id="knp_dictionary.dictionary.factory.value" class="Knp\DictionaryBundle\Dictionary\Factory\Value">
         <argument type="service" id="knp_dictionary.dictionary.value_transformer.transformer_aggregate"/>
         <tag name="knp_dictionary.factory"/>
