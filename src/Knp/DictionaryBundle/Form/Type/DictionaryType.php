@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Form\Type;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
@@ -35,7 +37,7 @@ class DictionaryValidator extends ConstraintValidator
         $dictionary = $this->dictionaries->get($constraint->name);
         $values     = $dictionary->getKeys();
 
-        if (false === in_array($value, $values)) {
+        if (false === \in_array($value, $values)) {
             $this->context->addViolation(
                 $constraint->message,
                 ['{{ key }}' => $value, '{{ keys }}' => implode(', ', $values)]

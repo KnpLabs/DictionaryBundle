@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
@@ -57,8 +59,6 @@ class SimpleDictionary implements DictionaryInterface
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
     public function offsetGet($offset)
     {

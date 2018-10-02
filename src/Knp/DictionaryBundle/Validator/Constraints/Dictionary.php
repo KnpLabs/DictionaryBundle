@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;

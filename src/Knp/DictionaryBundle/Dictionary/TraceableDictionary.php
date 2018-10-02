@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
@@ -63,8 +65,6 @@ class TraceableDictionary implements Dictionary
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
     public function offsetGet($offset)
     {

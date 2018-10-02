@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Knp\DictionaryBundle\DependencyInjection;
 
 use Knp\DictionaryBundle\DependencyInjection\KnpDictionaryExtension;

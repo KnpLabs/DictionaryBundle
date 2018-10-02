@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Faker\Provider;
 
 use Faker\Generator;
@@ -25,9 +27,6 @@ class Dictionary extends Base
         parent::__construct($generator);
     }
 
-    /**
-     * @return mixed
-     */
     public function dictionary(string $name)
     {
         return self::randomElement($this->dictionaries->get($name)->getKeys());
