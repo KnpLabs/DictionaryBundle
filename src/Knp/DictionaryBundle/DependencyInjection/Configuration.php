@@ -35,6 +35,7 @@ class Configuration implements ConfigurationInterface
                         ->end()
                         ->children()
                             ->scalarNode('type')->defaultValue('value')->end()
+                            ->scalarNode('extends')->end()
                             ->arrayNode('content')
                                 ->normalizeKeys(false)->prototype('scalar')->end()
                             ->end()
