@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
@@ -15,9 +17,6 @@ class CallableFactory implements Factory
      */
     private $container;
 
-    /**
-     * @param Container $container
-     */
     public function __construct(Container $container)
     {
         $this->container = $container;
@@ -32,7 +31,7 @@ class CallableFactory implements Factory
     {
         if (!isset($config['service'])) {
             throw new InvalidArgumentException(sprintf(
-                'The "service" config key must be set for the dictionary named "%s"',
+                'The "service" config key must be set for the dictionary named "%s".',
                 $name
             ));
         }
@@ -44,9 +43,9 @@ class CallableFactory implements Factory
             $callable[] = $config['method'];
         }
 
-        if (false === is_callable($callable)) {
+        if (false === \is_callable($callable)) {
             throw new InvalidArgumentException(sprintf(
-                'You must provide a valid callable for the dictionary named "%s"',
+                'You must provide a valid callable for the dictionary named "%s".',
                 $name
             ));
         }

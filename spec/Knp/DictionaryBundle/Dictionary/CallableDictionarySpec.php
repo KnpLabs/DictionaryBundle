@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Exception;
@@ -40,7 +42,7 @@ class CallableDictionarySpec extends ObjectBehavior
     function it_supports_callable_arguments()
     {
         $this->beConstructedWith('baz', function () {
-            return call_user_func_array([$this, 'execution'], func_get_args());
+            return \call_user_func_array([$this, 'execution'], \func_get_args());
         }, [['foo' => 2, 'bar' => 1, 'baz' => 0]]);
 
         $this->getValues()->shouldReturn(['foo' => 2, 'bar' => 1, 'baz' => 0]);
@@ -100,14 +102,13 @@ class CallableDictionarySpec extends ObjectBehavior
         Assert::eq($this['baz']->getWrappedObject(), 2);
     }
 
-    function it_throws_an_exception_if_callable_returns_somthing_else_than_an_array_or_an_array_access(
-        $nothing
-    ) {
+    function it_throws_an_exception_if_callable_returns_somthing_else_than_an_array_or_an_array_access($nothing)
+    {
         $this->beConstructedWith('foo', function () {
         });
 
         $this
-            ->shouldThrow(new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess'))
+            ->shouldThrow(new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess.'))
             ->duringGetValues();
     }
 
@@ -132,7 +133,7 @@ class CallableDictionarySpec extends ObjectBehavior
     {
         if (false === $this->executed) {
             $this->executed = true;
-            $args           = func_get_args();
+            $args           = \func_get_args();
 
             return !empty($args) ? current($args) : [
                 'foo' => 0,
@@ -141,6 +142,6 @@ class CallableDictionarySpec extends ObjectBehavior
             ];
         }
 
-        throw new Exception('Executed twice');
+        throw new Exception('Executed twice.');
     }
 }

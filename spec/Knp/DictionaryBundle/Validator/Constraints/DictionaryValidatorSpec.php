@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 
 use Knp\DictionaryBundle\Dictionary;
@@ -14,11 +16,8 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class DictionaryValidatorSpec extends ObjectBehavior
 {
-    function let(
-        DictionaryRegistry $dictionaries,
-        ExecutionContextInterface $context,
-        Dictionary $dictionary
-    ) {
+    function let(DictionaryRegistry $dictionaries, ExecutionContextInterface $context, Dictionary $dictionary)
+    {
         $this->beConstructedWith($dictionaries);
         $this->initialize($context);
 

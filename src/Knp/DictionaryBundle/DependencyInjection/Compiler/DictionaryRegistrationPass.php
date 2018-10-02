@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
-use Knp\DictionaryBundle\Dictionary\Dictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

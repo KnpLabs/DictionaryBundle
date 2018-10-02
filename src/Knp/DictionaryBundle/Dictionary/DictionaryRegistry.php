@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayAccess;
@@ -26,7 +28,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
     {
         if (isset($this->dictionaries[$key])) {
             throw new RuntimeException(sprintf(
-                'The key "%s" already exists in the dictionary registry',
+                'The key "%s" already exists in the dictionary registry.',
                 $key
             ));
         }
@@ -110,7 +112,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function count()
     {
-        return count($this->dictionaries);
+        return \count($this->dictionaries);
     }
 
     /**

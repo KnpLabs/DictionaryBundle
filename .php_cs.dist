@@ -1,24 +1,33 @@
 <?php
 
-function recur_ksort(&$array) {
-    foreach ($array as &$value) {
-        if (is_array($value)) recur_ksort($value);
-    }
-    return ksort($array);
-}
+declare(strict_types=1);
 
-$rules = json_decode(file_get_contents('.php_cs.rules.json'), true);
+use PedroTroller\CS\Fixer\Fixers;
+use PedroTroller\CS\Fixer\RuleSetFactory;
 
-recur_ksort($rules);
-
-file_put_contents('.php_cs.rules.json', json_encode($rules, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
-
-$config = PhpCsFixer\Config::create()
+return PhpCsFixer\Config::create()
     ->setRiskyAllowed(true)
-    ->setRules($rules)
+    ->setRules(RuleSetFactory::create()
+        ->symfony(true)
+        ->php(7.0, true)
+        ->pedrotroller(true)
+        ->enable('ordered_imports')
+        ->enable('align_multiline_comment')
+        ->enable('array_indentation')
+        ->enable('no_superfluous_phpdoc_tags')
+        ->enable('binary_operator_spaces', [
+            'operators' => [
+                '='  => 'align_single_space_minimal',
+                '=>' => 'align_single_space_minimal',
+            ],
+        ])
+        ->getRules()
+    )
     ->setUsingCache(false)
-    ->registerCustomFixers(new PedroTroller\CS\Fixer\Fixers())
-    ->setFinder(PhpCsFixer\Finder::create()->in(__DIR__))
+    ->registerCustomFixers(new Fixers())
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->in(__DIR__)
+            ->append([__FILE__])
+    )
 ;
-
-return $config;

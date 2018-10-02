@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary\Factory;

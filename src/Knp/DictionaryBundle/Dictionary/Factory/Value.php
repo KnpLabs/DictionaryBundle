@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
@@ -15,9 +17,6 @@ class Value implements Factory
      */
     protected $transformer;
 
-    /**
-     * @param ValueTransformer $transformer
-     */
     public function __construct(ValueTransformer $transformer)
     {
         $this->transformer = $transformer;
@@ -32,7 +31,7 @@ class Value implements Factory
     {
         if (!isset($config['content'])) {
             throw new InvalidArgumentException(sprintf(
-                'The key content for dictionary %s must be set',
+                'The key content for dictionary %s must be set.',
                 $name
             ));
         }

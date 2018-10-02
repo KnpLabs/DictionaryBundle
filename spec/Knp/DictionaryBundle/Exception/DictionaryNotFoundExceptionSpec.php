@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace spec\Knp\DictionaryBundle\Exception;
 
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;

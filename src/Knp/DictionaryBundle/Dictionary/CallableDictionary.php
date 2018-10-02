@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary;
 
-use ArrayAccess;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 
@@ -75,8 +76,6 @@ class CallableDictionary implements Dictionary
 
     /**
      * {@inheritdoc}
-     *
-     * @return mixed
      */
     public function offsetGet($offset)
     {
@@ -124,11 +123,11 @@ class CallableDictionary implements Dictionary
             return;
         }
 
-        $values = call_user_func_array($this->callable, $this->callableArgs);
+        $values = \call_user_func_array($this->callable, $this->callableArgs);
 
-        if (false === is_array($values)) {
+        if (false === \is_array($values)) {
             throw new InvalidArgumentException(
-                'Dictionary callable must return an array or an instance of ArrayAccess'
+                'Dictionary callable must return an array or an instance of ArrayAccess.'
             );
         }
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Twig;
 
 use Knp\DictionaryBundle\Dictionary;
@@ -44,11 +46,6 @@ class DictionaryExtension extends \Twig_Extension
         return $this->dictionaries->get($name);
     }
 
-    /**
-     * @param mixed $key
-     *
-     * @return mixed
-     */
     public function getValue($key, string $name)
     {
         $dictionary = $this->dictionaries->get($name);
