@@ -5,35 +5,45 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Faker\Provider;
 
 use Assert\Assert;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
-use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
-use Knp\DictionaryBundle\Faker\Provider\Dictionary;
+use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Faker;
 use PhpSpec\ObjectBehavior;
 
 class DictionarySpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $dictionaries)
+    /**
+     * @var Dictionary\Collection
+     */
+    private $dictionaries;
+
+    function let()
     {
-        $this->beConstructedWith($dictionaries);
+        $this->dictionaries = new Dictionary\Collection();
+
+        $this->beConstructedWith($this->dictionaries);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary::class);
+        $this->shouldHaveType(Faker\Provider\Dictionary::class);
     }
 
-    function it_can_generates_random_values($dictionaries, SimpleDictionary $dictionary)
+    function it_can_generates_random_values(Dictionary $dictionary)
     {
-        $dictionaries->get('the_dico')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
+        $dictionary->getName()->willReturn('the_dico');
+
+        $this->dictionaries->add($dictionary->getWrappedObject());
 
         $this->dictionary('the_dico')->shouldBeOneOf(['foo', 'bar', 'baz']);
     }
 
-    function it_can_generates_unique_random_values($dictionaries, SimpleDictionary $dictionary)
+    function it_can_generates_unique_random_values(Dictionary $dictionary)
     {
-        $dictionaries->get('the_dico')->willReturn($dictionary);
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
+        $dictionary->getName()->willReturn('the_dico');
+
+        $this->dictionaries->add($dictionary->getWrappedObject());
 
         $this->unique()->dictionary('the_dico')->shouldBeOneOf(['foo', 'bar', 'baz']);
     }

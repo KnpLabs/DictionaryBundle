@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
-use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
 
 class Extended implements Factory
 {
@@ -16,20 +18,14 @@ class Extended implements Factory
     private $factoryAggregate;
 
     /**
-     * @var DictionaryRegistry
+     * @var Collection
      */
-    private $registry;
+    private $dictionaries;
 
-    /**
-     * @param FactoryAggregate $factoryAggregate
-     * @param DictionaryRegistry $registry
-     */
-    public function __construct(
-        FactoryAggregate $factoryAggregate,
-        DictionaryRegistry $registry
-    ) {
+    public function __construct(FactoryAggregate $factoryAggregate, Collection $dictionaries)
+    {
         $this->factoryAggregate = $factoryAggregate;
-        $this->registry         = $registry;
+        $this->dictionaries     = $dictionaries;
     }
 
     /**
@@ -45,10 +41,11 @@ class Extended implements Factory
         }
 
         $extends = $config['extends'];
+
         unset($config['extends']);
 
-        $dictionaries = [];
-        $dictionaries[] = $this->registry->get($extends);
+        $dictionaries   = [];
+        $dictionaries[] = $this->dictionaries[$extends];
         $dictionaries[] = $this->factoryAggregate->create($name, $config);
 
         return new CombinedDictionary($name, $dictionaries);

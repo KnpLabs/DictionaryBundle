@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -12,11 +12,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 class DictionaryValidator extends ConstraintValidator
 {
     /**
-     * @var DictionaryRegistry
+     * @var Collection
      */
     private $dictionaries;
 
-    public function __construct(DictionaryRegistry $dictionaries)
+    public function __construct(Collection $dictionaries)
     {
         $this->dictionaries = $dictionaries;
     }
@@ -34,7 +34,7 @@ class DictionaryValidator extends ConstraintValidator
             return;
         }
 
-        $dictionary = $this->dictionaries->get($constraint->name);
+        $dictionary = $this->dictionaries[$constraint->name];
         $values     = $dictionary->getKeys();
 
         if (false === \in_array($value, $values)) {

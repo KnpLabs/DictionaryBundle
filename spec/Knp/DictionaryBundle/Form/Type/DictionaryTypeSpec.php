@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Form\Type;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Form\Type\DictionaryType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -15,9 +15,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class DictionaryTypeSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $dictionaries)
+    function let()
     {
-        $this->beConstructedWith($dictionaries);
+        $this->beConstructedWith(new Collection());
     }
 
     function it_is_initializable()
@@ -33,21 +33,19 @@ class DictionaryTypeSpec extends ObjectBehavior
     }
 
     function it_has_default_options(
-        $dictionaries,
         OptionsResolver $resolver,
         Options $options,
         Dictionary $dictionary1,
         Dictionary $dictionary2
     ) {
-        $dictionaries
-            ->all()
-            ->willReturn(['d1' => $dictionary1, 'd2' => $dictionary2]);
-
-        $dictionaries
-            ->offsetGet('d1')
-            ->willReturn($dictionary1);
+        $dictionary1->getName()->willReturn('d1');
+        $dictionary2->getName()->willReturn('d2');
 
         $dictionary1->getValues()->willReturn(['foo' => 'bar']);
+
+        $dictionaries = new Collection($dictionary1->getWrappedObject(), $dictionary2->getWrappedObject());
+
+        $this->beConstructedWith($dictionaries);
 
         $resolver
             ->setDefault('choices', Argument::that(function ($callable) use ($options) {

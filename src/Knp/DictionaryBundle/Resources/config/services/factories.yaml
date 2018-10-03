@@ -11,7 +11,7 @@ services:
     public: false
     arguments:
       - '@Knp\DictionaryBundle\Dictionary\Factory'
-      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+      - '@Knp\DictionaryBundle\Dictionary\Collection'
     tags:
       - knp_dictionary.factory
 
@@ -46,6 +46,6 @@ services:
   Knp\DictionaryBundle\Dictionary\Factory\Combined:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+      - '@Knp\DictionaryBundle\Dictionary\Collection'
     tags:
       - knp_dictionary.factory

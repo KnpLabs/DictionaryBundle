@@ -43,9 +43,10 @@ knp_dictionary:
             - Bar
             - Baz
 ```
-You will be able to retreive it trough the dictionary registry service:
+You will be able to retreive it trough the dictionaries collection service:
 ```php
-$container->get('knp_dictionary.registry')->get('my_dictionary');
+$dictionaries = $container->get(\Knp\DictionaryBundle\Dictionary\Collection::class);
+$dictionary   = $dictionaries['my_dictionary'];
 ```
 ### Dictionary form type
 
