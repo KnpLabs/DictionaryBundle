@@ -1,0 +1,6 @@
+---
+services:
+
+  knp_dictionary.data_collector.dictionary_data_collector:
+    public: false
+    alias: Knp\DictionaryBundle\DataCollector\DictionaryDataCollector
