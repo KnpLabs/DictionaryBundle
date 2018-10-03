@@ -5,9 +5,8 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Knp\DictionaryBundle\Dictionary\Factory;
-use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\ExtendedDictionary;
+use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
 
 class Extended implements Factory
 {
@@ -19,7 +18,7 @@ class Extended implements Factory
     /**
      * @var DictionaryRegistry
      */
-    private $dictionaryRegistry;
+    private $registry;
 
     /**
      * @param FactoryAggregate $factoryAggregate
@@ -48,10 +47,11 @@ class Extended implements Factory
         $extends = $config['extends'];
         unset($config['extends']);
 
-        $extendedDictionary = $this->factoryAggregate->create($name, $config);
-        $initialDictionary = $this->registry->get($extends);
+        $dictionaries = [];
+        $dictionaries[] = $this->registry->get($extends);
+        $dictionaries[] = $this->factoryAggregate->create($name, $config);
 
-        return new ExtendedDictionary($name, $initialDictionary, $extendedDictionary);
+        return new CombinedDictionary($name, $dictionaries);
     }
 
     /**
