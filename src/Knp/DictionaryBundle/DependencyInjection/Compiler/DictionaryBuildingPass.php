@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -34,7 +35,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
         $definition
             ->setClass(Dictionary::class)
             ->setFactory([
-                new Reference('knp_dictionary.dictionary.factory.factory_aggregate'),
+                new Reference(FactoryAggregate::class),
                 'create',
             ])
             ->addArgument($name)

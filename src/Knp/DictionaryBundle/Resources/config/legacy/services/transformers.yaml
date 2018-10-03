@@ -1,0 +1,10 @@
+---
+services:
+
+  knp_dictionary.dictionary.value_transformer.constant_transformer:
+    public: false
+    alias: Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer
+
+  knp_dictionary.dictionary.value_transformer.transformer_aggregate:
+    public: false
+    alias: Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate

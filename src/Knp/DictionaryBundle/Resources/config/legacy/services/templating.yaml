@@ -1,0 +1,6 @@
+---
+services:
+
+  knp_dictionary.twig.dictionary_extension:
+    public: false
+    alias: Knp\DictionaryBundle\Twig\DictionaryExtension

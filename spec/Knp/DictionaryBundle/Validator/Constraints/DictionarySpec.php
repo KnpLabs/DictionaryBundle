@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
+use Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator;
 use PhpSpec\ObjectBehavior;
 
 class DictionarySpec extends ObjectBehavior
@@ -22,6 +23,6 @@ class DictionarySpec extends ObjectBehavior
     function it_adds_default_values()
     {
         $this->name->shouldReturn('yolo');
-        $this->validatedBy()->shouldReturn('knp_dictionary.dictionary_validator');
+        $this->validatedBy()->shouldReturn(DictionaryValidator::class);
     }
 }

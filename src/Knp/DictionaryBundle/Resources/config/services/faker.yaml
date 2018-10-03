@@ -1,8 +1,7 @@
 ---
 services:
 
-  knp_dictionary.faker.provider.dictionary:
+  Knp\DictionaryBundle\Faker\Provider\Dictionary:
     public: false
-    class: Knp\DictionaryBundle\Faker\Provider\Dictionary
     arguments:
-      - '@knp_dictionary.registry'
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'

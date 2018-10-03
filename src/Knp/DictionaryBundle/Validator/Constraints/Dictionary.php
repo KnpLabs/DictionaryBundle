@@ -27,7 +27,7 @@ class Dictionary extends Constraint
      */
     public function validatedBy()
     {
-        return 'knp_dictionary.dictionary_validator';
+        return DictionaryValidator::class;
     }
 
     /**
