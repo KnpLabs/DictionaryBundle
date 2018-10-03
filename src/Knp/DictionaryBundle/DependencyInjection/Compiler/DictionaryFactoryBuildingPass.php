@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -19,7 +20,7 @@ class DictionaryFactoryBuildingPass implements CompilerPassInterface
     {
         $factories = $container->findTaggedServiceIds(self::TAG_FACTORY);
 
-        $factoryAggregate = $container->findDefinition('knp_dictionary.dictionary.factory.factory_aggregate');
+        $factoryAggregate = $container->findDefinition(FactoryAggregate::class);
 
         foreach (array_keys($factories) as $id) {
             $factoryAggregate->addMethodCall('addFactory', [new Reference($id)]);

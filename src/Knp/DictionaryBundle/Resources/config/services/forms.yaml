@@ -1,10 +1,9 @@
 ---
 services:
 
-  knp_dictionary.form.type.dictionary_type:
+  Knp\DictionaryBundle\Form\Type\DictionaryType:
     public: false
-    class: Knp\DictionaryBundle\Form\Type\DictionaryType
     arguments:
-      - '@knp_dictionary.dictionary.dictionary_registry'
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
     tags:
-      - {name: form.type, alias: dictionary}
+      - form.type

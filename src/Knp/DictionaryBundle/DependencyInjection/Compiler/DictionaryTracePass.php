@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary\TraceableDictionary;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -17,11 +18,11 @@ class DictionaryTracePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (false === $container->has('knp_dictionary.data_collector.dictionary_data_collector')) {
+        if (false === $container->has(DictionaryDataCollector::class)) {
             return;
         }
 
-        $collector = new Reference('knp_dictionary.data_collector.dictionary_data_collector');
+        $collector = new Reference(DictionaryDataCollector::class);
         $services  = $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY);
 
         foreach (array_keys($services) as $id) {
