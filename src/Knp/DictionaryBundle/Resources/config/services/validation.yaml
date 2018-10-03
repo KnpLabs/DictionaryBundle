@@ -4,6 +4,6 @@ services:
   Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+      - '@Knp\DictionaryBundle\Dictionary\Collection'
     tags:
       - validator.constraint_validator

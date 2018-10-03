@@ -4,6 +4,6 @@ services:
   Knp\DictionaryBundle\Form\Type\DictionaryType:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+      - '@Knp\DictionaryBundle\Dictionary\Collection'
     tags:
       - form.type

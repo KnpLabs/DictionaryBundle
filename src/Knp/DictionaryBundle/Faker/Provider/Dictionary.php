@@ -6,16 +6,16 @@ namespace Knp\DictionaryBundle\Faker\Provider;
 
 use Faker\Generator;
 use Faker\Provider\Base;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 
 class Dictionary extends Base
 {
     /**
-     * @var DictionaryRegistry
+     * @var Collection
      */
     private $dictionaries;
 
-    public function __construct(DictionaryRegistry $dictionaries, Generator $generator = null)
+    public function __construct(Collection $dictionaries, Generator $generator = null)
     {
         $this->dictionaries = $dictionaries;
 
@@ -29,6 +29,6 @@ class Dictionary extends Base
 
     public function dictionary(string $name)
     {
-        return self::randomElement($this->dictionaries->get($name)->getKeys());
+        return self::randomElement($this->dictionaries[$name]->getKeys());
     }
 }

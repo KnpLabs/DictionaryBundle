@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Validator\Constraints;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary as Constraint;
 use Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator;
 use PhpSpec\ObjectBehavior;
@@ -16,14 +16,15 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 class DictionaryValidatorSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $dictionaries, ExecutionContextInterface $context, Dictionary $dictionary)
+    function let(ExecutionContextInterface $context, Dictionary $dictionary)
     {
+        $dictionary->getName()->willReturn('dico');
+        $dictionary->getKeys()->willReturn(['the_key']);
+
+        $dictionaries = new Collection($dictionary->getWrappedObject());
+
         $this->beConstructedWith($dictionaries);
         $this->initialize($context);
-
-        $dictionaries->get('dico')->willReturn($dictionary);
-
-        $dictionary->getKeys()->willReturn(['the_key']);
     }
 
     function it_is_initializable()
