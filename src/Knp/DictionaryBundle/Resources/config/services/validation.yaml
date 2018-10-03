@@ -1,0 +1,10 @@
+---
+services:
+
+  knp_dictionary.validator.constraints.dictionary_validator:
+    public: false
+    class: Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator
+    arguments:
+      - '@knp_dictionary.registry'
+    tags:
+      - {name: validator.constraint_validator, alias: knp_dictionary.dictionary_validator}
