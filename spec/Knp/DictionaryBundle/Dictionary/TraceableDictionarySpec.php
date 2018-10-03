@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Assert\Assert;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Dictionary\TraceableDictionary;
 use PhpSpec\ObjectBehavior;
-use Webmozart\Assert\Assert;
 
 class TraceableDictionarySpec extends ObjectBehavior
 {
@@ -77,13 +77,13 @@ class TraceableDictionarySpec extends ObjectBehavior
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        Assert::eq(isset($this['baz']), true);
+        Assert::that(isset($this['baz']))->eq(true);
     }
 
     function it_trace_iteration($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        Assert::eq(iterator_to_array($this->getIterator()->getWrappedObject()), ['foo' => 'bar', 'baz' => null]);
+        Assert::that(iterator_to_array($this->getIterator()->getWrappedObject()))->eq(['foo' => 'bar', 'baz' => null]);
     }
 }
