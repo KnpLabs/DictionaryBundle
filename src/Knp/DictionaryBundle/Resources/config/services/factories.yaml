@@ -1,0 +1,54 @@
+---
+services:
+  knp_dictionary.dictionary.factory.factory_aggregate:
+    public: true
+    class: Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate
+
+  knp_dictionary.dictionary.factory.extended_factory:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\Extended
+    arguments:
+      - '@knp_dictionary.dictionary.factory.factory_aggregate'
+      - '@knp_dictionary.dictionary.dictionary_registry'
+    tags:
+      - {name: knp_dictionary.factory}
+
+  knp_dictionary.dictionary.factory.value:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\Value
+    arguments:
+      - '@knp_dictionary.dictionary.value_transformer.transformer_aggregate'
+    tags:
+      - {name: knp_dictionary.factory}
+
+  knp_dictionary.dictionary.factory.key_value:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\KeyValue
+    arguments:
+      - '@knp_dictionary.dictionary.value_transformer.transformer_aggregate'
+    tags:
+      - {name: knp_dictionary.factory}
+
+  knp_dictionary.dictionary.factory.value_as_key:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey
+    arguments:
+      - '@knp_dictionary.dictionary.value_transformer.transformer_aggregate'
+    tags:
+      - {name: knp_dictionary.factory}
+
+  knp_dictionary.dictionary.factory.callable_factory:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\CallableFactory
+    arguments:
+      - '@service_container'
+    tags:
+      - {name: knp_dictionary.factory}
+
+  knp_dictionary.dictionary.factory.combined_factory:
+    public: false
+    class: Knp\DictionaryBundle\Dictionary\Factory\Combined
+    arguments:
+      - '@knp_dictionary.dictionary.dictionary_registry'
+    tags:
+      - {name: knp_dictionary.factory}
