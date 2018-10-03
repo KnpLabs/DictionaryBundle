@@ -10,5 +10,10 @@ imports:
 
 services:
 
-  Knp\DictionaryBundle\Dictionary\DictionaryRegistry:
+  knp_dictionary.dictionary.dictionary_registry:
     public: true
+    alias: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
+
+  knp_dictionary.registry:
+    public: true
+    alias: Knp\DictionaryBundle\Dictionary\DictionaryRegistry

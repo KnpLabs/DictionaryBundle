@@ -1,0 +1,6 @@
+---
+services:
+
+  knp_dictionary.faker.provider.dictionary:
+    public: false
+    alias: Knp\DictionaryBundle\Faker\Provider\Dictionary

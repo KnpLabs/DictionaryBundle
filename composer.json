@@ -17,12 +17,12 @@
     "minimum-stability": "stable",
     "require": {
         "php": ">=7.0",
-        "symfony/config": "~3.0 || ~4.0",
-        "symfony/dependency-injection": "~3.0 || ~4.0",
-        "symfony/form": "~3.0 || ~4.0",
-        "symfony/http-foundation": "~3.0 || ~4.0",
-        "symfony/http-kernel": "~3.0 || ~4.0",
-        "symfony/validator": "~3.0 || ~4.0",
+        "symfony/config": "~3.3 || ~4.0",
+        "symfony/dependency-injection": "~3.3 || ~4.0",
+        "symfony/form": "~3.3 || ~4.0",
+        "symfony/http-foundation": "~3.3 || ~4.0",
+        "symfony/http-kernel": "~3.3 || ~4.0",
+        "symfony/validator": "~3.3 || ~4.0",
         "twig/twig": "~1.12 || ~2.0"
     },
     "require-dev": {
