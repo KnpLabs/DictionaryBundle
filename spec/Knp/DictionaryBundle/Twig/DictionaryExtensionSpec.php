@@ -6,21 +6,23 @@ namespace spec\Knp\DictionaryBundle\Twig;
 
 use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Twig\DictionaryExtension;
 use PhpSpec\ObjectBehavior;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
-    function let(DictionaryRegistry $registry, Dictionary $dico1, Dictionary $dico2)
+    function let(Dictionary $dico1, Dictionary $dico2)
     {
-        $this->beConstructedWith($registry);
-
-        $registry->get('test')->willReturn($dico1);
-        $registry->get('other')->willReturn($dico2);
+        $dico1->getName()->willReturn('test');
+        $dico2->getName()->willReturn('other');
 
         $dico1->offsetGet('foo')->willReturn('bar');
         $dico2->offsetGet('foo')->willReturn(false);
+
+        $dictionaries = new Collection($dico1->getWrappedObject(), $dico2->getWrappedObject());
+
+        $this->beConstructedWith($dictionaries);
     }
 
     function it_is_initializable()

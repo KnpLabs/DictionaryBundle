@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Knp\DictionaryBundle\Dictionary;
 
 use AppendIterator;
@@ -18,10 +20,6 @@ class CombinedDictionary implements Dictionary
      */
     private $dictionaries;
 
-    /**
-     * @param string $name
-     * @param array $dictionaries
-     */
     public function __construct(string $name, array $dictionaries)
     {
         $this->name         = $name;
@@ -65,7 +63,7 @@ class CombinedDictionary implements Dictionary
      */
     public function offsetExists($offset)
     {
-        return in_array($offset, $this->getKeys());
+        return \in_array($offset, $this->getKeys());
     }
 
     /**
@@ -80,7 +78,7 @@ class CombinedDictionary implements Dictionary
         }
 
         throw new InvalidArgumentException(
-            sprintf('Undefined offset "%s"', $offset)
+            sprintf('Undefined offset "%s".', $offset)
         );
     }
 
@@ -98,7 +96,7 @@ class CombinedDictionary implements Dictionary
         }
 
         throw new InvalidArgumentException(
-            sprintf('Undefined offset "%s"', $offset)
+            sprintf('Undefined offset "%s".', $offset)
         );
     }
 

@@ -4,4 +4,4 @@ services:
   Knp\DictionaryBundle\Faker\Provider\Dictionary:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+      - '@Knp\DictionaryBundle\Dictionary\Collection'

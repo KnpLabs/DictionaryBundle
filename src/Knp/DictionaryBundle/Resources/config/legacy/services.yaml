@@ -10,6 +10,11 @@ imports:
 
 services:
 
+  Knp\DictionaryBundle\Dictionary\DictionaryRegistry:
+    public: true
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\Collection'
+
   knp_dictionary.dictionary.dictionary_registry:
     public: true
     alias: Knp\DictionaryBundle\Dictionary\DictionaryRegistry

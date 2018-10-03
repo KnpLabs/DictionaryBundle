@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Form\Type;
 
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -13,11 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class DictionaryType extends AbstractType
 {
     /**
-     * @var DictionaryRegistry
+     * @var Collection
      */
     private $dictionaries;
 
-    public function __construct(DictionaryRegistry $dictionaries)
+    public function __construct(Collection $dictionaries)
     {
         $this->dictionaries = $dictionaries;
     }
@@ -39,7 +39,7 @@ class DictionaryType extends AbstractType
         $resolver
             ->setDefault('choices', $choices)
             ->setRequired(['name'])
-            ->setAllowedValues('name', array_keys($this->dictionaries->all()));
+            ->setAllowedValues('name', array_keys(iterator_to_array($this->dictionaries)));
     }
 
     /**

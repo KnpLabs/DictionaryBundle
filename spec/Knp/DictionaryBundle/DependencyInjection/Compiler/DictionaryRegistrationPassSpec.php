@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,22 +18,22 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
         $this->shouldHaveType(DictionaryRegistrationPass::class);
     }
 
-    function it_registers_dictionaries(ContainerBuilder $container, Definition $registry)
+    function it_registers_dictionaries(ContainerBuilder $container, Definition $dictionaries)
     {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
-        $container->getDefinition(DictionaryRegistry::class)->willReturn($registry);
+        $container->getDefinition(Collection::class)->willReturn($dictionaries);
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);
 
-        $registry->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
             return 'foo' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
-        $registry->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
             return 'bar' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
-        $registry->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
             return 'baz' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 

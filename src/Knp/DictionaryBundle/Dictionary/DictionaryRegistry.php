@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayAccess;
-use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
@@ -15,25 +14,44 @@ use RuntimeException;
 class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
 {
     /**
+     * @var Collection
+     */
+    private $collection;
+
+    public function __construct(Collection $collection)
+    {
+        @trigger_error(
+            sprintf(
+                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
+                __CLASS__,
+                Collection::class
+            ),
+            E_USER_DEPRECATED
+        );
+
+        $this->collection = $collection;
+    }
+
+    /**
      * @var Dictionary[]
      */
     private $dictionaries = [];
 
     public function add(Dictionary $dictionary)
     {
-        $this->set($dictionary->getName(), $dictionary);
+        $this->collection->add($dictionary);
     }
 
     public function set(string $key, Dictionary $dictionary)
     {
-        if (isset($this->dictionaries[$key])) {
+        if (isset($this->collection[$key])) {
             throw new RuntimeException(sprintf(
                 'The key "%s" already exists in the dictionary registry.',
                 $key
             ));
         }
 
-        $this->dictionaries[$key] = $dictionary;
+        $this->add($dictionary);
     }
 
     /**
@@ -41,7 +59,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function all(): array
     {
-        return $this->dictionaries;
+        return iterator_to_array($this->collection);
     }
 
     /**
@@ -49,7 +67,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function get(string $offset): Dictionary
     {
-        return $this->offsetGet($offset);
+        return $this->collection[$offset];
     }
 
     /**
@@ -57,7 +75,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function offsetExists($offset)
     {
-        return isset($this->dictionaries[$offset]);
+        return isset($this->collection[$offset]);
     }
 
     /**
@@ -78,7 +96,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
             ));
         }
 
-        return $this->dictionaries[$offset];
+        return $this->get($offset);
     }
 
     /**
@@ -112,7 +130,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function count()
     {
-        return \count($this->dictionaries);
+        return \count($this->collection);
     }
 
     /**
@@ -120,6 +138,6 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     public function getIterator()
     {
-        return new ArrayIterator($this->dictionaries);
+        return $this->collection->getIterator();
     }
 }
