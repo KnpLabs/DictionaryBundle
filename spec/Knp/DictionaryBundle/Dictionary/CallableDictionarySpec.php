@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
+use Assert\Assert;
 use Exception;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use PhpSpec\ObjectBehavior;
-use Webmozart\Assert\Assert;
 
 class CallableDictionarySpec extends ObjectBehavior
 {
@@ -52,14 +52,14 @@ class CallableDictionarySpec extends ObjectBehavior
     {
         $dictionary = $this->getWrappedObject();
 
-        Assert::eq($dictionary['foo'], 0);
-        Assert::eq(isset($dictionary['foo']), true);
+        Assert::that($dictionary['foo'])->eq(0);
+        Assert::that(isset($dictionary['foo']))->eq(true);
 
         $dictionary['foo'] = 'test';
-        Assert::eq($dictionary['foo'], 'test');
+        Assert::that($dictionary['foo'])->eq('test');
 
         unset($dictionary['foo']);
-        Assert::eq(isset($dictionary['foo']), false);
+        Assert::that(isset($dictionary['foo']))->eq(false);
     }
 
     function it_provides_a_set_of_values()
@@ -97,9 +97,9 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_access_to_value_like_an_array()
     {
-        Assert::eq($this['foo']->getWrappedObject(), 0);
-        Assert::eq($this['bar']->getWrappedObject(), 1);
-        Assert::eq($this['baz']->getWrappedObject(), 2);
+        Assert::that($this['foo']->getWrappedObject())->eq(0);
+        Assert::that($this['bar']->getWrappedObject())->eq(1);
+        Assert::that($this['baz']->getWrappedObject())->eq(2);
     }
 
     function it_throws_an_exception_if_callable_returns_somthing_else_than_an_array_or_an_array_access($nothing)
@@ -117,7 +117,7 @@ class CallableDictionarySpec extends ObjectBehavior
         $iterator = $this->getIterator();
         $iterator->shouldHaveType('Iterator');
 
-        Assert::eq(iterator_to_array($iterator->getWrappedObject()), [
+        Assert::that(iterator_to_array($iterator->getWrappedObject()))->eq([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,

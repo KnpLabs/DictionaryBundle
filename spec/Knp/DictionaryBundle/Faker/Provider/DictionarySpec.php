@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Faker\Provider;
 
+use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use Knp\DictionaryBundle\Faker\Provider\Dictionary;
 use PhpSpec\ObjectBehavior;
-use Webmozart\Assert\Assert;
 
 class DictionarySpec extends ObjectBehavior
 {
@@ -42,7 +42,7 @@ class DictionarySpec extends ObjectBehavior
     {
         return [
             'beOneOf' => function (string $value, array $array) {
-                Assert::oneOf($value, $array);
+                Assert::that($value)->inArray($array);
 
                 return true;
             },
