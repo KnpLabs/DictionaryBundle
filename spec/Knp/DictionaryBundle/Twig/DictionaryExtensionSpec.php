@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Twig;
 
+use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use Knp\DictionaryBundle\Twig\DictionaryExtension;
 use PhpSpec\ObjectBehavior;
-use Webmozart\Assert\Assert;
 
 class DictionaryExtensionSpec extends ObjectBehavior
 {
@@ -33,8 +33,8 @@ class DictionaryExtensionSpec extends ObjectBehavior
         $filters   = $this->getFilters();
         $functions = $this->getFunctions();
 
-        Assert::eq(current($filters->getWrappedObject())->getName(), 'dictionary');
-        Assert::eq(current($functions->getWrappedObject())->getName(), 'dictionary');
+        Assert::that(current($filters->getWrappedObject())->getName())->eq('dictionary');
+        Assert::that(current($functions->getWrappedObject())->getName())->eq('dictionary');
     }
 
     function it_has_a_name()
