@@ -124,6 +124,33 @@ knp_dictionary:
 Callable dictionaries are loaded with a lazy strategy. It means that the callable
 will not be called if you do not use the dictionary.
 
+### Combined dictionary
+
+You can combine multiple dictionaries into a single one:
+```yaml
+knp_dictionary:
+  dictionaries:
+    payment_mode:
+      type: key_value
+      content:
+        card: "credit card"
+        none: "none"
+
+    extra_payment_mode:
+      type: key_value
+      content:
+        bank_transfert: "Bank transfert"
+        other: "Other"
+
+    combined_payment_mode:
+      type: combined
+      dictionaries:
+        - payment_mode
+        - extra_payment_mode
+```
+Now you have 3 dictionaries, `payment_mode` and `extra_payment_mode` contains 
+their own values but `combined_payment_mode` contains all the values of the previous ones.
+
 ### Extended dictionary
 
 You can create an extended dictionary:
@@ -146,7 +173,7 @@ knp_dictionary:
 The dictionary `world` will now contains its own values in addition
 to the `europe` values.
 
-*Note*: You must define the initial dictionary *BEFORE* the extended one.
+**Note**: You must define the initial dictionary **BEFORE** the extended one.
 
 ## Transformers
 For now, this bundle is only able to resolve your **class constants**:
