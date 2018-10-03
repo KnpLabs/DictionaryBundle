@@ -10,5 +10,5 @@ imports:
 
 services:
 
-  Knp\DictionaryBundle\Dictionary\DictionaryRegistry:
+  Knp\DictionaryBundle\Dictionary\Collection:
     public: true
