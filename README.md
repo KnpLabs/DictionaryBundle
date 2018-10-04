@@ -9,13 +9,9 @@ Are you often tired to repeat static choices like gender or civility in your app
 - Symfony >= 3.0
 
 ## Installation
-Add the DictionaryBundle to your `composer.json`:
-```yaml
-{
-    "require": {
-        "knplabs/dictionary-bundle": "~2.0"
-    }
-}
+Run the following command:
+```bash
+composer require knplabs/dictionary-bundle
 ```
 Register the bundle in ``app/AppKernel.php``
 
