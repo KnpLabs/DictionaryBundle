@@ -23,7 +23,7 @@
         "symfony/http-foundation": "~3.3 || ~4.0",
         "symfony/http-kernel": "~3.3 || ~4.0",
         "symfony/validator": "~3.3 || ~4.0",
-        "twig/twig": "~1.12 || ~2.0"
+        "twig/twig": "^2.0"
     },
     "require-dev": {
         "beberlei/assert": "^3.0",
@@ -41,6 +41,11 @@
     "autoload": {
         "psr-4": {
             "Knp\\DictionaryBundle\\": "src/Knp/DictionaryBundle"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Knp\\DictionaryBundle\\": "spec/Knp/DictionaryBundle"
         }
     },
     "extra": {
