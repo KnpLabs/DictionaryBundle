@@ -6,26 +6,24 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
-use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 
 class Extended implements Factory
 {
     /**
-     * @var Dictionary\Factory\FactoryAggregate
+     * @var Dictionary\Factory
      */
-    private $factoryAggregate;
+    private $factory;
 
     /**
      * @var Dictionary\Collection
      */
     private $dictionaries;
 
-    public function __construct(Dictionary\FactoryAggregate $factoryAggregate, Dictionary\Collection $dictionaries)
+    public function __construct(Dictionary\Factory $factory, Dictionary\Collection $dictionaries)
     {
-        $this->factoryAggregate = $factoryAggregate;
-        $this->dictionaries     = $dictionaries;
+        $this->factory      = $factory;
+        $this->dictionaries = $dictionaries;
     }
 
     /**
@@ -33,7 +31,7 @@ class Extended implements Factory
      */
     public function create(string $name, array $config): Dictionary
     {
-        if (false === $this->factoryAggregate->supports($config)) {
+        if (false === $this->factory->supports($config)) {
             throw new InvalidArgumentException(sprintf(
                 'The dictionary with named "%s" cannot be created.',
                 $name
@@ -46,7 +44,7 @@ class Extended implements Factory
 
         $dictionaries   = [];
         $dictionaries[] = $this->dictionaries[$extends];
-        $dictionaries[] = $this->factoryAggregate->create($name, $config);
+        $dictionaries[] = $this->factory->create($name, $config);
 
         return new Dictionary\Combined($name, $dictionaries);
     }

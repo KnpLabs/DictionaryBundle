@@ -7,14 +7,13 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\Factory;
-use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
 use PhpSpec\ObjectBehavior;
 
 class ExtendedSpec extends ObjectBehavior
 {
-    function let(FactoryAggregate $factoryAggregate)
+    function let(Factory $factory)
     {
-        $this->beConstructedWith($factoryAggregate, new Collection());
+        $this->beConstructedWith($factory, new Collection());
     }
 
     function it_is_initializable()
@@ -32,7 +31,7 @@ class ExtendedSpec extends ObjectBehavior
         $this->supports(['extends' => 'my_dictionary'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary($factoryAggregate, Dictionary $initialDictionary, Dictionary $extendsDictionary)
+    function it_creates_a_dictionary($factory, Dictionary $initialDictionary, Dictionary $extendsDictionary)
     {
         $initialDictionary->getName()->willReturn('initial_dictionary');
         $initialDictionary->getValues()->willReturn(['foo1', 'foo2']);
@@ -42,16 +41,16 @@ class ExtendedSpec extends ObjectBehavior
 
         $dictionaries = new Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
 
-        $this->beConstructedWith($factoryAggregate, $dictionaries);
+        $this->beConstructedWith($factory, $dictionaries);
 
         $config = [
             'content' => ['bar1', 'bar2', 'bar3'],
         ];
 
-        $factoryAggregate->create('yolo', $config)->willReturn($extendsDictionary);
+        $factory->create('yolo', $config)->willReturn($extendsDictionary);
 
         $config = array_merge($config, ['extends' => 'initial_dictionary']);
-        $factoryAggregate->supports($config)->willReturn(true);
+        $factory->supports($config)->willReturn(true);
 
         $dictionary = $this->create('yolo', $config);
 
