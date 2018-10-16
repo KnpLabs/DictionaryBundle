@@ -43,6 +43,11 @@
             "Knp\\DictionaryBundle\\": "src/Knp/DictionaryBundle"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\Knp\\DictionaryBundle\\": "spec/Knp/DictionaryBundle"
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "2.0.x-dev"

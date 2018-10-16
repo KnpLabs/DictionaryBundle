@@ -6,10 +6,9 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
 use PhpSpec\ObjectBehavior;
 
-class CombinedDictionarySpec extends ObjectBehavior
+class CombinedSpec extends ObjectBehavior
 {
     function let(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
     {
@@ -22,7 +21,7 @@ class CombinedDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CombinedDictionary::class);
+        $this->shouldHaveType(Dictionary\Combined::class);
     }
 
     function it_is_a_dictionary()
