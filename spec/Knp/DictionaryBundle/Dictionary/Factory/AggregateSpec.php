@@ -9,16 +9,11 @@ use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 
-class FactoryAggregateSpec extends ObjectBehavior
+class AggregateSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith(new Factory\Aggregate());
-    }
-
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\FactoryAggregate::class);
+        $this->shouldHaveType(Factory\Aggregate::class);
     }
 
     function it_is_a_factory()
