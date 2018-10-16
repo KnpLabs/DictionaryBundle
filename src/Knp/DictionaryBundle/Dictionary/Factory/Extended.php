@@ -13,16 +13,16 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 class Extended implements Factory
 {
     /**
-     * @var FactoryAggregate
+     * @var Dictionary\Factory\FactoryAggregate
      */
     private $factoryAggregate;
 
     /**
-     * @var Collection
+     * @var Dictionary\Collection
      */
     private $dictionaries;
 
-    public function __construct(FactoryAggregate $factoryAggregate, Collection $dictionaries)
+    public function __construct(Dictionary\FactoryAggregate $factoryAggregate, Dictionary\Collection $dictionaries)
     {
         $this->factoryAggregate = $factoryAggregate;
         $this->dictionaries     = $dictionaries;
@@ -48,7 +48,7 @@ class Extended implements Factory
         $dictionaries[] = $this->dictionaries[$extends];
         $dictionaries[] = $this->factoryAggregate->create($name, $config);
 
-        return new CombinedDictionary($name, $dictionaries);
+        return new Dictionary\Combined($name, $dictionaries);
     }
 
     /**

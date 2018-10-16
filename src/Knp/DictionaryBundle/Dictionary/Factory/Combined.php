@@ -10,16 +10,16 @@ use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 
-class Combined implements Factory
+class Combined implements Dictionary\Factory
 {
     const TYPE = 'combined';
 
     /**
-     * @var Collection
+     * @var Dictionary\Collection
      */
     private $dictionaries;
 
-    public function __construct(Collection $dictionaries)
+    public function __construct(Dictionary\Collection $dictionaries)
     {
         $this->dictionaries = $dictionaries;
     }
@@ -40,7 +40,7 @@ class Combined implements Factory
             return $this->dictionaries[$name];
         }, $config['dictionaries']);
 
-        return new CombinedDictionary($name, $dictionaries);
+        return new Dictionary\CombinedDictionary($name, $dictionaries);
     }
 
     /**

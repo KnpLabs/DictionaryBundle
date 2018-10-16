@@ -8,7 +8,7 @@ use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\Factory\Combined;
-use Phpspec\ObjectBehavior;
+use PhpSpec\ObjectBehavior;
 
 class CombinedSpec extends ObjectBehavior
 {
