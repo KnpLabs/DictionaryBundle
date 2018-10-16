@@ -1,5 +1,6 @@
 ---
 services:
+
   Knp\DictionaryBundle\Dictionary\Factory:
     public: true
     alias: Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate
@@ -36,7 +37,7 @@ services:
     tags:
       - knp_dictionary.factory
 
-  Knp\DictionaryBundle\Dictionary\Factory\CallableFactory:
+  Knp\DictionaryBundle\Dictionary\Factory\Invokable:
     public: false
     arguments:
       - '@service_container'

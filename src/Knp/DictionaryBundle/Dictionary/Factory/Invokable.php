@@ -6,28 +6,17 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\CallableDictionary;
-use Knp\DictionaryBundle\Dictionary\Factory;
-use Symfony\Component\DependencyInjection\Container;
+use Psr\Container\ContainerInterface;
 
-class CallableFactory implements Factory
+final class Invokable implements Dictionary\Factory
 {
     /**
-     * @var Container
+     * @var ContainerInterface
      */
     private $container;
 
-    public function __construct(Container $container)
+    public function __construct(ContainerInterface $container)
     {
-        @trigger_error(
-            sprintf(
-                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
-                __CLASS__,
-                Factory\Invokable::class
-            ),
-            E_USER_DEPRECATED
-        );
-
         $this->container = $container;
     }
 
@@ -59,7 +48,7 @@ class CallableFactory implements Factory
             ));
         }
 
-        return new CallableDictionary($name, $callable);
+        return new Dictionary\Invokable($name, $callable);
     }
 
     /**
