@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
-use Knp\DictionaryBundle\Dictionary\TraceableDictionary;
+use Knp\DictionaryBundle\Dictionary\Traceable;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -30,7 +30,7 @@ class DictionaryTracePass implements CompilerPassInterface
 
             $dictionary = new Reference(sprintf('%s.inner', $serviceId));
 
-            $traceable = new Definition(TraceableDictionary::class, [$dictionary, $collector]);
+            $traceable = new Definition(Traceable::class, [$dictionary, $collector]);
             $traceable->setDecoratedService($id);
 
             $container->setDefinition($serviceId, $traceable);
