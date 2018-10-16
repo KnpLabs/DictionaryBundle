@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass;
-use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
+use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -34,7 +34,7 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
             ]);
 
         $container
-            ->findDefinition(FactoryAggregate::class)
+            ->findDefinition(Aggregate::class)
             ->willReturn($aggregate);
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {

@@ -6,18 +6,22 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Factory;
 
-class FactoryAggregate implements Factory
+class FactoryAggregate implements Dictionary\Factory
 {
     /**
-     * @var Factory[]
+     * @var Dictionary\Factory\Aggregate
      */
-    private $factories = [];
+    private $factory;
 
-    public function addFactory(Factory $factory)
+    public function __construct(Dictionary\Factory\Aggregate $aggregate)
     {
-        $this->factories[] = $factory;
+        $this->factory = $aggregate;
+    }
+
+    public function addFactory(Dictionary\Factory $factory)
+    {
+        $this->factory->addFactory($factory);
     }
 
     /**
@@ -27,16 +31,7 @@ class FactoryAggregate implements Factory
      */
     public function create(string $name, array $config): Dictionary
     {
-        foreach ($this->factories as $factory) {
-            if ($factory->supports($config)) {
-                return $factory->create($name, $config);
-            }
-        }
-
-        throw new InvalidArgumentException(sprintf(
-            'The dictionary with named "%s" cannot be created.',
-            $name
-        ));
+        return $this->factory->create($name, $config);
     }
 
     /**
@@ -44,12 +39,6 @@ class FactoryAggregate implements Factory
      */
     public function supports(array $config): bool
     {
-        foreach ($this->factories as $factory) {
-            if ($factory->supports($config)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->factory->supports($config);
     }
 }
