@@ -1,7 +1,7 @@
 ---
 services:
 
-  Knp\DictionaryBundle\Twig\DictionaryExtension:
+  Knp\DictionaryBundle\Templating\Extension\Dictionary:
     public: false
     arguments:
       - '@Knp\DictionaryBundle\Dictionary\Collection'
