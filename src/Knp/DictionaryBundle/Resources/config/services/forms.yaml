@@ -1,0 +1,9 @@
+---
+services:
+
+  Knp\DictionaryBundle\Form\Type\DictionaryType:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+    tags:
+      - form.type

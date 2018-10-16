@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
+use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -21,7 +22,7 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
     {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
-        $container->getDefinition('knp_dictionary.dictionary.dictionary_registry')->willReturn($registry);
+        $container->getDefinition(DictionaryRegistry::class)->willReturn($registry);
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);
 
         $registry->addMethodCall('add', Argument::that(function (array $arguments) {

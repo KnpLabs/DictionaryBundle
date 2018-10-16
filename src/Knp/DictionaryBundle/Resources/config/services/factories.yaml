@@ -1,0 +1,51 @@
+---
+services:
+  Knp\DictionaryBundle\Dictionary\Factory:
+    public: true
+    alias: Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate
+
+  Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate:
+    public: false
+
+  Knp\DictionaryBundle\Dictionary\Factory\Extended:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\Factory'
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+    tags:
+      - knp_dictionary.factory
+
+  Knp\DictionaryBundle\Dictionary\Factory\Value:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+    tags:
+      - knp_dictionary.factory
+
+  Knp\DictionaryBundle\Dictionary\Factory\KeyValue:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+    tags:
+      - knp_dictionary.factory
+
+  Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+    tags:
+      - knp_dictionary.factory
+
+  Knp\DictionaryBundle\Dictionary\Factory\CallableFactory:
+    public: false
+    arguments:
+      - '@service_container'
+    tags:
+      - knp_dictionary.factory
+
+  Knp\DictionaryBundle\Dictionary\Factory\Combined:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+    tags:
+      - knp_dictionary.factory

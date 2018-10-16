@@ -1,0 +1,14 @@
+---
+imports:
+  - resource: 'services/debug.yaml'
+  - resource: 'services/factories.yaml'
+  - resource: 'services/faker.yaml'
+  - resource: 'services/forms.yaml'
+  - resource: 'services/templating.yaml'
+  - resource: 'services/transformers.yaml'
+  - resource: 'services/validation.yaml'
+
+services:
+
+  Knp\DictionaryBundle\Dictionary\DictionaryRegistry:
+    public: true

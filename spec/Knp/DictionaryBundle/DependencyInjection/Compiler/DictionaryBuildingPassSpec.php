@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Assert\Assert;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Webmozart\Assert\Assert;
 
 class DictionaryBuildingPassSpec extends ObjectBehavior
 {
@@ -34,15 +35,15 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                Assert::eq($definition->getClass(), Dictionary::class);
+                Assert::that($definition->getClass())->eq(Dictionary::class);
 
                 $factory = $definition->getFactory();
 
-                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
+                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
 
-                Assert::eq($factory[1], 'create');
+                Assert::that($factory[1])->eq('create');
 
-                Assert::eq($definition->getArguments(), [
+                Assert::that($definition->getArguments())->eq([
                     'dico1',
                     [
                         'type'    => Dictionary::VALUE_AS_KEY,
@@ -50,7 +51,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags())->eq([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -74,15 +75,15 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                Assert::eq($definition->getClass(), 'Knp\DictionaryBundle\Dictionary');
+                Assert::that($definition->getClass())->eq('Knp\DictionaryBundle\Dictionary');
 
                 $factory = $definition->getFactory();
 
-                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
+                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
 
-                Assert::eq($factory[1], 'create');
+                Assert::that($factory[1])->eq('create');
 
-                Assert::eq($definition->getArguments(), [
+                Assert::that($definition->getArguments())->eq([
                     'dico1',
                     [
                         'type'    => Dictionary::VALUE,
@@ -90,7 +91,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -114,15 +115,15 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition) {
-                Assert::eq($definition->getClass(), Dictionary::class);
+                Assert::that($definition->getClass())->eq(Dictionary::class);
 
                 $factory = $definition->getFactory();
 
-                Assert::eq($factory[0]->__toString(), 'knp_dictionary.dictionary.factory.factory_aggregate');
+                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
 
-                Assert::eq($factory[1], 'create');
+                Assert::that($factory[1])->eq('create');
 
-                Assert::eq($definition->getArguments(), [
+                Assert::that($definition->getArguments())->eq([
                     'dico1',
                     [
                         'type'    => Dictionary::KEY_VALUE,
@@ -130,7 +131,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::eq($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags())->eq([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })

@@ -1,0 +1,19 @@
+---
+imports:
+  - resource: 'services/debug.yaml'
+  - resource: 'services/factories.yaml'
+  - resource: 'services/faker.yaml'
+  - resource: 'services/forms.yaml'
+  - resource: 'services/templating.yaml'
+  - resource: 'services/transformers.yaml'
+  - resource: 'services/validation.yaml'
+
+services:
+
+  knp_dictionary.dictionary.dictionary_registry:
+    public: true
+    alias: Knp\DictionaryBundle\Dictionary\DictionaryRegistry
+
+  knp_dictionary.registry:
+    public: true
+    alias: Knp\DictionaryBundle\Dictionary\DictionaryRegistry

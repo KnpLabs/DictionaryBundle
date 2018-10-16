@@ -1,0 +1,7 @@
+---
+services:
+
+  Knp\DictionaryBundle\DataCollector\DictionaryDataCollector:
+    public: false
+    tags:
+      - {name: data_collector, template: "@KnpDictionary/layout.html.twig", id: dictionary}

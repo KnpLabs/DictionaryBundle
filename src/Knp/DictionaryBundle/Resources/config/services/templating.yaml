@@ -1,0 +1,9 @@
+---
+services:
+
+  Knp\DictionaryBundle\Twig\DictionaryExtension:
+    public: false
+    arguments:
+      - '@Knp\DictionaryBundle\Dictionary\DictionaryRegistry'
+    tags:
+      - twig.extension

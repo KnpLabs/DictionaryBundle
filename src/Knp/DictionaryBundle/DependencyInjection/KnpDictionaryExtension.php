@@ -6,7 +6,7 @@ namespace Knp\DictionaryBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class KnpDictionaryExtension extends Extension
@@ -20,10 +20,12 @@ class KnpDictionaryExtension extends Extension
         $config        = $this->processConfiguration($configuration, $config);
         $container->setParameter('knp_dictionary.configuration', $config);
 
-        $loader = new XmlFileLoader(
+        $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')
         );
-        $loader->load('dictionary.xml');
+
+        $loader->load('services.yaml');
+        $loader->load('legacy/services.yaml');
     }
 }
