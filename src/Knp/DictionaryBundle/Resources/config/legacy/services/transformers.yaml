@@ -8,3 +8,15 @@ services:
   knp_dictionary.dictionary.value_transformer.transformer_aggregate:
     public: false
     alias: Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate
+
+  Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer:
+    public: false
+
+  Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate:
+    public: false
+    calls:
+      - [addTransformer, ['@Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer']]
+
+  Knp\DictionaryBundle\Dictionary\ValueTransformer:
+    public: false
+    alias: Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate

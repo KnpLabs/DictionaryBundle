@@ -16,6 +16,15 @@ class FactoryAggregate implements Dictionary\Factory
 
     public function __construct(Dictionary\Factory\Aggregate $aggregate)
     {
+        @trigger_error(
+            sprintf(
+                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
+                __CLASS__,
+                Dictionary\Factory\Aggregate::class
+            ),
+            E_USER_DEPRECATED
+        );
+
         $this->factory = $aggregate;
     }
 
