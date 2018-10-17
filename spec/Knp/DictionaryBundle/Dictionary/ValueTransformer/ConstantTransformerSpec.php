@@ -20,6 +20,11 @@ class ConstantTransformerSpec extends ObjectBehavior
         $this->supports('foo')->shouldReturn(false);
     }
 
+    function it_doesnt_support_integers()
+    {
+        $this->supports(0)->shouldReturn(false);
+    }
+
     function it_doesnt_support_non_existing_classes()
     {
         $this->supports('My\Awesome\Non\Existing\Class::CONST')->shouldReturn(false);
