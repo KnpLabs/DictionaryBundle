@@ -6,7 +6,7 @@ DictionaryBundle
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
 ## Requirements
-- Symfony >= 3.0
+- Symfony >= 3.3
 
 ## Installation
 Run the following command:
@@ -33,11 +33,11 @@ You can ping us if need some reviews/comments/help:
 Define dictionaries in your config.yml file:
 ```yaml
 knp_dictionary:
-    dictionaries:
-        my_dictionary:      # your dictionary name
-            - Foo           # your dictionary content
-            - Bar
-            - Baz
+  dictionaries:
+    my_dictionary: # your dictionary name
+      - Foo        # your dictionary content
+      - Bar
+      - Baz
 ```
 You will be able to retreive it trough the dictionaries collection service:
 ```php
@@ -54,18 +54,7 @@ use Knp\DictionaryBundle\Form\Type\DictionaryType;
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
-        // PHP ~5.5.9 syntax
         ->add('civility', DictionaryType::class, array(
-            'name' => 'my_dictionary'
-        ))
-
-        // PHP ~5.3.9+ syntax
-        ->add('civility', 'Knp\DictionaryBundle\Form\Type\DictionaryType', array(
-            'name' => 'my_dictionary'
-        ))
-
-        // PHP ~5.3.9+ (deprecated since Symfony 3.0)
-        ->add('civility', 'dictionary', array(
             'name' => 'my_dictionary'
         ))
     ;
@@ -94,13 +83,13 @@ class User
 You can specify the indexation mode of each dictionary
 ```yaml
 knp_dictionary:
-    dictionaries:
-        my_dictionary:                  # your dictionary name
-            type: 'key_value'           # your dictionary type
-            content:                    # your dictionary content
-                "foo": "foo_value"
-                "bar": "bar_value"
-                "baz": "baz_value"
+  dictionaries:
+    my_dictionary:      # your dictionary name
+      type: 'key_value' # your dictionary type
+      content:          # your dictionary content
+        "foo": "foo_value"
+        "bar": "bar_value"
+        "baz": "baz_value"
 ```
 ### Available types
 - `value` (default) : Natural indexation
@@ -112,11 +101,11 @@ knp_dictionary:
 You can create a callable dictionary:
 ```yaml
 knp_dictionary:
-    dictionaries:
-        my_callable_dictionary:         # your dictionary name
-            type: 'callable'            # your dictionary type
-            service: 'app.service.id'   # a valid service from your application
-            method: 'getSomething'      # the method name to execute
+  dictionaries:
+    my_callable_dictionary:     # your dictionary name
+      type: 'callable'          # your dictionary type
+      service: 'app.service.id' # a valid service from your application
+      method: 'getSomething'    # the method name to execute
 ```
 Callable dictionaries are loaded with a lazy strategy. It means that the callable
 will not be called if you do not use the dictionary.
@@ -153,19 +142,19 @@ their own values but `combined_payment_mode` contains all the values of the prev
 You can create an extended dictionary:
 ```yaml
 knp_dictionary:
-    dictionaries:
-        europe:
-            type: 'key_value'
-            content:
-                fr: France
-                de: Germany
+  dictionaries:
+    europe:
+      type: 'key_value'
+      content:
+        fr: France
+        de: Germany
 
-        world:
-            type: 'key_value'
-            extends: europe
-            content:
-                us: USA
-                ca: Canada
+    world:
+      type: 'key_value'
+      extends: europe
+      content:
+        us: USA
+        ca: Canada
 ```
 The dictionary `world` will now contain its own values in addition
 to the `europe` values.
@@ -177,9 +166,9 @@ For now, this bundle is only able to resolve your **class constants**:
 
 ```yaml
 my_dictionary:
-    - MyClass::MY_CONSTANT
-    - Foo
-    - Bar
+  - MyClass::MY_CONSTANT
+  - Foo
+  - Bar
 ```
 You want to add other kinds of transformations for your dictionary values ?
 Feel free to create your own transformer !
@@ -190,10 +179,9 @@ Create your class that implements [TransformerInterface](src/Knp/DictionaryBundl
 Load your transformer and tag it as `knp_dictionary.value_transformer`.
 ```yaml
 services:
-    my_bundle.my_namespace.my_transformer:
-        class: %my_transformer_class%
-            tags:
-                - { name: knp_dictionary.value_transformer }
+  App\My\Transformer:
+    tags:
+      - knp_dictionary.value_transformer
 ```
 
 ## Use your dictionary in twig
@@ -226,10 +214,10 @@ if you use the awesome [knplabs/rad-fixtures-load](https://github.com/knplabs/ra
 
 ```yaml
 App\Entity\User:
-    john_doe:
-        firstname: John
-        latnale: Doe
-        city: <dictionary('cities')>
+  john_doe:
+    firstname: John
+    latnale: Doe
+    city: <dictionary('cities')>
 ```
 
 ## Create your own dictionary implementation
@@ -243,11 +231,8 @@ Your dictionary implementation must implements the interface [Dictionary](src/Kn
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
 
 ```yaml
-
 services:
-    app.dictionary.factory.my_custom_factory:
-        class: App\Dictionary\Factory\MyCustomFactory
-        tags:
-            { name: 'knp_dictionary.factory' }
-
+  App\Dictionary\Factory\MyCustomFactory:
+    tags:
+      - knp_dictionary.factory
 ```
