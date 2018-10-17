@@ -12,27 +12,27 @@ use PhpSpec\ObjectBehavior;
 
 class CombinedSpec extends ObjectBehavior
 {
-    public function let()
+    function let()
     {
         $this->beConstructedWith(new Collection());
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(Combined::class);
     }
 
-    public function it_is_a_factory()
+    function it_is_a_factory()
     {
         $this->shouldHaveType(Factory::class);
     }
 
-    public function it_supports_specific_config()
+    function it_supports_specific_config()
     {
         $this->supports(['type' => 'combined'])->shouldReturn(true);
     }
 
-    public function it_creates_a_dictionary(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
+    function it_creates_a_dictionary(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
     {
         $dictionary1->getValues()->willReturn([
             'foo1' => 'foo10',

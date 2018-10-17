@@ -6,9 +6,6 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
-use Knp\DictionaryBundle\Dictionary\CombinedDictionary;
-use Knp\DictionaryBundle\Dictionary\Factory;
 
 class Combined implements Dictionary\Factory
 {
