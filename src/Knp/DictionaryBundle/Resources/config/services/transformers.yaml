@@ -1,14 +1,14 @@
 ---
 services:
 
-  Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer:
+  Knp\DictionaryBundle\ValueTransformer\Constant:
     public: false
 
-  Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate:
+  Knp\DictionaryBundle\ValueTransformer\Aggregate:
     public: false
     calls:
-      - [addTransformer, ['@Knp\DictionaryBundle\Dictionary\ValueTransformer\ConstantTransformer']]
+      - [addTransformer, ['@Knp\DictionaryBundle\ValueTransformer\Constant']]
 
-  Knp\DictionaryBundle\Dictionary\ValueTransformer:
+  Knp\DictionaryBundle\ValueTransformer:
     public: false
-    alias: Knp\DictionaryBundle\Dictionary\ValueTransformer\TransformerAggregate
+    alias: Knp\DictionaryBundle\ValueTransformer\Aggregate

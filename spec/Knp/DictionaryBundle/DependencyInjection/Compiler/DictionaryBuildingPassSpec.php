@@ -8,7 +8,7 @@ use Assert\Assert;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate;
+use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -39,7 +39,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
@@ -79,7 +79,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
@@ -119,7 +119,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(FactoryAggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
