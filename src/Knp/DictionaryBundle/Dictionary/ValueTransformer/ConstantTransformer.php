@@ -19,6 +19,10 @@ class ConstantTransformer implements ValueTransformer
      */
     public function supports($value): bool
     {
+        if (false === \is_string($value)) {
+            return false;
+        }
+
         $matches = [];
 
         if (0 === preg_match($this->pattern, $value, $matches)) {
