@@ -74,7 +74,7 @@ The dictionary form type extends the [symfony's choice type](http://symfony.com/
 
 ### Validation constraint
 
-You can also use the constraint for validation. The `value` have to be set.
+You can also use the constraint for validation. The `value` has to be set.
 
 ```php
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
@@ -144,7 +144,7 @@ knp_dictionary:
         - payment_mode
         - extra_payment_mode
 ```
-Now you have 3 dictionaries, `payment_mode` and `extra_payment_mode` contains 
+Now you have 3 dictionaries, `payment_mode` and `extra_payment_mode` contain 
 their own values but `combined_payment_mode` contains all the values of the previous ones.
 
 ### Extended dictionary
@@ -166,7 +166,7 @@ knp_dictionary:
                 us: USA
                 ca: Canada
 ```
-The dictionary `world` will now contains its own values in addition
+The dictionary `world` will now contain its own values in addition
 to the `europe` values.
 
 **Note**: You must define the initial dictionary **BEFORE** the extended one.
