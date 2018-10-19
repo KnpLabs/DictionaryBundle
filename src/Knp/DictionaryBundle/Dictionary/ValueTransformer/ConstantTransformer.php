@@ -5,38 +5,32 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
-use ReflectionClass;
+use Knp\DictionaryBundle\ValueTransformer\Constant;
 
 class ConstantTransformer implements ValueTransformer
 {
     /**
-     * @var string
+     * @var Constant
      */
-    private $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
+    private $transformer;
 
-    /**
-     * {@inheritdoc}
-     */
+    public function __construct()
+    {
+        @trigger_error(
+            sprintf(
+                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
+                __CLASS__,
+                Constant::class
+            ),
+            E_USER_DEPRECATED
+        );
+
+        $this->transformer = new Constant();
+    }
+
     public function supports($value): bool
     {
-        if (false === \is_string($value)) {
-            return false;
-        }
-
-        $matches = [];
-
-        if (0 === preg_match($this->pattern, $value, $matches)) {
-            return false;
-        }
-
-        if (false === class_exists($matches['class']) && false === interface_exists($matches['class'])) {
-            return false;
-        }
-
-        $class     = new ReflectionClass($matches['class']);
-        $constants = $class->getConstants();
-
-        return array_key_exists($matches['constant'], $constants);
+        return $this->transformer->supports($value);
     }
 
     /**
@@ -44,12 +38,6 @@ class ConstantTransformer implements ValueTransformer
      */
     public function transform($value)
     {
-        $matches = [];
-
-        preg_match($this->pattern, $value, $matches);
-
-        $class = new ReflectionClass($matches['class']);
-
-        return $class->getConstant($matches['constant']);
+        return $this->transformer->transform($value);
     }
 }

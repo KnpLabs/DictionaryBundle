@@ -6,15 +6,16 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\ValueTransformer;
 
 class ValueAsKey implements Dictionary\Factory
 {
     /**
-     * @var Dictionary\ValueTransformer
+     * @var ValueTransformer
      */
     protected $transformer;
 
-    public function __construct(Dictionary\ValueTransformer $transformer)
+    public function __construct(ValueTransformer $transformer)
     {
         $this->transformer = $transformer;
     }

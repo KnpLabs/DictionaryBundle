@@ -19,21 +19,21 @@ services:
   Knp\DictionaryBundle\Dictionary\Factory\Value:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+      - '@Knp\DictionaryBundle\ValueTransformer'
     tags:
       - knp_dictionary.factory
 
   Knp\DictionaryBundle\Dictionary\Factory\KeyValue:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+      - '@Knp\DictionaryBundle\ValueTransformer'
     tags:
       - knp_dictionary.factory
 
   Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey:
     public: false
     arguments:
-      - '@Knp\DictionaryBundle\Dictionary\ValueTransformer'
+      - '@Knp\DictionaryBundle\ValueTransformer'
     tags:
       - knp_dictionary.factory
 

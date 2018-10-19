@@ -5,17 +5,37 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary\ValueTransformer;
 
 use Knp\DictionaryBundle\Dictionary\ValueTransformer;
+use Knp\DictionaryBundle\ValueTransformer\Aggregate;
 
 class TransformerAggregate implements ValueTransformer
 {
     /**
-     * @var ValueTransformer[]
+     * @var Aggregate
      */
-    private $transformers = [];
+    private $transformer;
+
+    public function __construct()
+    {
+        @trigger_error(
+            sprintf(
+                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
+                __CLASS__,
+                Aggregate::class
+            ),
+            E_USER_DEPRECATED
+        );
+
+        $this->transformer = new Aggregate();
+    }
 
     public function addTransformer(ValueTransformer $transformer)
     {
-        $this->transformers[] = $transformer;
+        $this->transformer->addTransformer($transformer);
+    }
+
+    public function supports($value): bool
+    {
+        return $this->transformer->supports($value);
     }
 
     /**
@@ -23,26 +43,6 @@ class TransformerAggregate implements ValueTransformer
      */
     public function transform($value)
     {
-        foreach ($this->transformers as $transformer) {
-            if ($transformer->supports($value)) {
-                return $transformer->transform($value);
-            }
-        }
-
-        return $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function supports($value): bool
-    {
-        foreach ($this->transformers as $transformer) {
-            if ($transformer->supports($value)) {
-                return true;
-            }
-        }
-
-        return false;
+        return $this->transformer->transform($value);
     }
 }
