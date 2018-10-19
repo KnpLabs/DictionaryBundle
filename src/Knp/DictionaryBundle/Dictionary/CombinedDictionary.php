@@ -14,7 +14,7 @@ class CombinedDictionary implements Dictionary
     {
         @trigger_error(
             sprintf(
-                'Class %s is deprecated since version 2.1, to be removed in 3.0. Use %s instead.',
+                'Class %s is deprecated since version 2.2, to be removed in 3.0. Use %s instead.',
                 __CLASS__,
                 Combined::class
             ),

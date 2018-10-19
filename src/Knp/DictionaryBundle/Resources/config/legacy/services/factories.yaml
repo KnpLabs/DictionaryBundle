@@ -29,10 +29,6 @@ services:
     public: false
     alias: Knp\DictionaryBundle\Dictionary\Factory\Combined
 
-  Knp\DictionaryBundle\Dictionary\Factory:
-    public: true
-    alias: Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate
-
   Knp\DictionaryBundle\Dictionary\Factory\FactoryAggregate:
     public: false
     arguments:

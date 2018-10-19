@@ -37,7 +37,7 @@ class Combined implements Dictionary\Factory
             return $this->dictionaries[$name];
         }, $config['dictionaries']);
 
-        return new Dictionary\CombinedDictionary($name, $dictionaries);
+        return new Dictionary\Combined($name, $dictionaries);
     }
 
     /**
