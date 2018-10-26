@@ -31,6 +31,5 @@ class KnpDictionaryExtension extends Extension
         );
 
         $loader->load('services.yaml');
-        $loader->load('legacy/services.yaml');
     }
 }

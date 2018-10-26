@@ -1,6 +1,0 @@
----
-services:
-
-  knp_dictionary.form.type.dictionary_type:
-    public: false
-    alias: Knp\DictionaryBundle\Form\Type\DictionaryType
