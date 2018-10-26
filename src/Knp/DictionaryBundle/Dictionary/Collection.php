@@ -7,12 +7,13 @@ namespace Knp\DictionaryBundle\Dictionary;
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
+use Iterator;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
 
-final class Collection implements ArrayAccess, IteratorAggregate, Countable
+final class Collection implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * @var Dictionary[]
@@ -31,7 +32,7 @@ final class Collection implements ArrayAccess, IteratorAggregate, Countable
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->dictionaries);
     }
@@ -57,12 +58,12 @@ final class Collection implements ArrayAccess, IteratorAggregate, Countable
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         return new ArrayIterator($this->dictionaries);
     }
 
-    public function count()
+    public function count(): int
     {
         return \count($this->dictionaries);
     }

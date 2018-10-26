@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle;
 
 use ArrayAccess;
+use Countable;
 use IteratorAggregate;
 
-interface Dictionary extends ArrayAccess, IteratorAggregate
+interface Dictionary extends ArrayAccess, Countable, IteratorAggregate
 {
     const VALUE        = 'value';
     const VALUE_AS_KEY = 'value_as_key';

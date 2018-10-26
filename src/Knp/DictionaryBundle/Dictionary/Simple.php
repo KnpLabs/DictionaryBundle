@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
+use Iterator;
 use Knp\DictionaryBundle\Dictionary;
 
 final class Simple implements Dictionary
@@ -52,7 +53,7 @@ final class Simple implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return array_key_exists($offset, $this->values);
     }
@@ -84,8 +85,13 @@ final class Simple implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         return new ArrayIterator($this->values);
+    }
+
+    public function count(): int
+    {
+        return \count($this->values);
     }
 }
