@@ -6,6 +6,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
 use InvalidArgumentException;
+use Iterator;
 use Knp\DictionaryBundle\Dictionary;
 
 final class Invokable implements Dictionary
@@ -68,7 +69,7 @@ final class Invokable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->hydrate();
 
@@ -108,7 +109,7 @@ final class Invokable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): Iterator
     {
         $this->hydrate();
 
@@ -133,5 +134,12 @@ final class Invokable implements Dictionary
         }
 
         $this->values = $values;
+    }
+
+    public function count(): int
+    {
+        $this->hydrate();
+
+        return \count($this->values);
     }
 }

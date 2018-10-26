@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use IteratorAggregate;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 
@@ -56,7 +57,7 @@ class Traceable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->trace();
 
@@ -96,15 +97,15 @@ class Traceable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function getIterator()
+    public function getIterator(): IteratorAggregate
     {
         $this->trace();
 
-        return $this->dictionary->getIterator();
+        return $this->dictionary;
     }
 
     /**
-     * Register this dictioanry as used.
+     * Register this dictionary as used.
      */
     private function trace(): void
     {
@@ -113,5 +114,12 @@ class Traceable implements Dictionary
             $this->dictionary->getKeys(),
             array_values($this->dictionary->getValues())
         );
+    }
+
+    public function count(): int
+    {
+        $this->trace();
+
+        return $this->dictionary->count();
     }
 }

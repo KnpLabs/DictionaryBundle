@@ -74,31 +74,40 @@ class CombinedSpec extends ObjectBehavior
         ]);
     }
 
-    function it_can_merge_dictionaries_naturally_indexed($dictionary1, $dictionary2, $dictionary3)
+    function it_can_iterate_over_dictionaries($dictionary1, $dictionary2, $dictionary3)
     {
         $dictionary1->getIterator()->willReturn(new ArrayIterator([
-            'foo10',
-            'foo20',
+            'foo1' => 'foo10',
+            'foo2' => 'foo20',
         ]));
 
         $dictionary2->getIterator()->willReturn(new ArrayIterator([
-            'bar10',
-            'bar20',
+            'bar1' => 'bar10',
+            'bar2' => 'bar20',
         ]));
 
         $dictionary3->getIterator()->willReturn(new ArrayIterator([
-            'baz10',
-            'baz20',
+            'foo2' => 'baz20',
+            'bar2' => 'baz20',
         ]));
 
-        $this->shouldIterateOn([
-            'foo10',
-            'foo20',
-            'bar10',
-            'bar20',
-            'baz10',
-            'baz20',
+        $this->shouldIterateOver([
+            'foo1' => 'foo10',
+            'foo2' => 'baz20',
+            'bar1' => 'bar10',
+            'bar2' => 'baz20',
         ]);
+    }
+
+    function it_sums_the_count_of_elements($dictionary1, $dictionary2, $dictionary3)
+    {
+        $dictionary1->count()->willReturn(1);
+
+        $dictionary2->count()->willReturn(2);
+
+        $dictionary3->count()->willReturn(4);
+
+        $this->count()->shouldReturn(7);
     }
 
     function its_getname_should_return_dictionary_name()
@@ -109,8 +118,10 @@ class CombinedSpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'iterateOn' => function (Traversable $iterator, array $array) {
-                return iterator_to_array($iterator) === $array;
+            'iterateOver' => function (IteratorAggregate $iterator, array $array): bool {
+                Assert::that(iterator_to_array($iterator))->eq($array);
+
+                return true;
             },
         ];
     }

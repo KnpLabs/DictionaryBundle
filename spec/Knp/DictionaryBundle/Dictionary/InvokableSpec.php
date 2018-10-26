@@ -125,6 +125,11 @@ class InvokableSpec extends ObjectBehavior
         $this->getName()->shouldReturn('foo');
     }
 
+    function it_returns_the_count_of_elements()
+    {
+        $this->count()->shouldReturn(3);
+    }
+
     public function getMatchers(): array
     {
         return [

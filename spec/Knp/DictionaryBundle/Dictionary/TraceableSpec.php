@@ -96,4 +96,9 @@ class TraceableSpec extends ObjectBehavior
             },
         ];
     }
+
+    function it_delegates_the_count_to_the_other_dictionary()
+    {
+        $this->count()->shouldReturn(2);
+    }
 }

@@ -6,10 +6,11 @@ use Pedrotroller\Symfony\IntegrationChecker\ConfigurableKernel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
+use Knp\DictionaryBundle\Dictionary\Collection;
 
 $test = function (KernelInterface $kernel) {
-    if (false === $kernel->getContainer()->get('knp_dictionary.registry') instanceof DictionaryRegistry) {
-        throw new Exception('Service "knp_dictionary.registry" unavailable.');
+    if (false === $kernel->getContainer()->get(Collection::class) instanceof Collection) {
+        throw new Exception('Service "Knp\DictionaryBundle\Dictionary\Collection" unavailable.');
     }
 };
 
