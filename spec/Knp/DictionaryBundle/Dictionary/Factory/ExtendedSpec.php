@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use ArrayIterator;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -32,10 +33,10 @@ class ExtendedSpec extends ObjectBehavior
     function it_creates_a_dictionary($factory, Dictionary $initialDictionary, Dictionary $extendsDictionary)
     {
         $initialDictionary->getName()->willReturn('initial_dictionary');
-        $initialDictionary->getValues()->willReturn(['foo1', 'foo2']);
+        $initialDictionary->getIterator()->willReturn(new ArrayIterator(['foo1', 'foo2']));
 
         $extendsDictionary->getName()->willReturn('extends_dictionary');
-        $extendsDictionary->getValues()->willReturn(['bar1', 'bar2', 'bar3']);
+        $extendsDictionary->getIterator()->willReturn(new ArrayIterator(['bar1', 'bar2', 'bar3']));
 
         $dictionaries = new Dictionary\Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
 

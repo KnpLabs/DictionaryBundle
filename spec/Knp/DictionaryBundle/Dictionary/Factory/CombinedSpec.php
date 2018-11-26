@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
+use ArrayIterator;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -31,22 +32,13 @@ class CombinedSpec extends ObjectBehavior
 
     function it_creates_a_dictionary(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
     {
-        $dictionary1->getValues()->willReturn([
-            'foo1' => 'foo10',
-            'foo2' => 'foo20',
-        ]);
+        $dictionary1->getIterator()->willReturn(new ArrayIterator(['foo1' => 'foo10', 'foo2' => 'foo20']));
         $dictionary1->getName()->willReturn('dictionary1');
 
-        $dictionary2->getValues()->willReturn([
-            'bar1' => 'bar10',
-            'bar2' => 'bar20',
-        ]);
+        $dictionary2->getIterator()->willReturn(new ArrayIterator(['bar1' => 'bar10', 'bar2' => 'bar20']));
         $dictionary2->getName()->willReturn('dictionary2');
 
-        $dictionary3->getValues()->willReturn([
-            'foo2' => 'baz20',
-            'bar2' => 'baz20',
-        ]);
+        $dictionary3->getIterator()->willReturn(new ArrayIterator(['foo2' => 'baz20', 'bar2' => 'baz20']));
         $dictionary3->getName()->willReturn('dictionary3');
 
         $this->beConstructedWith(new Dictionary\Collection($dictionary1->getWrappedObject(), $dictionary2->getWrappedObject(), $dictionary3->getWrappedObject()));
