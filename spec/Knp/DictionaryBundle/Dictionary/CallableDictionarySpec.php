@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Assert\Assert;
 use Exception;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use PhpSpec\ObjectBehavior;
+use Traversable;
 
 class CallableDictionarySpec extends ObjectBehavior
 {
@@ -31,7 +30,7 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CallableDictionary::class);
+        $this->shouldHaveType(Dictionary\CallableDictionary::class);
     }
 
     function it_is_a_dictionary()
@@ -52,14 +51,14 @@ class CallableDictionarySpec extends ObjectBehavior
     {
         $dictionary = $this->getWrappedObject();
 
-        Assert::that($dictionary['foo'])->eq(0);
-        Assert::that(isset($dictionary['foo']))->eq(true);
+        $this['foo']->shouldReturn(0);
+        $this->offsetExists('foo')->shouldReturn(true);
 
-        $dictionary['foo'] = 'test';
-        Assert::that($dictionary['foo'])->eq('test');
+        $this['foo'] = 'test';
+        $this['foo']->shouldReturn('test');
 
-        unset($dictionary['foo']);
-        Assert::that(isset($dictionary['foo']))->eq(false);
+        unset($this['foo']);
+        $this->offsetExists('foo')->shouldReturn(false);
     }
 
     function it_provides_a_set_of_values()
@@ -97,9 +96,9 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_access_to_value_like_an_array()
     {
-        Assert::that($this['foo']->getWrappedObject())->eq(0);
-        Assert::that($this['bar']->getWrappedObject())->eq(1);
-        Assert::that($this['baz']->getWrappedObject())->eq(2);
+        $this['foo']->shouldReturn(0);
+        $this['bar']->shouldReturn(1);
+        $this['baz']->shouldReturn(2);
     }
 
     function it_throws_an_exception_if_callable_returns_somthing_else_than_an_array_or_an_array_access($nothing)
@@ -114,10 +113,7 @@ class CallableDictionarySpec extends ObjectBehavior
 
     function it_generates_an_iterator()
     {
-        $iterator = $this->getIterator();
-        $iterator->shouldHaveType('Iterator');
-
-        Assert::that(iterator_to_array($iterator->getWrappedObject()))->eq([
+        $this->shouldIterateOn([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
@@ -127,6 +123,15 @@ class CallableDictionarySpec extends ObjectBehavior
     function its_getname_should_return_dictionary_name()
     {
         $this->getName()->shouldReturn('foo');
+    }
+
+    public function getMatchers(): array
+    {
+        return [
+            'iterateOn' => function (Traversable $iterator, array $array) {
+                return iterator_to_array($iterator) === $array;
+            },
+        ];
     }
 
     public function execution()

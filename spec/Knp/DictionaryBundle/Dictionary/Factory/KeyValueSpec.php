@@ -5,25 +5,24 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
-use Knp\DictionaryBundle\Dictionary\Factory;
-use Knp\DictionaryBundle\Dictionary\ValueTransformer;
+use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
 class KeyValueSpec extends ObjectBehavior
 {
-    function let(ValueTransformer $transformer)
+    function let(Dictionary\ValueTransformer $transformer)
     {
         $this->beConstructedWith($transformer);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\KeyValue::class);
+        $this->shouldHaveType(Dictionary\Factory\KeyValue::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Factory::class);
+        $this->shouldHaveType(Dictionary\Factory::class);
     }
 
     function it_supports_specific_config()

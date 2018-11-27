@@ -18,11 +18,11 @@ class DictionaryRegistrationPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        $dictionaries = $container->getDefinition(Collection::class);
-        $services     = $container->findTaggedServiceIds(self::TAG_DICTIONARY);
-
-        foreach (array_keys($services) as $id) {
-            $dictionaries->addMethodCall('add', [new Reference($id)]);
+        foreach ($container->findTaggedServiceIds(self::TAG_DICTIONARY) as $id => $tags) {
+            $container
+                ->getDefinition(Collection::class)
+                ->addMethodCall('add', [new Reference($id)])
+            ;
         }
     }
 }

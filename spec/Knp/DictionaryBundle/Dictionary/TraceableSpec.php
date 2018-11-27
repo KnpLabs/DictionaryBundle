@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
+use Traversable;
 
 class TraceableSpec extends ObjectBehavior
 {
@@ -75,13 +75,25 @@ class TraceableSpec extends ObjectBehavior
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        Assert::that(isset($this['baz']))->eq(true);
+        $this->offsetExists('baz')->shouldReturn(true);
     }
 
     function it_trace_iteration($collector)
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        Assert::that(iterator_to_array($this->getIterator()->getWrappedObject()))->eq(['foo' => 'bar', 'baz' => null]);
+        $this->shouldIterateOn([
+            'foo' => 'bar',
+            'baz' => null,
+        ]);
+    }
+
+    public function getMatchers(): array
+    {
+        return [
+            'iterateOn' => function (Traversable $iterator, array $array) {
+                return iterator_to_array($iterator) === $array;
+            },
+        ];
     }
 }

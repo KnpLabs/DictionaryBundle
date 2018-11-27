@@ -32,8 +32,8 @@ class DictionarySpec extends ObjectBehavior
         $filters   = $this->getFilters();
         $functions = $this->getFunctions();
 
-        Assert::that(current($filters->getWrappedObject())->getName())->eq('dictionary');
-        Assert::that(current($functions->getWrappedObject())->getName())->eq('dictionary');
+        $filters[0]->getName()->shouldReturn('dictionary');
+        $functions[0]->getName()->shouldReturn('dictionary');
     }
 
     function it_has_a_name()
