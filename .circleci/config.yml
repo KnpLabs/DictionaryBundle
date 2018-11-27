@@ -1,0 +1,93 @@
+---
+version: 2
+
+composer_lower: &composer_lower
+  run: |
+    composer global require hirak/prestissimo --no-progress
+    composer update --prefer-lowest --prefer-stable
+
+composer_highter: &composer_highter
+  run: |
+    composer global require hirak/prestissimo --no-progress
+    composer update
+
+tests: &tests
+  run: |
+      echo "PHPSpec tests"
+      rm phpspec.yml
+      vendor/bin/phpspec -n -fpretty run -v
+      echo ""
+      echo "Integration tests"
+      echo ""
+      vendor/bin/symfony-integration-checker check
+      echo ""
+      echo "Linter tests"
+      echo ""
+      vendor/bin/php-cs-fixer fix --diff || (echo "Coding standards are not respected. Run 'vendor/bin/php-cs-fixer fix'" && exit 1)
+
+jobs:
+
+  php 7.0:
+    docker:
+      - image: circleci/php:7.0
+    steps:
+      - checkout
+      - <<: *composer_highter
+      - <<: *tests
+
+  php 7.0 with lowest dependencies:
+    docker:
+      - image: circleci/php:7.0
+    steps:
+      - checkout
+      - <<: *composer_lower
+      - <<: *tests
+
+  php 7.1:
+    docker:
+      - image: circleci/php:7.1
+    steps:
+      - checkout
+      - <<: *composer_highter
+      - <<: *tests
+
+  php 7.1 with lowest dependencies:
+    docker:
+      - image: circleci/php:7.1
+    steps:
+      - checkout
+      - <<: *composer_lower
+      - <<: *tests
+
+  php 7.2:
+    docker:
+      - image: circleci/php:7.2
+    steps:
+      - checkout
+      - <<: *composer_highter
+      - <<: *tests
+
+  php 7.2 with lowest dependencies:
+    docker:
+      - image: circleci/php:7.2
+    steps:
+      - checkout
+      - <<: *composer_lower
+      - <<: *tests
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - php 7.0
+      - php 7.0 with lowest dependencies:
+          requires:
+            - php 7.0
+      - php 7.1
+      - php 7.1 with lowest dependencies:
+          requires:
+            - php 7.1
+      - php 7.2
+      - php 7.2 with lowest dependencies:
+          requires:
+            - php 7.2
