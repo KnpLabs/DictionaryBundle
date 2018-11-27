@@ -27,22 +27,6 @@ tests: &tests
 
 jobs:
 
-  php 7.0:
-    docker:
-      - image: circleci/php:7.0
-    steps:
-      - checkout
-      - <<: *composer_highter
-      - <<: *tests
-
-  php 7.0 with lowest dependencies:
-    docker:
-      - image: circleci/php:7.0
-    steps:
-      - checkout
-      - <<: *composer_lower
-      - <<: *tests
-
   php 7.1:
     docker:
       - image: circleci/php:7.1
@@ -79,10 +63,6 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - php 7.0
-      - php 7.0 with lowest dependencies:
-          requires:
-            - php 7.0
       - php 7.1
       - php 7.1 with lowest dependencies:
           requires:

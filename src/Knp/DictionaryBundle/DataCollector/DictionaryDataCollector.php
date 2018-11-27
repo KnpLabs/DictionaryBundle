@@ -14,11 +14,11 @@ class DictionaryDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, Exception $exception = null)
+    public function collect(Request $request, Response $response, Exception $exception = null): void
     {
     }
 
-    public function addDictionary($name, array $keys, array $values)
+    public function addDictionary($name, array $keys, array $values): void
     {
         $this->data[$name] = array_map(function ($key, $value) {
             return ['key' => $key, 'value' => $value];
@@ -36,7 +36,7 @@ class DictionaryDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function reset()
+    public function reset(): void
     {
     }
 

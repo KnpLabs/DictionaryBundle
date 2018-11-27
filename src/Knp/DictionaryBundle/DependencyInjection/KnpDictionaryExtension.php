@@ -14,7 +14,7 @@ class KnpDictionaryExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $config, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
         $config        = $this->processConfiguration($configuration, $config);

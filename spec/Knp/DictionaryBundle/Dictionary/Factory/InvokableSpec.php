@@ -57,7 +57,8 @@ class InvokableSpec extends ObjectBehavior
 
 class Mock
 {
-    public function getYolo()
+    public function getYolo(): array
     {
+        return [];
     }
 }

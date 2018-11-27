@@ -26,7 +26,7 @@ final class Collection implements ArrayAccess, IteratorAggregate, Countable
         }
     }
 
-    public function add(Dictionary $dictionary)
+    public function add(Dictionary $dictionary): void
     {
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
@@ -50,14 +50,14 @@ final class Collection implements ArrayAccess, IteratorAggregate, Countable
         return $this->dictionaries[$offset];
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new RuntimeException(
             'To add a Dictionary to the Collection, use Knp\DictionaryBundle\Dictionary\Collection::add(Dictionary $dictionary).'
         );
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }

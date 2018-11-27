@@ -16,7 +16,7 @@ class DictionaryBuildingPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $configuration = $container->getParameter('knp_dictionary.configuration');
 

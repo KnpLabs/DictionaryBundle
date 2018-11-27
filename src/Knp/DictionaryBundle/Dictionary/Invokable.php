@@ -88,7 +88,7 @@ final class Invokable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->hydrate();
 
@@ -98,7 +98,7 @@ final class Invokable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->hydrate();
 
@@ -118,7 +118,7 @@ final class Invokable implements Dictionary
     /**
      * Hydrate values from callable.
      */
-    private function hydrate()
+    private function hydrate(): void
     {
         if (null !== $this->values) {
             return;
