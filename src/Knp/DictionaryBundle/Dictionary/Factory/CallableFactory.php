@@ -6,11 +6,10 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\CallableDictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Symfony\Component\DependencyInjection\Container;
 
-class CallableFactory implements Factory
+class CallableFactory implements Dictionary\Factory
 {
     /**
      * @var Container
@@ -59,7 +58,7 @@ class CallableFactory implements Factory
             ));
         }
 
-        return new CallableDictionary($name, $callable);
+        return new Dictionary\CallableDictionary($name, $callable);
     }
 
     /**

@@ -5,25 +5,23 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
-use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 
 class ExtendedSpec extends ObjectBehavior
 {
-    function let(Factory $factory)
+    function let(Dictionary\Factory $factory)
     {
-        $this->beConstructedWith($factory, new Collection());
+        $this->beConstructedWith($factory, new Dictionary\Collection());
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\Extended::class);
+        $this->shouldHaveType(Dictionary\Factory\Extended::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Factory::class);
+        $this->shouldHaveType(Dictionary\Factory::class);
     }
 
     function it_supports_specific_config()
@@ -39,7 +37,7 @@ class ExtendedSpec extends ObjectBehavior
         $extendsDictionary->getName()->willReturn('extends_dictionary');
         $extendsDictionary->getValues()->willReturn(['bar1', 'bar2', 'bar3']);
 
-        $dictionaries = new Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
+        $dictionaries = new Dictionary\Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
 
         $this->beConstructedWith($factory, $dictionaries);
 

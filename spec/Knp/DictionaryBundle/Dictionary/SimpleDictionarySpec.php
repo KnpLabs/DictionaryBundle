@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\SimpleDictionary;
 use PhpSpec\ObjectBehavior;
@@ -32,9 +31,9 @@ class SimpleDictionarySpec extends ObjectBehavior
 
     function it_access_to_value_like_an_array()
     {
-        Assert::that($this['foo']->getWrappedObject())->eq(0);
-        Assert::that($this['bar']->getWrappedObject())->eq(1);
-        Assert::that($this['baz']->getWrappedObject())->eq(2);
+        $this['foo']->shouldReturn(0);
+        $this['bar']->shouldReturn(1);
+        $this['baz']->shouldReturn(2);
     }
 
     function its_getvalues_should_return_dictionary_values()

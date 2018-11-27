@@ -13,12 +13,12 @@ class AggregateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\Aggregate::class);
+        $this->shouldHaveType(Dictionary\Factory\Aggregate::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Factory::class);
+        $this->shouldHaveType(Dictionary\Factory::class);
     }
 
     function it_supports_if_one_factory_supports(Factory $factory1, Factory $factory2, Factory $factory3)

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -43,9 +42,9 @@ class CombinedSpec extends ObjectBehavior
         $dictionary3->offsetExists('baz1')->willReturn(true);
         $dictionary3->offsetGet('baz1')->willReturn('baz10');
 
-        Assert::that($this['foo1']->getWrappedObject())->eq('foo10');
-        Assert::that($this['bar1']->getWrappedObject())->eq('bar10');
-        Assert::that($this['baz1']->getWrappedObject())->eq('baz10');
+        $this['foo1']->shouldBe('foo10');
+        $this['bar1']->shouldBe('bar10');
+        $this['baz1']->shouldBe('baz10');
     }
 
     function it_getvalues_should_return_dictionaries_values($dictionary1, $dictionary2, $dictionary3)

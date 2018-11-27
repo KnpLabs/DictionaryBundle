@@ -5,11 +5,9 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use ArrayAccess;
-use Assert\Assert;
 use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
 use PhpSpec\ObjectBehavior;
 use RuntimeException;
 
@@ -24,7 +22,7 @@ class CollectionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Collection::class);
+        $this->shouldHaveType(Dictionary\Collection::class);
     }
 
     function it_is_an_array_access()
@@ -44,8 +42,8 @@ class CollectionSpec extends ObjectBehavior
 
     function it_should_entry_if_it_exists($dictionary)
     {
-        Assert::that(isset($this->getWrappedObject()['foo']))->eq(true);
-        Assert::that(isset($this->getWrappedObject()['baz']))->eq(false);
+        $this->offsetExists('foo')->shouldBe(true);
+        $this->offsetExists('baz')->shouldBe(false);
     }
 
     function it_counts_entries()

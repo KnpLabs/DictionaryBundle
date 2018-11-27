@@ -5,26 +5,23 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
-use Knp\DictionaryBundle\Dictionary\Factory;
-use Knp\DictionaryBundle\Dictionary\Factory\Combined;
 use PhpSpec\ObjectBehavior;
 
 class CombinedSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new Collection());
+        $this->beConstructedWith(new Dictionary\Collection());
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Combined::class);
+        $this->shouldHaveType(Dictionary\Factory\Combined::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Factory::class);
+        $this->shouldHaveType(Dictionary\Factory::class);
     }
 
     function it_supports_specific_config()
@@ -52,7 +49,7 @@ class CombinedSpec extends ObjectBehavior
         ]);
         $dictionary3->getName()->willReturn('dictionary3');
 
-        $this->beConstructedWith(new Collection($dictionary1->getWrappedObject(), $dictionary2->getWrappedObject(), $dictionary3->getWrappedObject()));
+        $this->beConstructedWith(new Dictionary\Collection($dictionary1->getWrappedObject(), $dictionary2->getWrappedObject(), $dictionary3->getWrappedObject()));
 
         $config = [
             'type'         => 'combined',

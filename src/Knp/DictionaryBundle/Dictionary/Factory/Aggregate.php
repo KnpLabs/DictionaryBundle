@@ -6,9 +6,8 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Factory;
 
-class Aggregate implements Factory
+class Aggregate implements Dictionary\Factory
 {
     /**
      * @var Dictionary\Factory[]

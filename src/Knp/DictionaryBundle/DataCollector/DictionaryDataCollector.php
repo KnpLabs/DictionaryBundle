@@ -25,10 +25,7 @@ class DictionaryDataCollector extends DataCollector
         }, $keys, $values);
     }
 
-    /**
-     * @return array
-     */
-    public function getDictionaries()
+    public function getDictionaries(): array
     {
         return $this->data;
     }

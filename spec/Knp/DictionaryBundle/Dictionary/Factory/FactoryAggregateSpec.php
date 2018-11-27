@@ -6,28 +6,30 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 
 class FactoryAggregateSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(new Factory\Aggregate());
+        $this->beConstructedWith(new Dictionary\Factory\Aggregate());
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\FactoryAggregate::class);
+        $this->shouldHaveType(Dictionary\Factory\FactoryAggregate::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Factory::class);
+        $this->shouldHaveType(Dictionary\Factory::class);
     }
 
-    function it_supports_if_one_factory_supports(Factory $factory1, Factory $factory2, Factory $factory3)
-    {
+    function it_supports_if_one_factory_supports(
+        Dictionary\Factory $factory1,
+        Dictionary\Factory $factory2,
+        Dictionary\Factory $factory3
+    ) {
         $this->addFactory($factory1);
         $this->addFactory($factory2);
 
@@ -43,9 +45,9 @@ class FactoryAggregateSpec extends ObjectBehavior
     }
 
     function it_uses_its_factory_to_build_a_dictionary(
-        Factory $factory1,
-        Factory $factory2,
-        Factory $factory3,
+        Dictionary\Factory $factory1,
+        Dictionary\Factory $factory2,
+        Dictionary\Factory $factory3,
         Dictionary $dictionary
     ) {
         $this->addFactory($factory1);
@@ -62,9 +64,9 @@ class FactoryAggregateSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_no_factory_supports_the_config(
-        Factory $factory1,
-        Factory $factory2,
-        Factory $factory3
+        Dictionary\Factory $factory1,
+        Dictionary\Factory $factory2,
+        Dictionary\Factory $factory3
     ) {
         $this->addFactory($factory1);
         $this->addFactory($factory2);
