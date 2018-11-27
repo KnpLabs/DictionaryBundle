@@ -28,7 +28,7 @@ class TransformerAggregate implements ValueTransformer
         $this->transformer = new Aggregate();
     }
 
-    public function addTransformer(ValueTransformer $transformer)
+    public function addTransformer(ValueTransformer $transformer): void
     {
         $this->transformer->addTransformer($transformer);
     }

@@ -85,7 +85,7 @@ class Combined implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         foreach ($this->dictionaries as $dictionary) {
             if ($dictionary->offsetExists($offset)) {
@@ -103,7 +103,7 @@ class Combined implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         foreach ($this->dictionaries as $dictionary) {
             if ($dictionary->offsetExists($offset)) {

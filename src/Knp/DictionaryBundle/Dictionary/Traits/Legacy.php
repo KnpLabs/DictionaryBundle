@@ -36,12 +36,12 @@ trait Legacy
         return $this->dictionary->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->dictionary->offsetSet($offset, $value);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->dictionary->offsetUnset($offset);
     }

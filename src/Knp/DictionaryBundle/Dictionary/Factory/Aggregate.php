@@ -15,7 +15,7 @@ class Aggregate implements Factory
      */
     private $factories = [];
 
-    public function addFactory(Dictionary\Factory $factory)
+    public function addFactory(Dictionary\Factory $factory): void
     {
         $this->factories[] = $factory;
     }

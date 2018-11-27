@@ -103,7 +103,7 @@ class InvokableSpec extends ObjectBehavior
 
     function it_throws_an_exception_if_callable_returns_somthing_else_than_an_array_or_an_array_access($nothing)
     {
-        $this->beConstructedWith('foo', function () {
+        $this->beConstructedWith('foo', function (): void {
         });
 
         $this

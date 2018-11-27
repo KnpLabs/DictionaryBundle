@@ -68,7 +68,7 @@ final class Simple implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->values[$offset] = $value;
     }
@@ -76,7 +76,7 @@ final class Simple implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->values[$offset]);
     }

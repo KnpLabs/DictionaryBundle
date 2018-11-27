@@ -13,7 +13,7 @@ final class Aggregate implements ValueTransformer
      */
     private $transformers = [];
 
-    public function addTransformer(ValueTransformer $transformer)
+    public function addTransformer(ValueTransformer $transformer): void
     {
         $this->transformers[] = $transformer;
     }

@@ -57,7 +57,8 @@ class CallableFactorySpec extends ObjectBehavior
 
 class MockedService
 {
-    public function getYolo()
+    public function getYolo(): array
     {
+        return [];
     }
 }

@@ -16,7 +16,7 @@ class DictionaryRegistrationPass implements CompilerPassInterface
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $dictionaries = $container->getDefinition(Collection::class);
         $services     = $container->findTaggedServiceIds(self::TAG_DICTIONARY);

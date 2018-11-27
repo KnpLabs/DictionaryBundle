@@ -37,12 +37,12 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      */
     private $dictionaries = [];
 
-    public function add(Dictionary $dictionary)
+    public function add(Dictionary $dictionary): void
     {
         $this->collection->add($dictionary);
     }
 
-    public function set(string $key, Dictionary $dictionary)
+    public function set(string $key, Dictionary $dictionary): void
     {
         if (isset($this->collection[$key])) {
             throw new RuntimeException(sprintf(
@@ -104,7 +104,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      *
      * @throw RuntimeException
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         throw new RuntimeException(
             'You can\'t use Knp\DictionaryBundle\Dictionary\Dictionary::offsetSet. Please use '.
@@ -117,7 +117,7 @@ class DictionaryRegistry implements ArrayAccess, IteratorAggregate, Countable
      *
      * @throw RuntimeException
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         throw new RuntimeException(
             'You can\'t destroy a dictionary registry value. It\'s used as application '.
