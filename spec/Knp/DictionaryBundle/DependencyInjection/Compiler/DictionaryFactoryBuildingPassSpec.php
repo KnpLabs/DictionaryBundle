@@ -37,17 +37,17 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
             ->findDefinition(Aggregate::class)
             ->willReturn($aggregate);
 
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
+        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
             expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory1');
         }));
 
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
+        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
             expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory2');
         }));
 
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference) {
+        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
             expect($reference)->toHaveType(Reference::class);
             expect($reference->__toString())->toBe('factory3');
         }));

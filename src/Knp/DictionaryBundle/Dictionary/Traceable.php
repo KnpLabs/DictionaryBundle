@@ -76,7 +76,7 @@ class Traceable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         $this->dictionary->offsetSet($offset, $value);
 
@@ -86,7 +86,7 @@ class Traceable implements Dictionary
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         $this->dictionary->offsetUnset($offset);
 
@@ -106,7 +106,7 @@ class Traceable implements Dictionary
     /**
      * Register this dictioanry as used.
      */
-    private function trace()
+    private function trace(): void
     {
         $this->collector->addDictionary(
             $this->dictionary->getName(),

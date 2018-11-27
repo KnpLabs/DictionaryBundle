@@ -16,7 +16,7 @@ class KnpDictionaryBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(new DictionaryBuildingPass());
         $container->addCompilerPass(new DictionaryFactoryBuildingPass());

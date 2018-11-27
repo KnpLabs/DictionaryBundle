@@ -28,7 +28,7 @@ class FactoryAggregate implements Dictionary\Factory
         $this->factory = $aggregate;
     }
 
-    public function addFactory(Dictionary\Factory $factory)
+    public function addFactory(Dictionary\Factory $factory): void
     {
         $this->factory->addFactory($factory);
     }
