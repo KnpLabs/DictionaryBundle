@@ -17,8 +17,13 @@ class KnpDictionaryExtension extends Extension
     public function load(array $config, ContainerBuilder $container): void
     {
         $configuration = new Configuration();
-        $config        = $this->processConfiguration($configuration, $config);
-        $container->setParameter('knp_dictionary.configuration', $config);
+
+        $container
+            ->setParameter(
+                'knp_dictionary.configuration',
+                $this->processConfiguration($configuration, $config)
+            )
+        ;
 
         $loader = new YamlFileLoader(
             $container,

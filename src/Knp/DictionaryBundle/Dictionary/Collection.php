@@ -39,12 +39,7 @@ final class Collection implements ArrayAccess, IteratorAggregate, Countable
     public function offsetGet($offset)
     {
         if (false === $this->offsetExists($offset)) {
-            throw new DictionaryNotFoundException(sprintf(
-                'The dictionary "%s" has not been found in the dictionaries collection. '.
-                'Known dictionaries are: "%s".',
-                $offset,
-                implode('", "', array_keys($this->dictionaries))
-            ));
+            throw new DictionaryNotFoundException($offset, array_keys($this->dictionaries));
         }
 
         return $this->dictionaries[$offset];

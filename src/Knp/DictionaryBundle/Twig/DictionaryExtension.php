@@ -5,18 +5,17 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Twig;
 
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
 use Twig_SimpleFilter;
 use Twig_SimpleFunction;
 
 class DictionaryExtension extends \Twig_Extension
 {
     /**
-     * @var Collection
+     * @var Dictionary\Collection
      */
     private $dictionaries;
 
-    public function __construct(Collection $dictionaries)
+    public function __construct(Dictionary\Collection $dictionaries)
     {
         @trigger_error(
             sprintf(
