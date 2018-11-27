@@ -1,6 +1,6 @@
 DictionaryBundle
 ================
-[![Build Status](https://travis-ci.org/KnpLabs/DictionaryBundle.svg)](https://travis-ci.org/KnpLabs/DictionaryBundle)
+[![CircleCI](https://circleci.com/gh/KnpLabs/DictionaryBundle.svg?style=svg)](https://circleci.com/gh/KnpLabs/DictionaryBundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/KnpLabs/DictionaryBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/KnpLabs/DictionaryBundle/?branch=master)
 
 Are you often tired to repeat static choices like gender or civility in your apps ?
