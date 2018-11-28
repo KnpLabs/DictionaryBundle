@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use AppendIterator;
-use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 
-class Combined implements Dictionary
+final class Combined implements Dictionary
 {
+    use Traits\Wrapper;
+
     /**
      * @var string
      */
@@ -22,107 +22,31 @@ class Combined implements Dictionary
 
     public function __construct(string $name, array $dictionaries)
     {
-        $this->name         = $name;
-        $this->dictionaries = $dictionaries;
+        $this->dictionary = new Invokable($name, function () use ($dictionaries) {
+            $data = [];
+
+            foreach ($dictionaries as $dictionary) {
+                $data = $this->merge($data, iterator_to_array($dictionary));
+            }
+
+            return $data;
+        });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getName(): string
+    private function merge(array $array1, array $array2): array
     {
-        return $this->name;
-    }
+        if ($array1 === array_values($array1) && $array2 === array_values($array2)) {
+            return array_merge($array1, $array2);
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getValues(): array
-    {
-        $values = array_map(function ($dictionary) {
-            return $dictionary->getValues();
-        }, $this->dictionaries);
+        $data = [];
 
-        return array_merge(...$values);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getKeys(): array
-    {
-        $keys = array_map(function ($dictionary) {
-            return $dictionary->getKeys();
-        }, $this->dictionaries);
-
-        return array_merge(...$keys);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetExists($offset)
-    {
-        return \in_array($offset, $this->getKeys());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetGet($offset)
-    {
-        foreach ($this->dictionaries as $dictionary) {
-            if ($dictionary->offsetExists($offset)) {
-                return $dictionary->offsetGet($offset);
+        foreach ([$array1, $array2] as $array) {
+            foreach ($array as $key => $value) {
+                $data[$key] = $value;
             }
         }
 
-        throw new InvalidArgumentException(
-            sprintf('Undefined offset "%s".', $offset)
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetSet($offset, $value): void
-    {
-        foreach ($this->dictionaries as $dictionary) {
-            if ($dictionary->offsetExists($offset)) {
-                $dictionary->offsetSet($offset, $value);
-
-                return;
-            }
-        }
-
-        throw new InvalidArgumentException(
-            sprintf('Undefined offset "%s".', $offset)
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function offsetUnset($offset): void
-    {
-        foreach ($this->dictionaries as $dictionary) {
-            if ($dictionary->offsetExists($offset)) {
-                $dictionary->offsetUnset($offset);
-            }
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIterator()
-    {
-        $iterator = new AppendIterator();
-
-        foreach ($this->dictionaries as $dictionary) {
-            $iterator->append($dictionary->getIterator());
-        }
-
-        return $iterator;
+        return $data;
     }
 }
