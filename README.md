@@ -110,6 +110,18 @@ knp_dictionary:
 Callable dictionaries are loaded with a lazy strategy. It means that the callable
 will not be called if you do not use the dictionary.
 
+### Iterator based dictionary
+You can create a dictionary from an iterator:
+```yaml
+knp_dictionary:
+  dictionaries:
+    my_iterator_dictionary:     # your dictionary name
+      type: 'iterator'          # your dictionary type
+      service: 'app.service.id' # a valid service from your application
+```
+Iterator based dictionaries are loaded with a lazy strategy. It means that the 
+iterator will not be fetched if you do not use the dictionary.
+
 ### Combined dictionary
 
 You can combine multiple dictionaries into a single one:
