@@ -44,6 +44,13 @@ services:
     tags:
       - knp_dictionary.factory
 
+  Knp\DictionaryBundle\Dictionary\Factory\Iterator:
+    public: false
+    arguments:
+      - '@service_container'
+    tags:
+      - knp_dictionary.factory
+
   Knp\DictionaryBundle\Dictionary\Factory\Combined:
     public: false
     arguments:
