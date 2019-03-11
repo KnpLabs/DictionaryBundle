@@ -104,6 +104,13 @@ class Traceable implements Dictionary
         return $this->dictionary;
     }
 
+    public function count(): int
+    {
+        $this->trace();
+
+        return $this->dictionary->count();
+    }
+
     /**
      * Register this dictionary as used.
      */
@@ -114,12 +121,5 @@ class Traceable implements Dictionary
             $this->dictionary->getKeys(),
             array_values($this->dictionary->getValues())
         );
-    }
-
-    public function count(): int
-    {
-        $this->trace();
-
-        return $this->dictionary->count();
     }
 }

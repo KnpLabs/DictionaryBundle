@@ -24,19 +24,23 @@ class KnpDictionaryBundleSpec extends ObjectBehavior
     {
         $container
             ->addCompilerPass(Argument::type(DictionaryFactoryBuildingPass::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $container
             ->addCompilerPass(Argument::type(DictionaryBuildingPass::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $container
             ->addCompilerPass(Argument::type(DictionaryRegistrationPass::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $container
             ->addCompilerPass(Argument::type(DictionaryTracePass::class))
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->build($container);
     }

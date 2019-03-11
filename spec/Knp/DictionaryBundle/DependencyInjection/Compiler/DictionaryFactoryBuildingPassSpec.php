@@ -31,11 +31,13 @@ class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
                 'factory1' => $factory1,
                 'factory2' => $factory2,
                 'factory3' => $factory3,
-            ]);
+            ])
+        ;
 
         $container
             ->findDefinition(Aggregate::class)
-            ->willReturn($aggregate);
+            ->willReturn($aggregate)
+        ;
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
             expect($reference)->toHaveType(Reference::class);

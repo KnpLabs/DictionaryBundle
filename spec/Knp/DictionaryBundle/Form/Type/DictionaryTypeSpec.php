@@ -29,7 +29,8 @@ class DictionaryTypeSpec extends ObjectBehavior
     {
         $this
             ->getParent()
-            ->shouldReturn(ChoiceType::class);
+            ->shouldReturn(ChoiceType::class)
+        ;
     }
 
     function it_has_default_options(
@@ -54,17 +55,20 @@ class DictionaryTypeSpec extends ObjectBehavior
                 return $callable($options->getWrappedObject()) === array_flip(['foo' => 'bar']);
             }))
             ->willReturn($resolver)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $resolver
             ->setRequired(['name'])
             ->willReturn($resolver)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $resolver
             ->setAllowedValues('name', ['d1', 'd2'])
             ->willReturn($resolver)
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }

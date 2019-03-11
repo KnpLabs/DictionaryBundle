@@ -73,7 +73,7 @@ final class Invokable implements Dictionary
     {
         $this->hydrate();
 
-        return array_key_exists($offset, $this->values);
+        return \array_key_exists($offset, $this->values);
     }
 
     /**
@@ -116,6 +116,13 @@ final class Invokable implements Dictionary
         return new ArrayIterator($this->values);
     }
 
+    public function count(): int
+    {
+        $this->hydrate();
+
+        return \count($this->values);
+    }
+
     /**
      * Hydrate values from callable.
      */
@@ -134,12 +141,5 @@ final class Invokable implements Dictionary
         }
 
         $this->values = $values;
-    }
-
-    public function count(): int
-    {
-        $this->hydrate();
-
-        return \count($this->values);
     }
 }

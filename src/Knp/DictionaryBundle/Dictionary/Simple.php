@@ -55,7 +55,7 @@ final class Simple implements Dictionary
      */
     public function offsetExists($offset): bool
     {
-        return array_key_exists($offset, $this->values);
+        return \array_key_exists($offset, $this->values);
     }
 
     /**
