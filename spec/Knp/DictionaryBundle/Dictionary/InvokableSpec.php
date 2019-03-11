@@ -8,7 +8,6 @@ use Exception;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
-use Traversable;
 
 class InvokableSpec extends ObjectBehavior
 {
@@ -113,7 +112,7 @@ class InvokableSpec extends ObjectBehavior
 
     function it_generates_an_iterator()
     {
-        $this->shouldIterateOn([
+        $this->shouldIterateLike([
             'foo' => 0,
             'bar' => 1,
             'baz' => 2,
@@ -130,16 +129,7 @@ class InvokableSpec extends ObjectBehavior
         $this->count()->shouldReturn(3);
     }
 
-    public function getMatchers(): array
-    {
-        return [
-            'iterateOn' => function (Traversable $iterator, array $array) {
-                return iterator_to_array($iterator) === $array;
-            },
-        ];
-    }
-
-    public function execution()
+    private function execution()
     {
         if (false === $this->executed) {
             $this->executed = true;

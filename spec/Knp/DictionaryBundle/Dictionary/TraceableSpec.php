@@ -7,7 +7,6 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
-use Traversable;
 
 class TraceableSpec extends ObjectBehavior
 {
@@ -82,19 +81,10 @@ class TraceableSpec extends ObjectBehavior
     {
         $collector->addDictionary('name', ['foo', 'baz'], ['bar', null])->shouldbeCalled();
 
-        $this->shouldIterateOn([
+        $this->shouldIterateLike([
             'foo' => 'bar',
             'baz' => null,
         ]);
-    }
-
-    public function getMatchers(): array
-    {
-        return [
-            'iterateOn' => function (Traversable $iterator, array $array) {
-                return iterator_to_array($iterator) === $array;
-            },
-        ];
     }
 
     function it_delegates_the_count_to_the_other_dictionary()
