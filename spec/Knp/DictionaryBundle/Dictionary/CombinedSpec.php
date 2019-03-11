@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
+use Assert\Assert;
+use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
-use Traversable;
 
 class CombinedSpec extends ObjectBehavior
 {
@@ -101,11 +102,21 @@ class CombinedSpec extends ObjectBehavior
 
     function it_sums_the_count_of_elements($dictionary1, $dictionary2, $dictionary3)
     {
-        $dictionary1->count()->willReturn(1);
+        $dictionary1->getIterator()->willReturn(new ArrayIterator([
+            'foo1' => 'foo10',
+        ]));
 
-        $dictionary2->count()->willReturn(2);
+        $dictionary2->getIterator()->willReturn(new ArrayIterator([
+            'bar1' => 'bar10',
+            'bar2' => 'bar20',
+        ]));
 
-        $dictionary3->count()->willReturn(4);
+        $dictionary3->getIterator()->willReturn(new ArrayIterator([
+            'baz1' => 'baz10',
+            'baz2' => 'baz20',
+            'baz3' => 'baz30',
+            'baz4' => 'baz40',
+        ]));
 
         $this->count()->shouldReturn(7);
     }
