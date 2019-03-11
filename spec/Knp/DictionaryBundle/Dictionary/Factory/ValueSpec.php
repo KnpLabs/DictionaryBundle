@@ -6,11 +6,12 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\ValueTransformer;
 use PhpSpec\ObjectBehavior;
 
 class ValueSpec extends ObjectBehavior
 {
-    function let(Dictionary\ValueTransformer $transformer)
+    function let(ValueTransformer $transformer)
     {
         $this->beConstructedWith($transformer);
     }

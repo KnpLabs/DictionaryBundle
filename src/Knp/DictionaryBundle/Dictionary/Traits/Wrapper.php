@@ -46,6 +46,11 @@ trait Wrapper
         $this->dictionary->offsetUnset($offset);
     }
 
+    public function count()
+    {
+        return $this->dictionary->count();
+    }
+
     public function getIterator()
     {
         return $this->dictionary->getIterator();
