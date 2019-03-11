@@ -107,7 +107,8 @@ class InvokableSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess.'))
-            ->duringGetValues();
+            ->duringGetValues()
+        ;
     }
 
     function it_generates_an_iterator()

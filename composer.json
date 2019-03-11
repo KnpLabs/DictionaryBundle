@@ -28,7 +28,7 @@
     "require-dev": {
         "beberlei/assert": "^3.0",
         "fzaninotto/faker": "~1.3",
-        "pedrotroller/php-cs-custom-fixer": "^2.15",
+        "pedrotroller/php-cs-custom-fixer": "^2.16",
         "pedrotroller/symfony-integration-checker": "~2.0.0",
         "phpspec/phpspec": "~5.0",
         "sebastian/comparator": "~1.2.4"

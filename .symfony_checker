@@ -1,20 +1,20 @@
 <?php
 
-use Knp\DictionaryBundle\Dictionary\DictionaryRegistry;
+declare(strict_types=1);
+
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\KnpDictionaryBundle;
 use Pedrotroller\Symfony\IntegrationChecker\ConfigurableKernel;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\KernelInterface;
-use Webmozart\Assert\Assert;
-use Knp\DictionaryBundle\Dictionary\Collection;
 
-$test = function (KernelInterface $kernel) {
+$test = function (KernelInterface $kernel): void {
     if (false === $kernel->getContainer()->get(Collection::class) instanceof Collection) {
         throw new Exception('Service "Knp\DictionaryBundle\Dictionary\Collection" unavailable.');
     }
 };
 
-return function (ConfigurableKernel $kernel) use ($test) {
+return function (ConfigurableKernel $kernel) use ($test): void {
     $container = new ContainerBuilder();
 
     $kernel

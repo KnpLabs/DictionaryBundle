@@ -37,7 +37,7 @@ final class Constant implements ValueTransformer
             ->getConstants()
         ;
 
-        return array_key_exists($matches['constant'], $constants);
+        return \array_key_exists($matches['constant'], $constants);
     }
 
     /**

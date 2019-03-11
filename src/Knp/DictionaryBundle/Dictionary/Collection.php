@@ -34,7 +34,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     public function offsetExists($offset): bool
     {
-        return array_key_exists($offset, $this->dictionaries);
+        return \array_key_exists($offset, $this->dictionaries);
     }
 
     public function offsetGet($offset)
