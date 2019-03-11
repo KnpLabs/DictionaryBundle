@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
-use Assert\Assert;
-use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -92,7 +90,7 @@ class CombinedSpec extends ObjectBehavior
             'bar2' => 'baz20',
         ]));
 
-        $this->shouldIterateOver([
+        $this->shouldIterateLike([
             'foo1' => 'foo10',
             'foo2' => 'baz20',
             'bar1' => 'bar10',
@@ -124,16 +122,5 @@ class CombinedSpec extends ObjectBehavior
     function its_getname_should_return_dictionary_name()
     {
         $this->getName()->shouldReturn('combined_dictionary');
-    }
-
-    public function getMatchers(): array
-    {
-        return [
-            'iterateOver' => function (IteratorAggregate $iterator, array $array): bool {
-                Assert::that(iterator_to_array($iterator))->eq($array);
-
-                return true;
-            },
-        ];
     }
 }
