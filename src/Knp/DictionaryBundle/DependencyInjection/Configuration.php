@@ -9,14 +9,20 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    private const CONFIG_NAME = 'knp_dictionary';
+
     /**
      * {@inheritdoc}
      */
     public function getConfigTreeBuilder()
     {
-        $builder = new TreeBuilder();
-        $builder
-            ->root('knp_dictionary')
+        $builder  = new TreeBuilder(self::CONFIG_NAME);
+        $rootNode = method_exists($builder, 'getRootNode')
+            ? $builder->getRootNode()
+            : $builder->root(self::CONFIG_NAME)
+        ;
+
+        $rootNode
             ->children()
             ->arrayNode('dictionaries')
                 ->useAttributeAsKey('name')
