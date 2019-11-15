@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Templating\Extension;
 
 use Knp\DictionaryBundle\Dictionary\Collection;
-use Twig_Extension;
-use Twig_Filter;
-use Twig_Function;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
 
-final class Dictionary extends Twig_Extension
+final class Dictionary extends AbstractExtension
 {
     /**
      * @var Collection
@@ -27,7 +27,7 @@ final class Dictionary extends Twig_Extension
     public function getFunctions()
     {
         return [
-            new Twig_Function('dictionary', [$this->dictionaries, 'offsetGet']),
+            new TwigFunction('dictionary', [$this->dictionaries, 'offsetGet']),
         ];
     }
 
@@ -37,7 +37,7 @@ final class Dictionary extends Twig_Extension
     public function getFilters()
     {
         return [
-            new Twig_Filter('dictionary', function ($key, string $name) {
+            new TwigFilter('dictionary', function ($key, string $name) {
                 return $this->dictionaries[$name][$key];
             }),
         ];
