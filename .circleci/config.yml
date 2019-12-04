@@ -13,6 +13,8 @@ composer_highter: &composer_highter
 
 tests: &tests
   run: |
+      echo "PHP version"
+      php --version
       echo "PHPSpec tests"
       rm phpspec.yml
       vendor/bin/phpspec -n -fpretty run -v
@@ -26,22 +28,6 @@ tests: &tests
       vendor/bin/php-cs-fixer fix --diff || (echo "Coding standards are not respected. Run 'vendor/bin/php-cs-fixer fix'" && exit 1)
 
 jobs:
-
-  php 7.1:
-    docker:
-      - image: circleci/php:7.1
-    steps:
-      - checkout
-      - <<: *composer_highter
-      - <<: *tests
-
-  php 7.1 with lowest dependencies:
-    docker:
-      - image: circleci/php:7.1
-    steps:
-      - checkout
-      - <<: *composer_lower
-      - <<: *tests
 
   php 7.2:
     docker:
@@ -75,14 +61,26 @@ jobs:
       - <<: *composer_lower
       - <<: *tests
 
+  php 7.4:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - checkout
+      - <<: *composer_highter
+      - <<: *tests
+
+  php 7.4 with lowest dependencies:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - checkout
+      - <<: *composer_lower
+      - <<: *tests
+
 workflows:
   version: 2
   workflow:
     jobs:
-      - php 7.1
-      - php 7.1 with lowest dependencies:
-          requires:
-            - php 7.1
       - php 7.2
       - php 7.2 with lowest dependencies:
           requires:
@@ -91,3 +89,7 @@ workflows:
       - php 7.3 with lowest dependencies:
           requires:
             - php 7.3
+      - php 7.4
+      - php 7.4 with lowest dependencies:
+          requires:
+            - php 7.4
