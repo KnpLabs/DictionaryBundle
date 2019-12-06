@@ -21,8 +21,6 @@ final class Invokable implements Dictionary\Factory
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -41,7 +39,7 @@ final class Invokable implements Dictionary\Factory
             $callable[] = $config['method'];
         }
 
-        if (false === \is_callable($callable)) {
+        if (!\is_callable($callable)) {
             throw new InvalidArgumentException(sprintf(
                 'You must provide a valid callable for the dictionary named "%s".',
                 $name
@@ -51,9 +49,6 @@ final class Invokable implements Dictionary\Factory
         return new Dictionary\Invokable($name, $callable);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'callable' === $config['type'] : false;

@@ -21,12 +21,9 @@ class DictionaryValidator extends ConstraintValidator
         $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function validate($value, Constraint $constraint): void
     {
-        if (false === $constraint instanceof Dictionary) {
+        if (!$constraint instanceof Dictionary) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
         }
 
@@ -37,7 +34,7 @@ class DictionaryValidator extends ConstraintValidator
         $dictionary = $this->dictionaries[$constraint->name];
         $values     = $dictionary->getKeys();
 
-        if (false === \in_array($value, $values, true)) {
+        if (!\in_array($value, $values, true)) {
             $this->context->addViolation(
                 $constraint->message,
                 ['{{ key }}' => $value, '{{ keys }}' => implode(', ', $values)]

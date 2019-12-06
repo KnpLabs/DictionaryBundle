@@ -51,7 +51,7 @@ class DictionarySpec extends ObjectBehavior
     public function getMatchers(): array
     {
         return [
-            'beOneOf' => function (string $value, array $array) {
+            'beOneOf' => function (string $value, array $array): bool {
                 Assert::that($value)->inArray($array);
 
                 return true;

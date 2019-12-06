@@ -9,7 +9,10 @@ use Knp\DictionaryBundle\Dictionary;
 
 class Combined implements Dictionary\Factory
 {
-    const TYPE = 'combined';
+    /**
+     * @var string
+     */
+    public const TYPE = 'combined';
 
     /**
      * @var Dictionary\Collection
@@ -21,9 +24,6 @@ class Combined implements Dictionary\Factory
         $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['dictionaries'])) {
@@ -33,16 +33,13 @@ class Combined implements Dictionary\Factory
             ));
         }
 
-        $dictionaries = array_map(function ($name) {
+        $dictionaries = array_map(function ($name): Dictionary {
             return $this->dictionaries[$name];
         }, $config['dictionaries']);
 
         return new Dictionary\Combined($name, $dictionaries);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return isset($config['type']) ? self::TYPE === $config['type'] : false;

@@ -20,8 +20,6 @@ class Aggregate implements Dictionary\Factory
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throw InvalidArgumentException Not able to create a dictionary with the given name
      */
     public function create(string $name, array $config): Dictionary
@@ -38,9 +36,6 @@ class Aggregate implements Dictionary\Factory
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         foreach ($this->factories as $factory) {

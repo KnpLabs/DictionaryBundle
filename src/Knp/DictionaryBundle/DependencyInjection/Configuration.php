@@ -9,12 +9,12 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * @var string
+     */
     private const CONFIG_NAME = 'knp_dictionary';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $builder  = new TreeBuilder(self::CONFIG_NAME);
         $rootNode = method_exists($builder, 'getRootNode')
