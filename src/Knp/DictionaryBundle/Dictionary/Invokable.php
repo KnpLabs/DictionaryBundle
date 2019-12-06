@@ -17,9 +17,14 @@ final class Invokable implements Dictionary
     private $name;
 
     /**
+     * @var bool
+     */
+    private $invoked = false;
+
+    /**
      * @var array
      */
-    private $values;
+    private $values = [];
 
     /**
      * @var callable
@@ -29,7 +34,7 @@ final class Invokable implements Dictionary
     /**
      * @var array
      */
-    private $callableArgs;
+    private $callableArgs = [];
 
     public function __construct(string $name, callable $callable, array $callableArgs = [])
     {
@@ -38,108 +43,82 @@ final class Invokable implements Dictionary
         $this->callableArgs = $callableArgs;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValues(): array
     {
-        $this->hydrate();
+        $this->invoke();
 
         return $this->values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getKeys(): array
     {
-        $this->hydrate();
+        $this->invoke();
 
         return array_keys($this->values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetExists($offset): bool
     {
-        $this->hydrate();
+        $this->invoke();
 
         return \array_key_exists($offset, $this->values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetGet($offset)
     {
-        $this->hydrate();
+        $this->invoke();
 
         return $this->values[$offset];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetSet($offset, $value): void
     {
-        $this->hydrate();
+        $this->invoke();
 
         $this->values[$offset] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetUnset($offset): void
     {
-        $this->hydrate();
+        $this->invoke();
 
         unset($this->values[$offset]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getIterator(): Iterator
     {
-        $this->hydrate();
+        $this->invoke();
 
         return new ArrayIterator($this->values);
     }
 
     public function count(): int
     {
-        $this->hydrate();
+        $this->invoke();
 
         return \count($this->values);
     }
 
-    /**
-     * Hydrate values from callable.
-     */
-    private function hydrate(): void
+    private function invoke(): void
     {
-        if (null !== $this->values) {
+        if ($this->invoked) {
             return;
         }
 
-        $values = \call_user_func_array($this->callable, $this->callableArgs);
+        $values = ($this->callable)(...$this->callableArgs);
 
-        if (false === \is_array($values)) {
+        if (!\is_array($values)) {
             throw new InvalidArgumentException(
                 'Dictionary callable must return an array or an instance of ArrayAccess.'
             );
         }
 
-        $this->values = $values;
+        $this->values  = $values;
+        $this->invoked = true;
     }
 }

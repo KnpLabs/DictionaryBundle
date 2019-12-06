@@ -12,7 +12,7 @@ final class DictionaryNotFoundException extends Exception
     {
         $message = sprintf('The dictionary "%s" has not been found in the registry.', $dictionaryName);
 
-        if (false === empty($knowns)) {
+        if (!empty($knowns)) {
             $message .= sprintf(' Known dictionaries are: "%s".', implode('", "', $knowns));
         }
 

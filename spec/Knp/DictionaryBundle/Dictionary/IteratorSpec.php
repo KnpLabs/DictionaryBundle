@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Exception;
-use Generator;
 use Knp\DictionaryBundle\Dictionary;
 use PhpSpec\ObjectBehavior;
 
@@ -101,9 +100,9 @@ class IteratorSpec extends ObjectBehavior
         $this->getName()->shouldReturn('foo');
     }
 
-    private function execution(): Generator
+    private function execution(): iterable
     {
-        if (false === $this->executed) {
+        if (!$this->executed) {
             $this->executed = true;
 
             yield 'foo' => 0;

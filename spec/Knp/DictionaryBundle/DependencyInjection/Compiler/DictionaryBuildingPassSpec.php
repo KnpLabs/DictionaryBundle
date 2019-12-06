@@ -32,7 +32,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
-            Argument::that(function ($definition) {
+            Argument::that(function ($definition): bool {
                 Assert::that($definition->getClass())->eq(Dictionary::class);
 
                 $factory = $definition->getFactory();
@@ -72,8 +72,8 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
-            Argument::that(function ($definition) {
-                Assert::that($definition->getClass())->eq('Knp\DictionaryBundle\Dictionary');
+            Argument::that(function ($definition): bool {
+                Assert::that($definition->getClass())->eq(\Knp\DictionaryBundle\Dictionary::class);
 
                 $factory = $definition->getFactory();
 
@@ -112,7 +112,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->getParameter('knp_dictionary.configuration')->willReturn($config);
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
-            Argument::that(function ($definition) {
+            Argument::that(function ($definition): bool {
                 Assert::that($definition->getClass())->eq(Dictionary::class);
 
                 $factory = $definition->getFactory();

@@ -21,8 +21,6 @@ class KeyValue implements Dictionary\Factory
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -46,9 +44,6 @@ class KeyValue implements Dictionary\Factory
         return new Dictionary\Simple($name, $values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'key_value' === $config['type'] : false;

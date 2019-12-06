@@ -13,12 +13,9 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DictionaryTracePass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
-        if (false === $container->has(DictionaryDataCollector::class)) {
+        if (!$container->has(DictionaryDataCollector::class)) {
             return;
         }
 

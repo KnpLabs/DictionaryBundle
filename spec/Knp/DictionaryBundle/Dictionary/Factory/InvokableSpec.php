@@ -30,7 +30,7 @@ class InvokableSpec extends ObjectBehavior
         $this->supports(['type' => 'callable'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary($container, Mock $service)
+    function it_creates_a_dictionary($container, MockInvokable $service)
     {
         $config = [
             'service' => 'service.id',
@@ -55,8 +55,11 @@ class InvokableSpec extends ObjectBehavior
     }
 }
 
-class Mock
+class MockInvokable
 {
+    /**
+     * @return mixed[]
+     */
     public function getYolo(): array
     {
         return [];

@@ -18,11 +18,11 @@ final class Combined implements Dictionary
     /**
      * @var array
      */
-    private $dictionaries;
+    private $dictionaries = [];
 
     public function __construct(string $name, array $dictionaries)
     {
-        $this->dictionary = new Invokable($name, function () use ($dictionaries) {
+        $this->dictionary = new Invokable($name, function () use ($dictionaries): array {
             $data = [];
 
             foreach ($dictionaries as $dictionary) {

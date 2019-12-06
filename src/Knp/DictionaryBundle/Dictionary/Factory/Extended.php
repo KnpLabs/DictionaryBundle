@@ -25,12 +25,9 @@ class Extended implements Dictionary\Factory
         $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(string $name, array $config): Dictionary
     {
-        if (false === $this->factory->supports($config)) {
+        if (!$this->factory->supports($config)) {
             throw new InvalidArgumentException(sprintf(
                 'The dictionary with named "%s" cannot be created.',
                 $name
@@ -48,9 +45,6 @@ class Extended implements Dictionary\Factory
         return new Dictionary\Combined($name, $dictionaries);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return isset($config['extends']);

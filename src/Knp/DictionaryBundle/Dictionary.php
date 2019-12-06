@@ -10,9 +10,20 @@ use IteratorAggregate;
 
 interface Dictionary extends ArrayAccess, Countable, IteratorAggregate
 {
-    const VALUE        = 'value';
-    const VALUE_AS_KEY = 'value_as_key';
-    const KEY_VALUE    = 'key_value';
+    /**
+     * @var string
+     */
+    public const VALUE = 'value';
+
+    /**
+     * @var string
+     */
+    public const VALUE_AS_KEY = 'value_as_key';
+
+    /**
+     * @var string
+     */
+    public const KEY_VALUE = 'key_value';
 
     public function getName(): string;
 

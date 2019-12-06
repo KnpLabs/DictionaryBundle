@@ -14,12 +14,9 @@ final class Constant implements ValueTransformer
      */
     private $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($value): bool
     {
-        if (false === \is_string($value)) {
+        if (!\is_string($value)) {
             return false;
         }
 
@@ -29,7 +26,7 @@ final class Constant implements ValueTransformer
             return false;
         }
 
-        if (false === class_exists($matches['class']) && false === interface_exists($matches['class'])) {
+        if (!class_exists($matches['class']) && !interface_exists($matches['class'])) {
             return false;
         }
 
@@ -40,9 +37,6 @@ final class Constant implements ValueTransformer
         return \array_key_exists($matches['constant'], $constants);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function transform($value)
     {
         $matches = [];

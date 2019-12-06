@@ -10,7 +10,7 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\Container;
 
-class InvokableSpec extends ObjectBehavior
+class IteratorSpec extends ObjectBehavior
 {
     function let(Container $container)
     {
@@ -19,7 +19,7 @@ class InvokableSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\Invokable::class);
+        $this->shouldHaveType(Factory\Iterator::class);
     }
 
     function it_is_a_factory()
@@ -32,14 +32,14 @@ class InvokableSpec extends ObjectBehavior
         $this->supports(['type' => 'iterator'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary($container, Mock $service)
+    function it_creates_a_dictionary($container, MockIterator $service)
     {
         $config = [
             'service' => 'service.id',
         ];
 
         $container->get('service.id')->willReturn($service);
-        $service->getIterator()->willReturn(new ArrayAccess([
+        $service->getIterator()->willReturn(new ArrayIterator([
             'foo1' => 'bar1',
             'foo2' => 'bar2',
             'foo3' => 'bar3',
@@ -56,9 +56,9 @@ class InvokableSpec extends ObjectBehavior
     }
 }
 
-class Mock implements IteratorAggregate
+class MockIterator implements IteratorAggregate
 {
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator([]);
     }

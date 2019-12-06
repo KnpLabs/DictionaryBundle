@@ -13,9 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $configuration = $container->getParameter('knp_dictionary.configuration');
