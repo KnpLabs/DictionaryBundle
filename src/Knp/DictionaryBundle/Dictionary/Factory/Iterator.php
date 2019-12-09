@@ -22,6 +22,8 @@ final class Iterator implements Dictionary\Factory
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary

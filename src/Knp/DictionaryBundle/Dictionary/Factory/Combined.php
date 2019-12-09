@@ -33,11 +33,14 @@ class Combined implements Dictionary\Factory
             ));
         }
 
-        $dictionaries = array_map(function ($name): Dictionary {
-            return $this->dictionaries[$name];
-        }, $config['dictionaries']);
+        $dictionaries = array_map(
+            function ($name): Dictionary {
+                return $this->dictionaries[$name];
+            },
+            $config['dictionaries']
+        );
 
-        return new Dictionary\Combined($name, $dictionaries);
+        return new Dictionary\Combined($name, ...$dictionaries);
     }
 
     public function supports(array $config): bool

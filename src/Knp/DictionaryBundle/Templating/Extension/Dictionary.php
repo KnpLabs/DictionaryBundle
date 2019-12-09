@@ -42,9 +42,4 @@ final class Dictionary extends AbstractExtension
             }),
         ];
     }
-
-    public function getName()
-    {
-        return 'knp_dictionary.dictionary_extension';
-    }
 }

@@ -11,6 +11,9 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class KnpDictionaryExtension extends Extension
 {
+    /**
+     * @param array<mixed, mixed> $config
+     */
     public function load(array $config, ContainerBuilder $container): void
     {
         $configuration = new Configuration();

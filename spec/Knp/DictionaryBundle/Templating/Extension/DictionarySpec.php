@@ -36,11 +36,6 @@ class DictionarySpec extends ObjectBehavior
         $functions[0]->getName()->shouldReturn('dictionary');
     }
 
-    function it_has_a_name()
-    {
-        $this->getName()->shouldReturn('knp_dictionary.dictionary_extension');
-    }
-
     function it_returns_a_dictionary_by_its_name($dico1, $dico2)
     {
         $functions = $this->getFunctions();

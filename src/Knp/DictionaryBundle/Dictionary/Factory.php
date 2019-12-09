@@ -8,7 +8,15 @@ use Knp\DictionaryBundle\Dictionary;
 
 interface Factory
 {
+    /**
+     * @param mixed[] $config
+     *
+     * @return Dictionary<mixed>
+     */
     public function create(string $name, array $config): Dictionary;
 
+    /**
+     * @param mixed[] $config
+     */
     public function supports(array $config): bool;
 }

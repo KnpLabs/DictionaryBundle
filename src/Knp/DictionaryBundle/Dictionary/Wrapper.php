@@ -7,12 +7,13 @@ namespace Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary;
 
 /**
- * @implements Dictionary
+ * @template E
+ * @implements Dictionary<E>
  */
 abstract class Wrapper implements Dictionary
 {
     /**
-     * @var Dictionary
+     * @var Dictionary<E>
      */
     private $wrapped;
 
@@ -61,6 +62,9 @@ abstract class Wrapper implements Dictionary
         return $this->wrapped->count();
     }
 
+    /**
+     * @return Dictionary<E>
+     */
     public function getIterator(): Dictionary
     {
         return $this->wrapped;

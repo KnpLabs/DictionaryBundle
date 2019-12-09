@@ -29,8 +29,8 @@ class DictionarySpec extends ObjectBehavior
 
     function it_can_generates_random_values(Dictionary $dictionary)
     {
-        $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
         $dictionary->getName()->willReturn('the_dico');
+        $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
         $this->dictionaries->add($dictionary->getWrappedObject());
 
@@ -39,8 +39,8 @@ class DictionarySpec extends ObjectBehavior
 
     function it_can_generates_unique_random_values(Dictionary $dictionary)
     {
-        $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
         $dictionary->getName()->willReturn('the_dico');
+        $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 
         $this->dictionaries->add($dictionary->getWrappedObject());
 

@@ -12,13 +12,20 @@ use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
 
+/**
+ * @implements ArrayAccess<string, Dictionary<mixed>>
+ * @implements IteratorAggregate<string, Dictionary<mixed>>
+ */
 final class Collection implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
-     * @var Dictionary[]
+     * @var array<string, Dictionary<mixed>>
      */
     private $dictionaries = [];
 
+    /**
+     * @param array<int, Dictionary<mixed>> $dictionaries
+     */
     public function __construct(Dictionary ...$dictionaries)
     {
         foreach ($dictionaries as $dictionary) {
@@ -26,6 +33,9 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         }
     }
 
+    /**
+     * @param Dictionary<mixed> $dictionary
+     */
     public function add(Dictionary $dictionary): void
     {
         $this->dictionaries[$dictionary->getName()] = $dictionary;
@@ -62,7 +72,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         return new ArrayIterator($this->dictionaries);
     }
 
-    public function count()
+    public function count(): int
     {
         return \count($this->dictionaries);
     }

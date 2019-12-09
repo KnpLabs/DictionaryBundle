@@ -4,9 +4,18 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
+use Knp\DictionaryBundle\Dictionary;
+
+/**
+ * @template E
+ * @extends Wrapper<E>
+ */
 final class Combined extends Wrapper
 {
-    public function __construct(string $name, array $dictionaries)
+    /**
+     * @param array<int, Dictionary<E>> $dictionaries
+     */
+    public function __construct(string $name, Dictionary ...$dictionaries)
     {
         parent::__construct(
             new Invokable($name, function () use ($dictionaries) {
@@ -21,6 +30,12 @@ final class Combined extends Wrapper
         );
     }
 
+    /**
+     * @param E[] $array1
+     * @param E[] $array2
+     *
+     * @return E[]
+     */
     private function merge(array $array1, array $array2): array
     {
         if ($array1 === array_values($array1) && $array2 === array_values($array2)) {

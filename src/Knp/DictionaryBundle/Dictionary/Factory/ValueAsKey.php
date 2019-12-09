@@ -21,15 +21,14 @@ class ValueAsKey implements Dictionary\Factory
     }
 
     /**
+     * {@inheritdoc}
+     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['content'])) {
-            throw new InvalidArgumentException(sprintf(
-                'The key content for dictionary %s must be set.',
-                $name
-            ));
+            throw new InvalidArgumentException("The key content for dictionary {$name} must be set.");
         }
 
         $content = $config['content'];

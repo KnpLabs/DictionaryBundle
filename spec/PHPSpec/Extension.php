@@ -8,6 +8,9 @@ use PhpSpec;
 
 final class Extension implements PhpSpec\Extension
 {
+    /**
+     * @param mixed[] $params
+     */
     public function load(PhpSpec\ServiceContainer $container, array $params): void
     {
         $container->define(

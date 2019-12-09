@@ -38,11 +38,11 @@ class Extended implements Dictionary\Factory
 
         unset($config['extends']);
 
-        $dictionaries   = [];
-        $dictionaries[] = $this->dictionaries[$extends];
-        $dictionaries[] = $this->factory->create($name, $config);
-
-        return new Dictionary\Combined($name, $dictionaries);
+        return new Dictionary\Combined(
+            $name,
+            $this->dictionaries[$extends],
+            $this->factory->create($name, $config)
+        );
     }
 
     public function supports(array $config): bool
