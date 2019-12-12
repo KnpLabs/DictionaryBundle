@@ -45,9 +45,36 @@ class DictionaryValidatorSpec extends ObjectBehavior
     {
         $constraint = new Constraint(['name' => 'dico']);
 
-        $context->addViolation("The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.", ['{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'])->shouldBeCalled();
+        $context->addViolation(
+            "The key {{ key }}{{ keyType }} doesn't exist in the given dictionary. {{ keys }}{{ keysType }} available.",
+            [
+                '{{ key }}' => 'the_unexisting_key',
+                '{{ keyType }}'  => '',
+                '{{ keys }}' => 'the_key',
+                '{{ keysType }}' => '',
+            ]
+        )->shouldBeCalled();
 
         $this->validate('the_unexisting_key', $constraint);
+    }
+
+    function it_adds_violation_for_an_unmathching_key_type($context, Dictionary $dictionary)
+    {
+        $dictionary->getName()->willReturn('dico');
+        $dictionary->getKeys()->willReturn([0]);
+        $constraint = new Constraint(['name' => 'dico']);
+
+        $context->addViolation(
+            "The key {{ key }}{{ keyType }} doesn't exist in the given dictionary. {{ keys }}{{ keysType }} available.",
+            [
+                '{{ key }}' => '0',
+                '{{ keyType }}'  => ' (string)',
+                '{{ keys }}' => 0,
+                '{{ keysType }}' => ' (integer)',
+            ]
+        )->shouldBeCalled();
+
+        $this->validate('0', $constraint);
     }
 
     function it_throw_exception_form_unknown_constraints()

@@ -35,9 +35,17 @@ class DictionaryValidator extends ConstraintValidator
         $values     = $dictionary->getKeys();
 
         if (!\in_array($value, $values, true)) {
+            $valueType = gettype($value);
+            $dictionaryFirstType = gettype($values[0]);
+            $diffType = $valueType !== $dictionaryFirstType;
             $this->context->addViolation(
                 $constraint->message,
-                ['{{ key }}' => $value, '{{ keys }}' => implode(', ', $values)]
+                [
+                    '{{ key }}'  => $value,
+                    '{{ keyType }}'  => $diffType ? sprintf(' (%s)', $valueType) : '',
+                    '{{ keys }}' => implode(', ', $values),
+                    '{{ keysType }}' =>  ($diffType ? sprintf(' (%s)', $dictionaryFirstType) : ''),
+                ]
             );
         }
     }
