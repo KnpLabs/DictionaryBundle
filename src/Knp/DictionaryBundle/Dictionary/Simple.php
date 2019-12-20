@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use ArrayIterator;
-use Iterator;
+use Generator;
 use Knp\DictionaryBundle\Dictionary;
 
+/**
+ * @template E
+ * @implements Dictionary<E>
+ */
 final class Simple implements Dictionary
 {
     /**
@@ -16,78 +19,60 @@ final class Simple implements Dictionary
     private $name;
 
     /**
-     * @var array
+     * @var array<mixed, E>
      */
-    private $values;
+    private $values = [];
 
+    /**
+     * @param array<mixed, E> $values
+     */
     public function __construct(string $name, array $values)
     {
         $this->name   = $name;
         $this->values = $values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getValues(): array
     {
         return $this->values;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getKeys(): array
     {
         return array_keys($this->values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetExists($offset): bool
     {
         return \array_key_exists($offset, $this->values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetGet($offset)
     {
         return $this->values[$offset];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetSet($offset, $value): void
     {
         $this->values[$offset] = $value;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function offsetUnset($offset): void
     {
         unset($this->values[$offset]);
     }
 
     /**
-     * {@inheritdoc}
+     * @return Generator<mixed>
      */
-    public function getIterator(): Iterator
+    public function getIterator(): Generator
     {
-        return new ArrayIterator($this->values);
+        yield from $this->values;
     }
 
     public function count(): int

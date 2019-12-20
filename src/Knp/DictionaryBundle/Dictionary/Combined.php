@@ -6,33 +6,36 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
 
-final class Combined implements Dictionary
+/**
+ * @template E
+ * @extends Wrapper<E>
+ */
+final class Combined extends Wrapper
 {
-    use Traits\Wrapper;
-
     /**
-     * @var string
+     * @param array<int, Dictionary<E>> $dictionaries
      */
-    private $name;
-
-    /**
-     * @var array
-     */
-    private $dictionaries;
-
-    public function __construct(string $name, array $dictionaries)
+    public function __construct(string $name, Dictionary ...$dictionaries)
     {
-        $this->dictionary = new Invokable($name, function () use ($dictionaries) {
-            $data = [];
+        parent::__construct(
+            new Invokable($name, function () use ($dictionaries) {
+                $data = [];
 
-            foreach ($dictionaries as $dictionary) {
-                $data = $this->merge($data, iterator_to_array($dictionary));
-            }
+                foreach ($dictionaries as $dictionary) {
+                    $data = $this->merge($data, iterator_to_array($dictionary));
+                }
 
-            return $data;
-        });
+                return $data;
+            })
+        );
     }
 
+    /**
+     * @param E[] $array1
+     * @param E[] $array2
+     *
+     * @return E[]
+     */
     private function merge(array $array1, array $array2): array
     {
         if ($array1 === array_values($array1) && $array2 === array_values($array2)) {

@@ -6,10 +6,12 @@ DictionaryBundle
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
 ## Requirements
+
 - PHP >= 7.2
 - Symfony 3.4, 4.2, 4.3, 4.4 or 5.*
 
 ## Installation
+
 Run the following command:
 ```bash
 composer require knplabs/dictionary-bundle
@@ -31,6 +33,7 @@ You can ping us if need some reviews/comments/help:
  - [@PedroTroller](https://github.com/PedroTroller)
 
 ## Basic usage
+
 Define dictionaries in your config.yml file:
 ```yaml
 knp_dictionary:
@@ -199,7 +202,7 @@ services:
 
 ## Use your dictionary in twig
 
-You can also use your dictionary in your Twig templates via calling ```dictionary``` function (or filter)
+You can also use your dictionary in your Twig templates via calling `dictionary` function (or filter).
 
 ```twig
 {% for example in dictionary('examples') %}
@@ -248,4 +251,30 @@ services:
   App\Dictionary\Factory\MyCustomFactory:
     tags:
       - knp_dictionary.factory
+```
+## Tests
+
+### phpspec
+
+```bash
+$ composer install
+$ vendor/bin/phpspec run
+```
+
+### php-cs-fixer
+
+```bash
+$ composer install
+$ vendor/bin/php-cs-fixer fix
+```
+
+### phpstan
+
+First [install phive](https://github.com/phar-io/phive#getting-phive).
+
+Then...
+
+```bash
+$ phive install
+$ tools/phpstan process
 ```

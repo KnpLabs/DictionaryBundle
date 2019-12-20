@@ -18,23 +18,6 @@ final class Aggregate implements ValueTransformer
         $this->transformers[] = $transformer;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function transform($value)
-    {
-        foreach ($this->transformers as $transformer) {
-            if ($transformer->supports($value)) {
-                return $transformer->transform($value);
-            }
-        }
-
-        return $value;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function supports($value): bool
     {
         foreach ($this->transformers as $transformer) {
@@ -44,5 +27,16 @@ final class Aggregate implements ValueTransformer
         }
 
         return false;
+    }
+
+    public function transform($value)
+    {
+        foreach ($this->transformers as $transformer) {
+            if ($transformer->supports($value)) {
+                return $transformer->transform($value);
+            }
+        }
+
+        return $value;
     }
 }

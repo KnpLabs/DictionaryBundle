@@ -44,9 +44,6 @@ class Value implements Dictionary\Factory
         return new Dictionary\Simple($name, $values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'value' === $config['type'] : false;

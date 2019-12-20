@@ -27,6 +27,9 @@ class Dictionary extends Base
         parent::__construct($generator);
     }
 
+    /**
+     * @return mixed
+     */
     public function dictionary(string $name)
     {
         return self::randomElement($this->dictionaries[$name]->getKeys());

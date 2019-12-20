@@ -25,12 +25,9 @@ class Extended implements Dictionary\Factory
         $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function create(string $name, array $config): Dictionary
     {
-        if (false === $this->factory->supports($config)) {
+        if (!$this->factory->supports($config)) {
             throw new InvalidArgumentException(sprintf(
                 'The dictionary with named "%s" cannot be created.',
                 $name
@@ -41,16 +38,13 @@ class Extended implements Dictionary\Factory
 
         unset($config['extends']);
 
-        $dictionaries   = [];
-        $dictionaries[] = $this->dictionaries[$extends];
-        $dictionaries[] = $this->factory->create($name, $config);
-
-        return new Dictionary\Combined($name, $dictionaries);
+        return new Dictionary\Combined(
+            $name,
+            $this->dictionaries[$extends],
+            $this->factory->create($name, $config)
+        );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return isset($config['extends']);

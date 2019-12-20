@@ -12,11 +12,12 @@ class CombinedSpec extends ObjectBehavior
 {
     function let(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
     {
-        $this->beConstructedWith('combined_dictionary', [
+        $this->beConstructedWith(
+            'combined_dictionary',
             $dictionary1,
             $dictionary2,
-            $dictionary3,
-        ]);
+            $dictionary3
+        );
     }
 
     function it_is_initializable()

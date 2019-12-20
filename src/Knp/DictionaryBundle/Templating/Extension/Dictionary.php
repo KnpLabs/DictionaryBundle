@@ -22,7 +22,7 @@ final class Dictionary extends AbstractExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @return TwigFunction[]
      */
     public function getFunctions()
     {
@@ -32,7 +32,7 @@ final class Dictionary extends AbstractExtension
     }
 
     /**
-     * {@inheritdoc}
+     * @return TwigFilter[]
      */
     public function getFilters()
     {
@@ -41,13 +41,5 @@ final class Dictionary extends AbstractExtension
                 return $this->dictionaries[$name][$key];
             }),
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'knp_dictionary.dictionary_extension';
     }
 }

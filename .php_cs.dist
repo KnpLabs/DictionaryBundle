@@ -12,17 +12,20 @@ return PhpCsFixer\Config::create()
             ->phpCsFixer(true)
             ->php(7.2, true)
             ->pedrotroller(true)
-            ->enable('ordered_imports')
             ->enable('align_multiline_comment')
             ->enable('array_indentation')
-            ->enable('no_superfluous_phpdoc_tags')
             ->enable('binary_operator_spaces', [
                 'operators' => [
                     '='  => 'align_single_space_minimal',
                     '=>' => 'align_single_space_minimal',
                 ],
             ])
+            ->enable('global_namespace_import', ['import_classes' => true, 'import_constants' => false, 'import_functions' => false])
+            ->enable('ordered_imports')
+            ->enable('ordered_interfaces')
+            ->enable('phpdoc_line_span')
             ->disable('method_chaining_indentation')
+            ->disable('no_superfluous_phpdoc_tags')
             ->getRules()
     )
     ->setUsingCache(false)

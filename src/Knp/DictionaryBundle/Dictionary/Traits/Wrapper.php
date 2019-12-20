@@ -4,10 +4,15 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary\Traits;
 
+/**
+ * @template E
+ *
+ * @deprecated Trait Knp\DictionaryBundle\Dictionary\Traits\Wrapper is deprecated since version 3.1, to be removed in 3.2. Extend from Knp\DictionaryBundle\Dictionary\Wrapper instead.
+ */
 trait Wrapper
 {
     /**
-     * @var \Knp\DictionaryBundle\Dictionary
+     * @var \Knp\DictionaryBundle\Dictionary<E>
      */
     private $dictionary;
 
@@ -51,8 +56,11 @@ trait Wrapper
         return $this->dictionary->count();
     }
 
+    /**
+     * @return \Knp\DictionaryBundle\Dictionary<E>
+     */
     public function getIterator()
     {
-        return $this->dictionary->getIterator();
+        return $this->dictionary;
     }
 }

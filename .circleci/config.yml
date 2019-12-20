@@ -11,13 +11,26 @@ composer_highter: &composer_highter
     composer global require hirak/prestissimo --no-progress
     composer update
 
+phive: &phive
+  run: |
+      wget https://phar.io/releases/phive.phar
+      wget https://phar.io/releases/phive.phar.asc
+      gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 0x9B2D5D79
+      gpg --verify phive.phar.asc phive.phar
+      chmod +x phive.phar
+      sudo mv phive.phar /usr/bin/phive
+      phive install --trust-gpg-keys CF1A108D0E7AE720
+
 tests: &tests
   run: |
       echo "PHP version"
       php --version
-      echo "PHPSpec tests"
-      rm phpspec.yml
-      vendor/bin/phpspec -n -fpretty run -v
+      echo ""
+      echo "Static analysis"
+      echo ""
+      tools/phpstan analyse
+      echo "Phpspec tests"
+      vendor/bin/phpspec run -v
       echo ""
       echo "Integration tests"
       echo ""
@@ -27,6 +40,7 @@ tests: &tests
       echo ""
       vendor/bin/php-cs-fixer fix --diff || (echo "Coding standards are not respected. Run 'vendor/bin/php-cs-fixer fix'" && exit 1)
 
+
 jobs:
 
   php 7.2:
@@ -34,6 +48,7 @@ jobs:
       - image: circleci/php:7.2
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_highter
       - <<: *tests
 
@@ -42,6 +57,7 @@ jobs:
       - image: circleci/php:7.2
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_lower
       - <<: *tests
 
@@ -50,6 +66,7 @@ jobs:
       - image: circleci/php:7.3
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_highter
       - <<: *tests
 
@@ -58,6 +75,7 @@ jobs:
       - image: circleci/php:7.3
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_lower
       - <<: *tests
 
@@ -66,6 +84,7 @@ jobs:
       - image: circleci/php:7.4
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_highter
       - <<: *tests
 
@@ -74,6 +93,7 @@ jobs:
       - image: circleci/php:7.4
     steps:
       - checkout
+      - <<: *phive
       - <<: *composer_lower
       - <<: *tests
 

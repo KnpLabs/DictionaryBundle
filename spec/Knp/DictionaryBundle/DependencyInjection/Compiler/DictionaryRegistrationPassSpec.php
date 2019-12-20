@@ -25,15 +25,15 @@ class DictionaryRegistrationPassSpec extends ObjectBehavior
         $container->getDefinition(Collection::class)->willReturn($dictionaries);
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);
 
-        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments): bool {
             return 'foo' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
-        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments): bool {
             return 'bar' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 
-        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments) {
+        $dictionaries->addMethodCall('add', Argument::that(function (array $arguments): bool {
             return 'baz' === $arguments[0]->__toString();
         }))->shouldBeCalled();
 

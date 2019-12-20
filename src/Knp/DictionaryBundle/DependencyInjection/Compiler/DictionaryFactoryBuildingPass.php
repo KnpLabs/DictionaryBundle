@@ -11,11 +11,11 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DictionaryFactoryBuildingPass implements CompilerPassInterface
 {
+    /**
+     * @var string
+     */
     const TAG_FACTORY = 'knp_dictionary.factory';
 
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         foreach ($container->findTaggedServiceIds(self::TAG_FACTORY) as $id => $tags) {

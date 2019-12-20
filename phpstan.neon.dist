@@ -1,0 +1,12 @@
+parameters:
+    level: 7
+    paths:
+        - src
+        - spec/PHPSpec
+    excludes_analyse:
+        - src/Knp/DictionaryBundle/Dictionary/Wrapper.php
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)\.#'
+        - '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder::root\(\)\.#'
+        - '#Class Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder does not have a constructor and must be instantiated without any parameters\.#'

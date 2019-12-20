@@ -39,9 +39,13 @@ class InvokableSpec extends ObjectBehavior
 
     function it_supports_callable_arguments()
     {
-        $this->beConstructedWith('baz', function () {
-            return \call_user_func_array([$this, 'execution'], \func_get_args());
-        }, [['foo' => 2, 'bar' => 1, 'baz' => 0]]);
+        $this->beConstructedWith(
+            'baz',
+            function () {
+                return $this->execution(...\func_get_args());
+            },
+            [['foo' => 2, 'bar' => 1, 'baz' => 0]]
+        );
 
         $this->getValues()->shouldReturn(['foo' => 2, 'bar' => 1, 'baz' => 0]);
     }
@@ -132,7 +136,7 @@ class InvokableSpec extends ObjectBehavior
 
     private function execution()
     {
-        if (false === $this->executed) {
+        if (!$this->executed) {
             $this->executed = true;
             $args           = \func_get_args();
 
