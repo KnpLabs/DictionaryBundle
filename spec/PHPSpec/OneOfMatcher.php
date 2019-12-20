@@ -9,11 +9,19 @@ use PhpSpec\Matcher\BasicMatcher;
 
 final class OneOfMatcher extends BasicMatcher
 {
+    /**
+     * @param mixed   $subject
+     * @param mixed[] $arguments
+     */
     public function supports(string $name, $subject, array $arguments): bool
     {
         return 'beOneOf' === $name;
     }
 
+    /**
+     * @param mixed   $subject
+     * @param mixed[] $arguments
+     */
     protected function matches($subject, array $arguments): bool
     {
         if (1 === \count($arguments) && \is_array(current($arguments))) {
@@ -23,6 +31,10 @@ final class OneOfMatcher extends BasicMatcher
         return \in_array($subject, $arguments, true);
     }
 
+    /**
+     * @param mixed   $subject
+     * @param mixed[] $arguments
+     */
     protected function getFailureException(string $name, $subject, array $arguments): FailureException
     {
         if (1 === \count($arguments) && \is_array(current($arguments))) {
@@ -38,6 +50,10 @@ final class OneOfMatcher extends BasicMatcher
         );
     }
 
+    /**
+     * @param mixed   $subject
+     * @param mixed[] $arguments
+     */
     protected function getNegativeFailureException(string $name, $subject, array $arguments): FailureException
     {
         if (1 === \count($arguments) && \is_array(current($arguments))) {

@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use ArrayIterator;
+use Generator;
 use Knp\DictionaryBundle\Dictionary;
 
+/**
+ * @template E
+ * @implements Dictionary<E>
+ */
 final class Simple implements Dictionary
 {
     /**
@@ -15,10 +19,13 @@ final class Simple implements Dictionary
     private $name;
 
     /**
-     * @var array
+     * @var array<mixed, E>
      */
     private $values = [];
 
+    /**
+     * @param array<mixed, E> $values
+     */
     public function __construct(string $name, array $values)
     {
         $this->name   = $name;
@@ -40,7 +47,7 @@ final class Simple implements Dictionary
         return array_keys($this->values);
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return \array_key_exists($offset, $this->values);
     }
@@ -60,12 +67,15 @@ final class Simple implements Dictionary
         unset($this->values[$offset]);
     }
 
-    public function getIterator()
+    /**
+     * @return Generator<mixed>
+     */
+    public function getIterator(): Generator
     {
-        return new ArrayIterator($this->values);
+        yield from $this->values;
     }
 
-    public function count()
+    public function count(): int
     {
         return \count($this->values);
     }

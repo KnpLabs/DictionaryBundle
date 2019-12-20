@@ -25,6 +25,9 @@ class DictionaryBuildingPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param mixed[] $config
+     */
     private function createDefinition(string $name, array $config): Definition
     {
         $definition = new Definition();

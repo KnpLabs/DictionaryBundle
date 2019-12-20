@@ -6,9 +6,12 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayIterator;
 use InvalidArgumentException;
-use Iterator;
 use Knp\DictionaryBundle\Dictionary;
 
+/**
+ * @template E
+ * @implements Dictionary<E>
+ */
 final class Invokable implements Dictionary
 {
     /**
@@ -22,7 +25,7 @@ final class Invokable implements Dictionary
     private $invoked = false;
 
     /**
-     * @var array
+     * @var array<mixed, mixed>
      */
     private $values = [];
 
@@ -32,10 +35,13 @@ final class Invokable implements Dictionary
     private $callable;
 
     /**
-     * @var array
+     * @var mixed[]
      */
     private $callableArgs = [];
 
+    /**
+     * @param mixed[] $callableArgs
+     */
     public function __construct(string $name, callable $callable, array $callableArgs = [])
     {
         $this->name         = $name;
@@ -90,7 +96,10 @@ final class Invokable implements Dictionary
         unset($this->values[$offset]);
     }
 
-    public function getIterator(): Iterator
+    /**
+     * @return ArrayIterator<mixed, mixed>
+     */
+    public function getIterator(): ArrayIterator
     {
         $this->invoke();
 

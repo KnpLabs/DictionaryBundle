@@ -7,10 +7,14 @@ namespace Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 
+/**
+ * @template E
+ * @implements Dictionary<E>
+ */
 class Traceable implements Dictionary
 {
     /**
-     * @var Dictionary
+     * @var Dictionary<E>
      */
     private $dictionary;
 
@@ -19,6 +23,9 @@ class Traceable implements Dictionary
      */
     private $collector;
 
+    /**
+     * @param Dictionary<E> $dictionary
+     */
     public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
     {
         $this->dictionary = $dictionary;
@@ -44,7 +51,7 @@ class Traceable implements Dictionary
         return $this->dictionary->getKeys();
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         $this->markAsUsed();
 
@@ -72,14 +79,17 @@ class Traceable implements Dictionary
         $this->markAsUsed();
     }
 
-    public function getIterator()
+    /**
+     * @return Dictionary<E>
+     */
+    public function getIterator(): Dictionary
     {
         $this->markAsUsed();
 
         return $this->dictionary;
     }
 
-    public function count()
+    public function count(): int
     {
         $this->markAsUsed();
 

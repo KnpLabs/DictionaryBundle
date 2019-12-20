@@ -15,13 +15,24 @@ class DictionaryDataCollector extends DataCollector
     {
     }
 
-    public function addDictionary($name, array $keys, array $values): void
+    /**
+     * @param mixed[] $keys
+     * @param mixed[] $values
+     */
+    public function addDictionary(string $name, array $keys, array $values): void
     {
-        $this->data[$name] = array_map(function ($key, $value): array {
-            return ['key' => $key, 'value' => $value];
-        }, $keys, $values);
+        $this->data[$name] = array_map(
+            function ($key, $value): array {
+                return ['key' => $key, 'value' => $value];
+            },
+            $keys,
+            $values
+        );
     }
 
+    /**
+     * @return iterable<array<string, mixed>>
+     */
     public function getDictionaries(): iterable
     {
         return $this->data;

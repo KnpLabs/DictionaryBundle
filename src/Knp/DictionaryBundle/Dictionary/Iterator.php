@@ -6,8 +6,15 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Traversable;
 
+/**
+ * @template E
+ * @extends Wrapper<E>
+ */
 final class Iterator extends Wrapper
 {
+    /**
+     * @param Traversable<mixed, E> $iterator
+     */
     public function __construct(string $name, Traversable $iterator)
     {
         parent::__construct(
