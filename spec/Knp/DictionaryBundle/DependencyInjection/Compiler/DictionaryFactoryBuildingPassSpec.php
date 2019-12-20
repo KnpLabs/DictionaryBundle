@@ -11,7 +11,7 @@ use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
+final class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -6,10 +6,11 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
 use Psr\Container\ContainerInterface;
 use Traversable;
 
-final class Iterator implements Dictionary\Factory
+final class Iterator implements Factory
 {
     /**
      * @var ContainerInterface

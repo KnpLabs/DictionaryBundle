@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class KnpDictionaryExtension extends Extension
+final class KnpDictionaryExtension extends Extension
 {
     /**
      * @param array<mixed, mixed> $config

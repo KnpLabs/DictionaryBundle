@@ -6,14 +6,16 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Simple;
 use Knp\DictionaryBundle\ValueTransformer;
 
-class Value implements Dictionary\Factory
+final class Value implements Factory
 {
     /**
      * @var ValueTransformer
      */
-    protected $transformer;
+    private $transformer;
 
     public function __construct(ValueTransformer $transformer)
     {
@@ -41,7 +43,7 @@ class Value implements Dictionary\Factory
             $values[] = $this->transformer->transform($value);
         }
 
-        return new Dictionary\Simple($name, $values);
+        return new Simple($name, $values);
     }
 
     public function supports(array $config): bool

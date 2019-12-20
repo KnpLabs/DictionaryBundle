@@ -6,9 +6,10 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Exception;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Iterator;
 use PhpSpec\ObjectBehavior;
 
-class IteratorSpec extends ObjectBehavior
+final class IteratorSpec extends ObjectBehavior
 {
     /**
      * @var bool
@@ -24,7 +25,7 @@ class IteratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Iterator::class);
+        $this->shouldHaveType(Iterator::class);
     }
 
     function it_is_a_dictionary()

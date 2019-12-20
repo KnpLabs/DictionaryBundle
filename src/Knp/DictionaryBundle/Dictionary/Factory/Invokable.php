@@ -6,9 +6,10 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
 use Psr\Container\ContainerInterface;
 
-final class Invokable implements Dictionary\Factory
+final class Invokable implements Factory
 {
     /**
      * @var ContainerInterface
