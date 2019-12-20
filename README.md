@@ -278,3 +278,9 @@ Then...
 $ phive install
 $ tools/phpstan process
 ```
+
+### rector (*optional*)
+
+```bash
+rector process --set php70 --set php71 --set php72 --set code-quality --set coding-style --set symfony34 --set twig240 --set psr-4 --set solid src/ spec/
+```

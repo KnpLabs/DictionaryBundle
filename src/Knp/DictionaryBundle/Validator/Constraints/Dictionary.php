@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraint;
  * @Annotation
  * @Target({"PROPERTY", "METHOD"})
  */
-class Dictionary extends Constraint
+final class Dictionary extends Constraint
 {
     /**
      * @var string

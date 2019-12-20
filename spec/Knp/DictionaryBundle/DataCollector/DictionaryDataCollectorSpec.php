@@ -7,7 +7,7 @@ namespace spec\Knp\DictionaryBundle\DataCollector;
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use PhpSpec\ObjectBehavior;
 
-class DictionaryDataCollectorSpec extends ObjectBehavior
+final class DictionaryDataCollectorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -20,7 +20,7 @@ class DictionaryDataCollectorSpec extends ObjectBehavior
         $this->addDictionary('foo', ['key1', 'key2'], ['value1', 'value2']);
         $this->addDictionary('bar', ['keyA', 'keyB'], ['valueA', 'valueB']);
 
-        $this->getDictionaries()->shouldReturn([
+        $this->getDictionaries()->shouldIterateLike([
             'foo' => [
                 [
                     'key'   => 'key1',

@@ -13,7 +13,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class KnpDictionaryBundleSpec extends ObjectBehavior
+final class KnpDictionaryBundleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

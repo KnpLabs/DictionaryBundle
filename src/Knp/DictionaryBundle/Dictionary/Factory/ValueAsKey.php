@@ -6,14 +6,16 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Simple;
 use Knp\DictionaryBundle\ValueTransformer;
 
-class ValueAsKey implements Dictionary\Factory
+final class ValueAsKey implements Factory
 {
     /**
      * @var ValueTransformer
      */
-    protected $transformer;
+    private $transformer;
 
     public function __construct(ValueTransformer $transformer)
     {
@@ -28,7 +30,7 @@ class ValueAsKey implements Dictionary\Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['content'])) {
-            throw new InvalidArgumentException("The key content for dictionary {$name} must be set.");
+            throw new InvalidArgumentException(sprintf('The key content for dictionary %s must be set.', $name));
         }
 
         $content = $config['content'];
@@ -39,7 +41,7 @@ class ValueAsKey implements Dictionary\Factory
             $values[$builtValue] = $builtValue;
         }
 
-        return new Dictionary\Simple($name, $values);
+        return new Simple($name, $values);
     }
 
     public function supports(array $config): bool

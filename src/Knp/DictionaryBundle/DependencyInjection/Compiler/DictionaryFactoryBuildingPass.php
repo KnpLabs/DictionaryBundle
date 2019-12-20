@@ -9,12 +9,12 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class DictionaryFactoryBuildingPass implements CompilerPassInterface
+final class DictionaryFactoryBuildingPass implements CompilerPassInterface
 {
     /**
      * @var string
      */
-    const TAG_FACTORY = 'knp_dictionary.factory';
+    public const TAG_FACTORY = 'knp_dictionary.factory';
 
     public function process(ContainerBuilder $container): void
     {

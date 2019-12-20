@@ -6,23 +6,26 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use ArrayIterator;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
+use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Factory\Extended;
 use PhpSpec\ObjectBehavior;
 
-class ExtendedSpec extends ObjectBehavior
+final class ExtendedSpec extends ObjectBehavior
 {
-    function let(Dictionary\Factory $factory)
+    function let(Factory $factory)
     {
-        $this->beConstructedWith($factory, new Dictionary\Collection());
+        $this->beConstructedWith($factory, new Collection());
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Factory\Extended::class);
+        $this->shouldHaveType(Extended::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Dictionary\Factory::class);
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_supports_specific_config()
@@ -38,7 +41,7 @@ class ExtendedSpec extends ObjectBehavior
         $extendsDictionary->getName()->willReturn('extends_dictionary');
         $extendsDictionary->getIterator()->willReturn(new ArrayIterator(['bar1', 'bar2', 'bar3']));
 
-        $dictionaries = new Dictionary\Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
+        $dictionaries = new Collection($initialDictionary->getWrappedObject(), $extendsDictionary->getWrappedObject());
 
         $this->beConstructedWith($factory, $dictionaries);
 

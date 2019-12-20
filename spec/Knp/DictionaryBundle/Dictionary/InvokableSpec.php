@@ -7,9 +7,10 @@ namespace spec\Knp\DictionaryBundle\Dictionary;
 use Exception;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Invokable;
 use PhpSpec\ObjectBehavior;
 
-class InvokableSpec extends ObjectBehavior
+final class InvokableSpec extends ObjectBehavior
 {
     /**
      * @var bool
@@ -29,7 +30,7 @@ class InvokableSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Invokable::class);
+        $this->shouldHaveType(Invokable::class);
     }
 
     function it_is_a_dictionary()
