@@ -202,7 +202,7 @@ services:
 
 ## Use your dictionary in twig
 
-You can also use your dictionary in your Twig templates via calling ```dictionary``` function (or filter)`.
+You can also use your dictionary in your Twig templates via calling `dictionary` function (or filter).
 
 ```twig
 {% for example in dictionary('examples') %}
