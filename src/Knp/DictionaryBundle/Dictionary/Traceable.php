@@ -11,7 +11,7 @@ use Knp\DictionaryBundle\Dictionary;
  * @template E
  * @implements Dictionary<E>
  */
-class Traceable implements Dictionary
+final class Traceable implements Dictionary
 {
     /**
      * @var Dictionary<E>

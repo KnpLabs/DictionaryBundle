@@ -8,10 +8,11 @@ use ArrayAccess;
 use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use PhpSpec\ObjectBehavior;
 use RuntimeException;
 
-class CollectionSpec extends ObjectBehavior
+final class CollectionSpec extends ObjectBehavior
 {
     function let(Dictionary $dictionary, Dictionary $dictionary2)
     {
@@ -22,7 +23,7 @@ class CollectionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Collection::class);
+        $this->shouldHaveType(Collection::class);
     }
 
     function it_is_an_array_access()

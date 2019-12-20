@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Factory\Invokable;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\Container;
 
-class InvokableSpec extends ObjectBehavior
+final class InvokableSpec extends ObjectBehavior
 {
     function let(Container $container)
     {
@@ -17,7 +18,7 @@ class InvokableSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\Invokable::class);
+        $this->shouldHaveType(Invokable::class);
     }
 
     function it_is_a_factory()
@@ -55,7 +56,7 @@ class InvokableSpec extends ObjectBehavior
     }
 }
 
-class MockInvokable
+abstract class MockInvokable
 {
     /**
      * @return mixed[]

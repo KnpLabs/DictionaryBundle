@@ -8,7 +8,7 @@ use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 use Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator;
 use PhpSpec\ObjectBehavior;
 
-class DictionarySpec extends ObjectBehavior
+final class DictionarySpec extends ObjectBehavior
 {
     function let()
     {

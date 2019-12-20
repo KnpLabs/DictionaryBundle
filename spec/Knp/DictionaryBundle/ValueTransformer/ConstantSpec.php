@@ -8,7 +8,7 @@ use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\ValueTransformer\Constant;
 use PhpSpec\ObjectBehavior;
 
-class ConstantSpec extends ObjectBehavior
+final class ConstantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

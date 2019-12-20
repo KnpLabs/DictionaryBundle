@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
-use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Factory\ValueAsKey;
 use Knp\DictionaryBundle\ValueTransformer;
 use PhpSpec\ObjectBehavior;
 
-class ValueAsKeySpec extends ObjectBehavior
+final class ValueAsKeySpec extends ObjectBehavior
 {
     function let(ValueTransformer $transformer)
     {
@@ -18,12 +19,12 @@ class ValueAsKeySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Factory\ValueAsKey::class);
+        $this->shouldHaveType(ValueAsKey::class);
     }
 
     function it_is_a_factory()
     {
-        $this->shouldHaveType(Dictionary\Factory::class);
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_supports_specific_config()

@@ -5,10 +5,11 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Faker\Provider;
 
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Faker;
 use PhpSpec\ObjectBehavior;
 
-class DictionarySpec extends ObjectBehavior
+final class DictionarySpec extends ObjectBehavior
 {
     /**
      * @var Dictionary\Collection
@@ -17,7 +18,7 @@ class DictionarySpec extends ObjectBehavior
 
     function let()
     {
-        $this->dictionaries = new Dictionary\Collection();
+        $this->dictionaries = new Collection();
 
         $this->beConstructedWith($this->dictionaries);
     }
