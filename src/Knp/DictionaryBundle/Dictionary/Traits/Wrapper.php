@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary\Traits;
 
+/**
+ * @deprecated Trait Knp\DictionaryBundle\Dictionary\Traits\Wrapper is deprecated since version 3.1, to be removed in 3.2. Extend from Knp\DictionaryBundle\Dictionary\Wrapper instead.
+ */
 trait Wrapper
 {
     /**
