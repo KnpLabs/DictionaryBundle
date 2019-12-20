@@ -9,7 +9,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class DictionaryValidator extends ConstraintValidator
+final class DictionaryValidator extends ConstraintValidator
 {
     /**
      * @var Collection

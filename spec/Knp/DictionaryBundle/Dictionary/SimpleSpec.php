@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Simple;
 use PhpSpec\ObjectBehavior;
 
-class SimpleSpec extends ObjectBehavior
+final class SimpleSpec extends ObjectBehavior
 {
     function let()
     {
@@ -20,7 +21,7 @@ class SimpleSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Dictionary\Simple::class);
+        $this->shouldHaveType(Simple::class);
     }
 
     function it_is_a_dictionary()

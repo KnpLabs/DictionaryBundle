@@ -8,7 +8,7 @@ use Faker\Generator;
 use Faker\Provider\Base;
 use Knp\DictionaryBundle\Dictionary\Collection;
 
-class Dictionary extends Base
+final class Dictionary extends Base
 {
     /**
      * @var Collection

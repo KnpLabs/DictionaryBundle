@@ -21,6 +21,7 @@ return PhpCsFixer\Config::create()
                 ],
             ])
             ->enable('global_namespace_import', ['import_classes' => true, 'import_constants' => false, 'import_functions' => false])
+            ->enable('final_class')
             ->enable('ordered_imports')
             ->enable('ordered_interfaces')
             ->enable('phpdoc_line_span')

@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\ValueTransformer;
 
 use Knp\DictionaryBundle\ValueTransformer;
+use Knp\DictionaryBundle\ValueTransformer\Aggregate;
 use PhpSpec\ObjectBehavior;
 
-class AggregateSpec extends ObjectBehavior
+final class AggregateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(ValueTransformer\Aggregate::class);
+        $this->shouldHaveType(Aggregate::class);
     }
 
     function it_is_a_value_transformer()

@@ -6,10 +6,11 @@ namespace spec\Knp\DictionaryBundle\Templating\Extension;
 
 use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Templating\Extension;
 use PhpSpec\ObjectBehavior;
 
-class DictionarySpec extends ObjectBehavior
+final class DictionarySpec extends ObjectBehavior
 {
     function let(Dictionary $dico1, Dictionary $dico2)
     {
@@ -19,7 +20,7 @@ class DictionarySpec extends ObjectBehavior
         $dico2->offsetGet('foo')->willReturn(false);
         $dico2->getName()->willReturn('other');
 
-        $this->beConstructedWith(new Dictionary\Collection($dico1->getWrappedObject(), $dico2->getWrappedObject()));
+        $this->beConstructedWith(new Collection($dico1->getWrappedObject(), $dico2->getWrappedObject()));
     }
 
     function it_is_initializable()

@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class DictionaryRegistrationPass implements CompilerPassInterface
+final class DictionaryRegistrationPass implements CompilerPassInterface
 {
     /**
      * @var string
