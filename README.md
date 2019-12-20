@@ -6,7 +6,8 @@ DictionaryBundle
 Are you often tired to repeat static choices like gender or civility in your apps ?
 
 ## Requirements
-- Symfony >= 3.3
+- PHP >= 7.2
+- Symfony 3.4, 4.2, 4.3, 4.4 or 5.*
 
 ## Installation
 Run the following command:
