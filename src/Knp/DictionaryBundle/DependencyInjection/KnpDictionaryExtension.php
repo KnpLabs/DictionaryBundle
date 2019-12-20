@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class KnpDictionaryExtension extends Extension
 {
     /**
-     * {@inheritdoc}
+     * @param array<mixed, mixed> $config
      */
     public function load(array $config, ContainerBuilder $container): void
     {

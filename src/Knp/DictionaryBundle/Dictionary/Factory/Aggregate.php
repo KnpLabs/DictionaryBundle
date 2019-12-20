@@ -38,9 +38,6 @@ class Aggregate implements Dictionary\Factory
         ));
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         foreach ($this->factories as $factory) {

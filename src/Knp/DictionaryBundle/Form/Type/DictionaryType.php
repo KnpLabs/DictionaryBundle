@@ -22,14 +22,11 @@ class DictionaryType extends AbstractType
         $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver): void
     {
         $dictionaries = $this->dictionaries;
 
-        $choices = function (Options $options) use ($dictionaries) {
+        $choices = function (Options $options) use ($dictionaries): array {
             $name    = $options['name'];
             $choices = $dictionaries[$name]->getValues();
 
@@ -43,10 +40,7 @@ class DictionaryType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getParent()
+    public function getParent(): string
     {
         return ChoiceType::class;
     }

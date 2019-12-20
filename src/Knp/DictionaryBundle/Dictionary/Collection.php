@@ -7,19 +7,25 @@ namespace Knp\DictionaryBundle\Dictionary;
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
-use Iterator;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
 
+/**
+ * @implements ArrayAccess<string, Dictionary<mixed>>
+ * @implements IteratorAggregate<string, Dictionary<mixed>>
+ */
 final class Collection implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
-     * @var Dictionary[]
+     * @var array<string, Dictionary<mixed>>
      */
-    private $dictionaries;
+    private $dictionaries = [];
 
+    /**
+     * @param array<int, Dictionary<mixed>> $dictionaries
+     */
     public function __construct(Dictionary ...$dictionaries)
     {
         foreach ($dictionaries as $dictionary) {
@@ -27,19 +33,22 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         }
     }
 
+    /**
+     * @param Dictionary<mixed> $dictionary
+     */
     public function add(Dictionary $dictionary): void
     {
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
 
-    public function offsetExists($offset): bool
+    public function offsetExists($offset)
     {
         return \array_key_exists($offset, $this->dictionaries);
     }
 
     public function offsetGet($offset)
     {
-        if (false === $this->offsetExists($offset)) {
+        if (!$this->offsetExists($offset)) {
             throw new DictionaryNotFoundException($offset, array_keys($this->dictionaries));
         }
 
@@ -58,7 +67,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    public function getIterator(): Iterator
+    public function getIterator()
     {
         return new ArrayIterator($this->dictionaries);
     }

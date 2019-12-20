@@ -13,9 +13,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DictionaryBuildingPass implements CompilerPassInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function process(ContainerBuilder $container): void
     {
         $configuration = $container->getParameter('knp_dictionary.configuration');
@@ -28,6 +25,9 @@ class DictionaryBuildingPass implements CompilerPassInterface
         }
     }
 
+    /**
+     * @param mixed[] $config
+     */
     private function createDefinition(string $name, array $config): Definition
     {
         $definition = new Definition();

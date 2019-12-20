@@ -14,7 +14,7 @@ class AggregateSpec extends ObjectBehavior
         $this->shouldHaveType(ValueTransformer\Aggregate::class);
     }
 
-    function it_is_a_value_transfomer()
+    function it_is_a_value_transformer()
     {
         $this->shouldHaveType(ValueTransformer::class);
     }

@@ -20,18 +20,15 @@ class Dictionary extends Constraint
     /**
      * @var string
      */
-    public $message = 'The key {{ key }} doesn\'t exist in the given dictionary. {{ keys }} available.';
+    public $message = "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.";
 
-    /**
-     * {@inheritdoc}
-     */
     public function validatedBy()
     {
         return DictionaryValidator::class;
     }
 
     /**
-     * {@inheritdoc}
+     * @return string[]
      */
     public function getRequiredOptions()
     {

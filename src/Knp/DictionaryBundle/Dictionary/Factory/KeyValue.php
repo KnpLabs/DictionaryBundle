@@ -46,9 +46,6 @@ class KeyValue implements Dictionary\Factory
         return new Dictionary\Simple($name, $values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'key_value' === $config['type'] : false;

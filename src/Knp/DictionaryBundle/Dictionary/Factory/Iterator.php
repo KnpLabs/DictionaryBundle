@@ -37,19 +37,16 @@ final class Iterator implements Dictionary\Factory
 
         $service = $this->container->get($config['service']);
 
-        if (false === $service instanceof Traversable) {
+        if (!$service instanceof Traversable) {
             throw new InvalidArgumentException(sprintf(
                 'You must provide a valid instance of Traversable for the dictionary named "%s".',
                 $name
             ));
         }
 
-        return new Dictionary\Iterator($name, $callable);
+        return new Dictionary\Iterator($name, $service);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'iterator' === $config['type'] : false;

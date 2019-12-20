@@ -28,10 +28,7 @@ class ValueAsKey implements Dictionary\Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['content'])) {
-            throw new InvalidArgumentException(sprintf(
-                'The key content for dictionary %s must be set.',
-                $name
-            ));
+            throw new InvalidArgumentException("The key content for dictionary {$name} must be set.");
         }
 
         $content = $config['content'];
@@ -45,9 +42,6 @@ class ValueAsKey implements Dictionary\Factory
         return new Dictionary\Simple($name, $values);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $config): bool
     {
         return (isset($config['type'])) ? 'value_as_key' === $config['type'] : false;
