@@ -16,8 +16,7 @@ tests: &tests
       echo "PHP version"
       php --version
       echo "PHPSpec tests"
-      rm phpspec.yml
-      vendor/bin/phpspec -n -fpretty run -v
+      vendor/bin/phpspec run -v
       echo ""
       echo "Integration tests"
       echo ""
