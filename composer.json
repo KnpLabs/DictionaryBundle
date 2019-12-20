@@ -44,7 +44,8 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Knp\\DictionaryBundle\\": "spec/Knp/DictionaryBundle"
+            "spec\\Knp\\DictionaryBundle\\": "spec/Knp/DictionaryBundle",
+            "spec\\PHPSpec\\": "spec/PHPSpec"
         }
     },
     "extra": {

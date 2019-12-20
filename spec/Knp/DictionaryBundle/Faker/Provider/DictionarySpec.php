@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Faker\Provider;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Faker;
 use PhpSpec\ObjectBehavior;
@@ -35,7 +34,7 @@ class DictionarySpec extends ObjectBehavior
 
         $this->dictionaries->add($dictionary->getWrappedObject());
 
-        $this->dictionary('the_dico')->shouldBeOneOf(['foo', 'bar', 'baz']);
+        $this->dictionary('the_dico')->shouldBeOneOf('foo', 'bar', 'baz');
     }
 
     function it_can_generates_unique_random_values(Dictionary $dictionary)
@@ -45,17 +44,6 @@ class DictionarySpec extends ObjectBehavior
 
         $this->dictionaries->add($dictionary->getWrappedObject());
 
-        $this->unique()->dictionary('the_dico')->shouldBeOneOf(['foo', 'bar', 'baz']);
-    }
-
-    public function getMatchers(): array
-    {
-        return [
-            'beOneOf' => function (string $value, array $array): bool {
-                Assert::that($value)->inArray($array);
-
-                return true;
-            },
-        ];
+        $this->unique()->dictionary('the_dico')->shouldBeOneOf('foo', 'bar', 'baz');
     }
 }
