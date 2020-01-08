@@ -46,6 +46,13 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         return \array_key_exists($offset, $this->dictionaries);
     }
 
+    /**
+     * @param mixed $offset
+     *
+     * @throws DictionaryNotFoundException
+     *
+     * @return Dictionary<mixed>
+     */
     public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
