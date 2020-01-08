@@ -37,8 +37,44 @@ class DictionaryValidator extends ConstraintValidator
         if (!\in_array($value, $values, true)) {
             $this->context->addViolation(
                 $constraint->message,
-                ['{{ key }}' => $value, '{{ keys }}' => implode(', ', $values)]
+                [
+                    '{{ key }}'  => $this->varToString($value),
+                    '{{ keys }}' => implode(
+                        ', ',
+                        array_map(
+                            [$this, 'varToString'],
+                            $values
+                        )
+                    ),
+                ]
             );
         }
+    }
+
+    /**
+     * @param mixed $var
+     */
+    private function varToString($var): string
+    {
+        if (null === $var) {
+            return 'null';
+        }
+
+        if (\is_string($var)) {
+            return '"'.$var.'"';
+        }
+
+        if (\is_bool($var)) {
+            return $var ? 'true' : 'false';
+        }
+
+        if (\is_float($var)) {
+            return 0.0 === $var
+                ? '0.0'
+                : (string) $var
+            ;
+        }
+
+        return (string) $var;
     }
 }

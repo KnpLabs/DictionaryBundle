@@ -45,7 +45,36 @@ class DictionaryValidatorSpec extends ObjectBehavior
     {
         $constraint = new Constraint(['name' => 'dico']);
 
-        $context->addViolation("The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.", ['{{ key }}' => 'the_unexisting_key', '{{ keys }}' => 'the_key'])->shouldBeCalled();
+        $context
+            ->addViolation(
+                "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.",
+                [
+                    '{{ key }}'  => '"the_unexisting_key"',
+                    '{{ keys }}' => '"the_key"',
+                ]
+            )
+            ->shouldBeCalled()
+        ;
+
+        $this->validate('the_unexisting_key', $constraint);
+    }
+
+    function it_transforms_keys_in_string_representation($dictionary, $context)
+    {
+        $dictionary->getKeys()->willReturn(['the_key', true, 12, 3.14, 0.0, null]);
+
+        $constraint = new Constraint(['name' => 'dico']);
+
+        $context
+            ->addViolation(
+                "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.",
+                [
+                    '{{ key }}'  => '"the_unexisting_key"',
+                    '{{ keys }}' => '"the_key", true, 12, 3.14, 0.0, null',
+                ]
+            )
+            ->shouldBeCalled()
+        ;
 
         $this->validate('the_unexisting_key', $constraint);
     }
@@ -53,6 +82,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
     function it_throw_exception_form_unknown_constraints()
     {
         $constraint = new NotNull();
+
         $this->shouldThrow(new UnexpectedTypeException($constraint, Constraint::class))->duringValidate('the_key', $constraint);
     }
 }
