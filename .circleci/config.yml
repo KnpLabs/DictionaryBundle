@@ -38,8 +38,7 @@ tests: &tests
       echo ""
       echo "Linter tests"
       echo ""
-      vendor/bin/php-cs-fixer fix --diff || (echo "Coding standards are not respected. Run 'vendor/bin/php-cs-fixer fix'" && exit 1)
-
+      vendor/bin/php-cs-fixer fix --diff --dry-run
 
 jobs:
 
