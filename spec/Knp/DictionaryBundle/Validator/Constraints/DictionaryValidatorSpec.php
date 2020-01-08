@@ -48,9 +48,9 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $context->addViolation(
             "The key {{ key }}{{ keyType }} doesn't exist in the given dictionary. {{ keys }}{{ keysType }} available.",
             [
-                '{{ key }}' => 'the_unexisting_key',
+                '{{ key }}'      => 'the_unexisting_key',
                 '{{ keyType }}'  => '',
-                '{{ keys }}' => 'the_key',
+                '{{ keys }}'     => 'the_key',
                 '{{ keysType }}' => '',
             ]
         )->shouldBeCalled();
@@ -67,9 +67,9 @@ class DictionaryValidatorSpec extends ObjectBehavior
         $context->addViolation(
             "The key {{ key }}{{ keyType }} doesn't exist in the given dictionary. {{ keys }}{{ keysType }} available.",
             [
-                '{{ key }}' => '0',
+                '{{ key }}'      => '0',
                 '{{ keyType }}'  => ' (string)',
-                '{{ keys }}' => 0,
+                '{{ keys }}'     => 0,
                 '{{ keysType }}' => ' (integer)',
             ]
         )->shouldBeCalled();

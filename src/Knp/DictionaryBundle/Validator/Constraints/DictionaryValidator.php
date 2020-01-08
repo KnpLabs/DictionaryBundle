@@ -8,6 +8,9 @@ use Knp\DictionaryBundle\Dictionary\Collection;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use function gettype;
+use function in_array;
+use function reset;
 
 class DictionaryValidator extends ConstraintValidator
 {
@@ -21,9 +24,12 @@ class DictionaryValidator extends ConstraintValidator
         $this->dictionaries = $dictionaries;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate($value, Constraint $constraint): void
     {
-        if (!$constraint instanceof Dictionary) {
+        if (false === $constraint instanceof Dictionary) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
         }
 
@@ -32,19 +38,23 @@ class DictionaryValidator extends ConstraintValidator
         }
 
         $dictionary = $this->dictionaries[$constraint->name];
-        $values     = $dictionary->getKeys();
+        $keys       = $dictionary->getKeys();
 
-        if (!\in_array($value, $values, true)) {
+        $dictionaryFirstType = null;
+        if (count($keys)) {
+            $dictionaryFirstType = gettype(reset($keys));
+        }
+
+        if (false === in_array($value, $keys, true)) {
             $valueType = gettype($value);
-            $dictionaryFirstType = gettype($values[0]);
-            $diffType = $valueType !== $dictionaryFirstType;
+            $isTypeDifferent = $valueType !== $dictionaryFirstType;
             $this->context->addViolation(
                 $constraint->message,
                 [
                     '{{ key }}'  => $value,
-                    '{{ keyType }}'  => $diffType ? sprintf(' (%s)', $valueType) : '',
-                    '{{ keys }}' => implode(', ', $values),
-                    '{{ keysType }}' =>  ($diffType ? sprintf(' (%s)', $dictionaryFirstType) : ''),
+                    '{{ keyType }}'  => $isTypeDifferent ? sprintf(' (%s)', $valueType) : '',
+                    '{{ keys }}' => implode(', ', $keys),
+                    '{{ keysType }}' =>  ($isTypeDifferent ? sprintf(' (%s)', $dictionaryFirstType) : ''),
                 ]
             );
         }
