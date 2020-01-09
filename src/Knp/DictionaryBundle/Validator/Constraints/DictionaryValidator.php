@@ -40,21 +40,23 @@ class DictionaryValidator extends ConstraintValidator
         $dictionary = $this->dictionaries[$constraint->name];
         $keys       = $dictionary->getKeys();
 
-        $dictionaryFirstType = null;
-        if (count($keys)) {
-            $dictionaryFirstType = gettype(reset($keys));
-        }
-
         if (false === in_array($value, $keys, true)) {
-            $valueType = gettype($value);
-            $isTypeDifferent = $valueType !== $dictionaryFirstType;
+            if (true === in_array($value, $keys)) {
+                $valueType = gettype($value);
+                foreach ($keys as $key) {
+                    if ($key == $value) {
+                        $keyValue = $key;
+                        $keyType = gettype($key);                        
+                    }
+                }
+            }
             $this->context->addViolation(
                 $constraint->message,
                 [
-                    '{{ key }}'  => $value,
-                    '{{ keyType }}'  => $isTypeDifferent ? sprintf(' (%s)', $valueType) : '',
-                    '{{ keys }}' => implode(', ', $keys),
-                    '{{ keysType }}' =>  ($isTypeDifferent ? sprintf(' (%s)', $dictionaryFirstType) : ''),
+                    '{{ key }}'      => $value,
+                    '{{ keyType }}'  => isset($valueType) ? sprintf(' (%s)', $valueType) : '',
+                    '{{ keys }}'     => implode(', ', $keys),
+                    '{{ keysType }}' => ((isset($keyValue) && isset($keyType)) ? sprintf(' (%s is %s)', $keyValue, $keyType) : ''),
                 ]
             );
         }

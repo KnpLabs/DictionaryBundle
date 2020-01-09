@@ -61,7 +61,7 @@ class DictionaryValidatorSpec extends ObjectBehavior
     function it_adds_violation_for_an_unmathching_key_type($context, Dictionary $dictionary)
     {
         $dictionary->getName()->willReturn('dico');
-        $dictionary->getKeys()->willReturn([0]);
+        $dictionary->getKeys()->willReturn(['a', 'foo', 0, 1]);
         $constraint = new Constraint(['name' => 'dico']);
 
         $context->addViolation(
@@ -69,8 +69,8 @@ class DictionaryValidatorSpec extends ObjectBehavior
             [
                 '{{ key }}'      => '0',
                 '{{ keyType }}'  => ' (string)',
-                '{{ keys }}'     => 0,
-                '{{ keysType }}' => ' (integer)',
+                '{{ keys }}'     => 'a, foo, 0, 1',
+                '{{ keysType }}' => ' (0 is integer)',
             ]
         )->shouldBeCalled();
 
