@@ -20,19 +20,10 @@ switch (true) {
         }
 
         break;
-    case Kernel::VERSION_ID >= 40306:
+    case Kernel::VERSION_ID < 50000:
         trait SymfonyCompatibilityTrait
         {
             public function collect(Request $request, Response $response/*, \Throwable $exception = null*/): void
-            {
-            }
-        }
-
-        break;
-    case Kernel::VERSION_ID < 40306:
-        trait SymfonyCompatibilityTrait
-        {
-            public function collect(Request $request, Response $response, Exception $exception = null): void
             {
             }
         }

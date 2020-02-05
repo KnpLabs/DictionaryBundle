@@ -7,7 +7,7 @@ namespace Knp\DictionaryBundle\DataCollector;
 use Generator;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-class DictionaryDataCollector extends DataCollector
+final class DictionaryDataCollector extends DataCollector
 {
     use DictionaryDataCollector\SymfonyCompatibilityTrait;
 

@@ -16,6 +16,9 @@
 
 {% block panel %}
 {% for name, dictionary in collector.dictionaries %}
+    {% if false === loop.first %}
+        <hr />
+    {% endif %}
     <h2><b>{{ name }}</b></h2>
     <table>
         <tbody>
@@ -31,9 +34,6 @@
             {% endfor %}
         </tbody>
     </table>
-    {% if false == loop.last %}
-        <hr />
-    {% endif %}
 {% else %}
     <div class="empty">
         <p>No dictionary used</p>
