@@ -11,9 +11,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, Exception $exception = null): void
-    {
-    }
+    use SymfonyCompatibilityTrait;
 
     /**
      * @param mixed[] $keys
