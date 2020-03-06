@@ -4,16 +4,11 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DataCollector;
 
-use Exception;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, Exception $exception = null): void
-    {
-    }
+    use DictionaryDataCollector\SymfonyCompatibilityTrait;
 
     /**
      * @param mixed[] $keys
