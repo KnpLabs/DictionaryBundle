@@ -35,6 +35,7 @@
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "~6.0",
         "sebastian/comparator": "~3.0.2",
+        "symfony/twig-bridge": "~4.3.7 || ~5.0",
         "symfony/var-dumper": "~4.3.7 || ~5.0"
     },
     "suggest": {
