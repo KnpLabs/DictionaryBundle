@@ -21,5 +21,5 @@ $application->add(
         )
     )
 );
-$application->setDefaultCommand(LintCommand::getDefaultName());
+$application->setDefaultCommand(LintCommand::getDefaultName(), true);
 $application->run(new ArgvInput());

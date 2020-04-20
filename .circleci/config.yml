@@ -38,7 +38,7 @@ tests: &tests
       echo ""
       echo "Twig Linter"
       echo ""
-      bin/lint-twig
+      bin/lint-twig src/
       echo ""
       echo "Linter tests"
       echo ""
