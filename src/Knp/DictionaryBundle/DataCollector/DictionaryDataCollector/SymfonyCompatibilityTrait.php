@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 
-use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Kernel;
