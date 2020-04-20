@@ -36,6 +36,10 @@ tests: &tests
       echo ""
       vendor/bin/symfony-integration-checker check
       echo ""
+      echo "Twig Linter"
+      echo ""
+      bin/lint-twig
+      echo ""
       echo "Linter tests"
       echo ""
       vendor/bin/php-cs-fixer fix --diff --dry-run
