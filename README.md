@@ -43,7 +43,7 @@ knp_dictionary:
       - Bar
       - Baz
 ```
-You will be able to retreive it trough the dictionaries collection service:
+You will be able to retreive it through the dictionaries collection service:
 ```php
 $dictionaries = $container->get(\Knp\DictionaryBundle\Dictionary\Collection::class);
 $dictionary   = $dictionaries['my_dictionary'];
