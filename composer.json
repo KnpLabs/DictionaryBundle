@@ -18,12 +18,12 @@
     ],
     "require": {
         "php": ">=7.2",
-        "symfony/config": "~4.3.7 || ~5.0",
-        "symfony/dependency-injection": "~4.3.7 || ~5.0",
-        "symfony/form": "~4.3.7 || ~5.0",
-        "symfony/http-foundation": "~4.3.7 || ~5.0",
-        "symfony/http-kernel": "~4.3.7 || ~5.0",
-        "symfony/validator": "~4.3.7 || ~5.0",
+        "symfony/config": "~4.4 || ~5.1",
+        "symfony/dependency-injection": "~4.4 || ~5.1",
+        "symfony/form": "~4.4 || ~5.1",
+        "symfony/http-foundation": "~4.4 || ~5.1",
+        "symfony/http-kernel": "~4.4 || ~5.1",
+        "symfony/validator": "~4.4 || ~5.1",
         "twig/twig": "~2.4 || ~3.0"
     },
     "require-dev": {
@@ -35,8 +35,8 @@
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "~6.0",
         "sebastian/comparator": "~3.0.2",
-        "symfony/twig-bridge": "~4.3.7 || ~5.0",
-        "symfony/var-dumper": "~4.3.7 || ~5.0"
+        "symfony/twig-bridge": "~4.4 || ~5.1",
+        "symfony/var-dumper": "~4.4 || ~5.1"
     },
     "suggest": {
         "knplabs/rad-fixtures-load": "Allows to autoregister the dictionary provider as an alice provider"
