@@ -16,7 +16,7 @@ final class Traceable implements Dictionary
     /**
      * @var Dictionary<E>
      */
-    private $dictionary;
+    private $traced;
 
     /**
      * @var DictionaryDataCollector
@@ -24,57 +24,65 @@ final class Traceable implements Dictionary
     private $collector;
 
     /**
-     * @param Dictionary<E> $dictionary
+     * @param Dictionary<E> $traced
      */
-    public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
+    public function __construct(Dictionary $traced, DictionaryDataCollector $collector)
     {
-        $this->dictionary = $dictionary;
+        $this->traced = $traced;
         $this->collector  = $collector;
+    }
+
+    /**
+     * @return Dictionary<E>
+     */
+    public function getTraced(): Dictionary
+    {
+        return $this->traced;
     }
 
     public function getName(): string
     {
-        return $this->dictionary->getName();
+        return $this->traced->getName();
     }
 
     public function getValues(): array
     {
         $this->markAsUsed();
 
-        return $this->dictionary->getValues();
+        return $this->traced->getValues();
     }
 
     public function getKeys(): array
     {
         $this->markAsUsed();
 
-        return $this->dictionary->getKeys();
+        return $this->traced->getKeys();
     }
 
     public function offsetExists($offset): bool
     {
         $this->markAsUsed();
 
-        return $this->dictionary->offsetExists($offset);
+        return $this->traced->offsetExists($offset);
     }
 
     public function offsetGet($offset)
     {
         $this->markAsUsed();
 
-        return $this->dictionary->offsetGet($offset);
+        return $this->traced->offsetGet($offset);
     }
 
     public function offsetSet($offset, $value): void
     {
-        $this->dictionary->offsetSet($offset, $value);
+        $this->traced->offsetSet($offset, $value);
 
         $this->markAsUsed();
     }
 
     public function offsetUnset($offset): void
     {
-        $this->dictionary->offsetUnset($offset);
+        $this->traced->offsetUnset($offset);
 
         $this->markAsUsed();
     }
@@ -86,14 +94,14 @@ final class Traceable implements Dictionary
     {
         $this->markAsUsed();
 
-        return $this->dictionary;
+        return $this->traced;
     }
 
     public function count(): int
     {
         $this->markAsUsed();
 
-        return $this->dictionary->count();
+        return $this->traced->count();
     }
 
     /**
@@ -102,9 +110,9 @@ final class Traceable implements Dictionary
     private function markAsUsed(): void
     {
         $this->collector->addDictionary(
-            $this->dictionary->getName(),
-            $this->dictionary->getKeys(),
-            array_values($this->dictionary->getValues())
+            $this->traced->getName(),
+            $this->traced->getKeys(),
+            array_values($this->traced->getValues())
         );
     }
 }

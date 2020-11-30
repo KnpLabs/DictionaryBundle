@@ -18,16 +18,21 @@ final class TraceableSpec extends ObjectBehavior
      */
     private $collector;
 
+    /**
+     * @var Dictionary
+     */
+    private $dictionary;
+
     function let()
     {
-        $dictionary = new Simple('name', [
+        $this->dictionary = new Simple('name', [
             'foo' => 'bar',
             'baz' => null,
         ]);
 
         $this->collector = new DictionaryDataCollector();
 
-        $this->beConstructedWith($dictionary, $this->collector);
+        $this->beConstructedWith($this->dictionary, $this->collector);
     }
 
     function it_is_initializable()
@@ -38,6 +43,11 @@ final class TraceableSpec extends ObjectBehavior
     function it_is_a_dictionary()
     {
         $this->shouldImplement(Dictionary::class);
+    }
+
+    function it_trace_an_other_dictionary()
+    {
+        $this->getTraced()->shouldReturn($this->dictionary);
     }
 
     function it_has_a_name()
