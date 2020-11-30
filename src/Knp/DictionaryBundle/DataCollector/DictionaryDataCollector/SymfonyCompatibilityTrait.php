@@ -19,6 +19,7 @@ switch (true) {
         }
 
         break;
+
     case Kernel::VERSION_ID < 50000:
         trait SymfonyCompatibilityTrait
         {
