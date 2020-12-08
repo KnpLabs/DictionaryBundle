@@ -224,10 +224,6 @@ The KnpDictionaryBundle comes with a [faker provider](https://github.com/fzanino
 
 To register the provider in [nelmio/alice](https://github.com/nelmio/alice), you can follow the [official documentation](https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md#add-a-custom-faker-provider-class)
 
-or ...
-
-if you use the awesome [knplabs/rad-fixtures-load](https://github.com/knplabs/rad-fixtures-load) library, the dictionary provider will be automaticaly loaded for you :)
-
 ```yaml
 App\Entity\User:
   john_doe:
