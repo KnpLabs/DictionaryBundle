@@ -30,7 +30,7 @@
         "beberlei/assert": "^3.0",
         "ergebnis/composer-normalize": "^2.0",
         "friendsofphp/php-cs-fixer": "~2.17",
-        "fzaninotto/faker": "~1.3",
+        "fakerphp/faker": "^1.10",
         "pedrotroller/php-cs-custom-fixer": "^2.23",
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "~6.0",

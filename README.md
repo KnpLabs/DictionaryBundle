@@ -218,7 +218,7 @@ But you can also access directly to a value by using the same function (or filte
 
 ## Faker provider
 
-The KnpDictionaryBundle comes with a [faker provider](https://github.com/fzaninotto/Faker) that can be used to provide a random entry from a dictionary.
+The KnpDictionaryBundle comes with a [faker provider](https://github.com/FakerPHP/Faker) that can be used to provide a random entry from a dictionary.
 
 ### Alice
 
