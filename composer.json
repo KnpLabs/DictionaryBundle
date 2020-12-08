@@ -38,9 +38,6 @@
         "symfony/twig-bridge": "^4.4 || ^5.1",
         "symfony/var-dumper": "^4.4 || ^5.1"
     },
-    "suggest": {
-        "knplabs/rad-fixtures-load": "Allows to autoregister the dictionary provider as an alice provider"
-    },
     "config": {
         "sort-packages": true
     },
