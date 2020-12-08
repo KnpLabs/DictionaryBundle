@@ -17,6 +17,9 @@ abstract class Wrapper implements Dictionary
      */
     private $wrapped;
 
+    /**
+     * @param Dictionary<E> $wrapped
+     */
     public function __construct(Dictionary $wrapped)
     {
         $this->wrapped = $wrapped;

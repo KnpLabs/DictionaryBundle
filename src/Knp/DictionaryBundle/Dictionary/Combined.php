@@ -13,7 +13,7 @@ use Knp\DictionaryBundle\Dictionary;
 final class Combined extends Wrapper
 {
     /**
-     * @param array<int, Dictionary<E>> $dictionaries
+     * @param Dictionary<E> ...$dictionaries
      */
     public function __construct(string $name, Dictionary ...$dictionaries)
     {

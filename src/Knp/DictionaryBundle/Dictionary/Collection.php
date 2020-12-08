@@ -24,7 +24,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     private $dictionaries = [];
 
     /**
-     * @param array<int, Dictionary<mixed>> $dictionaries
+     * @param Dictionary<mixed> ...$dictionaries
      */
     public function __construct(Dictionary ...$dictionaries)
     {
