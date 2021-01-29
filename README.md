@@ -238,9 +238,24 @@ App\Entity\User:
 
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary.php).
 
+It is automaticaly registered with the `autoconfigure: true` DIC feature.
+
+Else you can register it by your self: 
+
+```yaml
+services:
+  App\Dictionary\MyCustomDictionary:
+    tags:
+      - knp_dictionary.dictionary
+```
+
 ### Dictionary Factory
 
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
+
+It is automaticaly registered with the `autoconfigure: true` DIC feature.
+
+Else you can register it by your self: 
 
 ```yaml
 services:
