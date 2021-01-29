@@ -36,7 +36,7 @@ jobs:
           docker pull php:<< parameters.php >>-cli
       - execute:
           image: composer:2.0
-          command: composer update << parameters.composer-options >>
+          command: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
       - execute:
           image: phpstan/phpstan
           command: analyse --no-progress --memory-limit=-1
@@ -63,7 +63,7 @@ workflows:
               php:
                 - "7.3"
                 - "7.4"
-              # - "8.0-rc"
+                - "8.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"

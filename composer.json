@@ -29,11 +29,12 @@
     "require-dev": {
         "beberlei/assert": "^3.0",
         "ergebnis/composer-normalize": "^2.0",
-        "friendsofphp/php-cs-fixer": "~2.17",
-        "fakerphp/faker": "^1.10",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "fakerphp/faker": "^1.13",
         "pedrotroller/php-cs-custom-fixer": "^2.23",
         "pedrotroller/symfony-integration-checker": "^3.0",
-        "phpspec/phpspec": "~6.0",
+        "phpspec/phpspec": "^7.0",
+        "phpspec/prophecy": "^1.12",
         "sebastian/comparator": "~3.0.2",
         "symfony/twig-bridge": "^4.4 || ^5.1",
         "symfony/var-dumper": "^4.4 || ^5.1"
