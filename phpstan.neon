@@ -1,0 +1,12 @@
+parameters:
+    level: max
+    paths: 
+        - src
+    ignoreErrors:
+        - path: src/Knp/DictionaryBundle/DependencyInjection/Configuration.php
+          message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\TreeBuilder::root\(\)\.#'
+        - path: src/Knp/DictionaryBundle/DependencyInjection/Configuration.php
+          message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeDefinition::children\(\)\.#'
+        - path: src/Knp/DictionaryBundle/DataCollector/DictionaryDataCollector/SymfonyCompatibilityTrait.php
+          message: '#Comparison operation "(>=|<)" between (\*NEVER\*|\d+) and 50000 is always (true|false)\.#'
+    reportUnmatchedIgnoredErrors: false

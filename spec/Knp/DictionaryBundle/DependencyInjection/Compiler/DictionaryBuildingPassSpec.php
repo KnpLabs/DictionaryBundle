@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Assert\Assert;
-use Knp\DictionaryBundle\DependencyInjection\Compiler;
+use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
+use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class DictionaryBuildingPassSpec extends ObjectBehavior
+final class DictionaryBuildingPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(Compiler\DictionaryBuildingPass::class);
+        $this->shouldHaveType(DictionaryBuildingPass::class);
     }
 
     function it_builds_a_value_as_key_dictionary_from_the_config(ContainerBuilder $container)
@@ -37,7 +39,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(Dictionary\Factory\Aggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
@@ -49,7 +51,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::that($definition->getTags())->eq([Compiler\DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags())->eq([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -73,11 +75,11 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
         $container->setDefinition(
             'knp_dictionary.dictionary.dico1',
             Argument::that(function ($definition): bool {
-                Assert::that($definition->getClass())->eq(\Knp\DictionaryBundle\Dictionary::class);
+                Assert::that($definition->getClass())->eq(Dictionary::class);
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(Dictionary\Factory\Aggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
@@ -89,7 +91,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::that($definition->getTags(), [Compiler\DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags(), [DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })
@@ -117,7 +119,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
 
                 $factory = $definition->getFactory();
 
-                Assert::that($factory[0]->__toString())->eq(Dictionary\Factory\Aggregate::class);
+                Assert::that($factory[0]->__toString())->eq(Aggregate::class);
 
                 Assert::that($factory[1])->eq('create');
 
@@ -129,7 +131,7 @@ class DictionaryBuildingPassSpec extends ObjectBehavior
                     ],
                 ]);
 
-                Assert::that($definition->getTags())->eq([Compiler\DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
+                Assert::that($definition->getTags())->eq([DictionaryRegistrationPass::TAG_DICTIONARY => [[]]]);
 
                 return true;
             })

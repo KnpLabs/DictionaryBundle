@@ -7,8 +7,8 @@ Are you often tired to repeat static choices like gender or civility in your app
 
 ## Requirements
 
-- PHP >= 7.2
-- Symfony 3.4, 4.2, 4.3, 4.4 or 5.*
+- PHP >= 7.3
+- Symfony 4.4 or >= 5.1
 
 ## Installation
 
@@ -218,15 +218,11 @@ But you can also access directly to a value by using the same function (or filte
 
 ## Faker provider
 
-The KnpDictionaryBundle comes with a [faker provider](https://github.com/fzaninotto/Faker) that can be used to provide a random entry from a dictionary.
+The KnpDictionaryBundle comes with a [faker provider](https://github.com/FakerPHP/Faker) that can be used to provide a random entry from a dictionary.
 
 ### Alice
 
 To register the provider in [nelmio/alice](https://github.com/nelmio/alice), you can follow the [official documentation](https://github.com/nelmio/alice/blob/master/doc/customizing-data-generation.md#add-a-custom-faker-provider-class)
-
-or ...
-
-if you use the awesome [knplabs/rad-fixtures-load](https://github.com/knplabs/rad-fixtures-load) library, the dictionary provider will be automaticaly loaded for you :)
 
 ```yaml
 App\Entity\User:
@@ -242,9 +238,24 @@ App\Entity\User:
 
 Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary.php).
 
+It is automaticaly registered with the `autoconfigure: true` DIC feature.
+
+Else you can register it by your self: 
+
+```yaml
+services:
+  App\Dictionary\MyCustomDictionary:
+    tags:
+      - knp_dictionary.dictionary
+```
+
 ### Dictionary Factory
 
 You must create a dictionary factory that will be responsible to instanciate your dictionary.
+
+It is automaticaly registered with the `autoconfigure: true` DIC feature.
+
+Else you can register it by your self: 
 
 ```yaml
 services:
@@ -277,4 +288,10 @@ Then...
 ```bash
 $ phive install
 $ tools/phpstan process
+```
+
+### rector (*optional*)
+
+```bash
+rector process --set php70 --set php71 --set php72 --set code-quality --set coding-style --set symfony34 --set twig240 --set psr-4 --set solid src/ spec/
 ```

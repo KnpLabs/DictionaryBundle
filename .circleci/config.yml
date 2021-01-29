@@ -1,114 +1,69 @@
 ---
-version: 2
+version: 2.1
 
-composer_lower: &composer_lower
-  run: |
-    composer global require hirak/prestissimo --no-progress
-    composer update --prefer-lowest --prefer-stable
+executorType: machine
 
-composer_highter: &composer_highter
-  run: |
-    composer global require hirak/prestissimo --no-progress
-    composer update
+orbs:
+  docker: circleci/docker@1.5.0
 
-phive: &phive
-  run: |
-      wget https://phar.io/releases/phive.phar
-      wget https://phar.io/releases/phive.phar.asc
-      gpg --keyserver hkps.pool.sks-keyservers.net --recv-keys 0x9B2D5D79
-      gpg --verify phive.phar.asc phive.phar
-      chmod +x phive.phar
-      sudo mv phive.phar /usr/bin/phive
-      phive install --trust-gpg-keys CF1A108D0E7AE720
-
-tests: &tests
-  run: |
-      echo "PHP version"
-      php --version
-      echo ""
-      echo "Static analysis"
-      echo ""
-      tools/phpstan analyse
-      echo "Phpspec tests"
-      vendor/bin/phpspec run -v
-      echo ""
-      echo "Integration tests"
-      echo ""
-      vendor/bin/symfony-integration-checker check
-      echo ""
-      echo "Linter tests"
-      echo ""
-      vendor/bin/php-cs-fixer fix --diff --dry-run
+commands:
+  execute:
+    parameters:
+      image:
+        type: string
+      command:
+        type: string
+    steps:
+      - run:
+          name: "<< parameters.command >>"
+          command: docker run -it --rm -v $(pwd):/code -w /code << parameters.image >> << parameters.command >>
 
 jobs:
-
-  php 7.2:
-    docker:
-      - image: circleci/php:7.2
+  test:
+    machine:
+      docker_layer_caching: false
+    parameters:
+      php:
+        type: string
+      composer-options:
+        type: string
     steps:
+      - docker/install-docker
       - checkout
-      - <<: *phive
-      - <<: *composer_highter
-      - <<: *tests
-
-  php 7.2 with lowest dependencies:
-    docker:
-      - image: circleci/php:7.2
-    steps:
-      - checkout
-      - <<: *phive
-      - <<: *composer_lower
-      - <<: *tests
-
-  php 7.3:
-    docker:
-      - image: circleci/php:7.3
-    steps:
-      - checkout
-      - <<: *phive
-      - <<: *composer_highter
-      - <<: *tests
-
-  php 7.3 with lowest dependencies:
-    docker:
-      - image: circleci/php:7.3
-    steps:
-      - checkout
-      - <<: *phive
-      - <<: *composer_lower
-      - <<: *tests
-
-  php 7.4:
-    docker:
-      - image: circleci/php:7.4
-    steps:
-      - checkout
-      - <<: *phive
-      - <<: *composer_highter
-      - <<: *tests
-
-  php 7.4 with lowest dependencies:
-    docker:
-      - image: circleci/php:7.4
-    steps:
-      - checkout
-      - <<: *phive
-      - <<: *composer_lower
-      - <<: *tests
+      - run: |
+          docker pull composer:2.0
+          docker pull phpstan/phpstan
+          docker pull php:<< parameters.php >>-cli-alpine
+      - execute:
+          image: composer:2.0
+          command: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
+      - execute:
+          image: knplabs/phpstan
+          command: analyse --no-progress --memory-limit=-1
+      - execute:
+          image: php:<< parameters.php >>-cli-alpine
+          command: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
+      - execute:
+          image: php:<< parameters.php >>-cli-alpine
+          command: vendor/bin/symfony-integration-checker check
+      - execute:
+          image: php:<< parameters.php >>-cli-alpine
+          command: bin/lint-twig src/
+      - execute:
+          image: php:<< parameters.php >>-cli-alpine
+          command: vendor/bin/php-cs-fixer fix --diff --dry-run
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - php 7.2
-      - php 7.2 with lowest dependencies:
-          requires:
-            - php 7.2
-      - php 7.3
-      - php 7.3 with lowest dependencies:
-          requires:
-            - php 7.3
-      - php 7.4
-      - php 7.4 with lowest dependencies:
-          requires:
-            - php 7.4
+      - test:
+          matrix:
+            parameters:
+              php:
+                - "7.3"
+                - "7.4"
+                - "8.0"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"

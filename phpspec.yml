@@ -3,3 +3,9 @@ formatter.name: pretty
 
 extensions:
   spec\PHPSpec\Extension: ~
+
+  FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
+    format:
+      - clover
+    output:
+      clover: coverage.xml

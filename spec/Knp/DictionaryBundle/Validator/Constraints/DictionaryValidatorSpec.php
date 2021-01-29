@@ -14,7 +14,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class DictionaryValidatorSpec extends ObjectBehavior
+final class DictionaryValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context, Dictionary $dictionary)
     {

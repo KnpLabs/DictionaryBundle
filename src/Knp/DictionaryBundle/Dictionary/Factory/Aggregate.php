@@ -6,15 +6,16 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Factory;
 
-class Aggregate implements Dictionary\Factory
+final class Aggregate implements Factory
 {
     /**
      * @var Dictionary\Factory[]
      */
     private $factories = [];
 
-    public function addFactory(Dictionary\Factory $factory): void
+    public function addFactory(Factory $factory): void
     {
         $this->factories[] = $factory;
     }

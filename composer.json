@@ -1,10 +1,12 @@
 {
-    "name":         "knplabs/dictionary-bundle",
-    "description":  "Are you often tired to repeat static choices like gender or civility in your apps ?",
-    "keywords":     ["dictionary"],
-    "type":         "symfony-bundle",
-    "license":      "MIT",
-    "authors":      [
+    "name": "knplabs/dictionary-bundle",
+    "type": "symfony-bundle",
+    "description": "Are you often tired to repeat static choices like gender or civility in your apps ?",
+    "keywords": [
+        "dictionary"
+    ],
+    "license": "MIT",
+    "authors": [
         {
             "name": "Knplabs",
             "homepage": "http://knplabs.com"
@@ -14,28 +16,37 @@
             "homepage": "https://github.com/Shivoham"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
-        "php": ">=7.2",
-        "symfony/config": "~3.4|~4.2|~5.0",
-        "symfony/dependency-injection": "~3.4|~4.2|~5.0",
-        "symfony/form": "~3.4|~4.2|~5.0",
-        "symfony/http-foundation": "~3.4|~4.2|~5.0",
-        "symfony/http-kernel": "~3.4|~4.2|~5.0",
-        "symfony/validator": "~3.4|~4.2|~5.0",
-        "twig/twig": "~2.4|~3.0"
+        "php": ">=7.3",
+        "symfony/config": "^4.4 || ^5.1",
+        "symfony/dependency-injection": "^4.4 || ^5.1",
+        "symfony/form": "^4.4 || ^5.1",
+        "symfony/http-foundation": "^4.4 || ^5.1",
+        "symfony/http-kernel": "^4.4 || ^5.1",
+        "symfony/validator": "^4.4 || ^5.1",
+        "twig/twig": "~2.4 || ~3.0"
     },
     "require-dev": {
         "beberlei/assert": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.16.1",
-        "fzaninotto/faker": "~1.3",
-        "pedrotroller/php-cs-custom-fixer": "^2.16",
-        "pedrotroller/symfony-integration-checker": "~3.0.0",
-        "phpspec/phpspec": "~6.0",
-        "sebastian/comparator": "~3.0.2"
+        "ergebnis/composer-normalize": "^2.0",
+        "fakerphp/faker": "^1.13",
+        "friends-of-phpspec/phpspec-code-coverage": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.18",
+        "pedrotroller/php-cs-custom-fixer": "^2.23",
+        "pedrotroller/symfony-integration-checker": "^3.0",
+        "phpspec/phpspec": "^7.0",
+        "phpspec/prophecy": "^1.12",
+        "sebastian/comparator": "~3.0.2",
+        "symfony/twig-bridge": "^4.4 || ^5.1",
+        "symfony/var-dumper": "^4.4 || ^5.1"
     },
     "config": {
         "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.2.x-dev"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -44,16 +55,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "spec\\Knp\\DictionaryBundle\\": "spec/Knp/DictionaryBundle",
+            "spec\\Knp\\": "spec/Knp",
             "spec\\PHPSpec\\": "spec/PHPSpec"
         }
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.1.x-dev"
-        }
-    },
-    "suggest": {
-        "knplabs/rad-fixtures-load": "Allows to autoregister the dictionary provider as an alice provider"
-    }
+    "minimum-stability": "stable"
 }

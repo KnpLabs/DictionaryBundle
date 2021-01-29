@@ -7,10 +7,11 @@ namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 use ArrayIterator;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary\Factory;
+use Knp\DictionaryBundle\Dictionary\Factory\Iterator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\Container;
 
-class IteratorSpec extends ObjectBehavior
+final class IteratorSpec extends ObjectBehavior
 {
     function let(Container $container)
     {
@@ -19,7 +20,7 @@ class IteratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(Factory\Iterator::class);
+        $this->shouldHaveType(Iterator::class);
     }
 
     function it_is_a_factory()
@@ -56,10 +57,10 @@ class IteratorSpec extends ObjectBehavior
     }
 }
 
-class MockIterator implements IteratorAggregate
+abstract class MockIterator implements IteratorAggregate
 {
-    public function getIterator(): ArrayIterator
+    public function getIterator()
     {
-        return new ArrayIterator([]);
+        return yield from [];
     }
 }

@@ -6,8 +6,11 @@ namespace Knp\DictionaryBundle\Dictionary\Factory;
 
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
+use Knp\DictionaryBundle\Dictionary\Combined;
+use Knp\DictionaryBundle\Dictionary\Factory;
 
-class Extended implements Dictionary\Factory
+final class Extended implements Factory
 {
     /**
      * @var Dictionary\Factory
@@ -19,7 +22,7 @@ class Extended implements Dictionary\Factory
      */
     private $dictionaries;
 
-    public function __construct(Dictionary\Factory $factory, Dictionary\Collection $dictionaries)
+    public function __construct(Factory $factory, Collection $dictionaries)
     {
         $this->factory      = $factory;
         $this->dictionaries = $dictionaries;
@@ -38,7 +41,7 @@ class Extended implements Dictionary\Factory
 
         unset($config['extends']);
 
-        return new Dictionary\Combined(
+        return new Combined(
             $name,
             $this->dictionaries[$extends],
             $this->factory->create($name, $config)

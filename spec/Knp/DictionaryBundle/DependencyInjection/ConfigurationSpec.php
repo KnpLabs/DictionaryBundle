@@ -8,7 +8,7 @@ use Knp\DictionaryBundle\DependencyInjection\Configuration;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 
-class ConfigurationSpec extends ObjectBehavior
+final class ConfigurationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -1,0 +1,25 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Bridge\Twig\Command\LintCommand;
+use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\ArgvInput;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+
+require dirname(__DIR__) . '/vendor/autoload.php';
+
+$application = new Application;
+$application->add(
+    new LintCommand(
+        new Environment(
+            new FilesystemLoader(
+                [
+                    dirname(__DIR__) . '/src',
+                ]
+            )
+        )
+    )
+);
+$application->setDefaultCommand(LintCommand::getDefaultName(), true);
+$application->run(new ArgvInput());
