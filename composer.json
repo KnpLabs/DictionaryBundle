@@ -29,8 +29,9 @@
     "require-dev": {
         "beberlei/assert": "^3.0",
         "ergebnis/composer-normalize": "^2.0",
-        "friendsofphp/php-cs-fixer": "^2.18",
         "fakerphp/faker": "^1.13",
+        "friends-of-phpspec/phpspec-code-coverage": "^6.0",
+        "friendsofphp/php-cs-fixer": "^2.18",
         "pedrotroller/php-cs-custom-fixer": "^2.23",
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "^7.0",
