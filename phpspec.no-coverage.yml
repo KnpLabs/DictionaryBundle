@@ -1,0 +1,5 @@
+---
+formatter.name: pretty
+
+extensions:
+  spec\PHPSpec\Extension: ~

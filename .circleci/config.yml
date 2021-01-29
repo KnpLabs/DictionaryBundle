@@ -33,7 +33,7 @@ jobs:
       - run: |
           docker pull composer:2.0
           docker pull phpstan/phpstan
-          docker pull php:<< parameters.php >>-cli
+          docker pull php:<< parameters.php >>-cli-alpine
       - execute:
           image: composer:2.0
           command: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
@@ -41,16 +41,16 @@ jobs:
           image: knplabs/phpstan
           command: analyse --no-progress --memory-limit=-1
       - execute:
-          image: php:<< parameters.php >>-cli
-          command: vendor/bin/phpspec run -v
+          image: php:<< parameters.php >>-cli-alpine
+          command: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
       - execute:
-          image: php:<< parameters.php >>-cli
+          image: php:<< parameters.php >>-cli-alpine
           command: vendor/bin/symfony-integration-checker check
       - execute:
-          image: php:<< parameters.php >>-cli
+          image: php:<< parameters.php >>-cli-alpine
           command: bin/lint-twig src/
       - execute:
-          image: php:<< parameters.php >>-cli
+          image: php:<< parameters.php >>-cli-alpine
           command: vendor/bin/php-cs-fixer fix --diff --dry-run
 
 workflows:
