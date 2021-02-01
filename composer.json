@@ -36,7 +36,7 @@
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "^7.0",
         "phpspec/prophecy": "^1.12",
-        "sebastian/comparator": "~3.0.2",
+        "sebastian/comparator": "~4.0.6",
         "symfony/twig-bridge": "^4.4 || ^5.1",
         "symfony/var-dumper": "^4.4 || ^5.1"
     },
