@@ -1,10 +1,14 @@
-inherit: true
-
+---
 build:
-    tests:
+  nodes:
+    analysis:
+      tests:
         override:
-            -
-                command: 'vendor/bin/phpspec run -n -fpretty'
-                coverage:
-                    file: 'coverage.xml'
-                    format: 'clover'
+          - php-scrutinizer-run
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpspec run -n -fpretty'
+        coverage:
+          file: 'coverage.xml'
+          format: 'clover'
