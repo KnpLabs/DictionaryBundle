@@ -141,7 +141,7 @@ knp_dictionary:
     extra_payment_mode:
       type: key_value
       content:
-        bank_transfert: "Bank transfert"
+        bank_transfer: "Bank transfer"
         other: "Other"
 
     combined_payment_mode:
