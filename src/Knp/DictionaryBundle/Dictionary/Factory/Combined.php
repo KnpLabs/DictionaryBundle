@@ -36,9 +36,7 @@ final class Combined implements Factory
         }
 
         $dictionaries = array_map(
-            function ($name): Dictionary {
-                return $this->dictionaries[$name];
-            },
+            fn ($name): Dictionary => $this->dictionaries[$name],
             $config['dictionaries']
         );
 

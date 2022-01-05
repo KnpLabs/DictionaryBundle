@@ -18,9 +18,7 @@ final class DictionaryDataCollector extends DataCollector
     public function addDictionary(string $name, array $keys, array $values): void
     {
         $this->data[$name] = array_map(
-            function ($key, $value): array {
-                return ['key' => $key, 'value' => $value];
-            },
+            fn ($key, $value): array => ['key' => $key, 'value' => $value],
             $keys,
             $values
         );
@@ -40,7 +38,7 @@ final class DictionaryDataCollector extends DataCollector
     {
     }
 
-    public function getName()
+    public function getName(): string
     {
         return 'dictionary';
     }

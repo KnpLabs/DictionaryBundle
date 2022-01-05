@@ -41,9 +41,7 @@ workflows:
           matrix:
             parameters:
               php:
-                - "7.3"
-                - "7.4"
-                - "8.0"
+                - "8.0.2"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
