@@ -56,13 +56,13 @@ final class InvokableSpec extends ObjectBehavior
         $dictionary = $this->getWrappedObject();
 
         $this['foo']->shouldBe(0);
-        $this->offsetExists('foo')->shouldReturn(true);
+        $this->shouldHaveKey('foo');
 
         $this['foo'] = 'test';
         $this['foo']->shouldBe('test');
 
         unset($dictionary['foo']);
-        $this->offsetExists('foo')->shouldReturn(false);
+        $this->shouldNotHaveKey('foo');
     }
 
     function it_provides_a_set_of_values()

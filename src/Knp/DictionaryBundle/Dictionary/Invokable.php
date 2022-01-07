@@ -97,7 +97,7 @@ final class Invokable implements Dictionary
     }
 
     /**
-     * @return ArrayIterator<mixed, mixed>
+     * @return ArrayIterator<int|string, mixed>
      */
     public function getIterator(): ArrayIterator
     {

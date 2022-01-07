@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
+use Assert\Assert;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use PhpSpec\ObjectBehavior;
@@ -40,18 +41,18 @@ final class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
         ;
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            expect($reference)->toHaveType(Reference::class);
-            expect($reference->__toString())->toBe('factory1');
+            Assert::that($reference)->isInstanceOf(Reference::class);
+            Assert::that($reference->__toString())->eq('factory1');
         }));
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            expect($reference)->toHaveType(Reference::class);
-            expect($reference->__toString())->toBe('factory2');
+            Assert::that($reference)->isInstanceOf(Reference::class);
+            Assert::that($reference->__toString())->eq('factory2');
         }));
 
         $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            expect($reference)->toHaveType(Reference::class);
-            expect($reference->__toString())->toBe('factory3');
+            Assert::that($reference)->isInstanceOf(Reference::class);
+            Assert::that($reference->__toString())->eq('factory3');
         }));
 
         $this->process($container);
