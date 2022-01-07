@@ -4,54 +4,26 @@ version: 2.1
 executorType: machine
 
 orbs:
-  docker: circleci/docker@1.5.0
-
-commands:
-  execute:
-    parameters:
-      image:
-        type: string
-      command:
-        type: string
-    steps:
-      - run:
-          name: "<< parameters.command >>"
-          command: docker run -it --rm -v $(pwd):/code -w /code << parameters.image >> << parameters.command >>
+  php: circleci/php@1.1.0
 
 jobs:
   test:
-    machine:
-      docker_layer_caching: false
+    docker:
+      - image: circleci/php:<< parameters.php >>
     parameters:
       php:
         type: string
       composer-options:
         type: string
     steps:
-      - docker/install-docker
+      - php/install-composer
+      - run: rm -rf ./*
       - checkout
-      - run: |
-          docker pull composer:2.0
-          docker pull phpstan/phpstan
-          docker pull php:<< parameters.php >>-cli-alpine
-      - execute:
-          image: composer:2.0
-          command: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
-      - execute:
-          image: knplabs/phpstan
-          command: analyse --no-progress --memory-limit=-1
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/symfony-integration-checker check
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: bin/lint-twig src/
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/php-cs-fixer fix --diff --dry-run
+      - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
+      - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
+      - run: vendor/bin/symfony-integration-checker check
+      - run: bin/lint-twig src/
+      - run: vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
 
 workflows:
   version: 2

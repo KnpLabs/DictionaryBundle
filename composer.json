@@ -30,7 +30,6 @@
     },
     "require-dev": {
         "beberlei/assert": "^3.0",
-        "ergebnis/composer-normalize": "^2.0",
         "fakerphp/faker": "^1.13",
         "friends-of-phpspec/phpspec-code-coverage": "^6.0",
         "pedrotroller/symfony-integration-checker": "^3.0",
