@@ -1,3 +1,5 @@
-composer.lock
-vendor
-tools
+/composer.lock
+/coverage.xml
+/phpstan.neon
+/tools/
+/vendor/

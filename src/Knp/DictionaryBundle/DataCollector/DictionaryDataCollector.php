@@ -27,7 +27,7 @@ final class DictionaryDataCollector extends DataCollector
     }
 
     /**
-     * @return Generator<string, array>
+     * @return Generator<string, array<mixed>>
      */
     public function getDictionaries(): Generator
     {

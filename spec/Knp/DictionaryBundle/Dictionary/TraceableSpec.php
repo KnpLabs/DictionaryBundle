@@ -163,7 +163,7 @@ final class TraceableSpec extends ObjectBehavior
     {
         Assert::that(iterator_to_array($this->collector->getDictionaries()))->noContent();
 
-        $this->offsetExists('baz')->shouldReturn(true);
+        $this->shouldHaveKey('baz');
 
         Assert::that(iterator_to_array($this->collector->getDictionaries()))
             ->eq([

@@ -4,54 +4,34 @@ version: 2.1
 executorType: machine
 
 orbs:
-  docker: circleci/docker@1.5.0
-
-commands:
-  execute:
-    parameters:
-      image:
-        type: string
-      command:
-        type: string
-    steps:
-      - run:
-          name: "<< parameters.command >>"
-          command: docker run -it --rm -v $(pwd):/code -w /code << parameters.image >> << parameters.command >>
+  php: circleci/php@1.1.0
 
 jobs:
   test:
-    machine:
-      docker_layer_caching: false
+    docker:
+      - image: php:<< parameters.php >>
     parameters:
       php:
         type: string
       composer-options:
         type: string
     steps:
-      - docker/install-docker
       - checkout
       - run: |
-          docker pull composer:2.0
-          docker pull phpstan/phpstan
-          docker pull php:<< parameters.php >>-cli-alpine
-      - execute:
-          image: composer:2.0
-          command: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
-      - execute:
-          image: knplabs/phpstan
-          command: analyse --no-progress --memory-limit=-1
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/symfony-integration-checker check
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: bin/lint-twig src/
-      - execute:
-          image: php:<< parameters.php >>-cli-alpine
-          command: vendor/bin/php-cs-fixer fix --diff --dry-run
+          apt-get update
+          apt-get -y install git zip
+      - run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+          php composer-setup.php
+          php -r "unlink('composer-setup.php');"
+          mv composer.phar /usr/local/bin/composer
+      - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
+      - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
+      - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
+      - run: vendor/bin/symfony-integration-checker check
+      - run: bin/lint-twig src/
+      - run: vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
 
 workflows:
   version: 2

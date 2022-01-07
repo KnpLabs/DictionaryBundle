@@ -41,10 +41,10 @@ final class CollectionSpec extends ObjectBehavior
         $this->shouldHaveType(Countable::class);
     }
 
-    function it_should_entry_if_it_exists($dictionary)
+    function it_should_entry_if_it_exists()
     {
-        $this->offsetExists('foo')->shouldBe(true);
-        $this->offsetExists('baz')->shouldBe(false);
+        $this->shouldHaveKey('foo');
+        $this->shouldNotHaveKey('baz');
     }
 
     function it_counts_entries()

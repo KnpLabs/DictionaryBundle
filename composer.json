@@ -1,11 +1,11 @@
 {
     "name": "knplabs/dictionary-bundle",
-    "type": "symfony-bundle",
     "description": "Are you often tired to repeat static choices like gender or civility in your apps ?",
+    "license": "MIT",
+    "type": "symfony-bundle",
     "keywords": [
         "dictionary"
     ],
-    "license": "MIT",
     "authors": [
         {
             "name": "Knplabs",
@@ -18,8 +18,6 @@
     ],
     "require": {
         "php": ">=7.3",
-        "friendsofphp/php-cs-fixer": "v2.18.6",
-        "pedrotroller/php-cs-custom-fixer": "v2.24.1",
         "symfony/config": "^4.4 || ^5.1",
         "symfony/dependency-injection": "^4.4 || ^5.1",
         "symfony/form": "^4.4 || ^5.1",
@@ -30,24 +28,17 @@
     },
     "require-dev": {
         "beberlei/assert": "^3.0",
-        "ergebnis/composer-normalize": "^2.0",
         "fakerphp/faker": "^1.13",
         "friends-of-phpspec/phpspec-code-coverage": "^6.0",
+        "pedrotroller/php-cs-custom-fixer": "~2.24.1",
         "pedrotroller/symfony-integration-checker": "^3.0",
-        "phpspec/phpspec": "^7.0",
-        "phpspec/prophecy": "^1.12",
+        "phpspec/phpspec": "^7.1",
+        "phpstan/phpstan": "~0.12.99",
         "sebastian/comparator": "~4.0.6",
         "symfony/twig-bridge": "^4.4 || ^5.1",
         "symfony/var-dumper": "^4.4 || ^5.1"
     },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "3.2.x-dev"
-        }
-    },
+    "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
             "Knp\\DictionaryBundle\\": "src/Knp/DictionaryBundle"
@@ -59,5 +50,12 @@
             "spec\\PHPSpec\\": "spec/PHPSpec"
         }
     },
-    "minimum-stability": "stable"
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "3.2.x-dev"
+        }
+    }
 }
