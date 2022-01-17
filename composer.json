@@ -30,7 +30,7 @@
         "beberlei/assert": "^3.0",
         "fakerphp/faker": "^1.13",
         "friends-of-phpspec/phpspec-code-coverage": "^6.0",
-        "pedrotroller/php-cs-custom-fixer": "~2.24.1",
+        "pedrotroller/php-cs-custom-fixer": "^2.27",
         "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "^7.1",
         "phpstan/phpstan": "~0.12.99",
