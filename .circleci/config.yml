@@ -42,6 +42,7 @@ workflows:
             parameters:
               php:
                 - "8.0.2"
+                - "8.1"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
