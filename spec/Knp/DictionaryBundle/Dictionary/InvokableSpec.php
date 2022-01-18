@@ -23,9 +23,7 @@ final class InvokableSpec extends ObjectBehavior
 
         $context = $this;
 
-        $this->beConstructedWith('foo', function () use ($context) {
-            return $context->execution();
-        });
+        $this->beConstructedWith('foo', fn () => $context->execution());
     }
 
     function it_is_initializable()
@@ -42,9 +40,7 @@ final class InvokableSpec extends ObjectBehavior
     {
         $this->beConstructedWith(
             'baz',
-            function () {
-                return $this->execution(...\func_get_args());
-            },
+            fn () => $this->execution(...\func_get_args()),
             [['foo' => 2, 'bar' => 1, 'baz' => 0]]
         );
 

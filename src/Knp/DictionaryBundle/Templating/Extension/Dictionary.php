@@ -37,9 +37,7 @@ final class Dictionary extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('dictionary', function ($key, string $name) {
-                return $this->dictionaries[$name][$key];
-            }),
+            new TwigFilter('dictionary', fn ($key, string $name) => $this->dictionaries[$name][$key]),
         ];
     }
 }

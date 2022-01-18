@@ -20,9 +20,7 @@ final class Iterator extends Wrapper
         parent::__construct(
             new Invokable(
                 $name,
-                function () use ($iterator): array {
-                    return iterator_to_array($iterator);
-                }
+                fn (): array => iterator_to_array($iterator)
             )
         );
     }

@@ -22,7 +22,7 @@ final class Dictionary extends Constraint
      */
     public $message = "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.";
 
-    public function validatedBy()
+    public function validatedBy(): string
     {
         return DictionaryValidator::class;
     }
@@ -30,7 +30,7 @@ final class Dictionary extends Constraint
     /**
      * @return string[]
      */
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
         return ['name'];
     }

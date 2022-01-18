@@ -21,7 +21,7 @@ final class DictionaryValidator extends ConstraintValidator
         $this->dictionaries = $dictionaries;
     }
 
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof Dictionary) {
             throw new UnexpectedTypeException($constraint, __NAMESPACE__.'\Dictionary');
