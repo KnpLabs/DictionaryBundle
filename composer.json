@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=8.0.2",
+        "php": ">=7.4",
         "symfony/config": "^5.4 || ^6.0",
         "symfony/dependency-injection": "^5.4 || ^6.0",
         "symfony/form": "^5.4 || ^6.0",
@@ -31,8 +31,8 @@
         "fakerphp/faker": "^1.13",
         "friends-of-phpspec/phpspec-code-coverage": "^6.0",
         "pedrotroller/php-cs-custom-fixer": "^2.27",
-        "pedrotroller/symfony-integration-checker": "^3.0",
         "phpspec/phpspec": "^7.1",
+        "phpspec/prophecy": "^1.15",
         "phpstan/phpstan": "~0.12.99",
         "sebastian/comparator": "~4.0.6",
         "symfony/twig-bridge": "^5.4 || ^6.0",

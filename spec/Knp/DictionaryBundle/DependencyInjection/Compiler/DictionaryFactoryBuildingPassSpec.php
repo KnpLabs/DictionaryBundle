@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryFactoryBuildingPass;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 final class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
 {
@@ -24,7 +24,8 @@ final class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
         Definition $factory1,
         Definition $factory2,
         Definition $factory3,
-        Definition $aggregate
+        Definition $aggregate,
+        Definition $definition
     ) {
         $container
             ->findTaggedServiceIds(DictionaryFactoryBuildingPass::TAG_FACTORY)
@@ -40,20 +41,13 @@ final class DictionaryFactoryBuildingPassSpec extends ObjectBehavior
             ->willReturn($aggregate)
         ;
 
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            Assert::that($reference)->isInstanceOf(Reference::class);
-            Assert::that($reference->__toString())->eq('factory1');
-        }));
-
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            Assert::that($reference)->isInstanceOf(Reference::class);
-            Assert::that($reference->__toString())->eq('factory2');
-        }));
-
-        $aggregate->addMethodCall('addFactory', Argument::that(function ($reference): void {
-            Assert::that($reference)->isInstanceOf(Reference::class);
-            Assert::that($reference->__toString())->eq('factory3');
-        }));
+        foreach (['factory1', 'factory2', 'factory3'] as $id) {
+            $aggregate
+                ->addMethodCall('addFactory', Argument::exact([new Reference($id)]))
+                ->shouldBeCalledTimes(1)
+                ->willReturn($definition)
+            ;
+        }
 
         $this->process($container);
     }

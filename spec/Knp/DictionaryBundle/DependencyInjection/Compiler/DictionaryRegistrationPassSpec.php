@@ -10,6 +10,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 final class DictionaryRegistrationPassSpec extends ObjectBehavior
 {
@@ -18,18 +19,20 @@ final class DictionaryRegistrationPassSpec extends ObjectBehavior
         $this->shouldHaveType(DictionaryRegistrationPass::class);
     }
 
-    function it_registers_dictionaries(ContainerBuilder $container, Definition $dictionaries)
+    function it_registers_dictionaries(ContainerBuilder $container, Definition $dictionaries, Definition $definition)
     {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
         $container->getDefinition(Collection::class)->willReturn($dictionaries);
         $container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)->willReturn($tags);
 
-        $dictionaries->addMethodCall('add', Argument::that(fn (array $arguments): bool => 'foo' === $arguments[0]->__toString()))->shouldBeCalled();
-
-        $dictionaries->addMethodCall('add', Argument::that(fn (array $arguments): bool => 'bar' === $arguments[0]->__toString()))->shouldBeCalled();
-
-        $dictionaries->addMethodCall('add', Argument::that(fn (array $arguments): bool => 'baz' === $arguments[0]->__toString()))->shouldBeCalled();
+        foreach (['foo', 'bar', 'baz'] as $id) {
+            $dictionaries
+                ->addMethodCall('add', Argument::exact([new Reference($id)]))
+                ->shouldBeCalledTimes(1)
+                ->willReturn($definition)
+            ;
+        }
 
         $this->process($container);
     }

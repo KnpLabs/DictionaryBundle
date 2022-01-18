@@ -15,7 +15,7 @@ $config->setUsingCache(true);
 $config->setRules(
     PedroTroller\CS\Fixer\RuleSetFactory::create()
         ->phpCsFixer(true)
-        ->php(7.3, true)
+        ->php(7.4, true)
         ->pedrotroller(true)
         ->enable('align_multiline_comment')
         ->enable('array_indentation')

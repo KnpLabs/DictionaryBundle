@@ -27,9 +27,9 @@ jobs:
           php -r "unlink('composer-setup.php');"
           mv composer.phar /usr/local/bin/composer
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
+      - run: cat vendor/composer/installed.json
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
       - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
-      - run: vendor/bin/symfony-integration-checker check
       - run: bin/lint-twig src/
       - run: vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
 
@@ -41,7 +41,8 @@ workflows:
           matrix:
             parameters:
               php:
-                - "8.0.2"
+                - "7.4"
+                - "8.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
