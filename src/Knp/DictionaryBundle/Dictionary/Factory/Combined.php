@@ -16,10 +16,7 @@ final class Combined implements Factory
      */
     private const TYPE = 'combined';
 
-    /**
-     * @var Dictionary\Collection
-     */
-    private $dictionaries;
+    private Dictionary\Collection $dictionaries;
 
     public function __construct(Collection $dictionaries)
     {

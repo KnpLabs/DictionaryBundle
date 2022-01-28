@@ -16,12 +16,12 @@ final class Traceable implements Dictionary
     /**
      * @var Dictionary<E>
      */
-    private $dictionary;
+    private Dictionary $dictionary;
 
     /**
      * @var DictionaryDataCollector
      */
-    private $collector;
+    private DictionaryDataCollector $collector;
 
     /**
      * @param Dictionary<E> $dictionary

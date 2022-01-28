@@ -11,10 +11,7 @@ final class DictionaryValidator extends ConstraintValidator
 {
     use DictionaryValidator\SymfonyCompatibilityTrait;
 
-    /**
-     * @var Collection
-     */
-    private $dictionaries;
+    private Collection $dictionaries;
 
     public function __construct(Collection $dictionaries)
     {

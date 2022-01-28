@@ -9,9 +9,9 @@ use Knp\DictionaryBundle\ValueTransformer;
 final class Aggregate implements ValueTransformer
 {
     /**
-     * @var ValueTransformer[]
+     * @var array<ValueTransformer>
      */
-    private $transformers = [];
+    private array $transformers = [];
 
     public function addTransformer(ValueTransformer $transformer): void
     {

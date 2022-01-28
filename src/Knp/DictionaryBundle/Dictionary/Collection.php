@@ -21,7 +21,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     /**
      * @var array<string, Dictionary<mixed>>
      */
-    private $dictionaries = [];
+    private array $dictionaries = [];
 
     /**
      * @param Dictionary<mixed> ...$dictionaries

@@ -13,15 +13,12 @@ use Knp\DictionaryBundle\Dictionary;
  */
 final class Simple implements Dictionary
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
     /**
      * @var array<mixed, E>
      */
-    private $values = [];
+    private array $values = [];
 
     /**
      * @param array<mixed, E> $values

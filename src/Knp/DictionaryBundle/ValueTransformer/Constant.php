@@ -9,10 +9,7 @@ use ReflectionClass;
 
 final class Constant implements ValueTransformer
 {
-    /**
-     * @var string
-     */
-    private $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
+    private string $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
 
     public function supports($value): bool
     {

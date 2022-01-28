@@ -15,7 +15,7 @@ abstract class Wrapper implements Dictionary
     /**
      * @var Dictionary<E>
      */
-    private $wrapped;
+    private Dictionary $wrapped;
 
     /**
      * @param Dictionary<E> $wrapped

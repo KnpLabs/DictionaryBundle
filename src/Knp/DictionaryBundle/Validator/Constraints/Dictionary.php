@@ -12,15 +12,9 @@ use Symfony\Component\Validator\Constraint;
  */
 final class Dictionary extends Constraint
 {
-    /**
-     * @var string
-     */
-    public $name;
+    public string $name;
 
-    /**
-     * @var string
-     */
-    public $message = "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.";
+    public string $message = "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.";
 
     public function validatedBy(): string
     {
@@ -28,7 +22,7 @@ final class Dictionary extends Constraint
     }
 
     /**
-     * @return string[]
+     * @return array<string>
      */
     public function getRequiredOptions(): array
     {

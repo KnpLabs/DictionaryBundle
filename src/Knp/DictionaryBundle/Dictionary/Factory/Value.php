@@ -12,10 +12,7 @@ use Knp\DictionaryBundle\ValueTransformer;
 
 final class Value implements Factory
 {
-    /**
-     * @var ValueTransformer
-     */
-    private $transformer;
+    private ValueTransformer $transformer;
 
     public function __construct(ValueTransformer $transformer)
     {

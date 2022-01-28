@@ -11,9 +11,9 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 final class Aggregate implements Factory
 {
     /**
-     * @var Dictionary\Factory[]
+     * @var array<Dictionary\Factory>
      */
-    private $factories = [];
+    private array $factories = [];
 
     public function addFactory(Factory $factory): void
     {

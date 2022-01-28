@@ -14,20 +14,14 @@ use Knp\DictionaryBundle\Dictionary;
  */
 final class Invokable implements Dictionary
 {
-    /**
-     * @var string
-     */
-    private $name;
+    private string $name;
 
-    /**
-     * @var bool
-     */
-    private $invoked = false;
+    private bool $invoked = false;
 
     /**
      * @var array<mixed, mixed>
      */
-    private $values = [];
+    private array $values = [];
 
     /**
      * @var callable
@@ -35,9 +29,9 @@ final class Invokable implements Dictionary
     private $callable;
 
     /**
-     * @var mixed[]
+     * @var array<mixed>
      */
-    private $callableArgs = [];
+    private array $callableArgs = [];
 
     /**
      * @param mixed[] $callableArgs

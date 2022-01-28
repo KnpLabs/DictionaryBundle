@@ -10,10 +10,7 @@ use Knp\DictionaryBundle\Dictionary\Collection;
 
 final class Dictionary extends Base
 {
-    /**
-     * @var Collection
-     */
-    private $dictionaries;
+    private Collection $dictionaries;
 
     public function __construct(Collection $dictionaries, Generator $generator = null)
     {
