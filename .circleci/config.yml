@@ -13,21 +13,26 @@ jobs:
     parameters:
       php:
         type: string
+      symfony:
+        type: string
       composer-options:
         type: string
     steps:
       - checkout
       - run: |
           apt-get update
-          apt-get -y install git zip
+          apt-get -y install git zip jq
       - run: |
           php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
           php -r "if (hash_file('sha384', 'composer-setup.php') === '906a84df04cea2aa72f40b5f787e49f22d4c2f19492ac310e8cba5b96ac8b64115ac402c8cd292b8a03482574915d1a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
           php composer-setup.php
           php -r "unlink('composer-setup.php');"
           mv composer.phar /usr/local/bin/composer
+      - run: |
+          cat composer.json | jq --raw-output '. + {"conflict": ((.require + ."require-dev") | keys | map(select(startswith("symfony"))) | map({"key": ., "value": "< << parameters.symfony >> || > << parameters.symfony >>.9999"}) | from_entries)}' > composer.new.json
+          mv composer.new.json composer.json
+          cat composer.json
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
-      - run: cat vendor/composer/installed.json
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
       - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
       - run: bin/lint-twig src/
@@ -38,11 +43,23 @@ workflows:
   workflow:
     jobs:
       - test:
+          name: php7.4
+          php: "7.4"
           matrix:
             parameters:
-              php:
-                - "7.4"
-                - "8.0"
+              symfony:
+                - "5.4"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"
+      - test:
+          name: php8.0
+          php: "8.0"
+          matrix:
+            parameters:
+              symfony:
+                - "5.4"
+                - "6.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
