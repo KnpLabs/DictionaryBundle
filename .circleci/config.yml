@@ -48,6 +48,7 @@ workflows:
           matrix:
             parameters:
               symfony:
+                - "4.4"
                 - "5.4"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
@@ -58,6 +59,7 @@ workflows:
           matrix:
             parameters:
               symfony:
+                - "4.4"
                 - "5.4"
                 - "6.0"
               composer-options:
