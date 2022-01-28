@@ -12,7 +12,12 @@ use Symfony\Component\Validator\Constraint;
  */
 final class Dictionary extends Constraint
 {
-    public string $name;
+    /**
+     * @var string
+     *
+     * @todo switch to native typehint after Symfony 4.4 compatibility was removed
+     */
+    public $name;
 
     public string $message = "The key {{ key }} doesn't exist in the given dictionary. {{ keys }} available.";
 
