@@ -12,15 +12,9 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 
 final class Extended implements Factory
 {
-    /**
-     * @var Dictionary\Factory
-     */
-    private $factory;
+    private Dictionary\Factory $factory;
 
-    /**
-     * @var Dictionary\Collection
-     */
-    private $dictionaries;
+    private Dictionary\Collection $dictionaries;
 
     public function __construct(Factory $factory, Collection $dictionaries)
     {

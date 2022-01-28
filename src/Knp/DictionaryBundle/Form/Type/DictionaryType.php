@@ -12,10 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class DictionaryType extends AbstractType
 {
-    /**
-     * @var Collection
-     */
-    private $dictionaries;
+    private Collection $dictionaries;
 
     public function __construct(Collection $dictionaries)
     {
