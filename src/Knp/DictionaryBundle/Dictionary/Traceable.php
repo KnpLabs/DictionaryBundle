@@ -58,6 +58,7 @@ final class Traceable implements Dictionary
         return $this->dictionary->offsetExists($offset);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $this->markAsUsed();
