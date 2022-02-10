@@ -6,7 +6,6 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E
@@ -59,8 +58,7 @@ final class Traceable implements Dictionary
         return $this->dictionary->offsetExists($offset);
     }
 
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): mixed
     {
         $this->markAsUsed();
 

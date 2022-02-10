@@ -42,8 +42,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
 
-    #[ReturnTypeWillChange]
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return \array_key_exists($offset, $this->dictionaries);
     }
@@ -55,8 +54,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return Dictionary<mixed>
      */
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet($offset): Dictionary
     {
         if (!$this->offsetExists($offset)) {
             throw new DictionaryNotFoundException($offset, array_keys($this->dictionaries));
@@ -77,8 +75,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    #[ReturnTypeWillChange]
-    public function getIterator()
+    public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->dictionaries);
     }
