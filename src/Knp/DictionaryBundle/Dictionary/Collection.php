@@ -75,7 +75,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @return ArrayIterator<string,Dictionary>
+     * @return ArrayIterator<string,Dictionary<mixed>>
      */
     public function getIterator(): ArrayIterator
     {
