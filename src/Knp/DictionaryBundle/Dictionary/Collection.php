@@ -11,7 +11,6 @@ use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
-use ReturnTypeWillChange;
 
 /**
  * @implements ArrayAccess<string, Dictionary<mixed>>
