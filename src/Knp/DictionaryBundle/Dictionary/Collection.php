@@ -11,6 +11,7 @@ use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
+use ReturnTypeWillChange;
 
 /**
  * @implements ArrayAccess<string, Dictionary<mixed>>
@@ -41,7 +42,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetExists($offset)
     {
         return \array_key_exists($offset, $this->dictionaries);
@@ -54,7 +55,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return Dictionary<mixed>
      */
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
@@ -76,7 +77,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    #[\ReturnTypeWillChange]
+    #[ReturnTypeWillChange]
     public function getIterator()
     {
         return new ArrayIterator($this->dictionaries);
