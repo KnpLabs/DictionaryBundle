@@ -74,6 +74,9 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
+    /**
+     * @return ArrayIterator<string,Dictionary>
+     */
     public function getIterator(): ArrayIterator
     {
         return new ArrayIterator($this->dictionaries);
