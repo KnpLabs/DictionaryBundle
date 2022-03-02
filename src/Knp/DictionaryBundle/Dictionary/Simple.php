@@ -50,7 +50,7 @@ final class Simple implements Dictionary
     }
 
     #[\ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->values[$offset];
     }
