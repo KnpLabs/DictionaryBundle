@@ -49,6 +49,7 @@ final class Simple implements Dictionary
         return \array_key_exists($offset, $this->values);
     }
 
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->values[$offset];
