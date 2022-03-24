@@ -45,7 +45,6 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
         break;
 
     case '5.4':
-    case '4.4':
         trait SymfonyCompatibilityTrait
         {
             public function validate($value, Constraint $constraint): void

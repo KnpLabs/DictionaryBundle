@@ -11,6 +11,7 @@ use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
 use RuntimeException;
+use Traversable;
 
 /**
  * @implements ArrayAccess<string, Dictionary<mixed>>
@@ -47,11 +48,10 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param mixed $offset
-     *
      * @throws DictionaryNotFoundException
      *
      * @return Dictionary<mixed>
+     *                           {@inheritdoc}
      */
     public function offsetGet($offset): Dictionary
     {
@@ -74,10 +74,7 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    /**
-     * @return ArrayIterator<string,Dictionary<mixed>>
-     */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): Traversable
     {
         return new ArrayIterator($this->dictionaries);
     }
