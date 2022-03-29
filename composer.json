@@ -17,7 +17,7 @@
         }
     ],
     "require": {
-        "php": ">=7.4",
+        "php": ">=8.0",
         "symfony/config": "^4.4 || ^5.4 || ^6.0",
         "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
         "symfony/form": "^4.4 || ^5.4 || ^6.0",
@@ -34,7 +34,7 @@
         "pedrotroller/php-cs-custom-fixer": "^2.27",
         "phpspec/phpspec": "^7.1",
         "phpspec/prophecy": "^1.15",
-        "phpstan/phpstan": "^1.4",
+        "phpstan/phpstan": "^1.4.6",
         "symfony/twig-bridge": "^4.4 || ^5.4 || ^6.0",
         "symfony/var-dumper": "^4.4 || ^5.4 || ^6.0"
     },
@@ -51,7 +51,10 @@
         }
     },
     "config": {
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        }
     },
     "extra": {
         "branch-alias": {
