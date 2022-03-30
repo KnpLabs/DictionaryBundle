@@ -29,8 +29,10 @@ jobs:
           php -r "unlink('composer-setup.php');"
           mv composer.phar /usr/local/bin/composer
       - run: |
-          cat composer.json | jq --raw-output '. + {"conflict": ((.require + ."require-dev") | keys | map(select(startswith("symfony"))) | map({"key": ., "value": "< << parameters.symfony >> || > << parameters.symfony >>.9999"}) | from_entries)}' > composer.new.json
+          curl -s https://repo.packagist.org/p2/symfony/symfony.json | jq '.packages."symfony/symfony" | map(select(.version_normalized | startswith("<< parameters.symfony >>"))) | first.replace | to_entries | map({key: .key, value: "< << parameters.symfony >> || > << parameters.symfony >>.9999"}) | from_entries' > conflict.json
+          jq -s '.[0] + {conflict: .[1]}' composer.json conflict.json > composer.new.json
           mv composer.new.json composer.json
+          rm conflict.json
           cat composer.json
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1

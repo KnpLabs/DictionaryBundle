@@ -107,7 +107,9 @@ final class IteratorSpec extends ObjectBehavior
             $this->executed = true;
 
             yield 'foo' => 0;
+
             yield 'bar' => 1;
+
             yield 'baz' => 2;
 
             return;
