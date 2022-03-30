@@ -28,7 +28,7 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/http-k
     case '4.4':
         trait SymfonyCompatibilityTrait
         {
-            public function collect(Request $request, Response $response/*, \Throwable $exception = null*/): void
+            public function collect(Request $request, Response $response/* , \Throwable $exception = null */): void
             {
             }
         }
