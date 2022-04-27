@@ -7,6 +7,7 @@ namespace Knp\DictionaryBundle\Dictionary;
 use ArrayIterator;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
+use ReturnTypeWillChange;
 
 /**
  * @template E
@@ -69,6 +70,7 @@ final class Invokable implements Dictionary
         return \array_key_exists($offset, $this->values);
     }
 
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $this->invoke();

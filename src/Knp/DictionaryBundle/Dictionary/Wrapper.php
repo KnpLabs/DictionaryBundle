@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
+use ReturnTypeWillChange;
 
 /**
  * @template E
@@ -40,11 +41,12 @@ abstract class Wrapper implements Dictionary
         return $this->wrapped->getKeys();
     }
 
-    public function offsetExists($offset)
+    public function offsetExists($offset): bool
     {
         return $this->wrapped->offsetExists($offset);
     }
 
+    #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         return $this->wrapped->offsetGet($offset);
