@@ -17,6 +17,10 @@ jobs:
         type: string
       composer-options:
         type: string
+      minimum-stability:
+        type: enum
+        default: "stable"
+        enum: ["stable", "dev"]
     steps:
       - checkout
       - run: |
@@ -32,6 +36,10 @@ jobs:
           jq -s '.[0] + {conflict: .[1]}' composer.json conflict.json > composer.new.json
           mv composer.new.json composer.json
           rm conflict.json
+          cat composer.json
+      - run: |
+          jq -s '.[0] + {"minimum-stability": "<< parameters.minimum-stability >>"}' composer.json > composer.new.json
+          mv composer.new.json composer.json
           cat composer.json
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
@@ -72,6 +80,17 @@ workflows:
               symfony:
                 - "5.4"
                 - "6.0"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"
+      - test:
+          name: php8.1-dev
+          php: "8.1"
+          minimum-stability: "dev"
+          matrix:
+            parameters:
+              symfony:
+                - "6.1"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
