@@ -1,0 +1,13 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "00:00"
+  allow:
+  - dependency-type: development
+  commit-message:
+    prefix: chore
+    prefix-development: chore
+    include: scope
