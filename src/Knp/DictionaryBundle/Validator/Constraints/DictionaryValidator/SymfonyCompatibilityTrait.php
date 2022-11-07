@@ -14,6 +14,7 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
     default:
         throw new Exception('knplabs/dictionary-bundle is not compatible with the current version of symfony/validator: '.$version);
 
+    case '6.2':
     case '6.1':
     case '6.0':
         trait SymfonyCompatibilityTrait
