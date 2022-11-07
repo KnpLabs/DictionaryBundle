@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
+ *
  * @Target({"PROPERTY", "METHOD"})
  */
 #[Attribute(Attribute::TARGET_PROPERTY | Attribute::TARGET_METHOD)]

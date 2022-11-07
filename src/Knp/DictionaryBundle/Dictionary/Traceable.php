@@ -10,6 +10,7 @@ use ReturnTypeWillChange;
 
 /**
  * @template E of mixed
+ *
  * @implements Dictionary<E>
  */
 final class Traceable implements Dictionary
