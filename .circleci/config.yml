@@ -54,16 +54,6 @@ workflows:
   workflow:
     jobs:
       - test:
-          name: php7.4
-          php: "7.4"
-          matrix:
-            parameters:
-              symfony:
-                - "5.4"
-              composer-options:
-                - "--prefer-stable --prefer-lowest"
-                - "--prefer-stable"
-      - test:
           name: php8.0
           php: "8.0"
           matrix:
@@ -77,22 +67,26 @@ workflows:
       - test:
           name: php8.1
           php: "8.1"
+          minimum-stability: 'dev' # Remove on Symfony 6.2 release
           matrix:
             parameters:
               symfony:
                 - "5.4"
                 - "6.0"
                 - "6.1"
+                - "6.2"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
     # - test:
-    #     name: php8.1-dev
-    #     php: "8.1"
-    #     minimum-stability: "dev"
+    #     name: php8.2
+    #     php: "8.2"
     #     matrix:
     #       parameters:
     #         symfony:
+    #           - "5.4"
+    #           - "6.0"
+    #           - "6.1"
     #           - "6.2"
     #         composer-options:
     #           - "--prefer-stable --prefer-lowest"

@@ -18,7 +18,7 @@ final class Aggregate implements ValueTransformer
         $this->transformers[] = $transformer;
     }
 
-    public function supports($value): bool
+    public function supports(mixed $value): bool
     {
         foreach ($this->transformers as $transformer) {
             if ($transformer->supports($value)) {
@@ -29,7 +29,7 @@ final class Aggregate implements ValueTransformer
         return false;
     }
 
-    public function transform($value)
+    public function transform(mixed $value)
     {
         foreach ($this->transformers as $transformer) {
             if ($transformer->supports($value)) {

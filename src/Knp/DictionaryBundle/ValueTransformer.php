@@ -6,15 +6,10 @@ namespace Knp\DictionaryBundle;
 
 interface ValueTransformer
 {
-    /**
-     * @param mixed $value
-     */
-    public function supports($value): bool;
+    public function supports(mixed $value): bool;
 
     /**
-     * @param mixed $value
-     *
      * @return mixed
      */
-    public function transform($value);
+    public function transform(mixed $value);
 }

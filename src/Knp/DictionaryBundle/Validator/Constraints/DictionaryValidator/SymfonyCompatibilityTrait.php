@@ -6,6 +6,7 @@ namespace Knp\DictionaryBundle\Validator\Constraints\DictionaryValidator;
 
 use Composer\InstalledVersions;
 use Exception;
+use Knp\DictionaryBundle\Symfony;
 use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
@@ -14,13 +15,13 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
     default:
         throw new Exception('knplabs/dictionary-bundle is not compatible with the current version of symfony/validator: '.$version);
 
-    case '6.3':
-    case '6.2':
-    case '6.1':
-    case '6.0':
+    case Symfony\SupportedVersion::v5_4:
         trait SymfonyCompatibilityTrait
         {
-            public function validate(mixed $value, Constraint $constraint): void
+            /**
+             * @param mixed $value
+             */
+            public function validate($value, Constraint $constraint): void
             {
                 if (!$constraint instanceof Dictionary) {
                     throw new UnexpectedTypeException($constraint, Dictionary::class);
@@ -47,10 +48,13 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
 
         break;
 
-    case '5.4':
+    case Symfony\SupportedVersion::v6_0:
+    case Symfony\SupportedVersion::v6_1:
+    case Symfony\SupportedVersion::v6_2:
+    case Symfony\SupportedVersion::v6_3:
         trait SymfonyCompatibilityTrait
         {
-            public function validate($value, Constraint $constraint): void
+            public function validate(mixed $value, Constraint $constraint): void
             {
                 if (!$constraint instanceof Dictionary) {
                     throw new UnexpectedTypeException($constraint, Dictionary::class);
