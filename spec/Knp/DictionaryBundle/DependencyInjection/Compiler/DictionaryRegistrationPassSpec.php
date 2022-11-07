@@ -19,8 +19,11 @@ final class DictionaryRegistrationPassSpec extends ObjectBehavior
         $this->shouldHaveType(DictionaryRegistrationPass::class);
     }
 
-    function it_registers_dictionaries(ContainerBuilder $container, Definition $dictionaries, Definition $definition)
-    {
+    function it_registers_dictionaries(
+        ContainerBuilder $container,
+        Definition $dictionaries,
+        Definition $definition
+    ) {
         $tags = ['foo' => [], 'bar' => [], 'baz' => []];
 
         $container->getDefinition(Collection::class)->willReturn($dictionaries);

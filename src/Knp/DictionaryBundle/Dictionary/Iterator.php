@@ -8,6 +8,7 @@ use Traversable;
 
 /**
  * @template E
+ *
  * @extends Wrapper<E>
  */
 final class Iterator extends Wrapper

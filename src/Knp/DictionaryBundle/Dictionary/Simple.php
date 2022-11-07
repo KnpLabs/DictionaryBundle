@@ -10,6 +10,7 @@ use ReturnTypeWillChange;
 
 /**
  * @template E
+ *
  * @implements Dictionary<E>
  */
 final class Simple implements Dictionary

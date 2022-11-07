@@ -11,6 +11,7 @@ use ReturnTypeWillChange;
 
 /**
  * @template E
+ *
  * @implements Dictionary<E>
  */
 final class Invokable implements Dictionary
