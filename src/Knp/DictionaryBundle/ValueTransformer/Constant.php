@@ -12,7 +12,7 @@ final class Constant implements ValueTransformer
 {
     private const PATTERN = '/^(?P<class>.*)::(?P<constant>.*)$/';
 
-    public function supports($value): bool
+    public function supports(mixed $value): bool
     {
         if (!\is_string($value)) {
             return false;
@@ -35,7 +35,7 @@ final class Constant implements ValueTransformer
         return \array_key_exists($matches['constant'], $constants);
     }
 
-    public function transform($value)
+    public function transform(mixed $value)
     {
         if (null === $matches = $this->extract($value)) {
             throw new Exception("Unable to resolve constant {$value}.");

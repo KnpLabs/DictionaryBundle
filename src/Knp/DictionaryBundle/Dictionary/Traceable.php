@@ -16,22 +16,10 @@ use ReturnTypeWillChange;
 final class Traceable implements Dictionary
 {
     /**
-     * @var Dictionary<E>
-     */
-    private Dictionary $dictionary;
-
-    /**
-     * @var DictionaryDataCollector
-     */
-    private DictionaryDataCollector $collector;
-
-    /**
      * @param Dictionary<E> $dictionary
      */
-    public function __construct(Dictionary $dictionary, DictionaryDataCollector $collector)
+    public function __construct(private Dictionary $dictionary, private DictionaryDataCollector $collector)
     {
-        $this->dictionary = $dictionary;
-        $this->collector  = $collector;
     }
 
     public function getName(): string

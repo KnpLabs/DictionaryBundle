@@ -16,8 +16,6 @@ use ReturnTypeWillChange;
  */
 final class Invokable implements Dictionary
 {
-    private string $name;
-
     private bool $invoked = false;
 
     /**
@@ -31,23 +29,11 @@ final class Invokable implements Dictionary
     private $callable;
 
     /**
-     * @var array<mixed>
-     */
-    private array $callableArgs = [];
-
-    /**
      * @param mixed[] $callableArgs
      */
-    public function __construct(string $name, callable $callable, array $callableArgs = [])
+    public function __construct(private string $name, callable $callable, private array $callableArgs = [])
     {
-        $this->name         = $name;
-        $this->callable     = $callable;
-        $this->callableArgs = $callableArgs;
-    }
-
-    public function getName(): string
-    {
-        return $this->name;
+        $this->callable = $callable;
     }
 
     public function getValues(): array
@@ -55,6 +41,11 @@ final class Invokable implements Dictionary
         $this->invoke();
 
         return $this->values;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
     }
 
     public function getKeys(): array
