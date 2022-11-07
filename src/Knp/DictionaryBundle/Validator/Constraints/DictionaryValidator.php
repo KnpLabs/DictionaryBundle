@@ -48,7 +48,9 @@ final class DictionaryValidator extends ConstraintValidator
         }
 
         if (settype($var, 'string')) {
-            // @var string $var
+            /**
+             * @var string $var
+             */
             return $var;
         }
 

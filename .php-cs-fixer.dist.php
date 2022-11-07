@@ -33,6 +33,7 @@ $config->setRules(
         ->disable('method_chaining_indentation')
         ->disable('no_break_comment')
         ->disable('no_superfluous_phpdoc_tags')
+        ->disable('phpdoc_to_comment')
         ->getRules()
 );
 
