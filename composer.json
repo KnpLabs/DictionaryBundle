@@ -24,7 +24,7 @@
         "symfony/http-foundation": "^5.4 || ^6.0",
         "symfony/http-kernel": "^5.4 || ^6.0",
         "symfony/validator": "^5.4 || ^6.0",
-        "twig/twig": "^2.14.11 || ^3.3.8"
+        "twig/twig": "^2.15.3 || ^3.4.3"
     },
     "require-dev": {
         "beberlei/assert": "^3.3",
