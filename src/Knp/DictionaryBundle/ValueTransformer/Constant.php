@@ -9,7 +9,7 @@ use ReflectionClass;
 
 final class Constant implements ValueTransformer
 {
-    private string $pattern = '/^(?P<class>.*)::(?P<constant>.*)$/';
+    private const PATTERN = '/^(?P<class>.*)::(?P<constant>.*)$/';
 
     public function supports($value): bool
     {
@@ -19,7 +19,7 @@ final class Constant implements ValueTransformer
 
         $matches = [];
 
-        if (0 === preg_match($this->pattern, $value, $matches)) {
+        if (0 === preg_match(self::PATTERN, $value, $matches)) {
             return false;
         }
 
@@ -36,9 +36,7 @@ final class Constant implements ValueTransformer
 
     public function transform($value)
     {
-        $matches = [];
-
-        preg_match($this->pattern, $value, $matches);
+        preg_match(self::PATTERN, $value, $matches);
 
         return (new ReflectionClass($matches['class']))
             ->getConstant($matches['constant'])

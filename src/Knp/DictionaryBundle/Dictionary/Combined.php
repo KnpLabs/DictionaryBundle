@@ -8,6 +8,7 @@ use Knp\DictionaryBundle\Dictionary;
 
 /**
  * @template E
+ *
  * @extends Wrapper<E>
  */
 final class Combined extends Wrapper

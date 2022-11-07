@@ -9,6 +9,7 @@ use ReturnTypeWillChange;
 
 /**
  * @template E
+ *
  * @implements Dictionary<E>
  */
 abstract class Wrapper implements Dictionary

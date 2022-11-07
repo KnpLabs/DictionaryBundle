@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
+use Exception;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use Symfony\Component\Validator\ConstraintValidator;
 
@@ -42,6 +43,15 @@ final class DictionaryValidator extends ConstraintValidator
             ;
         }
 
-        return (string) $var;
+        if (\is_object($var) && method_exists($var, '__toString')) {
+            return $var->__toString();
+        }
+
+        if (settype($var, 'string')) {
+            // @var string $var
+            return $var;
+        }
+
+        throw new Exception('Unable to transform var to string.');
     }
 }

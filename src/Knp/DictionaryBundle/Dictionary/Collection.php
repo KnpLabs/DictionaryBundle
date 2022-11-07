@@ -48,10 +48,10 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @throws DictionaryNotFoundException
-     *
      * @return Dictionary<mixed>
      *                           {@inheritdoc}
+     *
+     * @throws DictionaryNotFoundException
      */
     public function offsetGet($offset): Dictionary
     {
