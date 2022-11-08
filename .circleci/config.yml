@@ -83,6 +83,7 @@ workflows:
                 - "5.4"
                 - "6.0"
                 - "6.1"
+                - "6.2"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
