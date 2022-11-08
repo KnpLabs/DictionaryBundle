@@ -60,6 +60,9 @@ final class Traceable implements Dictionary
         return $this->dictionary->offsetExists($offset);
     }
 
+    /**
+     * @return
+     */
     #[ReturnTypeWillChange]
     public function offsetGet($offset)
     {
