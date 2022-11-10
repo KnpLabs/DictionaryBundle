@@ -18,10 +18,7 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
     case Symfony\SupportedVersion::v5_4:
         trait SymfonyCompatibilityTrait
         {
-            /**
-             * @param mixed $value
-             */
-            public function validate($value, Constraint $constraint): void
+            public function validate(mixed $value, Constraint $constraint): void
             {
                 if (!$constraint instanceof Dictionary) {
                     throw new UnexpectedTypeException($constraint, Dictionary::class);
@@ -48,8 +45,6 @@ switch ($version = substr((string) InstalledVersions::getVersion('symfony/valida
 
         break;
 
-    case Symfony\SupportedVersion::v6_0:
-    case Symfony\SupportedVersion::v6_1:
     case Symfony\SupportedVersion::v6_2:
     case Symfony\SupportedVersion::v6_3:
         trait SymfonyCompatibilityTrait

@@ -60,7 +60,6 @@ workflows:
             parameters:
               symfony:
                 - "5.4"
-                - "6.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
@@ -72,21 +71,17 @@ workflows:
             parameters:
               symfony:
                 - "5.4"
-                - "6.0"
-                - "6.1"
                 - "6.2"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
     # - test:
     #     name: php8.2
-    #     php: "8.2"
+    #     php: "8.2-rc"
     #     matrix:
     #       parameters:
     #         symfony:
     #           - "5.4"
-    #           - "6.0"
-    #           - "6.1"
     #           - "6.2"
     #         composer-options:
     #           - "--prefer-stable --prefer-lowest"
