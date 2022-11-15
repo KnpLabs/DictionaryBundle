@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Templating\Extension;
 
-use Assert\Assert;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Templating\Extension;
 use PhpSpec\ObjectBehavior;
+use Webmozart\Assert\Assert;
 
 final class DictionarySpec extends ObjectBehavior
 {
@@ -42,8 +42,8 @@ final class DictionarySpec extends ObjectBehavior
         $functions = $this->getFunctions();
         $callable  = current($functions->getWrappedObject())->getCallable();
 
-        Assert::that($callable('test'))->eq($dico1->getWrappedObject());
-        Assert::that($callable('other'))->eq($dico2->getWrappedObject());
+        Assert::eq($callable('test'), $dico1->getWrappedObject());
+        Assert::eq($callable('other'), $dico2->getWrappedObject());
     }
 
     function it_returns_a_value_from_a_dictionary()
@@ -51,7 +51,7 @@ final class DictionarySpec extends ObjectBehavior
         $filters  = $this->getFilters();
         $callable = current($filters->getWrappedObject())->getCallable();
 
-        Assert::that($callable('foo', 'test'))->eq('bar');
-        Assert::that($callable('foo', 'other'))->eq(false);
+        Assert::eq($callable('foo', 'test'), 'bar');
+        Assert::eq($callable('foo', 'other'), false);
     }
 }
