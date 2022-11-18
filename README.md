@@ -268,15 +268,15 @@ services:
 ### phpspec
 
 ```bash
-$ composer install
-$ vendor/bin/phpspec run
+composer install
+vendor/bin/phpspec run
 ```
 
 ### php-cs-fixer
 
 ```bash
-$ composer install
-$ vendor/bin/php-cs-fixer fix
+composer install
+vendor/bin/php-cs-fixer fix
 ```
 
 ### phpstan
@@ -286,8 +286,8 @@ First [install phive](https://github.com/phar-io/phive#getting-phive).
 Then...
 
 ```bash
-$ phive install
-$ tools/phpstan process
+phive install
+tools/phpstan process
 ```
 
 ### rector (*optional*)
