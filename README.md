@@ -43,10 +43,15 @@ knp_dictionary:
       - Bar
       - Baz
 ```
-You will be able to retreive it through the dictionaries collection service:
+You will be able to retreive it by injecting the Collection service and accessing the dictionary by its key
 ```php
-$dictionaries = $container->get(\Knp\DictionaryBundle\Dictionary\Collection::class);
-$dictionary   = $dictionaries['my_dictionary'];
+
+    private Dictionary $myDictionary;
+    public function __construct(
+        \Knp\DictionaryBundle\Dictionary\Collection $dictionaries)
+    {
+        $this->myDictionary = $dictionaries['my_dictionary'];
+    }
 ```
 ### Dictionary form type
 
