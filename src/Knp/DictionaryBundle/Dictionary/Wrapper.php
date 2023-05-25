@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E

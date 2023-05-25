@@ -33,8 +33,7 @@ final class DictionaryValidator extends ConstraintValidator
         if (\is_float($var)) {
             return 0.0 === $var
                 ? '0.0'
-                : (string) $var
-            ;
+                : (string) $var;
         }
 
         if (\is_object($var) && method_exists($var, '__toString')) {

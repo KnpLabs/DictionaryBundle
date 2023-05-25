@@ -6,7 +6,6 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E of mixed

@@ -6,7 +6,6 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Generator;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E
