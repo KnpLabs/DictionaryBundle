@@ -12,15 +12,21 @@ use Webmozart\Assert\Assert;
 
 final class DictionarySpec extends ObjectBehavior
 {
-    function let(Dictionary $dico1, Dictionary $dico2)
+    private Dictionary $dictionary1;
+    private Dictionary $dictionary2;
+
+    function let()
     {
-        $dico1->offsetGet('foo')->willReturn('bar');
-        $dico1->getName()->willReturn('test');
+        $this->dictionary1 = new Dictionary\Simple(
+            'test',
+            ['foo' => 'bar'],
+        );
+        $this->dictionary2 = new Dictionary\Simple(
+            'other',
+            ['foo' => false],
+        );
 
-        $dico2->offsetGet('foo')->willReturn(false);
-        $dico2->getName()->willReturn('other');
-
-        $this->beConstructedWith(new Collection($dico1->getWrappedObject(), $dico2->getWrappedObject()));
+        $this->beConstructedWith(new Collection($this->dictionary1, $this->dictionary2));
     }
 
     function it_is_initializable()
@@ -37,13 +43,13 @@ final class DictionarySpec extends ObjectBehavior
         $functions[0]->getName()->shouldReturn('dictionary');
     }
 
-    function it_returns_a_dictionary_by_its_name($dico1, $dico2)
+    function it_returns_a_dictionary_by_its_name()
     {
         $functions = $this->getFunctions();
         $callable  = current($functions->getWrappedObject())->getCallable();
 
-        Assert::eq($callable('test'), $dico1->getWrappedObject());
-        Assert::eq($callable('other'), $dico2->getWrappedObject());
+        Assert::eq($callable('test'), $this->dictionary1);
+        Assert::eq($callable('other'), $this->dictionary2);
     }
 
     function it_returns_a_value_from_a_dictionary()

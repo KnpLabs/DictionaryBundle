@@ -4,43 +4,38 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use ArrayIterator;
 use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
+use Traversable;
 
 /**
- * @template E
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @implements Dictionary<E>
+ * @implements Dictionary<TKey, TValue>
  */
 final class Invokable implements Dictionary
 {
-    private bool $invoked = false;
-
     /**
-     * @var array<mixed, mixed>
+     * @var Simple<TKey, TValue>
      */
-    private array $values = [];
+    private Simple $dictionary;
 
     /**
-     * @var callable
+     * @var callable(): array<TKey, TValue>
      */
     private $callable;
 
     /**
-     * @param mixed[] $callableArgs
+     * @param mixed[]                         $callableArgs
+     * @param callable(): array<TKey, TValue> $callable
      */
-    public function __construct(private string $name, callable $callable, private array $callableArgs = [])
-    {
+    public function __construct(
+        private string $name,
+        callable $callable,
+        private array $callableArgs = []
+    ) {
         $this->callable = $callable;
-    }
-
-    public function getValues(): array
-    {
-        $this->invoke();
-
-        return $this->values;
     }
 
     public function getName(): string
@@ -52,58 +47,66 @@ final class Invokable implements Dictionary
     {
         $this->invoke();
 
-        return array_keys($this->values);
+        return $this->dictionary->getKeys();
     }
 
-    public function offsetExists($offset): bool
+    public function getValues(): array
     {
         $this->invoke();
 
-        return \array_key_exists($offset, $this->values);
+        return $this->dictionary->getValues();
     }
 
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetExists(mixed $offset): bool
     {
         $this->invoke();
 
-        return $this->values[$offset];
+        return $this->dictionary->offsetExists($offset);
     }
 
-    public function offsetSet($offset, $value): void
+    public function offsetGet(mixed $offset): mixed
     {
         $this->invoke();
 
-        $this->values[$offset] = $value;
-    }
-
-    public function offsetUnset($offset): void
-    {
-        $this->invoke();
-
-        unset($this->values[$offset]);
+        return $this->dictionary->offsetGet($offset);
     }
 
     /**
-     * @return ArrayIterator<int|string, mixed>
+     * {@inheritdoc}
+     *
+     * @param TKey $offset
      */
-    public function getIterator(): ArrayIterator
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->invoke();
 
-        return new ArrayIterator($this->values);
+        $this->dictionary->offsetSet($offset, $value);
+    }
+
+    public function offsetUnset(mixed $offset): void
+    {
+        $this->invoke();
+
+        $this->dictionary->offsetUnset($offset);
+    }
+
+    public function getIterator(): Traversable
+    {
+        $this->invoke();
+
+        yield from $this->dictionary;
     }
 
     public function count(): int
     {
         $this->invoke();
 
-        return \count($this->values);
+        return $this->dictionary->count();
     }
 
     private function invoke(): void
     {
-        if ($this->invoked) {
+        if (isset($this->dictionary)) {
             return;
         }
 
@@ -115,7 +118,6 @@ final class Invokable implements Dictionary
             );
         }
 
-        $this->values  = $values;
-        $this->invoked = true;
+        $this->dictionary = new Simple($this->name, $values);
     }
 }

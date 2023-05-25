@@ -10,16 +10,26 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Throwable;
 
+/**
+ * @property array<string, array<mixed>> $data
+ */
 final class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, Throwable $exception = null): void {}
+    public function collect(
+        Request $request,
+        Response $response,
+        Throwable $exception = null
+    ): void {}
 
     /**
      * @param array<mixed> $keys
      * @param array<mixed> $values
      */
-    public function addDictionary(string $name, array $keys, array $values): void
-    {
+    public function addDictionary(
+        string $name,
+        array $keys,
+        array $values
+    ): void {
         $this->data[$name] = array_map(
             static fn ($key, $value): array => ['key' => $key, 'value' => $value],
             $keys,

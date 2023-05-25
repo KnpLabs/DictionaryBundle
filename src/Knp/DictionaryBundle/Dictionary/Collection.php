@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayAccess;
-use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
@@ -14,18 +13,18 @@ use RuntimeException;
 use Traversable;
 
 /**
- * @implements ArrayAccess<string, Dictionary<mixed>>
- * @implements IteratorAggregate<string, Dictionary<mixed>>
+ * @implements ArrayAccess<string, Dictionary<int|string, mixed>>
+ * @implements IteratorAggregate<string, Dictionary<int|string, mixed>>
  */
 final class Collection implements ArrayAccess, Countable, IteratorAggregate
 {
     /**
-     * @var array<string, Dictionary<mixed>>
+     * @var array<string, Dictionary<int|string, mixed>>
      */
     private array $dictionaries = [];
 
     /**
-     * @param Dictionary<mixed> ...$dictionaries
+     * @param Dictionary<int|string, mixed> ...$dictionaries
      */
     public function __construct(Dictionary ...$dictionaries)
     {
@@ -35,25 +34,24 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
     }
 
     /**
-     * @param Dictionary<mixed> $dictionary
+     * @param Dictionary<int|string, mixed> $dictionary
      */
     public function add(Dictionary $dictionary): void
     {
         $this->dictionaries[$dictionary->getName()] = $dictionary;
     }
 
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return \array_key_exists($offset, $this->dictionaries);
     }
 
     /**
-     * @return Dictionary<mixed>
-     *                           {@inheritdoc}
+     * @return Dictionary<int|string, mixed>
      *
      * @throws DictionaryNotFoundException
      */
-    public function offsetGet($offset): Dictionary
+    public function offsetGet(mixed $offset): mixed
     {
         if (!$this->offsetExists($offset)) {
             throw new DictionaryNotFoundException($offset, array_keys($this->dictionaries));
@@ -62,21 +60,21 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
         return $this->dictionaries[$offset];
     }
 
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         throw new RuntimeException(
             'To add a Dictionary to the Collection, use Knp\DictionaryBundle\Dictionary\Collection::add(Dictionary $dictionary).'
         );
     }
 
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
     public function getIterator(): Traversable
     {
-        return new ArrayIterator($this->dictionaries);
+        return yield from $this->dictionaries;
     }
 
     public function count(): int

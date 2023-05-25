@@ -38,8 +38,9 @@ final class DictionarySpec extends ObjectBehavior
         $this->dictionary('the_dico')->shouldBeOneOf('foo', 'bar', 'baz');
     }
 
-    function it_can_generates_unique_random_values(Dictionary $dictionary)
-    {
+    function it_can_generates_unique_random_values(
+        Dictionary $dictionary
+    ) {
         $dictionary->getName()->willReturn('the_dico');
         $dictionary->getKeys()->willReturn(['foo', 'bar', 'baz']);
 

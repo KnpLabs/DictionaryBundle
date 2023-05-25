@@ -15,8 +15,6 @@ final class ValueAsKey implements Factory
     public function __construct(private ValueTransformer $transformer) {}
 
     /**
-     * {@inheritdoc}
-     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -26,7 +24,12 @@ final class ValueAsKey implements Factory
         }
 
         $content = $config['content'];
-        $values  = [];
+
+        if (!is_iterable($content)) {
+            throw new InvalidArgumentException(sprintf('The key content for dictionary %s must iterable.', $name));
+        }
+
+        $values = [];
 
         foreach ($content as $value) {
             $builtValue          = $this->transformer->transform($value);
@@ -38,6 +41,6 @@ final class ValueAsKey implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'value_as_key' === $config['type'] : false;
+        return isset($config['type']) && 'value_as_key' === $config['type'];
     }
 }

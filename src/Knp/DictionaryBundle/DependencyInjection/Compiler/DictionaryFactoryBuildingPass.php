@@ -18,7 +18,7 @@ final class DictionaryFactoryBuildingPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        foreach ($container->findTaggedServiceIds(self::TAG_FACTORY) as $id => $tags) {
+        foreach (array_keys($container->findTaggedServiceIds(self::TAG_FACTORY)) as $id) {
             $container
                 ->findDefinition(Aggregate::class)
                 ->addMethodCall('addFactory', [new Reference($id)])

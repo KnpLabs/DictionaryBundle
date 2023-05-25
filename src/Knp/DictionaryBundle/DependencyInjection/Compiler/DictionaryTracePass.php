@@ -19,7 +19,7 @@ final class DictionaryTracePass implements CompilerPassInterface
             return;
         }
 
-        foreach ($container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY) as $id => $tags) {
+        foreach (array_keys($container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)) as $id) {
             $serviceId  = sprintf('%s.%s.traceable', $id, md5($id));
             $dictionary = new Reference(sprintf('%s.inner', $serviceId));
             $traceable  = new Definition(Traceable::class, [$dictionary, new Reference(DictionaryDataCollector::class)]);

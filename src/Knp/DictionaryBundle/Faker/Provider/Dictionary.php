@@ -10,9 +10,11 @@ use Knp\DictionaryBundle\Dictionary\Collection;
 
 final class Dictionary extends Base
 {
-    public function __construct(private Collection $dictionaries, Generator $generator = null)
-    {
-        if (null === $generator) {
+    public function __construct(
+        private readonly Collection $dictionaries,
+        Generator $generator = null
+    ) {
+        if (!$generator instanceof Generator) {
             $generator = new Generator();
             $generator->addProvider($this);
         }

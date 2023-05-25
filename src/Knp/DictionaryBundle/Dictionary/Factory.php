@@ -11,7 +11,7 @@ interface Factory
     /**
      * @param mixed[] $config
      *
-     * @return Dictionary<mixed>
+     * @return Dictionary<int|string, mixed>
      */
     public function create(string $name, array $config): Dictionary;
 

@@ -14,7 +14,7 @@ final class DictionaryValidator extends ConstraintValidator
 
     public function __construct(private Collection $dictionaries) {}
 
-    private function varToString(mixed $var): string
+    protected function varToString(mixed $var): string
     {
         if (null === $var) {
             return 'null';
@@ -38,11 +38,8 @@ final class DictionaryValidator extends ConstraintValidator
             return $var->__toString();
         }
 
-        if (settype($var, 'string')) {
-            /**
-             * @var string $var
-             */
-            return $var;
+        if (\is_scalar($var) && '' !== (string) $var) {
+            return (string) $var;
         }
 
         throw new Exception('Unable to transform var to string.');

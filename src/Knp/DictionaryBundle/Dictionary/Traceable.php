@@ -8,16 +8,20 @@ use Knp\DictionaryBundle\DataCollector\DictionaryDataCollector;
 use Knp\DictionaryBundle\Dictionary;
 
 /**
- * @template E of mixed
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @implements Dictionary<E>
+ * @implements Dictionary<TKey, TValue>
  */
 final class Traceable implements Dictionary
 {
     /**
-     * @param Dictionary<E> $dictionary
+     * @param Dictionary<TKey, TValue> $dictionary
      */
-    public function __construct(private Dictionary $dictionary, private DictionaryDataCollector $collector) {}
+    public function __construct(
+        private Dictionary $dictionary,
+        private DictionaryDataCollector $collector
+    ) {}
 
     public function getName(): string
     {
@@ -67,7 +71,7 @@ final class Traceable implements Dictionary
     }
 
     /**
-     * @return Dictionary<E>
+     * @return Dictionary<TKey, TValue>
      */
     public function getIterator(): Dictionary
     {

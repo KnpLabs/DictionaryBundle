@@ -21,14 +21,28 @@ final class Combined implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['dictionaries'])) {
-            throw new InvalidArgumentException(sprintf(
-                'Dictionary of type %s must contains a key "dictionaries".',
-                self::TYPE
-            ));
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The configuration of the dictionary named "%s" of type "%s" must contain a "dictionary" parameter.',
+                    $name,
+                    self::TYPE
+                )
+            );
+        }
+
+        if (!\is_array($config['dictionaries'])) {
+            throw new InvalidArgumentException(
+                sprintf(
+                    'The "dictionaries" configuration parameter of the dictionary named "%s" of type "%s" must contain an array, %s is given.',
+                    $name,
+                    self::TYPE,
+                    \gettype($config['dictionaries']),
+                )
+            );
         }
 
         $dictionaries = array_map(
-            fn ($name): Dictionary => $this->dictionaries[$name],
+            fn (string $name): Dictionary => $this->dictionaries[$name],
             $config['dictionaries']
         );
 
@@ -37,6 +51,6 @@ final class Combined implements Factory
 
     public function supports(array $config): bool
     {
-        return isset($config['type']) ? self::TYPE === $config['type'] : false;
+        return isset($config['type']) && self::TYPE === $config['type'];
     }
 }

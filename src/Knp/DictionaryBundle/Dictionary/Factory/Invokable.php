@@ -13,9 +13,12 @@ final class Invokable implements Factory
 {
     public function __construct(private ContainerInterface $container) {}
 
+    public function supports(array $config): bool
+    {
+        return 'callable' === $config['type'] ?: false;
+    }
+
     /**
-     * {@inheritdoc}
-     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -24,6 +27,14 @@ final class Invokable implements Factory
             throw new InvalidArgumentException(sprintf(
                 'The "service" config key must be set for the dictionary named "%s".',
                 $name
+            ));
+        }
+
+        if (!\is_string($config['service'])) {
+            throw new InvalidArgumentException(sprintf(
+                'The "service" config key must be a string for the dictionary named "%s"; %s given.',
+                $name,
+                \gettype($config['service']),
             ));
         }
 
@@ -42,10 +53,5 @@ final class Invokable implements Factory
         }
 
         return new Dictionary\Invokable($name, $callable);
-    }
-
-    public function supports(array $config): bool
-    {
-        return (isset($config['type'])) ? 'callable' === $config['type'] : false;
     }
 }

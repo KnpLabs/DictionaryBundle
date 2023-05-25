@@ -22,8 +22,11 @@ final class AggregateSpec extends ObjectBehavior
         $this->shouldHaveType(Factory::class);
     }
 
-    function it_supports_if_one_factory_supports(Factory $factory1, Factory $factory2, Factory $factory3)
-    {
+    function it_supports_if_one_factory_supports(
+        Factory $factory1,
+        Factory $factory2,
+        Factory $factory3
+    ) {
         $this->addFactory($factory1);
         $this->addFactory($factory2);
 

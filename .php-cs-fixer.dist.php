@@ -30,6 +30,7 @@ $config->setRules(
         ->enable('ordered_imports')
         ->enable('ordered_interfaces')
         ->enable('phpdoc_line_span')
+        ->enable('PedroTroller/line_break_between_method_arguments', ['max-length' => 80])
         ->disable('method_chaining_indentation')
         ->disable('no_break_comment')
         ->disable('no_superfluous_phpdoc_tags')

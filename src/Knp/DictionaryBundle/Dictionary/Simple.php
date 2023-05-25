@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Generator;
 use Knp\DictionaryBundle\Dictionary;
+use Traversable;
 
 /**
- * @template E
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @implements Dictionary<E>
+ * @implements Dictionary<TKey, TValue>
  */
 final class Simple implements Dictionary
 {
     /**
-     * @param array<mixed, E> $values
+     * @param array<TKey, TValue> $values
      */
     public function __construct(private string $name, private array $values) {}
 
@@ -24,14 +25,14 @@ final class Simple implements Dictionary
         return $this->name;
     }
 
-    public function getValues(): array
-    {
-        return $this->values;
-    }
-
     public function getKeys(): array
     {
         return array_keys($this->values);
+    }
+
+    public function getValues(): array
+    {
+        return array_values($this->values);
     }
 
     public function offsetExists(mixed $offset): bool
@@ -44,6 +45,11 @@ final class Simple implements Dictionary
         return $this->values[$offset];
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @param TKey $offset
+     */
     public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->values[$offset] = $value;
@@ -54,7 +60,7 @@ final class Simple implements Dictionary
         unset($this->values[$offset]);
     }
 
-    public function getIterator(): Generator
+    public function getIterator(): Traversable
     {
         yield from $this->values;
     }
