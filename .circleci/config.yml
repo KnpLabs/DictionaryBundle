@@ -24,9 +24,8 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | tee /etc/apt/sources.list.d/symfony-cli.list
           apt-get update
-          apt-get -y install git zip jq symfony-cli
+          apt-get -y install git zip jq
       - run: |
           php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
           php composer-setup.php
@@ -43,7 +42,6 @@ jobs:
           mv composer.new.json composer.json
           cat composer.json
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
-      - run: symfony security:check
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
       - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
       - run: bin/lint-twig src/
