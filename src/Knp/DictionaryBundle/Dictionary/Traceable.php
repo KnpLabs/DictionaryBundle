@@ -41,32 +41,28 @@ final class Traceable implements Dictionary
         return $this->dictionary->getKeys();
     }
 
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         $this->markAsUsed();
 
         return $this->dictionary->offsetExists($offset);
     }
 
-    /**
-     * @return
-     */
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         $this->markAsUsed();
 
         return $this->dictionary->offsetGet($offset);
     }
 
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->dictionary->offsetSet($offset, $value);
 
         $this->markAsUsed();
     }
 
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         $this->dictionary->offsetUnset($offset);
 
