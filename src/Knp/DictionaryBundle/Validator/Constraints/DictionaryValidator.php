@@ -12,17 +12,11 @@ final class DictionaryValidator extends ConstraintValidator
 {
     use DictionaryValidator\SymfonyCompatibilityTrait;
 
-    private Collection $dictionaries;
-
-    public function __construct(Collection $dictionaries)
+    public function __construct(private Collection $dictionaries)
     {
-        $this->dictionaries = $dictionaries;
     }
 
-    /**
-     * @param mixed $var
-     */
-    private function varToString($var): string
+    private function varToString(mixed $var): string
     {
         if (null === $var) {
             return 'null';
@@ -39,8 +33,7 @@ final class DictionaryValidator extends ConstraintValidator
         if (\is_float($var)) {
             return 0.0 === $var
                 ? '0.0'
-                : (string) $var
-            ;
+                : (string) $var;
         }
 
         if (\is_object($var) && method_exists($var, '__toString')) {

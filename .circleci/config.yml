@@ -24,9 +24,8 @@ jobs:
     steps:
       - checkout
       - run: |
-          echo 'deb [trusted=yes] https://repo.symfony.com/apt/ /' | tee /etc/apt/sources.list.d/symfony-cli.list
           apt-get update
-          apt-get -y install git zip jq symfony-cli
+          apt-get -y install git zip jq
       - run: |
           php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
           php composer-setup.php
@@ -43,26 +42,15 @@ jobs:
           mv composer.new.json composer.json
           cat composer.json
       - run: composer update << parameters.composer-options >> --ignore-platform-req=ext-intl
-      - run: symfony security:check
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
       - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
       - run: bin/lint-twig src/
-      - run: vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
 
 workflows:
   version: 2
   workflow:
     jobs:
-      - test:
-          name: php7.4
-          php: "7.4"
-          matrix:
-            parameters:
-              symfony:
-                - "5.4"
-              composer-options:
-                - "--prefer-stable --prefer-lowest"
-                - "--prefer-stable"
       - test:
           name: php8.0
           php: "8.0"
@@ -70,30 +58,32 @@ workflows:
             parameters:
               symfony:
                 - "5.4"
-                - "6.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
       - test:
           name: php8.1
           php: "8.1"
+          minimum-stability: 'dev' # Remove on Symfony 6.4 release
           matrix:
             parameters:
               symfony:
                 - "5.4"
-                - "6.0"
-                - "6.1"
+                - "6.2"
+                - "6.3"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
-    # - test:
-    #     name: php8.1-dev
-    #     php: "8.1"
-    #     minimum-stability: "dev"
-    #     matrix:
-    #       parameters:
-    #         symfony:
-    #           - "6.2"
-    #         composer-options:
-    #           - "--prefer-stable --prefer-lowest"
-    #           - "--prefer-stable"
+      - test:
+          name: php8.2
+          php: "8.2"
+          minimum-stability: 'dev' # Remove on Symfony 6.4 release
+          matrix:
+            parameters:
+              symfony:
+                - "5.4"
+                - "6.2"
+                - "6.3"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"

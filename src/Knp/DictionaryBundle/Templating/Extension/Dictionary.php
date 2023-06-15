@@ -11,14 +11,8 @@ use Twig\TwigFunction;
 
 final class Dictionary extends AbstractExtension
 {
-    /**
-     * @var Collection
-     */
-    private $dictionaries;
-
-    public function __construct(Collection $dictionaries)
+    public function __construct(private Collection $dictionaries)
     {
-        $this->dictionaries = $dictionaries;
     }
 
     /**

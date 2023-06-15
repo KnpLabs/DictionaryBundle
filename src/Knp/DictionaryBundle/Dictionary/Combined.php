@@ -40,7 +40,7 @@ final class Combined extends Wrapper
     private function merge(array $array1, array $array2): array
     {
         if ($array1 === array_values($array1) && $array2 === array_values($array2)) {
-            return array_merge($array1, $array2);
+            return [...$array1, ...$array2];
         }
 
         $data = [];

@@ -6,7 +6,6 @@ namespace Knp\DictionaryBundle\Dictionary;
 
 use Generator;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E
@@ -15,20 +14,11 @@ use ReturnTypeWillChange;
  */
 final class Simple implements Dictionary
 {
-    private string $name;
-
-    /**
-     * @var array<mixed, E>
-     */
-    private array $values = [];
-
     /**
      * @param array<mixed, E> $values
      */
-    public function __construct(string $name, array $values)
+    public function __construct(private string $name, private array $values)
     {
-        $this->name   = $name;
-        $this->values = $values;
     }
 
     public function getName(): string
@@ -46,30 +36,26 @@ final class Simple implements Dictionary
         return array_keys($this->values);
     }
 
-    public function offsetExists($offset): bool
+    public function offsetExists(mixed $offset): bool
     {
         return \array_key_exists($offset, $this->values);
     }
 
-    #[ReturnTypeWillChange]
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset): mixed
     {
         return $this->values[$offset];
     }
 
-    public function offsetSet($offset, $value): void
+    public function offsetSet(mixed $offset, mixed $value): void
     {
         $this->values[$offset] = $value;
     }
 
-    public function offsetUnset($offset): void
+    public function offsetUnset(mixed $offset): void
     {
         unset($this->values[$offset]);
     }
 
-    /**
-     * @return Generator<mixed>
-     */
     public function getIterator(): Generator
     {
         yield from $this->values;

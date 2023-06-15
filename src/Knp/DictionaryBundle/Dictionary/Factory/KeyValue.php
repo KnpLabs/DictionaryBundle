@@ -12,11 +12,8 @@ use Knp\DictionaryBundle\ValueTransformer;
 
 final class KeyValue implements Factory
 {
-    private ValueTransformer $transformer;
-
-    public function __construct(ValueTransformer $transformer)
+    public function __construct(private ValueTransformer $transformer)
     {
-        $this->transformer = $transformer;
     }
 
     /**

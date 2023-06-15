@@ -12,14 +12,8 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 
 final class Extended implements Factory
 {
-    private Dictionary\Factory $factory;
-
-    private Dictionary\Collection $dictionaries;
-
-    public function __construct(Factory $factory, Collection $dictionaries)
+    public function __construct(private Factory $factory, private Collection $dictionaries)
     {
-        $this->factory      = $factory;
-        $this->dictionaries = $dictionaries;
     }
 
     public function create(string $name, array $config): Dictionary
