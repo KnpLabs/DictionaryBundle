@@ -45,7 +45,7 @@ jobs:
       - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
       - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
       - run: bin/lint-twig src/
-      - run: vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
 
 workflows:
   version: 2
@@ -64,23 +64,26 @@ workflows:
       - test:
           name: php8.1
           php: "8.1"
-          minimum-stability: 'dev' # Remove on Symfony 6.2 release
+          minimum-stability: 'dev' # Remove on Symfony 6.4 release
           matrix:
             parameters:
               symfony:
                 - "5.4"
                 - "6.2"
+                - "6.3"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
-    # - test:
-    #     name: php8.2
-    #     php: "8.2-rc"
-    #     matrix:
-    #       parameters:
-    #         symfony:
-    #           - "5.4"
-    #           - "6.2"
-    #         composer-options:
-    #           - "--prefer-stable --prefer-lowest"
-    #           - "--prefer-stable"
+      - test:
+          name: php8.2
+          php: "8.2"
+          minimum-stability: 'dev' # Remove on Symfony 6.4 release
+          matrix:
+            parameters:
+              symfony:
+                - "5.4"
+                - "6.2"
+                - "6.3"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"
