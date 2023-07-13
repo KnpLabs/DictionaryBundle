@@ -34,7 +34,7 @@
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy": "^1.15",
         "phpstan/phpstan": "^1.9",
-        "rector/rector": "^0.14.7",
+        "rector/rector": "^0.17.5",
         "symfony/twig-bridge": "^5.4 || ^6.2@dev",
         "symfony/var-dumper": "^5.4 || ^6.2@dev",
         "webmozart/assert": "^1.11"
