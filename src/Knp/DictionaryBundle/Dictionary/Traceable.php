@@ -20,8 +20,7 @@ final class Traceable implements Dictionary
     public function __construct(
         private readonly Dictionary $dictionary,
         private readonly DictionaryDataCollector $collector
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

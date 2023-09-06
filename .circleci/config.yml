@@ -79,7 +79,7 @@ workflows:
                 - "--prefer-stable"
       - test:
           name: php8.3
-          php: "8.3.0RC1"
+          php: "8.3"
           minimum-stability: 'dev'
           matrix:
             parameters:

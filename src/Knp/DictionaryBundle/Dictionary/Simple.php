@@ -20,8 +20,7 @@ final class Simple implements Dictionary
     public function __construct(
         private readonly string $name,
         private array $values
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

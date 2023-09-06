@@ -12,9 +12,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class DictionaryValidator extends ConstraintValidator
 {
-    public function __construct(private Collection $dictionaries)
-    {
-    }
+    public function __construct(private Collection $dictionaries) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
