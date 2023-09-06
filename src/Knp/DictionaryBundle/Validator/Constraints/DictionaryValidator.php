@@ -6,13 +6,39 @@ namespace Knp\DictionaryBundle\Validator\Constraints;
 
 use Exception;
 use Knp\DictionaryBundle\Dictionary\Collection;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 final class DictionaryValidator extends ConstraintValidator
 {
-    use DictionaryValidator\SymfonyCompatibilityTrait;
+    public function __construct(private Collection $dictionaries)
+    {
+    }
 
-    public function __construct(private Collection $dictionaries) {}
+    public function validate(mixed $value, Constraint $constraint): void
+    {
+        if (!$constraint instanceof Dictionary) {
+            throw new UnexpectedTypeException($constraint, Dictionary::class);
+        }
+
+        if (null === $value || '' === $value) {
+            return;
+        }
+
+        $dictionary = $this->dictionaries[$constraint->name];
+        $values     = $dictionary->getKeys();
+
+        if (!\in_array($value, $values, true)) {
+            $this->context->addViolation(
+                $constraint->message,
+                [
+                    '{{ key }}'  => $this->varToString($value),
+                    '{{ keys }}' => implode(', ', array_map([$this, 'varToString'], $values)),
+                ]
+            );
+        }
+    }
 
     private function varToString(mixed $var): string
     {
