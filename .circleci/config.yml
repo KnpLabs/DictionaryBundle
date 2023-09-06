@@ -64,13 +64,15 @@ workflows:
       - test:
           name: php8.1
           php: "8.1"
-          minimum-stability: 'dev' # Remove on Symfony 6.4 release
+          minimum-stability: 'dev'
           matrix:
             parameters:
               symfony:
                 - "5.4"
                 - "6.2"
                 - "6.3"
+                - "6.4"
+                - "7.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
@@ -84,6 +86,23 @@ workflows:
                 - "5.4"
                 - "6.2"
                 - "6.3"
+                - "6.4"
+                - "7.0"
+              composer-options:
+                - "--prefer-stable --prefer-lowest"
+                - "--prefer-stable"
+      - test:
+          name: php8.3
+          php: "8.3.0RC1"
+          minimum-stability: 'dev'
+          matrix:
+            parameters:
+              symfony:
+                - "5.4"
+                - "6.2"
+                - "6.3"
+                - "6.4"
+                - "7.0"
               composer-options:
                 - "--prefer-stable --prefer-lowest"
                 - "--prefer-stable"
