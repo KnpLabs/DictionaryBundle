@@ -17,14 +17,14 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig
         ->phpVersion(
-            PhpVersion::PHP_80
+            PhpVersion::PHP_81
         )
     ;
 
     $rectorConfig
         ->sets(
             [
-                LevelSetList::UP_TO_PHP_80,
+                LevelSetList::UP_TO_PHP_81,
             ]
         )
     ;

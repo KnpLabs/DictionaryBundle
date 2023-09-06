@@ -11,8 +11,11 @@ use PhpSpec\ObjectBehavior;
 
 final class CombinedSpec extends ObjectBehavior
 {
-    function let(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
-    {
+    function let(
+        Dictionary $dictionary1,
+        Dictionary $dictionary2,
+        Dictionary $dictionary3
+    ) {
         $this->beConstructedWith(
             'combined_dictionary',
             $dictionary1,
@@ -31,8 +34,11 @@ final class CombinedSpec extends ObjectBehavior
         $this->shouldImplement(Dictionary::class);
     }
 
-    function it_access_to_value_like_an_array($dictionary1, $dictionary2, $dictionary3)
-    {
+    function it_access_to_value_like_an_array(
+        $dictionary1,
+        $dictionary2,
+        $dictionary3
+    ) {
         $dictionary1->getIterator()->willReturn(new ArrayIterator(['foo1' => 'foo10']));
 
         $dictionary2->getIterator()->willReturn(new ArrayIterator(['bar1' => 'bar10']));
@@ -44,8 +50,11 @@ final class CombinedSpec extends ObjectBehavior
         $this['baz1']->shouldBe('baz10');
     }
 
-    function it_getvalues_should_return_dictionaries_values($dictionary1, $dictionary2, $dictionary3)
-    {
+    function it_getvalues_should_return_dictionaries_values(
+        $dictionary1,
+        $dictionary2,
+        $dictionary3
+    ) {
         $dictionary1->getIterator()->willReturn(new ArrayIterator([
             'foo1' => 'foo10',
             'foo2' => 'foo20',
@@ -75,8 +84,11 @@ final class CombinedSpec extends ObjectBehavior
         ]);
     }
 
-    function it_can_iterate_over_dictionaries($dictionary1, $dictionary2, $dictionary3)
-    {
+    function it_can_iterate_over_dictionaries(
+        $dictionary1,
+        $dictionary2,
+        $dictionary3
+    ) {
         $dictionary1->getIterator()->willReturn(new ArrayIterator([
             'foo1' => 'foo10',
             'foo2' => 'foo20',
@@ -100,8 +112,11 @@ final class CombinedSpec extends ObjectBehavior
         ]);
     }
 
-    function it_sums_the_count_of_elements($dictionary1, $dictionary2, $dictionary3)
-    {
+    function it_sums_the_count_of_elements(
+        $dictionary1,
+        $dictionary2,
+        $dictionary3
+    ) {
         $dictionary1->getIterator()->willReturn(new ArrayIterator([
             'foo1' => 'foo10',
         ]));

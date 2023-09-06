@@ -11,7 +11,9 @@ use Psr\Container\ContainerInterface;
 
 final class Invokable implements Factory
 {
-    public function __construct(private ContainerInterface $container) {}
+    public function __construct(private readonly ContainerInterface $container)
+    {
+    }
 
     /**
      * {@inheritdoc}

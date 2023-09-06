@@ -34,7 +34,7 @@ final class DictionaryValidator extends ConstraintValidator
                 $constraint->message,
                 [
                     '{{ key }}'  => $this->varToString($value),
-                    '{{ keys }}' => implode(', ', array_map([$this, 'varToString'], $values)),
+                    '{{ keys }}' => implode(', ', array_map($this->varToString(...), $values)),
                 ]
             );
         }

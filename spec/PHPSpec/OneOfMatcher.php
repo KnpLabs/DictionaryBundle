@@ -35,8 +35,11 @@ final class OneOfMatcher extends BasicMatcher
      * @param mixed   $subject
      * @param mixed[] $arguments
      */
-    protected function getFailureException(string $name, $subject, array $arguments): FailureException
-    {
+    protected function getFailureException(
+        string $name,
+        $subject,
+        array $arguments
+    ): FailureException {
         if (1 === \count($arguments) && \is_array(current($arguments))) {
             $arguments = current($arguments);
         }
@@ -54,8 +57,11 @@ final class OneOfMatcher extends BasicMatcher
      * @param mixed   $subject
      * @param mixed[] $arguments
      */
-    protected function getNegativeFailureException(string $name, $subject, array $arguments): FailureException
-    {
+    protected function getNegativeFailureException(
+        string $name,
+        $subject,
+        array $arguments
+    ): FailureException {
         if (1 === \count($arguments) && \is_array(current($arguments))) {
             $arguments = current($arguments);
         }

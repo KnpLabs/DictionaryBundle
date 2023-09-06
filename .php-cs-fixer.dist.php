@@ -25,10 +25,17 @@ $config->setRules(
                 '=>' => 'align_single_space_minimal',
             ],
         ])
-        ->enable('global_namespace_import', ['import_classes' => true, 'import_constants' => false, 'import_functions' => false])
+        ->enable('global_namespace_import', [
+            'import_classes'   => true,
+            'import_constants' => false,
+            'import_functions' => false,
+        ])
         ->enable('final_class')
         ->enable('ordered_imports')
         ->enable('ordered_interfaces')
+        ->enable('PedroTroller/line_break_between_method_arguments', [
+            'max-length' => 80,
+        ])
         ->enable('phpdoc_line_span')
         ->disable('method_chaining_indentation')
         ->disable('no_break_comment')

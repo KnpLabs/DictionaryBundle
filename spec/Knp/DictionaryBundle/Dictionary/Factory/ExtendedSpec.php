@@ -33,8 +33,11 @@ final class ExtendedSpec extends ObjectBehavior
         $this->supports(['extends' => 'my_dictionary'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary($factory, Dictionary $initialDictionary, Dictionary $extendsDictionary)
-    {
+    function it_creates_a_dictionary(
+        $factory,
+        Dictionary $initialDictionary,
+        Dictionary $extendsDictionary
+    ) {
         $initialDictionary->getName()->willReturn('initial_dictionary');
         $initialDictionary->getIterator()->willReturn(new ArrayIterator(['foo1', 'foo2']));
 

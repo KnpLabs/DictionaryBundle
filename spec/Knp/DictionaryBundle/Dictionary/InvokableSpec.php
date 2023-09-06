@@ -12,10 +12,7 @@ use PhpSpec\ObjectBehavior;
 
 final class InvokableSpec extends ObjectBehavior
 {
-    /**
-     * @var bool
-     */
-    private $executed;
+    private bool $executed;
 
     function let()
     {

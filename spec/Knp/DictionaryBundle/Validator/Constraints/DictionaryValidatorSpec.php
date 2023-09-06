@@ -16,8 +16,10 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class DictionaryValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context, Dictionary $dictionary)
-    {
+    function let(
+        ExecutionContextInterface $context,
+        Dictionary $dictionary
+    ) {
         $dictionary->getName()->willReturn('dico');
         $dictionary->getKeys()->willReturn(['the_key']);
 
@@ -59,8 +61,10 @@ final class DictionaryValidatorSpec extends ObjectBehavior
         $this->validate('the_unexisting_key', $constraint);
     }
 
-    function it_transforms_keys_in_string_representation($dictionary, $context)
-    {
+    function it_transforms_keys_in_string_representation(
+        $dictionary,
+        $context
+    ) {
         $dictionary->getKeys()->willReturn(['the_key', true, 12, 3.14, 0.0, null]);
 
         $constraint = new Constraint(['name' => 'dico']);
