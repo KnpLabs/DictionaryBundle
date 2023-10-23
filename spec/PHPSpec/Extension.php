@@ -16,7 +16,7 @@ final class Extension implements PhpSpec\Extension
     {
         $container->define(
             OneOfMatcher::class,
-            fn (): OneOfMatcher => new OneOfMatcher(),
+            static fn (): OneOfMatcher => new OneOfMatcher(),
             ['matchers']
         );
     }

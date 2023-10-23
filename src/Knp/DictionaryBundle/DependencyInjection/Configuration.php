@@ -26,7 +26,7 @@ final class Configuration implements ConfigurationInterface
                     ->prototype('array')
                         ->beforeNormalization()
                             ->always()
-                            ->then(function ($values) {
+                            ->then(static function ($values) {
                                 if (false === \array_key_exists('type', $values)) {
                                     if (false === \array_key_exists('content', $values)) {
                                         return ['type' => 'value', 'content' => $values];

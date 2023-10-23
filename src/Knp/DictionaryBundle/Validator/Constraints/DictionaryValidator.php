@@ -12,9 +12,7 @@ final class DictionaryValidator extends ConstraintValidator
 {
     use DictionaryValidator\SymfonyCompatibilityTrait;
 
-    public function __construct(private Collection $dictionaries)
-    {
-    }
+    public function __construct(private Collection $dictionaries) {}
 
     private function varToString(mixed $var): string
     {

@@ -29,8 +29,8 @@
     "require-dev": {
         "fakerphp/faker": "^1.20",
         "friends-of-phpspec/phpspec-code-coverage": "^6.1",
-        "friendsofphp/php-cs-fixer": "^3.13",
-        "pedrotroller/php-cs-custom-fixer": "^2.28",
+        "friendsofphp/php-cs-fixer": "^3.35",
+        "pedrotroller/php-cs-custom-fixer": "^2.33",
         "phpspec/phpspec": "^7.2",
         "phpspec/prophecy": "^1.15",
         "phpstan/phpstan": "^1.9",

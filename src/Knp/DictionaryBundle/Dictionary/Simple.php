@@ -17,9 +17,7 @@ final class Simple implements Dictionary
     /**
      * @param array<mixed, E> $values
      */
-    public function __construct(private string $name, private array $values)
-    {
-    }
+    public function __construct(private string $name, private array $values) {}
 
     public function getName(): string
     {
