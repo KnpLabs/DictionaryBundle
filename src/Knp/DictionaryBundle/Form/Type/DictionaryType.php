@@ -12,15 +12,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class DictionaryType extends AbstractType
 {
-    public function __construct(private Collection $dictionaries)
-    {
-    }
+    public function __construct(private Collection $dictionaries) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $dictionaries = $this->dictionaries;
 
-        $choices = function (Options $options) use ($dictionaries): array {
+        $choices = static function (Options $options) use ($dictionaries): array {
             $name    = $options['name'];
             $choices = $dictionaries[$name]->getValues();
 

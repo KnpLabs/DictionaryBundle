@@ -11,9 +11,7 @@ use Twig\TwigFunction;
 
 final class Dictionary extends AbstractExtension
 {
-    public function __construct(private Collection $dictionaries)
-    {
-    }
+    public function __construct(private Collection $dictionaries) {}
 
     /**
      * @return TwigFunction[]

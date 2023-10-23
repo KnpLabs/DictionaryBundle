@@ -10,7 +10,5 @@ final class SupportedVersion
     public const v6_2 = '6.2';
     public const v6_3 = '6.3';
 
-    private function __construct()
-    {
-    }
+    private function __construct() {}
 }

@@ -12,9 +12,7 @@ use Throwable;
 
 final class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, Throwable $exception = null): void
-    {
-    }
+    public function collect(Request $request, Response $response, Throwable $exception = null): void {}
 
     /**
      * @param array<mixed> $keys
@@ -23,7 +21,7 @@ final class DictionaryDataCollector extends DataCollector
     public function addDictionary(string $name, array $keys, array $values): void
     {
         $this->data[$name] = array_map(
-            fn ($key, $value): array => ['key' => $key, 'value' => $value],
+            static fn ($key, $value): array => ['key' => $key, 'value' => $value],
             $keys,
             $values
         );
@@ -39,9 +37,7 @@ final class DictionaryDataCollector extends DataCollector
         }
     }
 
-    public function reset(): void
-    {
-    }
+    public function reset(): void {}
 
     public function getName(): string
     {

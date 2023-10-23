@@ -16,9 +16,7 @@ abstract class Wrapper implements Dictionary
     /**
      * @param Dictionary<E> $wrapped
      */
-    public function __construct(private Dictionary $wrapped)
-    {
-    }
+    public function __construct(private Dictionary $wrapped) {}
 
     public function getName(): string
     {
