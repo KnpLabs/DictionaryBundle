@@ -7,8 +7,8 @@ Are you often tired to repeat static choices like gender or civility in your app
 
 ## Requirements
 
-- PHP >= 7.4
-- Symfony 5.4 or >= 6.0
+- PHP >= 8.0
+- Symfony 5.4 or 6.*
 
 ## Installation
 
@@ -16,12 +16,12 @@ Run the following command:
 ```bash
 composer require knplabs/dictionary-bundle
 ```
-Register the bundle in ``app/AppKernel.php``
+Register the bundle in ``config/bundles.php``
 
 ```php
 $bundles = array(
     // ...
-    new Knp\DictionaryBundle\KnpDictionaryBundle(),
+    Knp\DictionaryBundle\KnpDictionaryBundle::class => ['all' => true],
 );
 ```
 
