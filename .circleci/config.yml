@@ -32,7 +32,7 @@ jobs:
           php -r "unlink('composer-setup.php');"
           mv composer.phar /usr/local/bin/composer
       - run: |
-          curl -s https://repo.packagist.org/p2/symfony/symfony.json | jq '.packages."symfony/symfony" | map(select(.version_normalized | startswith("<< parameters.symfony >>"))) | first.replace | to_entries | map({key: .key, value: "< << parameters.symfony >> || > << parameters.symfony >>.9999"}) | from_entries' > conflict.json
+          curl -s https://raw.githubusercontent.com/symfony/symfony/<< parameters.symfony >>/composer.json | jq '.replace | to_entries | map({key: .key, value: ("< " + "<< parameters.symfony >>" + ".0 || >= " + ("<< parameters.symfony >>" | (((.|tonumber + 0.1) * 10)|round / 10)|tostring) + ".0")}) | from_entries' > conflict.json
           jq -s '.[0] + {conflict: .[1]}' composer.json conflict.json > composer.new.json
           mv composer.new.json composer.json
           rm conflict.json
