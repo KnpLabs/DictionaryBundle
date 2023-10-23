@@ -27,17 +27,17 @@
         "twig/twig": "^2.15.3 || ^3.4.3"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.20",
-        "friends-of-phpspec/phpspec-code-coverage": "^6.1",
-        "friendsofphp/php-cs-fixer": "^3.35",
-        "pedrotroller/php-cs-custom-fixer": "^2.33",
-        "phpspec/phpspec": "^7.2",
-        "phpspec/prophecy": "^1.15",
-        "phpstan/phpstan": "^1.9",
-        "rector/rector": "^0.18.1",
+        "fakerphp/faker": "1.23.0",
+        "friends-of-phpspec/phpspec-code-coverage": "6.3.0",
+        "friendsofphp/php-cs-fixer": "3.35.1",
+        "pedrotroller/php-cs-custom-fixer": "2.33.0",
+        "phpspec/phpspec": "7.4.0",
+        "phpspec/prophecy": "1.17.0",
+        "phpstan/phpstan": "1.10.39",
+        "rector/rector": "0.18.5",
         "symfony/twig-bridge": "^5.4 || ^6.2@dev",
         "symfony/var-dumper": "^5.4 || ^6.2@dev",
-        "webmozart/assert": "^1.11"
+        "webmozart/assert": "1.11.0"
     },
     "minimum-stability": "stable",
     "autoload": {
