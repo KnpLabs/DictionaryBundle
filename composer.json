@@ -29,7 +29,7 @@
     "require-dev": {
         "fakerphp/faker": "1.23.0",
         "friends-of-phpspec/phpspec-code-coverage": "6.3.0",
-        "friendsofphp/php-cs-fixer": "3.35.1",
+        "friendsofphp/php-cs-fixer": "3.37.1",
         "pedrotroller/php-cs-custom-fixer": "2.33.0",
         "phpspec/phpspec": "7.4.0",
         "phpspec/prophecy": "1.17.0",
