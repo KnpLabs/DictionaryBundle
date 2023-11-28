@@ -19,7 +19,7 @@ final class Dictionary extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('dictionary', [$this->dictionaries, 'offsetGet']),
+            new TwigFunction('dictionary', $this->dictionaries->offsetGet(...)),
         ];
     }
 

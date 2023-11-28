@@ -17,7 +17,10 @@ final class Traceable implements Dictionary
     /**
      * @param Dictionary<E> $dictionary
      */
-    public function __construct(private Dictionary $dictionary, private DictionaryDataCollector $collector) {}
+    public function __construct(
+        private readonly Dictionary $dictionary,
+        private readonly DictionaryDataCollector $collector
+    ) {}
 
     public function getName(): string
     {
