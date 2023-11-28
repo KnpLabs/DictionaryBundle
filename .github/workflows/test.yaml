@@ -1,0 +1,46 @@
+---
+on: push
+
+jobs:
+  test:
+    name: "php${{ matrix.php }} symfony${{ matrix.symfony }} ${{matrix.minimumStability}} ${{ matrix.composerOptions }}"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php:
+          - '8.1'
+          - '8.2'
+          - '8.3'
+        symfony:
+          - '5.4'
+          - '6.2'
+          - '6.3'
+        # - '6.4'
+        # - '7.0'
+        minimumStability:
+          - 'stable'
+        composerOptions:
+          - '--prefer-stable --prefer-lowest'
+          - '--prefer-stable'
+    steps:
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: intl
+          tools: composer
+      - uses: actions/checkout@v4
+      - run: |
+          curl -s https://raw.githubusercontent.com/symfony/symfony/${{ matrix.symfony }}/composer.json | jq '.replace | to_entries | map({key: .key, value: ("< " + "${{ matrix.symfony }}" + ".0 || >= " + ("${{ matrix.symfony }}" | (((.|tonumber + 0.1) * 10)|round / 10)|tostring) + ".0")}) | from_entries' > conflict.json
+          jq -s '.[0] + {conflict: .[1]}' composer.json conflict.json > composer.new.json
+          mv composer.new.json composer.json
+          rm conflict.json
+          cat composer.json
+      - run: |
+          jq -s '.[0] + {"minimum-stability": "${{ matrix.minimumStability }}"}' composer.json > composer.new.json
+          mv composer.new.json composer.json
+          cat composer.json
+      - run: composer update ${{ matrix.composerOptions }}
+      - run: vendor/bin/phpstan analyse --no-progress --memory-limit=-1
+      - run: vendor/bin/phpspec run -v --config=phpspec.no-coverage.yml
+      - run: bin/lint-twig src/
+      - run: PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --diff --dry-run -vvv
