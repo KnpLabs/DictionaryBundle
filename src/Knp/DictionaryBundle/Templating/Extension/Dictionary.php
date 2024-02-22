@@ -19,7 +19,10 @@ final class Dictionary extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('dictionary', [$this->dictionaries, 'offsetGet']),
+            new TwigFunction(
+                'dictionary',
+                fn (string $name) => $this->dictionaries[$name],
+            ),
         ];
     }
 
@@ -29,7 +32,10 @@ final class Dictionary extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('dictionary', fn ($key, string $name) => $this->dictionaries[$name][$key]),
+            new TwigFilter(
+                'dictionary',
+                fn ($key, string $name) => $this->dictionaries[$name][$key] ?? null,
+            ),
         ];
     }
 }

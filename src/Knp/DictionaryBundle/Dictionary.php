@@ -9,37 +9,44 @@ use Countable;
 use IteratorAggregate;
 
 /**
- * @template E
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @extends IteratorAggregate<mixed, E>
- * @extends ArrayAccess<mixed, E>
+ * @extends IteratorAggregate<TKey, TValue>
+ * @extends ArrayAccess<TKey, TValue>
  */
 interface Dictionary extends ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * @var string
+     *
+     * @deprecated
      */
     public const VALUE = 'value';
 
     /**
      * @var string
+     *
+     * @deprecated
      */
     public const VALUE_AS_KEY = 'value_as_key';
 
     /**
      * @var string
+     *
+     * @deprecated
      */
     public const KEY_VALUE = 'key_value';
 
     public function getName(): string;
 
     /**
-     * @return mixed[]
-     */
-    public function getValues(): array;
-
-    /**
-     * @return mixed[]
+     * @return array<int, TKey>
      */
     public function getKeys(): array;
+
+    /**
+     * @return array<int, TValue>
+     */
+    public function getValues(): array;
 }

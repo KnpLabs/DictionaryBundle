@@ -1,0 +1,11 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Knp\\\\DictionaryBundle\\\\Dictionary\\\\Factory\\\\Value\\:\\:create\\(\\) should return Knp\\\\DictionaryBundle\\\\Dictionary\\<int\\|string, mixed\\> but returns Knp\\\\DictionaryBundle\\\\Dictionary\\\\Simple\\<int, mixed\\>\\.$#"
+			count: 1
+			path: src/Knp/DictionaryBundle/Dictionary/Factory/Value.php
+
+		-
+			message: "#^Parameter \\#1 \\$array of function array_flip expects array\\<int\\|string\\>, array\\<int, mixed\\> given\\.$#"
+			count: 1
+			path: src/Knp/DictionaryBundle/Form/Type/DictionaryType.php

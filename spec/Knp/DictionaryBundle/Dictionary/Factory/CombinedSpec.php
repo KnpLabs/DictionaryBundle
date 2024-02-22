@@ -33,8 +33,11 @@ final class CombinedSpec extends ObjectBehavior
         $this->supports(['type' => 'combined'])->shouldReturn(true);
     }
 
-    function it_creates_a_dictionary(Dictionary $dictionary1, Dictionary $dictionary2, Dictionary $dictionary3)
-    {
+    function it_creates_a_dictionary(
+        Dictionary $dictionary1,
+        Dictionary $dictionary2,
+        Dictionary $dictionary3
+    ) {
         $dictionary1->getIterator()->willReturn(new ArrayIterator(['foo1' => 'foo10', 'foo2' => 'foo20']));
         $dictionary1->getName()->willReturn('dictionary1');
 

@@ -7,14 +7,15 @@ namespace Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary;
 
 /**
- * @template E
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @extends Wrapper<E>
+ * @extends Wrapper<TKey, TValue>
  */
 final class Combined extends Wrapper
 {
     /**
-     * @param Dictionary<E> ...$dictionaries
+     * @param Dictionary<TKey, TValue> ...$dictionaries
      */
     public function __construct(string $name, Dictionary ...$dictionaries)
     {
@@ -32,10 +33,10 @@ final class Combined extends Wrapper
     }
 
     /**
-     * @param E[] $array1
-     * @param E[] $array2
+     * @param array<TKey, TValue> $array1
+     * @param array<TKey, TValue> $array2
      *
-     * @return E[]
+     * @return array<TKey, TValue>
      */
     private function merge(array $array1, array $array2): array
     {

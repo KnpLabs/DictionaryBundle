@@ -35,6 +35,9 @@ final class Constant implements ValueTransformer
         return \array_key_exists($matches['constant'], $constants);
     }
 
+    /**
+     * @param string $value
+     */
     public function transform(mixed $value)
     {
         if (null === $matches = $this->extract($value)) {

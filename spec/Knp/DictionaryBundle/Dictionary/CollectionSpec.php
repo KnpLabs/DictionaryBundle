@@ -14,10 +14,10 @@ use RuntimeException;
 
 final class CollectionSpec extends ObjectBehavior
 {
-    function let(Dictionary $dictionary, Dictionary $dictionary2)
+    function let(Dictionary $dictionary1, Dictionary $dictionary2)
     {
-        $this->beConstructedWith($dictionary, $dictionary2);
-        $dictionary->getName()->willReturn('foo');
+        $this->beConstructedWith($dictionary1, $dictionary2);
+        $dictionary1->getName()->willReturn('foo');
         $dictionary2->getName()->willReturn('dictionary');
     }
 
@@ -49,13 +49,13 @@ final class CollectionSpec extends ObjectBehavior
 
     function it_counts_entries()
     {
-        $this->count()->shouldReturn(2);
+        $this->shouldHaveCount(2);
     }
 
-    function it_is_a_list_ob_dictionaries($dictionary, $dictionary2)
+    function it_is_a_list_of_dictionaries($dictionary1, $dictionary2)
     {
-        $this->getIterator()->getArrayCopy()->shouldReturn([
-            'foo'        => $dictionary,
+        $this->shouldYieldLike([
+            'foo'        => $dictionary1,
             'dictionary' => $dictionary2,
         ]);
     }

@@ -18,7 +18,7 @@ final class DictionaryRegistrationPass implements CompilerPassInterface
 
     public function process(ContainerBuilder $container): void
     {
-        foreach ($container->findTaggedServiceIds(self::TAG_DICTIONARY) as $id => $tags) {
+        foreach (array_keys($container->findTaggedServiceIds(self::TAG_DICTIONARY)) as $id) {
             $container
                 ->getDefinition(Collection::class)
                 ->addMethodCall('add', [new Reference($id)])

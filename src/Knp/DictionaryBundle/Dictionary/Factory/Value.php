@@ -17,6 +17,8 @@ final class Value implements Factory
     /**
      * {@inheritdoc}
      *
+     * @param array{content?: array<mixed>} $config
+     *
      * @throw InvalidArgumentException Not able to create a dictionary with the given name
      */
     public function create(string $name, array $config): Dictionary
@@ -40,6 +42,6 @@ final class Value implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'value' === $config['type'] : false;
+        return isset($config['type']) && 'value' === $config['type'];
     }
 }

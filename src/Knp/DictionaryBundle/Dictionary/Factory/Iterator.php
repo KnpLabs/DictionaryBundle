@@ -17,6 +17,8 @@ final class Iterator implements Factory
     /**
      * {@inheritdoc}
      *
+     * @param array{service?: string} $config
+     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -42,6 +44,6 @@ final class Iterator implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'iterator' === $config['type'] : false;
+        return isset($config['type']) && 'iterator' === $config['type'];
     }
 }

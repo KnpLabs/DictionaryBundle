@@ -18,7 +18,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
     {
         $configuration = $container->getParameter('knp_dictionary.configuration');
 
-        if (false === \is_array($configuration)) {
+        if (!\is_array($configuration)) {
             throw new Exception('The configuration "knp_dictionary.dictionaries" should be an array.');
         }
 

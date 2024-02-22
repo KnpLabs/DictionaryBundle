@@ -5,16 +5,18 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use Knp\DictionaryBundle\Dictionary;
+use Traversable;
 
 /**
- * @template E
+ * @template TKey of (int|string)
+ * @template TValue
  *
- * @implements Dictionary<E>
+ * @implements Dictionary<TKey, TValue>
  */
 abstract class Wrapper implements Dictionary
 {
     /**
-     * @param Dictionary<E> $wrapped
+     * @param Dictionary<TKey, TValue> $wrapped
      */
     public function __construct(private Dictionary $wrapped) {}
 
@@ -58,11 +60,8 @@ abstract class Wrapper implements Dictionary
         return $this->wrapped->count();
     }
 
-    /**
-     * @return Dictionary<E>
-     */
-    public function getIterator(): Dictionary
+    public function getIterator(): Traversable
     {
-        return $this->wrapped;
+        yield from $this->wrapped;
     }
 }

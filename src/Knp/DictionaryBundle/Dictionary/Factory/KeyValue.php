@@ -17,6 +17,8 @@ final class KeyValue implements Factory
     /**
      * {@inheritdoc}
      *
+     * @param array{content?: array<mixed>} $config
+     *
      * @throw InvalidArgumentException if there is some problem with the config.
      */
     public function create(string $name, array $config): Dictionary
@@ -42,6 +44,6 @@ final class KeyValue implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'key_value' === $config['type'] : false;
+        return isset($config['type']) && 'key_value' === $config['type'];
     }
 }
