@@ -13,15 +13,29 @@ jobs:
           - '8.3'
         symfony:
           - '5.4'
-          - '6.2'
-          - '6.3'
-        # - '6.4'
-        # - '7.0'
+          - '6.4'
         minimumStability:
           - 'stable'
         composerOptions:
           - '--prefer-stable --prefer-lowest'
           - '--prefer-stable'
+        include:
+          - symfony: '7.0'
+            php: '8.2'
+            minimumStability: 'stable'
+            composerOptions: '--prefer-stable --prefer-lowest'
+          - symfony: '7.0'
+            php: '8.2'
+            minimumStability: 'stable'
+            composerOptions: '--prefer-stable'
+          - symfony: '7.0'
+            php: '8.3'
+            minimumStability: 'stable'
+            composerOptions: '--prefer-stable --prefer-lowest'
+          - symfony: '7.0'
+            php: '8.3'
+            minimumStability: 'stable'
+            composerOptions: '--prefer-stable'
     steps:
       - uses: shivammathur/setup-php@v2
         with:
