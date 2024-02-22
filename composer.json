@@ -31,7 +31,7 @@
         "friends-of-phpspec/phpspec-code-coverage": "6.3.0",
         "friendsofphp/php-cs-fixer": "3.40.0",
         "pedrotroller/php-cs-custom-fixer": "2.33.0",
-        "phpspec/phpspec": "7.4.0",
+        "phpspec/phpspec": "7.5.0",
         "phpspec/prophecy": "1.18.0",
         "phpstan/phpstan": "1.10.59",
         "rector/rector": "1.0.1",
