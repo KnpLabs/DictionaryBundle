@@ -3,29 +3,10 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
-use Rector\Core\ValueObject\PhpVersion;
-use Rector\Set\ValueObject\LevelSetList;
+use Rector\ValueObject\PhpVersion;
 
-return static function (RectorConfig $rectorConfig): void {
-    $rectorConfig
-        ->paths(
-            [
-                __DIR__.'/src',
-            ]
-        )
-    ;
-
-    $rectorConfig
-        ->phpVersion(
-            PhpVersion::PHP_80
-        )
-    ;
-
-    $rectorConfig
-        ->sets(
-            [
-                LevelSetList::UP_TO_PHP_80,
-            ]
-        )
-    ;
-};
+return RectorConfig::configure()
+    ->withPhpVersion(PhpVersion::PHP_80)
+    ->withPhpSets(php80: true)
+    ->withPaths([__DIR__.'/src'])
+;
