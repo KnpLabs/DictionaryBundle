@@ -2,18 +2,23 @@
 
 declare(strict_types=1);
 
-$finder = PhpCsFixer\Finder::create()
+use PedroTroller\CS\Fixer\Fixers;
+use PedroTroller\CS\Fixer\RuleSetFactory;
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$finder = Finder::create()
     ->in(__DIR__)
     ->append([__FILE__, __DIR__.'/.symfony_checker'])
 ;
 
-$config = new PhpCsFixer\Config();
+$config = new Config();
 $config->setFinder($finder);
-$config->registerCustomFixers(new PedroTroller\CS\Fixer\Fixers());
+$config->registerCustomFixers(new Fixers());
 $config->setRiskyAllowed(true);
 $config->setUsingCache(true);
 $config->setRules(
-    PedroTroller\CS\Fixer\RuleSetFactory::create()
+    RuleSetFactory::create()
         ->phpCsFixer(true)
         ->php(8.0, true)
         ->pedrotroller(true)
