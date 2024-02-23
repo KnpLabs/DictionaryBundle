@@ -8,7 +8,7 @@ Are you often tired to repeat static choices like gender or civility in your app
 ## Requirements
 
 - PHP >= 8.0
-- Symfony 5.4 or 6.*
+- Symfony 5.4, 6.4 or 7.*
 
 ## Installation
 
