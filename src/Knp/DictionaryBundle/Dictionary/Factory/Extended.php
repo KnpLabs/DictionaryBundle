@@ -12,7 +12,7 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 
 final class Extended implements Factory
 {
-    public function __construct(private Factory $factory, private Collection $dictionaries) {}
+    public function __construct(private readonly Factory $factory, private Collection $dictionaries) {}
 
     public function create(string $name, array $config): Dictionary
     {

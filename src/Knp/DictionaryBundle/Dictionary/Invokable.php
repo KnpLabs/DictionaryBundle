@@ -31,8 +31,11 @@ final class Invokable implements Dictionary
     /**
      * @param mixed[] $callableArgs
      */
-    public function __construct(private string $name, callable $callable, private array $callableArgs = [])
-    {
+    public function __construct(
+        private readonly string $name,
+        callable $callable,
+        private readonly array $callableArgs = []
+    ) {
         $this->callable = $callable;
     }
 
