@@ -12,7 +12,7 @@ use PhpSpec\ObjectBehavior;
 final class DictionarySpec extends ObjectBehavior
 {
     /**
-     * @var Dictionary\Collection
+     * @var Collection
      */
     private $dictionaries;
 
