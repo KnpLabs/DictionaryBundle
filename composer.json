@@ -33,7 +33,7 @@
         "pedrotroller/php-cs-custom-fixer": "2.33.0",
         "phpspec/phpspec": "7.5.0",
         "phpspec/prophecy": "1.18.0",
-        "phpstan/phpstan": "1.10.59",
+        "phpstan/phpstan": "1.10.62",
         "rector/rector": "1.0.1",
         "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0@dev",
         "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0@dev",
