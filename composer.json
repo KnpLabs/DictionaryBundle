@@ -32,7 +32,7 @@
         "friendsofphp/php-cs-fixer": "3.50.0",
         "pedrotroller/php-cs-custom-fixer": "2.33.0",
         "phpspec/phpspec": "7.5.0",
-        "phpspec/prophecy": "1.18.0",
+        "phpspec/prophecy": "1.19.0",
         "phpstan/phpstan": "1.10.59",
         "rector/rector": "1.0.4",
         "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0@dev",
