@@ -11,7 +11,7 @@ final class DictionaryNotFoundException extends Exception
     /**
      * @param string[] $knowns
      */
-    public function __construct(string $dictionaryName, array $knowns = [], Exception $previous = null)
+    public function __construct(string $dictionaryName, array $knowns = [], ?Exception $previous = null)
     {
         $message = sprintf('The dictionary "%s" has not been found in the registry.', $dictionaryName);
 
