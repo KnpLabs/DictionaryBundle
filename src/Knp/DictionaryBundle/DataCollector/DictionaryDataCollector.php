@@ -12,7 +12,7 @@ use Throwable;
 
 final class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, Throwable $exception = null): void {}
+    public function collect(Request $request, Response $response, ?Throwable $exception = null): void {}
 
     /**
      * @param array<mixed> $keys
