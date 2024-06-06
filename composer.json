@@ -18,12 +18,12 @@
     ],
     "require": {
         "php": ">=8.1",
-        "symfony/config": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/form": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/http-foundation": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/validator": "^5.4 || ^6.4 || ^7.0@dev",
+        "symfony/config": "^5.4 || ^6.4 || ^7.0",
+        "symfony/dependency-injection": "^5.4 || ^6.4 || ^7.0",
+        "symfony/form": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-foundation": "^5.4 || ^6.4 || ^7.0",
+        "symfony/http-kernel": "^5.4 || ^6.4 || ^7.0",
+        "symfony/validator": "^5.4 || ^6.4 || ^7.0",
         "twig/twig": "^2.15.3 || ^3.4.3"
     },
     "require-dev": {
@@ -35,8 +35,8 @@
         "phpspec/prophecy": "1.19.0",
         "phpstan/phpstan": "1.11.2",
         "rector/rector": "1.1.0",
-        "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0@dev",
-        "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0@dev",
+        "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0",
+        "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0",
         "webmozart/assert": "1.11.0"
     },
     "minimum-stability": "stable",

@@ -8,32 +8,25 @@ jobs:
     strategy:
       matrix:
         php:
-          - '8.1'
           - '8.2'
           - '8.3'
         symfony:
           - '5.4'
           - '6.4'
+          - '7.0'
+          - '7.1'
         minimumStability:
           - 'stable'
         composerOptions:
           - '--prefer-stable --prefer-lowest'
           - '--prefer-stable'
         include:
-          - symfony: '7.0'
-            php: '8.2'
+          - symfony: '5.4'
+            php: '8.1'
             minimumStability: 'stable'
             composerOptions: '--prefer-stable --prefer-lowest'
-          - symfony: '7.0'
-            php: '8.2'
-            minimumStability: 'stable'
-            composerOptions: '--prefer-stable'
-          - symfony: '7.0'
-            php: '8.3'
-            minimumStability: 'stable'
-            composerOptions: '--prefer-stable --prefer-lowest'
-          - symfony: '7.0'
-            php: '8.3'
+          - symfony: '5.4'
+            php: '8.1'
             minimumStability: 'stable'
             composerOptions: '--prefer-stable'
     steps:
