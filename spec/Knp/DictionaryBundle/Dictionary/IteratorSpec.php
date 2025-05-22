@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Exception;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Iterator;
 use PhpSpec\ObjectBehavior;
@@ -115,6 +114,6 @@ final class IteratorSpec extends ObjectBehavior
             return;
         }
 
-        throw new Exception('Executed twice.');
+        throw new \Exception('Executed twice.');
     }
 }

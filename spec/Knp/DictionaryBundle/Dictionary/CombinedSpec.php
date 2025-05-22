@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use ArrayIterator;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Combined;
 use PhpSpec\ObjectBehavior;
@@ -33,11 +32,11 @@ final class CombinedSpec extends ObjectBehavior
 
     function it_access_to_value_like_an_array($dictionary1, $dictionary2, $dictionary3)
     {
-        $dictionary1->getIterator()->willReturn(new ArrayIterator(['foo1' => 'foo10']));
+        $dictionary1->getIterator()->willReturn(new \ArrayIterator(['foo1' => 'foo10']));
 
-        $dictionary2->getIterator()->willReturn(new ArrayIterator(['bar1' => 'bar10']));
+        $dictionary2->getIterator()->willReturn(new \ArrayIterator(['bar1' => 'bar10']));
 
-        $dictionary3->getIterator()->willReturn(new ArrayIterator(['baz1' => 'baz10']));
+        $dictionary3->getIterator()->willReturn(new \ArrayIterator(['baz1' => 'baz10']));
 
         $this['foo1']->shouldBe('foo10');
         $this['bar1']->shouldBe('bar10');
@@ -46,17 +45,17 @@ final class CombinedSpec extends ObjectBehavior
 
     function it_getvalues_should_return_dictionaries_values($dictionary1, $dictionary2, $dictionary3)
     {
-        $dictionary1->getIterator()->willReturn(new ArrayIterator([
+        $dictionary1->getIterator()->willReturn(new \ArrayIterator([
             'foo1' => 'foo10',
             'foo2' => 'foo20',
         ]));
 
-        $dictionary2->getIterator()->willReturn(new ArrayIterator([
+        $dictionary2->getIterator()->willReturn(new \ArrayIterator([
             'bar1' => 'bar10',
             'bar2' => 'bar20',
         ]));
 
-        $dictionary3->getIterator()->willReturn(new ArrayIterator([
+        $dictionary3->getIterator()->willReturn(new \ArrayIterator([
             'foo1' => 'baz10',
             'bar2' => 'baz20',
         ]));
@@ -77,17 +76,17 @@ final class CombinedSpec extends ObjectBehavior
 
     function it_can_iterate_over_dictionaries($dictionary1, $dictionary2, $dictionary3)
     {
-        $dictionary1->getIterator()->willReturn(new ArrayIterator([
+        $dictionary1->getIterator()->willReturn(new \ArrayIterator([
             'foo1' => 'foo10',
             'foo2' => 'foo20',
         ]));
 
-        $dictionary2->getIterator()->willReturn(new ArrayIterator([
+        $dictionary2->getIterator()->willReturn(new \ArrayIterator([
             'bar1' => 'bar10',
             'bar2' => 'bar20',
         ]));
 
-        $dictionary3->getIterator()->willReturn(new ArrayIterator([
+        $dictionary3->getIterator()->willReturn(new \ArrayIterator([
             'foo2' => 'baz20',
             'bar2' => 'baz20',
         ]));
@@ -102,16 +101,16 @@ final class CombinedSpec extends ObjectBehavior
 
     function it_sums_the_count_of_elements($dictionary1, $dictionary2, $dictionary3)
     {
-        $dictionary1->getIterator()->willReturn(new ArrayIterator([
+        $dictionary1->getIterator()->willReturn(new \ArrayIterator([
             'foo1' => 'foo10',
         ]));
 
-        $dictionary2->getIterator()->willReturn(new ArrayIterator([
+        $dictionary2->getIterator()->willReturn(new \ArrayIterator([
             'bar1' => 'bar10',
             'bar2' => 'bar20',
         ]));
 
-        $dictionary3->getIterator()->willReturn(new ArrayIterator([
+        $dictionary3->getIterator()->willReturn(new \ArrayIterator([
             'baz1' => 'baz10',
             'baz2' => 'baz20',
             'baz3' => 'baz30',

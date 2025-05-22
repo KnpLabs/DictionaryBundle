@@ -4,15 +4,13 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DataCollector;
 
-use Generator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use Throwable;
 
 final class DictionaryDataCollector extends DataCollector
 {
-    public function collect(Request $request, Response $response, ?Throwable $exception = null): void {}
+    public function collect(Request $request, Response $response, ?\Throwable $throwable = null): void {}
 
     /**
      * @param array<mixed> $keys
@@ -28,9 +26,9 @@ final class DictionaryDataCollector extends DataCollector
     }
 
     /**
-     * @return Generator<string, array<mixed>>
+     * @return \Generator<string, array<mixed>>
      */
-    public function getDictionaries(): Generator
+    public function getDictionaries(): \Generator
     {
         foreach ($this->data as $name => $keyValuePairs) {
             yield $name => $keyValuePairs;

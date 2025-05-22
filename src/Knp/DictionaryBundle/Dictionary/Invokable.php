@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use ArrayIterator;
-use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
-use ReturnTypeWillChange;
 
 /**
  * @template E
@@ -65,7 +62,7 @@ final class Invokable implements Dictionary
         return \array_key_exists($offset, $this->values);
     }
 
-    #[ReturnTypeWillChange]
+    #[\ReturnTypeWillChange]
     public function offsetGet($offset)
     {
         $this->invoke();
@@ -88,13 +85,13 @@ final class Invokable implements Dictionary
     }
 
     /**
-     * @return ArrayIterator<int|string, mixed>
+     * @return \ArrayIterator<int|string, mixed>
      */
-    public function getIterator(): ArrayIterator
+    public function getIterator(): \ArrayIterator
     {
         $this->invoke();
 
-        return new ArrayIterator($this->values);
+        return new \ArrayIterator($this->values);
     }
 
     public function count(): int
@@ -113,7 +110,7 @@ final class Invokable implements Dictionary
         $values = ($this->callable)(...$this->callableArgs);
 
         if (!\is_array($values)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'Dictionary callable must return an array or an instance of ArrayAccess.'
             );
         }

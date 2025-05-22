@@ -10,9 +10,9 @@ use Knp\DictionaryBundle\Dictionary\Collection;
 
 final class Dictionary extends Base
 {
-    public function __construct(private Collection $dictionaries, ?Generator $generator = null)
+    public function __construct(private Collection $collection, ?Generator $generator = null)
     {
-        if (null === $generator) {
+        if (!$generator instanceof Generator) {
             $generator = new Generator();
             $generator->addProvider($this);
         }
@@ -25,6 +25,6 @@ final class Dictionary extends Base
      */
     public function dictionary(string $name)
     {
-        return self::randomElement($this->dictionaries[$name]->getKeys());
+        return self::randomElement($this->collection[$name]->getKeys());
     }
 }

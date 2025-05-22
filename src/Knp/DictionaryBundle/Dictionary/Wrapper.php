@@ -14,48 +14,48 @@ use Knp\DictionaryBundle\Dictionary;
 abstract class Wrapper implements Dictionary
 {
     /**
-     * @param Dictionary<E> $wrapped
+     * @param Dictionary<E> $dictionary
      */
-    public function __construct(private readonly Dictionary $wrapped) {}
+    public function __construct(private readonly Dictionary $dictionary) {}
 
     public function getName(): string
     {
-        return $this->wrapped->getName();
+        return $this->dictionary->getName();
     }
 
     public function getValues(): array
     {
-        return $this->wrapped->getValues();
+        return $this->dictionary->getValues();
     }
 
     public function getKeys(): array
     {
-        return $this->wrapped->getKeys();
+        return $this->dictionary->getKeys();
     }
 
     public function offsetExists(mixed $offset): bool
     {
-        return $this->wrapped->offsetExists($offset);
+        return $this->dictionary->offsetExists($offset);
     }
 
     public function offsetGet(mixed $offset): mixed
     {
-        return $this->wrapped->offsetGet($offset);
+        return $this->dictionary->offsetGet($offset);
     }
 
     public function offsetSet(mixed $offset, mixed $value): void
     {
-        $this->wrapped->offsetSet($offset, $value);
+        $this->dictionary->offsetSet($offset, $value);
     }
 
     public function offsetUnset(mixed $offset): void
     {
-        $this->wrapped->offsetUnset($offset);
+        $this->dictionary->offsetUnset($offset);
     }
 
     public function count(): int
     {
-        return $this->wrapped->count();
+        return $this->dictionary->count();
     }
 
     /**
@@ -63,6 +63,6 @@ abstract class Wrapper implements Dictionary
      */
     public function getIterator(): Dictionary
     {
-        return $this->wrapped;
+        return $this->dictionary;
     }
 }

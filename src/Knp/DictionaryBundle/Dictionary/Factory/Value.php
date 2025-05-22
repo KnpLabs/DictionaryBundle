@@ -12,7 +12,7 @@ use Knp\DictionaryBundle\ValueTransformer;
 
 final class Value implements Factory
 {
-    public function __construct(private readonly ValueTransformer $transformer) {}
+    public function __construct(private readonly ValueTransformer $valueTransformer) {}
 
     /**
      * {@inheritdoc}
@@ -22,7 +22,7 @@ final class Value implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['content'])) {
-            throw new InvalidArgumentException(\sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'The key content for dictionary %s must be set.',
                 $name
             ));
@@ -32,7 +32,7 @@ final class Value implements Factory
         $values  = [];
 
         foreach ($content as $value) {
-            $values[] = $this->transformer->transform($value);
+            $values[] = $this->valueTransformer->transform($value);
         }
 
         return new Simple($name, $values);
@@ -40,6 +40,6 @@ final class Value implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'value' === $config['type'] : false;
+        return isset($config['type']) && 'value' === $config['type'];
     }
 }

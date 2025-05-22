@@ -16,10 +16,10 @@ final class DictionaryRegistrationPass implements CompilerPassInterface
      */
     public const TAG_DICTIONARY = 'knp_dictionary.dictionary';
 
-    public function process(ContainerBuilder $container): void
+    public function process(ContainerBuilder $containerBuilder): void
     {
-        foreach ($container->findTaggedServiceIds(self::TAG_DICTIONARY) as $id => $tags) {
-            $container
+        foreach (array_keys($containerBuilder->findTaggedServiceIds(self::TAG_DICTIONARY)) as $id) {
+            $containerBuilder
                 ->getDefinition(Collection::class)
                 ->addMethodCall('add', [new Reference($id)])
             ;

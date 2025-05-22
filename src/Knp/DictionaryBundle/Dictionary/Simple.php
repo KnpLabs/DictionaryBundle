@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Generator;
 use Knp\DictionaryBundle\Dictionary;
 
 /**
@@ -54,7 +53,7 @@ final class Simple implements Dictionary
         unset($this->values[$offset]);
     }
 
-    public function getIterator(): Generator
+    public function getIterator(): \Traversable
     {
         yield from $this->values;
     }

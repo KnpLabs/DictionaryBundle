@@ -8,7 +8,6 @@ use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Psr\Container\ContainerInterface;
-use Traversable;
 
 final class Iterator implements Factory
 {
@@ -22,7 +21,7 @@ final class Iterator implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['service'])) {
-            throw new InvalidArgumentException(\sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'The "service" config key must be set for the dictionary named "%s".',
                 $name
             ));
@@ -30,8 +29,8 @@ final class Iterator implements Factory
 
         $service = $this->container->get($config['service']);
 
-        if (!$service instanceof Traversable) {
-            throw new InvalidArgumentException(\sprintf(
+        if (!$service instanceof \Traversable) {
+            throw new \InvalidArgumentException(\sprintf(
                 'You must provide a valid instance of Traversable for the dictionary named "%s".',
                 $name
             ));
@@ -42,6 +41,6 @@ final class Iterator implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'iterator' === $config['type'] : false;
+        return isset($config['type']) && 'iterator' === $config['type'];
     }
 }

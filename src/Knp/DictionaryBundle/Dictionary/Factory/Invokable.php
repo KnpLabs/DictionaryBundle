@@ -21,7 +21,7 @@ final class Invokable implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['service'])) {
-            throw new InvalidArgumentException(\sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'The "service" config key must be set for the dictionary named "%s".',
                 $name
             ));
@@ -35,7 +35,7 @@ final class Invokable implements Factory
         }
 
         if (!\is_callable($callable)) {
-            throw new InvalidArgumentException(\sprintf(
+            throw new \InvalidArgumentException(\sprintf(
                 'You must provide a valid callable for the dictionary named "%s".',
                 $name
             ));
@@ -46,6 +46,6 @@ final class Invokable implements Factory
 
     public function supports(array $config): bool
     {
-        return (isset($config['type'])) ? 'callable' === $config['type'] : false;
+        return isset($config['type']) && 'callable' === $config['type'];
     }
 }

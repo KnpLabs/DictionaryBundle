@@ -5,19 +5,15 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\Dictionary;
 
 use ArrayAccess;
-use ArrayIterator;
-use Countable;
 use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Exception\DictionaryNotFoundException;
-use RuntimeException;
-use Traversable;
 
 /**
  * @implements ArrayAccess<string, Dictionary<mixed>>
  * @implements IteratorAggregate<string, Dictionary<mixed>>
  */
-final class Collection implements ArrayAccess, Countable, IteratorAggregate
+final class Collection implements \ArrayAccess, \Countable, \IteratorAggregate
 {
     /**
      * @var array<string, Dictionary<mixed>>
@@ -64,19 +60,19 @@ final class Collection implements ArrayAccess, Countable, IteratorAggregate
 
     public function offsetSet($offset, $value): void
     {
-        throw new RuntimeException(
-            'To add a Dictionary to the Collection, use Knp\DictionaryBundle\Dictionary\Collection::add(Dictionary $dictionary).'
+        throw new \RuntimeException(
+            'To add a Dictionary to the Collection, use '.self::class.'::add(Dictionary $dictionary).'
         );
     }
 
     public function offsetUnset($offset): void
     {
-        throw new RuntimeException('It is not possible to remove a dictionary from the collection.');
+        throw new \RuntimeException('It is not possible to remove a dictionary from the collection.');
     }
 
-    public function getIterator(): Traversable
+    public function getIterator(): \Traversable
     {
-        return new ArrayIterator($this->dictionaries);
+        return new \ArrayIterator($this->dictionaries);
     }
 
     public function count(): int

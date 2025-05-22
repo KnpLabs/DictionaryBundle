@@ -19,7 +19,7 @@ final class Traceable implements Dictionary
      */
     public function __construct(
         private readonly Dictionary $dictionary,
-        private readonly DictionaryDataCollector $collector
+        private readonly DictionaryDataCollector $dictionaryDataCollector
     ) {}
 
     public function getName(): string
@@ -91,7 +91,7 @@ final class Traceable implements Dictionary
      */
     private function markAsUsed(): void
     {
-        $this->collector->addDictionary(
+        $this->dictionaryDataCollector->addDictionary(
             $this->dictionary->getName(),
             $this->dictionary->getKeys(),
             array_values($this->dictionary->getValues())

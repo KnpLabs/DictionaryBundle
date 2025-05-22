@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
-use Exception;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -14,16 +13,16 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class DictionaryBuildingPass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container): void
+    public function process(ContainerBuilder $containerBuilder): void
     {
-        $configuration = $container->getParameter('knp_dictionary.configuration');
+        $configuration = $containerBuilder->getParameter('knp_dictionary.configuration');
 
         if (false === \is_array($configuration)) {
-            throw new Exception('The configuration "knp_dictionary.dictionaries" should be an array.');
+            throw new \Exception('The configuration "knp_dictionary.dictionaries" should be an array.');
         }
 
         foreach ($configuration['dictionaries'] as $name => $config) {
-            $container->setDefinition(
+            $containerBuilder->setDefinition(
                 \sprintf('knp_dictionary.dictionary.%s', $name),
                 $this->createDefinition($name, $config)
             );

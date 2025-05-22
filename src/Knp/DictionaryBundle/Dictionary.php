@@ -14,7 +14,7 @@ use IteratorAggregate;
  * @extends IteratorAggregate<int|string, E>
  * @extends ArrayAccess<int|string, E>
  */
-interface Dictionary extends ArrayAccess, Countable, IteratorAggregate
+interface Dictionary extends \ArrayAccess, Countable, IteratorAggregate
 {
     /**
      * @var string

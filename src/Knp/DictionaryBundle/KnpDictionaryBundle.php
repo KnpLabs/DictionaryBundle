@@ -13,11 +13,11 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class KnpDictionaryBundle extends Bundle
 {
-    public function build(ContainerBuilder $container): void
+    public function build(ContainerBuilder $containerBuilder): void
     {
-        $container->addCompilerPass(new DictionaryBuildingPass());
-        $container->addCompilerPass(new DictionaryFactoryBuildingPass());
-        $container->addCompilerPass(new DictionaryRegistrationPass());
-        $container->addCompilerPass(new DictionaryTracePass());
+        $containerBuilder->addCompilerPass(new DictionaryBuildingPass());
+        $containerBuilder->addCompilerPass(new DictionaryFactoryBuildingPass());
+        $containerBuilder->addCompilerPass(new DictionaryRegistrationPass());
+        $containerBuilder->addCompilerPass(new DictionaryTracePass());
     }
 }

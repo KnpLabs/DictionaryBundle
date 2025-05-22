@@ -15,11 +15,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class DictionaryType extends AbstractType
 {
-    public function __construct(private readonly Collection $dictionaries) {}
+    public function __construct(private readonly Collection $collection) {}
 
-    public function configureOptions(OptionsResolver $resolver): void
+    public function configureOptions(OptionsResolver $optionsResolver): void
     {
-        $dictionaries = $this->dictionaries;
+        $dictionaries = $this->collection;
 
         $choices = static function (Options $options) use ($dictionaries): array {
             $name    = $options['name'];
@@ -28,10 +28,10 @@ final class DictionaryType extends AbstractType
             return array_flip($choices);
         };
 
-        $resolver
+        $optionsResolver
             ->setDefault('choices', $choices)
             ->setRequired(['name'])
-            ->setAllowedValues('name', array_keys(iterator_to_array($this->dictionaries)))
+            ->setAllowedValues('name', array_keys(iterator_to_array($this->collection)))
         ;
     }
 

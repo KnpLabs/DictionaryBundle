@@ -4,13 +4,9 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use ArrayAccess;
-use Countable;
-use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use PhpSpec\ObjectBehavior;
-use RuntimeException;
 
 final class CollectionSpec extends ObjectBehavior
 {
@@ -28,17 +24,17 @@ final class CollectionSpec extends ObjectBehavior
 
     function it_is_an_array_access()
     {
-        $this->shouldHaveType(ArrayAccess::class);
+        $this->shouldHaveType(\ArrayAccess::class);
     }
 
     function it_is_iterable()
     {
-        $this->shouldHaveType(IteratorAggregate::class);
+        $this->shouldHaveType(\IteratorAggregate::class);
     }
 
     function it_is_countable()
     {
-        $this->shouldHaveType(Countable::class);
+        $this->shouldHaveType(\Countable::class);
     }
 
     function it_should_entry_if_it_exists()
@@ -62,11 +58,11 @@ final class CollectionSpec extends ObjectBehavior
 
     function its_offsetSet_method_cannot_be_called()
     {
-        $this->shouldThrow(RuntimeException::class)->duringOffsetSet('foo', 'bar');
+        $this->shouldThrow(\RuntimeException::class)->duringOffsetSet('foo', 'bar');
     }
 
     function its_offsetUnset_method_cannot_be_called()
     {
-        $this->shouldThrow(RuntimeException::class)->duringOffsetUnset('foo');
+        $this->shouldThrow(\RuntimeException::class)->duringOffsetUnset('foo');
     }
 }

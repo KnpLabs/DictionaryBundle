@@ -16,10 +16,10 @@ final class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        $builder  = new TreeBuilder(self::CONFIG_NAME);
-        $rootNode = $builder->getRootNode();
+        $treeBuilder    = new TreeBuilder(self::CONFIG_NAME);
+        $nodeDefinition = $treeBuilder->getRootNode();
 
-        $rootNode
+        $nodeDefinition
             ->children()
             ->arrayNode('dictionaries')
                 ->useAttributeAsKey('name')
@@ -58,6 +58,6 @@ final class Configuration implements ConfigurationInterface
             ->end()
         ;
 
-        return $builder;
+        return $treeBuilder;
     }
 }
