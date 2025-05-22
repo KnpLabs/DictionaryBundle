@@ -10,9 +10,12 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @extends AbstractType<mixed>
+ */
 final class DictionaryType extends AbstractType
 {
-    public function __construct(private Collection $dictionaries) {}
+    public function __construct(private readonly Collection $dictionaries) {}
 
     public function configureOptions(OptionsResolver $resolver): void
     {

@@ -11,10 +11,7 @@ use PhpSpec\ObjectBehavior;
 
 final class DictionarySpec extends ObjectBehavior
 {
-    /**
-     * @var Collection
-     */
-    private $dictionaries;
+    private Collection $dictionaries;
 
     function let()
     {

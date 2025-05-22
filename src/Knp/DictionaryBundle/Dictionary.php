@@ -11,8 +11,8 @@ use IteratorAggregate;
 /**
  * @template E
  *
- * @extends IteratorAggregate<mixed, E>
- * @extends ArrayAccess<mixed, E>
+ * @extends IteratorAggregate<int|string, E>
+ * @extends ArrayAccess<int|string, E>
  */
 interface Dictionary extends ArrayAccess, Countable, IteratorAggregate
 {

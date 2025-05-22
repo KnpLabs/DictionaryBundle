@@ -35,6 +35,9 @@ final class Configuration implements ConfigurationInterface
                                     return array_merge($values, ['type' => 'value']);
                                 }
 
+                                /**
+                                 * @var non-empty-array<mixed> $values
+                                 */
                                 return $values;
                             })
                         ->end()
