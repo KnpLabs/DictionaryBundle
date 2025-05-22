@@ -24,7 +24,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
 
         foreach ($configuration['dictionaries'] as $name => $config) {
             $container->setDefinition(
-                sprintf('knp_dictionary.dictionary.%s', $name),
+                \sprintf('knp_dictionary.dictionary.%s', $name),
                 $this->createDefinition($name, $config)
             );
         }

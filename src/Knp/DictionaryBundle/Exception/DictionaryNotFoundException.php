@@ -13,10 +13,10 @@ final class DictionaryNotFoundException extends Exception
      */
     public function __construct(string $dictionaryName, array $knowns = [], ?Exception $previous = null)
     {
-        $message = sprintf('The dictionary "%s" has not been found in the registry.', $dictionaryName);
+        $message = \sprintf('The dictionary "%s" has not been found in the registry.', $dictionaryName);
 
         if (!empty($knowns)) {
-            $message .= sprintf(' Known dictionaries are: "%s".', implode('", "', $knowns));
+            $message .= \sprintf(' Known dictionaries are: "%s".', implode('", "', $knowns));
         }
 
         parent::__construct($message, 0, $previous);

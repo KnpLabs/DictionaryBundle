@@ -11,7 +11,7 @@ use Knp\DictionaryBundle\Dictionary\Factory;
 final class Aggregate implements Factory
 {
     /**
-     * @var array<Dictionary\Factory>
+     * @var array<Factory>
      */
     private array $factories = [];
 
@@ -33,7 +33,7 @@ final class Aggregate implements Factory
             }
         }
 
-        throw new InvalidArgumentException(sprintf(
+        throw new InvalidArgumentException(\sprintf(
             'The dictionary with named "%s" cannot be created.',
             $name
         ));

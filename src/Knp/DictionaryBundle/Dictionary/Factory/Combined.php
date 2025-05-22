@@ -21,7 +21,7 @@ final class Combined implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['dictionaries'])) {
-            throw new InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(\sprintf(
                 'Dictionary of type %s must contains a key "dictionaries".',
                 self::TYPE
             ));
