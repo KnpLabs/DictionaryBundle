@@ -20,8 +20,8 @@ final class DictionaryTracePass implements CompilerPassInterface
         }
 
         foreach ($container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY) as $id => $tags) {
-            $serviceId  = sprintf('%s.%s.traceable', $id, md5($id));
-            $dictionary = new Reference(sprintf('%s.inner', $serviceId));
+            $serviceId  = \sprintf('%s.%s.traceable', $id, md5($id));
+            $dictionary = new Reference(\sprintf('%s.inner', $serviceId));
             $traceable  = new Definition(Traceable::class, [$dictionary, new Reference(DictionaryDataCollector::class)]);
 
             $traceable->setDecoratedService($id);

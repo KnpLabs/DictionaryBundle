@@ -22,7 +22,7 @@ final class Value implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!isset($config['content'])) {
-            throw new InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(\sprintf(
                 'The key content for dictionary %s must be set.',
                 $name
             ));

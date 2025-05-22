@@ -42,7 +42,7 @@ final class OneOfMatcher extends BasicMatcher
         }
 
         return new FailureException(
-            sprintf(
+            \sprintf(
                 '"%s" is not one of ["%s"]',
                 $subject,
                 implode('", "', $arguments)
@@ -61,7 +61,7 @@ final class OneOfMatcher extends BasicMatcher
         }
 
         return new FailureException(
-            sprintf(
+            \sprintf(
                 '"%s" is one of ["%s"]',
                 $subject,
                 implode('", "', $arguments)

@@ -17,7 +17,7 @@ final class Extended implements Factory
     public function create(string $name, array $config): Dictionary
     {
         if (!$this->factory->supports($config)) {
-            throw new InvalidArgumentException(sprintf(
+            throw new InvalidArgumentException(\sprintf(
                 'The dictionary with named "%s" cannot be created.',
                 $name
             ));
