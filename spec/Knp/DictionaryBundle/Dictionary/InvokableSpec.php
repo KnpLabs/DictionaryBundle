@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary;
 
-use Exception;
-use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Invokable;
 use PhpSpec\ObjectBehavior;
@@ -106,7 +104,7 @@ final class InvokableSpec extends ObjectBehavior
         $this->beConstructedWith('foo', function (): void {});
 
         $this
-            ->shouldThrow(new InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess.'))
+            ->shouldThrow(new \InvalidArgumentException('Dictionary callable must return an array or an instance of ArrayAccess.'))
             ->duringGetValues()
         ;
     }
@@ -143,6 +141,6 @@ final class InvokableSpec extends ObjectBehavior
             ];
         }
 
-        throw new Exception('Executed twice.');
+        throw new \Exception('Executed twice.');
     }
 }

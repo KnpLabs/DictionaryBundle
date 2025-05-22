@@ -11,7 +11,7 @@ use Twig\TwigFunction;
 
 final class Dictionary extends AbstractExtension
 {
-    public function __construct(private Collection $dictionaries) {}
+    public function __construct(private Collection $collection) {}
 
     /**
      * @return TwigFunction[]
@@ -19,7 +19,7 @@ final class Dictionary extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('dictionary', $this->dictionaries->offsetGet(...)),
+            new TwigFunction('dictionary', $this->collection->offsetGet(...)),
         ];
     }
 
@@ -29,7 +29,7 @@ final class Dictionary extends AbstractExtension
     public function getFilters()
     {
         return [
-            new TwigFilter('dictionary', fn ($key, string $name) => $this->dictionaries[$name][$key]),
+            new TwigFilter('dictionary', fn ($key, string $name): mixed => $this->collection[$name][$key]),
         ];
     }
 }

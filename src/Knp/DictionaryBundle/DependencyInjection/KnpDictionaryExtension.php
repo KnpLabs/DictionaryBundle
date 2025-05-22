@@ -17,32 +17,32 @@ final class KnpDictionaryExtension extends Extension
     /**
      * @param array<mixed, mixed> $config
      */
-    public function load(array $config, ContainerBuilder $container): void
+    public function load(array $config, ContainerBuilder $containerBuilder): void
     {
         $configuration = new Configuration();
 
-        $container
+        $containerBuilder
             ->setParameter(
                 'knp_dictionary.configuration',
                 $this->processConfiguration($configuration, $config)
             )
         ;
 
-        $container
+        $containerBuilder
             ->registerForAutoconfiguration(Dictionary::class)
             ->addTag(DictionaryRegistrationPass::TAG_DICTIONARY)
         ;
 
-        $container
+        $containerBuilder
             ->registerForAutoconfiguration(Dictionary\Factory::class)
             ->addTag(DictionaryFactoryBuildingPass::TAG_FACTORY)
         ;
 
-        $loader = new YamlFileLoader(
-            $container,
+        $yamlFileLoader = new YamlFileLoader(
+            $containerBuilder,
             new FileLocator(__DIR__.'/../Resources/config')
         );
 
-        $loader->load('services.yaml');
+        $yamlFileLoader->load('services.yaml');
     }
 }

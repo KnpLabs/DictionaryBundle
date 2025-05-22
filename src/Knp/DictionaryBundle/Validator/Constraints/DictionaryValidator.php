@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Validator\Constraints;
 
-use Exception;
 use Knp\DictionaryBundle\Dictionary\Collection;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Constraint;
@@ -12,7 +11,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 final class DictionaryValidator extends ConstraintValidator
 {
-    public function __construct(private Collection $dictionaries) {}
+    public function __construct(private Collection $collection) {}
 
     public function validate(mixed $value, Constraint $constraint): void
     {
@@ -24,7 +23,7 @@ final class DictionaryValidator extends ConstraintValidator
             return;
         }
 
-        $dictionary = $this->dictionaries[$constraint->name];
+        $dictionary = $this->collection[$constraint->name];
         $values     = $dictionary->getKeys();
 
         if (!\in_array($value, $values, true)) {
@@ -59,16 +58,13 @@ final class DictionaryValidator extends ConstraintValidator
         }
 
         if (\is_object($var) && method_exists($var, '__toString')) {
-            return $var->__toString();
+            return (string) $var;
         }
 
-        if (settype($var, 'string')) {
-            /**
-             * @var string $var
-             */
-            return $var;
+        if (\is_scalar($var)) {
+            return (string) $var;
         }
 
-        throw new Exception('Unable to transform var to string.');
+        throw new \Exception('Unable to transform var to string.');
     }
 }

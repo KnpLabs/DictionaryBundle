@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\ValueTransformer;
 
-use Exception;
 use Knp\DictionaryBundle\ValueTransformer;
-use ReflectionClass;
 
 final class Constant implements ValueTransformer
 {
@@ -26,20 +24,20 @@ final class Constant implements ValueTransformer
 
         [$class, $constant] = $matches;
 
-        $constants = (new ReflectionClass($class))->getConstants();
+        $constants = (new \ReflectionClass($class))->getConstants();
 
         return \array_key_exists($constant, $constants);
     }
 
-    public function transform(mixed $value)
+    public function transform(mixed $value): mixed
     {
         if (null === $matches = $this->extract($value)) {
-            throw new Exception("Unable to resolve constant {$value}.");
+            throw new \Exception(\sprintf('Unable to resolve constant %s.', $value));
         }
 
         [$class, $constant] = $matches;
 
-        return (new ReflectionClass($class))->getConstant($constant);
+        return (new \ReflectionClass($class))->getConstant($constant);
     }
 
     /**

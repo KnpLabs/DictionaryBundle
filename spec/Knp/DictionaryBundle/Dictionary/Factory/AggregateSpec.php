@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
-use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
@@ -70,6 +69,6 @@ final class AggregateSpec extends ObjectBehavior
         $factory2->supports([])->willReturn(false);
         $factory3->supports([])->willReturn(false);
 
-        $this->shouldThrow(InvalidArgumentException::class)->during('create', ['yolo', []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('create', ['yolo', []]);
     }
 }

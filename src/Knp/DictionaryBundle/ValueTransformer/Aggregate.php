@@ -13,9 +13,9 @@ final class Aggregate implements ValueTransformer
      */
     private array $transformers = [];
 
-    public function addTransformer(ValueTransformer $transformer): void
+    public function addTransformer(ValueTransformer $valueTransformer): void
     {
-        $this->transformers[] = $transformer;
+        $this->transformers[] = $valueTransformer;
     }
 
     public function supports(mixed $value): bool

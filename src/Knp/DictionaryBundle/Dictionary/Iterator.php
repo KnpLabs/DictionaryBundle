@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Knp\DictionaryBundle\Dictionary;
 
-use Traversable;
-
 /**
  * @template E
  *
@@ -14,14 +12,14 @@ use Traversable;
 final class Iterator extends Wrapper
 {
     /**
-     * @param Traversable<mixed, E> $iterator
+     * @param \Traversable<mixed, E> $traversable
      */
-    public function __construct(string $name, Traversable $iterator)
+    public function __construct(string $name, \Traversable $traversable)
     {
         parent::__construct(
             new Invokable(
                 $name,
-                static fn (): array => iterator_to_array($iterator)
+                static fn (): array => iterator_to_array($traversable)
             )
         );
     }

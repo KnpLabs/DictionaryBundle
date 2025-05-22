@@ -16,10 +16,10 @@ final class DictionaryFactoryBuildingPass implements CompilerPassInterface
      */
     public const TAG_FACTORY = 'knp_dictionary.factory';
 
-    public function process(ContainerBuilder $container): void
+    public function process(ContainerBuilder $containerBuilder): void
     {
-        foreach ($container->findTaggedServiceIds(self::TAG_FACTORY) as $id => $tags) {
-            $container
+        foreach (array_keys($containerBuilder->findTaggedServiceIds(self::TAG_FACTORY)) as $id) {
+            $containerBuilder
                 ->findDefinition(Aggregate::class)
                 ->addMethodCall('addFactory', [new Reference($id)])
             ;

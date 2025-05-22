@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
-use ArrayIterator;
-use IteratorAggregate;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\Factory\Iterator;
 use PhpSpec\ObjectBehavior;
@@ -40,7 +38,7 @@ final class IteratorSpec extends ObjectBehavior
         ];
 
         $container->get('service.id')->willReturn($service);
-        $service->getIterator()->willReturn(new ArrayIterator([
+        $service->getIterator()->willReturn(new \ArrayIterator([
             'foo1' => 'bar1',
             'foo2' => 'bar2',
             'foo3' => 'bar3',
@@ -57,7 +55,7 @@ final class IteratorSpec extends ObjectBehavior
     }
 }
 
-abstract class MockIterator implements IteratorAggregate
+abstract class MockIterator implements \IteratorAggregate
 {
     public function getIterator()
     {

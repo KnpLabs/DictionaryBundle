@@ -13,20 +13,20 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class DictionaryTracePass implements CompilerPassInterface
 {
-    public function process(ContainerBuilder $container): void
+    public function process(ContainerBuilder $containerBuilder): void
     {
-        if (!$container->has(DictionaryDataCollector::class)) {
+        if (!$containerBuilder->has(DictionaryDataCollector::class)) {
             return;
         }
 
-        foreach ($container->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY) as $id => $tags) {
+        foreach (array_keys($containerBuilder->findTaggedServiceIds(DictionaryRegistrationPass::TAG_DICTIONARY)) as $id) {
             $serviceId  = \sprintf('%s.%s.traceable', $id, md5($id));
             $dictionary = new Reference(\sprintf('%s.inner', $serviceId));
             $traceable  = new Definition(Traceable::class, [$dictionary, new Reference(DictionaryDataCollector::class)]);
 
             $traceable->setDecoratedService($id);
 
-            $container->setDefinition($serviceId, $traceable);
+            $containerBuilder->setDefinition($serviceId, $traceable);
         }
     }
 }

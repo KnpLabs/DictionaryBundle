@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace spec\Knp\DictionaryBundle\Dictionary\Factory;
 
-use InvalidArgumentException;
 use Knp\DictionaryBundle\Dictionary\Factory;
 use Knp\DictionaryBundle\Dictionary\Factory\KeyValue;
 use Knp\DictionaryBundle\ValueTransformer;
@@ -35,7 +34,7 @@ final class KeyValueSpec extends ObjectBehavior
     function it_throws_exception_if_no_content_is_provided()
     {
         $this
-            ->shouldThrow(InvalidArgumentException::class)
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('create', ['yolo', []])
         ;
     }

@@ -19,7 +19,7 @@ final class Combined extends Wrapper
     public function __construct(string $name, Dictionary ...$dictionaries)
     {
         parent::__construct(
-            new Invokable($name, function () use ($dictionaries) {
+            new Invokable($name, function () use ($dictionaries): array {
                 $data = [];
 
                 foreach ($dictionaries as $dictionary) {
