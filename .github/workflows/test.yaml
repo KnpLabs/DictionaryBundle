@@ -10,11 +10,11 @@ jobs:
         php:
           - '8.2'
           - '8.3'
+        # - '8.4' waiting for phpspec/phpspec upgrade
         symfony:
           - '5.4'
           - '6.4'
-          - '7.0'
-          - '7.1'
+          - '7.2'
         minimumStability:
           - 'stable'
         composerOptions:
