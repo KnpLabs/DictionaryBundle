@@ -36,7 +36,7 @@
         "phpstan/extension-installer": "1.4.3",
         "phpstan/phpstan": "2.1.22",
         "phpstan/phpstan-symfony": "2.0.6",
-        "rector/rector": "2.1.2",
+        "rector/rector": "2.1.6",
         "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0",
         "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0",
         "webmozart/assert": "1.11.0"
