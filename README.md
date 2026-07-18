@@ -261,13 +261,43 @@ App\Entity\User:
 
 ## Create your own dictionary implementation
 
-## Dictionary
+### Dictionary
 
-Your dictionary implementation must implements the interface [Dictionary](src/Knp/DictionaryBundle/Dictionary.php).
+A dictionary stores an associative array: `getKeys()` returns its keys, `getValues()` returns the whole array,
+and `$dictionary[$key]` returns the value stored under that key.
+
+For a static custom dictionary, extend [Wrapper](src/Knp/DictionaryBundle/Dictionary/Wrapper.php) and delegate
+the storage to [Simple](src/Knp/DictionaryBundle/Dictionary/Simple.php):
+
+```php
+<?php
+
+declare(strict_types=1);
+
+namespace App\Dictionary;
+
+use Knp\DictionaryBundle\Dictionary\Simple;
+use Knp\DictionaryBundle\Dictionary\Wrapper;
+
+final class MyCustomDictionary extends Wrapper
+{
+    public function __construct()
+    {
+        parent::__construct(new Simple('my_custom', [
+            'foo' => 'Foo',
+            'bar' => 'Bar',
+        ]));
+    }
+}
+```
+
+`Simple` implements `offsetGet()` and the other `ArrayAccess`, `Countable`, and `IteratorAggregate` methods.
+For custom behavior, implement the [Dictionary](src/Knp/DictionaryBundle/Dictionary.php) interface directly and
+use `Simple` as the reference for those methods.
 
 It is automatically registered with the `autoconfigure: true` DIC feature.
 
-Else you can register it by your self:
+Otherwise, register it yourself:
 
 ```yaml
 services:
@@ -276,7 +306,7 @@ services:
       - knp_dictionary.dictionary
 ```
 
-## Dictionary Factory
+### Dictionary Factory
 
 You must create a dictionary factory that will be responsible to instantiate your dictionary.
 
