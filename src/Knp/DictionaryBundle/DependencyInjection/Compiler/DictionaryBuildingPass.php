@@ -52,11 +52,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
 
     private function normalizeArgumentName(string $name): ?string
     {
-        $words = preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name.'.dictionary');
-
-        if (null === $words) {
-            return null;
-        }
+        $words = preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name.'.dictionary') ?? '';
 
         $argumentName = lcfirst(str_replace(' ', '', ucwords($words)));
 

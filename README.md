@@ -46,9 +46,9 @@ knp_dictionary:
       - Ms
 ```
 
-Configured dictionaries can be injected by type-hinting `Dictionary` and naming
-the argument after the dictionary followed by `Dictionary`. Dictionary names are
-normalized to camel case, so `entity_class_icons` maps to
+To inject a configured dictionary directly, type-hint `Dictionary` and name the
+argument `<dictionaryName>Dictionary`. Names are normalized to camel case, so
+`entity_class_icons` maps to
 `$entityClassIconsDictionary`.
 
 ```php
@@ -62,7 +62,8 @@ final class UserManager
 }
 ```
 
-Use Symfony's `Target` attribute when the argument needs a different name:
+To use a different argument name, select the dictionary with Symfony's `Target`
+attribute:
 
 ```php
 use Knp\DictionaryBundle\Dictionary;
@@ -77,9 +78,9 @@ final class UserManager
 }
 ```
 
-Names that cannot become valid PHP argument names, or names that become
-ambiguous after normalization (for example, `foo-bar` and `foo_bar`), do not
-receive an automatic autowiring alias. They can be wired explicitly:
+Names that are invalid PHP argument names after normalization, or names that
+normalize to the same argument name (for example, `foo-bar` and `foo_bar`), do
+not receive an automatic autowiring alias. Wire them explicitly:
 
 ```yaml
 services:
@@ -88,8 +89,8 @@ services:
       $dictionary: '@knp_dictionary.dictionary.foo-bar'
 ```
 
-You can also inject the collection when the dictionary must be selected
-dynamically or cannot be autowired by name:
+Inject the collection instead when selecting a dictionary dynamically or when
+named autowiring is unavailable:
 
 ```php
 use Knp\DictionaryBundle\Dictionary;
@@ -135,7 +136,7 @@ use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 class User
 {
     #[ORM\Column]
-    #[Dictionary(name: 'my_dictionary')]
+    #[Dictionary(name: 'civility')]
     private $civility;
 }
 ```
