@@ -21,12 +21,46 @@ final class DictionaryBuildingPass implements CompilerPassInterface
             throw new \Exception('The configuration "knp_dictionary.dictionaries" should be an array.');
         }
 
+        /** @var array<string, list<array{string, string}>> $aliases */
+        $aliases = [];
+
         foreach ($configuration['dictionaries'] as $name => $config) {
+            $serviceId = \sprintf('knp_dictionary.dictionary.%s', $name);
+
             $containerBuilder->setDefinition(
-                \sprintf('knp_dictionary.dictionary.%s', $name),
+                $serviceId,
                 $this->createDefinition($name, $config)
             );
+
+            if (null !== $argumentName = $this->normalizeArgumentName($name)) {
+                $aliases[$argumentName][] = [$serviceId, $name.'.dictionary'];
+            }
         }
+
+        foreach ($aliases as $argumentName => $candidates) {
+            if (1 !== \count($candidates)) {
+                continue;
+            }
+
+            if ($containerBuilder->hasAlias(Dictionary::class.' $'.$argumentName)) {
+                continue;
+            }
+
+            $containerBuilder->registerAliasForArgument($candidates[0][0], Dictionary::class, $candidates[0][1]);
+        }
+    }
+
+    private function normalizeArgumentName(string $name): ?string
+    {
+        $words = preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name.'.dictionary');
+
+        if (null === $words) {
+            return null;
+        }
+
+        $argumentName = lcfirst(str_replace(' ', '', ucwords($words)));
+
+        return 1 === preg_match('/^[a-zA-Z_\x7f-\xff]/', $argumentName) ? $argumentName : null;
     }
 
     /**

@@ -41,22 +41,69 @@ Define dictionaries in your config.yml file:
 ```yaml
 knp_dictionary:
   dictionaries:
-    my_dictionary: # your dictionary name
-      - Foo # your dictionary content
-      - Bar
-      - Baz
+    civility:
+      - Mr
+      - Ms
 ```
 
-You will be able to retrieve it by injecting the Collection service and accessing the dictionary by its key
+Configured dictionaries can be injected by type-hinting `Dictionary` and naming
+the argument after the dictionary followed by `Dictionary`. Dictionary names are
+normalized to camel case, so `entity_class_icons` maps to
+`$entityClassIconsDictionary`.
 
 ```php
+use Knp\DictionaryBundle\Dictionary;
 
-    private Dictionary $myDictionary;
+final class UserManager
+{
     public function __construct(
-        \Knp\DictionaryBundle\Dictionary\Collection $dictionaries)
+        private Dictionary $civilityDictionary,
+    ) {}
+}
+```
+
+Use Symfony's `Target` attribute when the argument needs a different name:
+
+```php
+use Knp\DictionaryBundle\Dictionary;
+use Symfony\Component\DependencyInjection\Attribute\Target;
+
+final class UserManager
+{
+    public function __construct(
+        #[Target('civility.dictionary')]
+        private Dictionary $dictionary,
+    ) {}
+}
+```
+
+Names that cannot become valid PHP argument names, or names that become
+ambiguous after normalization (for example, `foo-bar` and `foo_bar`), do not
+receive an automatic autowiring alias. They can be wired explicitly:
+
+```yaml
+services:
+  App\Service\MyService:
+    arguments:
+      $dictionary: '@knp_dictionary.dictionary.foo-bar'
+```
+
+You can also inject the collection when the dictionary must be selected
+dynamically or cannot be autowired by name:
+
+```php
+use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
+
+final class UserManager
+{
+    private Dictionary $dictionary;
+
+    public function __construct(Collection $dictionaries)
     {
-        $this->myDictionary = $dictionaries['my_dictionary'];
+        $this->dictionary = $dictionaries['civility'];
     }
+}
 ```
 
 ## Dictionary form type
@@ -70,7 +117,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         ->add('civility', DictionaryType::class, array(
-            'name' => 'my_dictionary'
+            'name' => 'civility'
         ))
     ;
 }
