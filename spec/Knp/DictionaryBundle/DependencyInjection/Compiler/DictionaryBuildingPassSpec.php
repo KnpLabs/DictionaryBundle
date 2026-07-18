@@ -168,6 +168,8 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
             'dictionaries' => [
                 'vote'               => ['yes', 'no'],
                 'entity_class_icons' => ['user', 'group'],
+                'foo'                => ['base'],
+                'foo.autowiring'     => ['nested'],
             ],
         ]], $container);
         (new KnpDictionaryBundle())->build($container);
@@ -183,6 +185,11 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::same($consumer->voteDictionary->getName(), 'vote');
         Assert::same($consumer->entityClassIconsDictionary->getName(), 'entity_class_icons');
         Assert::same($consumer->dictionary->getName(), 'vote');
+
+        $dictionaries = $container->get(Collection::class);
+        Assert::isInstanceOf($dictionaries, Collection::class);
+        Assert::same($dictionaries['foo']->getName(), 'foo');
+        Assert::same($dictionaries['foo.autowiring']->getName(), 'foo.autowiring');
     }
 
     function it_keeps_invalid_and_ambiguous_dictionary_names_out_of_named_autowiring()
@@ -212,9 +219,9 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::true($container->hasDefinition('knp_dictionary.dictionary.foo_bar'));
         Assert::false($container->hasAlias(Dictionary::class.' $123StatusDictionary'));
         Assert::false($container->hasAlias(Dictionary::class.' $fooBarDictionary'));
-        Assert::false($container->hasDefinition('knp_dictionary.dictionary.123_status.autowiring'));
-        Assert::false($container->hasDefinition('knp_dictionary.dictionary.foo-bar.autowiring'));
-        Assert::false($container->hasDefinition('knp_dictionary.dictionary.foo_bar.autowiring'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.123_status'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.foo-bar'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.foo_bar'));
     }
 
     function it_preserves_existing_named_autowiring_aliases()
@@ -240,14 +247,14 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
             (string) $container->getAlias(Dictionary::class.' $voteDictionary'),
             'app.vote_dictionary'
         );
-        Assert::false($container->hasDefinition('knp_dictionary.dictionary.vote.autowiring'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.vote'));
     }
 
     private function expectDico1AliasRegistration(ContainerBuilder $container): void
     {
         $container->hasAlias(Dictionary::class.' $dico1Dictionary')->willReturn(false);
         $container->setDefinition(
-            'knp_dictionary.dictionary.dico1.autowiring',
+            'knp_dictionary.dictionary_autowiring.dico1',
             Argument::that(function ($definition): bool {
                 Assert::eq($definition->getClass(), Dictionary::class);
                 Assert::eq((string) $definition->getFactory()[0], Collection::class);
@@ -259,12 +266,12 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         )->shouldBeCalled();
         $container
             ->registerAliasForArgument(
-                'knp_dictionary.dictionary.dico1.autowiring',
+                'knp_dictionary.dictionary_autowiring.dico1',
                 Dictionary::class,
                 'dico1.dictionary'
             )
             ->shouldBeCalled()
-            ->willReturn(new Alias('knp_dictionary.dictionary.dico1.autowiring'))
+            ->willReturn(new Alias('knp_dictionary.dictionary_autowiring.dico1'))
         ;
     }
 }

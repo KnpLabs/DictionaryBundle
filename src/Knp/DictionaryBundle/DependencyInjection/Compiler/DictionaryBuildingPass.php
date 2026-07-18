@@ -22,7 +22,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
             throw new \Exception('The configuration "knp_dictionary.dictionaries" should be an array.');
         }
 
-        /** @var array<string, list<array{string, string}>> $aliases */
+        /** @var array<string, list<string>> $aliases */
         $aliases = [];
 
         foreach ($configuration['dictionaries'] as $name => $config) {
@@ -34,7 +34,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
             );
 
             if (null !== $argumentName = $this->normalizeArgumentName($name)) {
-                $aliases[$argumentName][] = [$serviceId, $name];
+                $aliases[$argumentName][] = $name;
             }
         }
 
@@ -47,12 +47,13 @@ final class DictionaryBuildingPass implements CompilerPassInterface
                 continue;
             }
 
-            $serviceId = $candidates[0][0].'.autowiring';
+            $name      = $candidates[0];
+            $serviceId = \sprintf('knp_dictionary.dictionary_autowiring.%s', $name);
             $containerBuilder->setDefinition(
                 $serviceId,
-                $this->createCollectionReferenceDefinition($candidates[0][1])
+                $this->createCollectionReferenceDefinition($name)
             );
-            $containerBuilder->registerAliasForArgument($serviceId, Dictionary::class, $candidates[0][1].'.dictionary');
+            $containerBuilder->registerAliasForArgument($serviceId, Dictionary::class, $name.'.dictionary');
         }
     }
 

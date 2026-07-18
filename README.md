@@ -41,15 +41,15 @@ Define dictionaries in your config.yml file:
 ```yaml
 knp_dictionary:
   dictionaries:
-    civility:
-      - Mr
+    civility: # your dictionary name
+      - Mr    # your dictionary content
       - Ms
 ```
 
 To inject a configured dictionary directly, type-hint `Dictionary` and name the
 argument `<dictionaryName>Dictionary`. Names are normalized to camel case, so
-`entity_class_icons` maps to
-`$entityClassIconsDictionary`.
+`civility` maps to
+`$civilityDictionary`.
 
 ```php
 use Knp\DictionaryBundle\Dictionary;
@@ -65,7 +65,7 @@ final class UserManager
 An existing named `Dictionary` autowiring alias takes precedence and is not
 replaced by a configured dictionary.
 
-To use a different argument name, select the dictionary with Symfony's `Target`
+To use a different argument name, select the dictionary with Symfony's `#[Target]`
 attribute:
 
 ```php
@@ -83,27 +83,17 @@ final class UserManager
 
 Names that are invalid PHP argument names after normalization, or names that
 normalize to the same argument name (for example, `foo-bar` and `foo_bar`), do
-not receive an automatic autowiring alias. Wire them explicitly:
-
-```yaml
-services:
-  App\Service\MyService:
-    arguments:
-      $dictionary: '@knp_dictionary.dictionary.foo-bar'
-```
-
-Inject the collection instead when selecting a dictionary dynamically or when
-named autowiring is unavailable:
+not receive an automatic autowiring alias. Inject the collection instead for
+these names or when selecting a dictionary dynamically:
 
 ```php
 use Knp\DictionaryBundle\Dictionary;
-use Knp\DictionaryBundle\Dictionary\Collection;
 
 final class UserManager
 {
     private Dictionary $dictionary;
 
-    public function __construct(Collection $dictionaries)
+    public function __construct(Dictionary\Collection $dictionaries)
     {
         $this->dictionary = $dictionaries['civility'];
     }
