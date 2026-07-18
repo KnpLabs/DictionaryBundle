@@ -27,6 +27,7 @@
         "twig/twig": "^2.15.3 || ^3.4.3"
     },
     "require-dev": {
+        "composer/semver": "3.4.0",
         "fakerphp/faker": "1.24.1",
         "friends-of-phpspec/phpspec-code-coverage": "6.5.0",
         "friendsofphp/php-cs-fixer": "3.75.0",
@@ -35,7 +36,7 @@
         "phpspec/prophecy": "1.22.0",
         "phpstan/extension-installer": "1.4.3",
         "phpstan/phpstan": "2.1.27",
-        "phpstan/phpstan-symfony": "2.0.6",
+        "phpstan/phpstan-symfony": "2.0.20",
         "rector/rector": "2.1.7",
         "symfony/twig-bridge": "^5.4 || ^6.4 || ^7.0",
         "symfony/var-dumper": "^5.4 || ^6.4 || ^7.0",
