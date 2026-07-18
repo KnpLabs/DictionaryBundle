@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -33,7 +34,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
             );
 
             if (null !== $argumentName = $this->normalizeArgumentName($name)) {
-                $aliases[$argumentName][] = [$serviceId, $name.'.dictionary'];
+                $aliases[$argumentName][] = [$serviceId, $name];
             }
         }
 
@@ -46,7 +47,12 @@ final class DictionaryBuildingPass implements CompilerPassInterface
                 continue;
             }
 
-            $containerBuilder->registerAliasForArgument($candidates[0][0], Dictionary::class, $candidates[0][1]);
+            $serviceId = $candidates[0][0].'.autowiring';
+            $containerBuilder->setDefinition(
+                $serviceId,
+                $this->createCollectionReferenceDefinition($candidates[0][1])
+            );
+            $containerBuilder->registerAliasForArgument($serviceId, Dictionary::class, $candidates[0][1].'.dictionary');
         }
     }
 
@@ -57,6 +63,14 @@ final class DictionaryBuildingPass implements CompilerPassInterface
         $argumentName = lcfirst(str_replace(' ', '', ucwords($words)));
 
         return 1 === preg_match('/^[a-zA-Z_\x7f-\xff]/', $argumentName) ? $argumentName : null;
+    }
+
+    private function createCollectionReferenceDefinition(string $name): Definition
+    {
+        return (new Definition(Dictionary::class))
+            ->setFactory([new Reference(Collection::class), 'offsetGet'])
+            ->addArgument($name)
+        ;
     }
 
     /**

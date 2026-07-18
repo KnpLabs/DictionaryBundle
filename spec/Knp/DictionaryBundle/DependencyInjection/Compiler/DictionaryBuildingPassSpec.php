@@ -6,9 +6,12 @@ namespace spec\Knp\DictionaryBundle\DependencyInjection\Compiler;
 
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryBuildingPass;
 use Knp\DictionaryBundle\DependencyInjection\Compiler\DictionaryRegistrationPass;
+use Knp\DictionaryBundle\DependencyInjection\KnpDictionaryExtension;
 use Knp\DictionaryBundle\Dictionary;
+use Knp\DictionaryBundle\Dictionary\Collection;
 use Knp\DictionaryBundle\Dictionary\Factory\Aggregate;
 use Knp\DictionaryBundle\Dictionary\Simple;
+use Knp\DictionaryBundle\KnpDictionaryBundle;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\DependencyInjection\Alias;
@@ -161,25 +164,18 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
     function it_autowires_configured_dictionaries_by_name()
     {
         $container = new ContainerBuilder();
-        $container->setParameter('knp_dictionary.configuration', [
+        (new KnpDictionaryExtension())->load([[
             'dictionaries' => [
-                'vote' => [
-                    'type'    => Dictionary::VALUE,
-                    'content' => ['yes', 'no'],
-                ],
-                'entity_class_icons' => [
-                    'type'    => Dictionary::VALUE,
-                    'content' => ['user', 'group'],
-                ],
+                'vote'               => ['yes', 'no'],
+                'entity_class_icons' => ['user', 'group'],
             ],
-        ]);
-        $container->register(Aggregate::class, DictionaryFactoryStub::class);
+        ]], $container);
+        (new KnpDictionaryBundle())->build($container);
         $container
             ->register(DictionaryConsumer::class, DictionaryConsumer::class)
             ->setAutowired(true)
             ->setPublic(true)
         ;
-        $this->process($container);
         $container->compile();
 
         $consumer = $container->get(DictionaryConsumer::class);
@@ -216,6 +212,9 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::true($container->hasDefinition('knp_dictionary.dictionary.foo_bar'));
         Assert::false($container->hasAlias(Dictionary::class.' $123StatusDictionary'));
         Assert::false($container->hasAlias(Dictionary::class.' $fooBarDictionary'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary.123_status.autowiring'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary.foo-bar.autowiring'));
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary.foo_bar.autowiring'));
     }
 
     function it_preserves_existing_named_autowiring_aliases()
@@ -241,31 +240,32 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
             (string) $container->getAlias(Dictionary::class.' $voteDictionary'),
             'app.vote_dictionary'
         );
+        Assert::false($container->hasDefinition('knp_dictionary.dictionary.vote.autowiring'));
     }
 
     private function expectDico1AliasRegistration(ContainerBuilder $container): void
     {
         $container->hasAlias(Dictionary::class.' $dico1Dictionary')->willReturn(false);
+        $container->setDefinition(
+            'knp_dictionary.dictionary.dico1.autowiring',
+            Argument::that(function ($definition): bool {
+                Assert::eq($definition->getClass(), Dictionary::class);
+                Assert::eq((string) $definition->getFactory()[0], Collection::class);
+                Assert::eq($definition->getFactory()[1], 'offsetGet');
+                Assert::eq($definition->getArguments(), ['dico1']);
+
+                return true;
+            })
+        )->shouldBeCalled();
         $container
             ->registerAliasForArgument(
-                'knp_dictionary.dictionary.dico1',
+                'knp_dictionary.dictionary.dico1.autowiring',
                 Dictionary::class,
                 'dico1.dictionary'
             )
             ->shouldBeCalled()
-            ->willReturn(new Alias('knp_dictionary.dictionary.dico1'))
+            ->willReturn(new Alias('knp_dictionary.dictionary.dico1.autowiring'))
         ;
-    }
-}
-
-final class DictionaryFactoryStub
-{
-    /**
-     * @param mixed[] $config
-     */
-    public function create(string $name, array $config): Dictionary
-    {
-        return new Simple($name, $config['content']);
     }
 }
 
