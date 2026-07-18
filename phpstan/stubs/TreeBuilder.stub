@@ -1,0 +1,10 @@
+<?php
+
+namespace Symfony\Component\Config\Definition\Builder;
+
+/**
+ * @template T of 'array'|'variable'|'scalar'|'string'|'boolean'|'integer'|'float'|'enum'
+ */
+class TreeBuilder
+{
+}

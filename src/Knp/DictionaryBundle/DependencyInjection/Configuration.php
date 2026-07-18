@@ -14,6 +14,9 @@ final class Configuration implements ConfigurationInterface
      */
     private const CONFIG_NAME = 'knp_dictionary';
 
+    /**
+     * @return TreeBuilder<'array'>
+     */
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder    = new TreeBuilder(self::CONFIG_NAME);
