@@ -218,6 +218,31 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::false($container->hasAlias(Dictionary::class.' $fooBarDictionary'));
     }
 
+    function it_preserves_existing_named_autowiring_aliases()
+    {
+        $container = new ContainerBuilder();
+        $container->setParameter('knp_dictionary.configuration', [
+            'dictionaries' => [
+                'vote' => [
+                    'type'    => Dictionary::VALUE,
+                    'content' => ['yes', 'no'],
+                ],
+            ],
+        ]);
+        $container
+            ->register('app.vote_dictionary', Simple::class)
+            ->setArguments(['custom_vote', ['custom']])
+        ;
+        $container->setAlias(Dictionary::class.' $voteDictionary', 'app.vote_dictionary');
+
+        $this->process($container);
+
+        Assert::same(
+            (string) $container->getAlias(Dictionary::class.' $voteDictionary'),
+            'app.vote_dictionary'
+        );
+    }
+
     private function expectDico1AliasRegistration(ContainerBuilder $container): void
     {
         $container->hasAlias(Dictionary::class.' $dico1Dictionary')->willReturn(false);

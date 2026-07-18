@@ -62,6 +62,9 @@ final class UserManager
 }
 ```
 
+An existing named `Dictionary` autowiring alias takes precedence and is not
+replaced by a configured dictionary.
+
 To use a different argument name, select the dictionary with Symfony's `Target`
 attribute:
 
