@@ -46,10 +46,25 @@ knp_dictionary:
       - Ms
 ```
 
-To inject a configured dictionary directly, type-hint `Dictionary` and name the
-argument `<dictionaryName>Dictionary`. Names are normalized to camel case, so
-`civility` maps to
-`$civilityDictionary`.
+To inject a configured dictionary directly, type-hint `Dictionary` and select
+its name with Symfony's `#[Target]` attribute:
+
+```php
+use Knp\DictionaryBundle\Dictionary;
+use Symfony\Component\DependencyInjection\Attribute\Target;
+
+final class UserManager
+{
+    public function __construct(
+        #[Target('civility.dictionary')]
+        private Dictionary $dictionary,
+    ) {}
+}
+```
+
+Selecting by argument name remains supported for compatibility. Use
+`<dictionaryName>Dictionary`; names are normalized to camel case, so `civility`
+maps to `$civilityDictionary`:
 
 ```php
 use Knp\DictionaryBundle\Dictionary;
@@ -64,22 +79,6 @@ final class UserManager
 
 An existing named `Dictionary` autowiring alias takes precedence and is not
 replaced by a configured dictionary.
-
-To use a different argument name, select the dictionary with Symfony's `#[Target]`
-attribute:
-
-```php
-use Knp\DictionaryBundle\Dictionary;
-use Symfony\Component\DependencyInjection\Attribute\Target;
-
-final class UserManager
-{
-    public function __construct(
-        #[Target('civility.dictionary')]
-        private Dictionary $dictionary,
-    ) {}
-}
-```
 
 Names that are invalid PHP argument names after normalization, or names that
 normalize to the same argument name (for example, `foo-bar` and `foo_bar`), do
