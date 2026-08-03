@@ -62,8 +62,8 @@ final class UserManager
 }
 ```
 
-Selecting by argument name remains supported for compatibility. Use
-`<dictionaryName>Dictionary`; names are normalized to camel case, so `civility`
+You can also select a dictionary by naming the argument
+`<dictionaryName>Dictionary`. Names are normalized to camel case, so `civility`
 maps to `$civilityDictionary`:
 
 ```php
@@ -77,8 +77,7 @@ final class UserManager
 }
 ```
 
-An existing named `Dictionary` autowiring alias takes precedence and is not
-replaced by a configured dictionary.
+An existing named `Dictionary` autowiring alias takes precedence.
 
 Names that are invalid PHP argument names after normalization, or names that
 normalize to the same argument name (for example, `foo-bar` and `foo_bar`), do

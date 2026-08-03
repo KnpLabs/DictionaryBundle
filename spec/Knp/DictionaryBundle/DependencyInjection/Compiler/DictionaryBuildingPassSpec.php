@@ -68,7 +68,7 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
                 return true;
             })
         )->shouldBeCalled();
-        $this->expectDico1AliasRegistration($container);
+        $this->expectDico1Alias($container);
 
         $this->process($container);
     }
@@ -112,7 +112,7 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
                 return true;
             })
         )->shouldBeCalled();
-        $this->expectDico1AliasRegistration($container);
+        $this->expectDico1Alias($container);
 
         $this->process($container);
     }
@@ -156,7 +156,7 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
                 return true;
             })
         )->shouldBeCalled();
-        $this->expectDico1AliasRegistration($container);
+        $this->expectDico1Alias($container);
 
         $this->process($container);
     }
@@ -224,7 +224,7 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.foo_bar'));
     }
 
-    function it_preserves_existing_named_autowiring_aliases()
+    function it_keeps_existing_named_autowiring_aliases()
     {
         $container = new ContainerBuilder();
         $container->setParameter('knp_dictionary.configuration', [
@@ -250,7 +250,7 @@ final class DictionaryBuildingPassSpec extends ObjectBehavior
         Assert::false($container->hasDefinition('knp_dictionary.dictionary_autowiring.vote'));
     }
 
-    private function expectDico1AliasRegistration(ContainerBuilder $container): void
+    private function expectDico1Alias(ContainerBuilder $container): void
     {
         $container->hasAlias(Dictionary::class.' $dico1Dictionary')->willReturn(false);
         $container->setDefinition(

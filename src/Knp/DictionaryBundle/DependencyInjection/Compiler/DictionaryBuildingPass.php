@@ -25,10 +25,8 @@ final class DictionaryBuildingPass implements CompilerPassInterface
         $aliases = [];
 
         foreach ($configuration['dictionaries'] as $name => $config) {
-            $serviceId = \sprintf('knp_dictionary.dictionary.%s', $name);
-
             $containerBuilder->setDefinition(
-                $serviceId,
+                \sprintf('knp_dictionary.dictionary.%s', $name),
                 $this->createDefinition($name, $config)
             );
 
@@ -57,6 +55,7 @@ final class DictionaryBuildingPass implements CompilerPassInterface
 
     private function normalizeArgumentName(string $name): ?string
     {
+        // Match Symfony's #[Target] parser, whose API differs in 5.4.
         $words = preg_replace('/[^a-zA-Z0-9\x7f-\xff]++/', ' ', $name.'.dictionary') ?? '';
 
         $argumentName = lcfirst(str_replace(' ', '', ucwords($words)));
@@ -66,9 +65,8 @@ final class DictionaryBuildingPass implements CompilerPassInterface
 
     private function createCollectionReferenceDefinition(string $name): Definition
     {
-        return (new Definition(Dictionary::class))
+        return (new Definition(Dictionary::class, [$name]))
             ->setFactory([new Reference(Collection::class), 'offsetGet'])
-            ->addArgument($name)
         ;
     }
 
