@@ -41,22 +41,61 @@ Define dictionaries in your config.yml file:
 ```yaml
 knp_dictionary:
   dictionaries:
-    my_dictionary: # your dictionary name
-      - Foo # your dictionary content
-      - Bar
-      - Baz
+    civility: # your dictionary name
+      - Mr    # your dictionary content
+      - Ms
 ```
 
-You will be able to retrieve it by injecting the Collection service and accessing the dictionary by its key
+To inject a configured dictionary directly, type-hint `Dictionary` and select
+its name with Symfony's `#[Target]` attribute:
 
 ```php
+use Knp\DictionaryBundle\Dictionary;
+use Symfony\Component\DependencyInjection\Attribute\Target;
 
-    private Dictionary $myDictionary;
+final class UserManager
+{
     public function __construct(
-        \Knp\DictionaryBundle\Dictionary\Collection $dictionaries)
+        #[Target('civility.dictionary')]
+        private Dictionary $dictionary,
+    ) {}
+}
+```
+
+You can also select a dictionary by naming the argument
+`<dictionaryName>Dictionary`. Names are normalized to camel case, so `civility`
+maps to `$civilityDictionary`:
+
+```php
+use Knp\DictionaryBundle\Dictionary;
+
+final class UserManager
+{
+    public function __construct(
+        private Dictionary $civilityDictionary,
+    ) {}
+}
+```
+
+An existing named `Dictionary` autowiring alias takes precedence.
+
+Names that are invalid PHP argument names after normalization, or names that
+normalize to the same argument name (for example, `foo-bar` and `foo_bar`), do
+not receive an automatic autowiring alias. Inject the collection instead for
+these names or when selecting a dictionary dynamically:
+
+```php
+use Knp\DictionaryBundle\Dictionary;
+
+final class UserManager
+{
+    private Dictionary $dictionary;
+
+    public function __construct(Dictionary\Collection $dictionaries)
     {
-        $this->myDictionary = $dictionaries['my_dictionary'];
+        $this->dictionary = $dictionaries['civility'];
     }
+}
 ```
 
 ## Dictionary form type
@@ -70,7 +109,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         ->add('civility', DictionaryType::class, array(
-            'name' => 'my_dictionary'
+            'name' => 'civility'
         ))
     ;
 }
@@ -88,7 +127,7 @@ use Knp\DictionaryBundle\Validator\Constraints\Dictionary;
 class User
 {
     #[ORM\Column]
-    #[Dictionary(name: 'my_dictionary')]
+    #[Dictionary(name: 'civility')]
     private $civility;
 }
 ```
