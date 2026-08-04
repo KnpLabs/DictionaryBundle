@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 
-Reusable Symfony bundle for declaring named dictionaries in application configuration and consuming them through DI, forms, validation, Twig, Faker, and the web profiler. PHP 8.1+; Symfony 5.4, 6.4, and 7.x; Twig 2.15/3.x.
+Reusable Symfony bundle for declaring named dictionaries in application configuration and consuming them through DI, forms, validation, Twig, Faker, and the web profiler. Treat `composer.json` and the CI matrix as the sources of truth for supported runtime and framework versions.
 
 ## STRUCTURE
 
@@ -24,7 +24,7 @@ DictionaryBundle/
 | Service composition | `src/Knp/DictionaryBundle/Resources/config/services.yaml` | Imports explicit service fragments |
 | Dictionary behavior | `src/Knp/DictionaryBundle/Dictionary/` | Implementations, collection, wrappers, factories |
 | Framework adapters | `Form/`, `Validator/`, `Templating/`, `Faker/`, `DataCollector/` | All consume the shared collection |
-| Behavioral specs | `spec/Knp/DictionaryBundle/` | Mirrors source paths; no PHPUnit suite |
+| Behavioral specs | `spec/Knp/DictionaryBundle/` | Mirrors source paths |
 
 ## CONVENTIONS
 
@@ -37,9 +37,9 @@ DictionaryBundle/
 ## ANTI-PATTERNS (THIS PROJECT)
 
 - Do not eagerly evaluate callable or iterator-backed dictionaries. Their documented contract is lazy until first value access.
-- Do not treat the README's `knp_dictionary.value_transformer` tag as implemented. No compiler pass or autoconfiguration consumes it.
+- Before relying on a documented DI tag, verify that a compiler pass or autoconfiguration actually consumes it.
 - Do not reorder compiler passes or tagged factory definitions without tracing construction order and running the relevant specs.
-- Do not copy the README's PHPStan or Rector commands; both sections are stale. Use the commands below.
+- Use the configured quality-tool commands below as the source of truth when prose documentation differs.
 
 ## COMMANDS
 
@@ -54,6 +54,6 @@ vendor/bin/rector process --dry-run
 
 ## NOTES
 
-- CI rewrites `composer.json` to test Symfony minors with lowest and current dependencies; avoid relying on a single local dependency set.
-- PHPStan level 8 covers `src` plus `spec/PHPSpec`, not the mirrored behavior specs.
-- CI currently excludes PHP 8.4 pending PHPSpec compatibility.
+- CI derives compatibility constraints at runtime to test both dependency floors and current releases; do not rely on a single local dependency set.
+- Tool configuration files define analysis levels and paths; do not duplicate those values here.
+- Keep runtime versions and temporary compatibility status out of this document. Declare them in `composer.json` and encode them in the CI matrix, with short inline comments for intentional exclusions.

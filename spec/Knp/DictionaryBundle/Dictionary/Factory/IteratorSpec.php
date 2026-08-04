@@ -57,7 +57,7 @@ final class IteratorSpec extends ObjectBehavior
 
 abstract class MockIterator implements \IteratorAggregate
 {
-    public function getIterator()
+    public function getIterator(): \Traversable
     {
         return yield from [];
     }
